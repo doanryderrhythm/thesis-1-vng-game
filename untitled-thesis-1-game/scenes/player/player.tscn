@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bmne7bel88n5p"]
+
+[ext_resource type="Texture2D" uid="uid://dkk35nx33o3ps" path="res://sprites/player/player_circle_1-1.png" id="1_8afob"]
+[ext_resource type="Script" uid="uid://4ntrfrdt4iyl" path="res://scripts/player/player.gd" id="1_dovo2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
+radius = 43.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
+size = Vector2(98, 98)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lvxji"]
+radius = 49.09175
+
+[node name="Player" type="CharacterBody2D" unique_id=556700346]
+motion_mode = 1
+platform_floor_layers = 4294967040
+script = ExtResource("1_dovo2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=768663192]
+rotation = 1.5707964
+texture = ExtResource("1_8afob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1744166195]
+shape = SubResource("CircleShape2D_dovo2")
+
+[node name="HurtArea2D" type="Node2D" parent="." unique_id=1943471864]
+
+[node name="TriangleHurtArea2D" type="Area2D" parent="HurtArea2D" unique_id=157640539]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtArea2D/TriangleHurtArea2D" unique_id=1203226930]
+polygon = PackedVector2Array(0, -46, 40, 23, -40, 23)
+
+[node name="SquareHurtArea2D" type="Area2D" parent="HurtArea2D" unique_id=505988169]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D/SquareHurtArea2D" unique_id=615332251]
+shape = SubResource("RectangleShape2D_gmlin")
+
+[node name="DiamondHurtArea2D" type="Area2D" parent="HurtArea2D" unique_id=234653207]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtArea2D/DiamondHurtArea2D" unique_id=769423035]
+polygon = PackedVector2Array(47, 0, 0, 47, -47, 0, 0, -47)
+
+[node name="CircleHurtArea2D" type="Area2D" parent="HurtArea2D" unique_id=259787778]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D/CircleHurtArea2D" unique_id=783319219]
+shape = SubResource("CircleShape2D_lvxji")
