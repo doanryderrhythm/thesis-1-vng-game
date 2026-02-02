@@ -49,3 +49,7 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D/CircleHurtArea2D" unique_id=783319219]
 shape = SubResource("CircleShape2D_lvxji")
+
+[node name="DashTimer" type="Timer" parent="." unique_id=2064906837]
+wait_time = 0.2
+one_shot = true
