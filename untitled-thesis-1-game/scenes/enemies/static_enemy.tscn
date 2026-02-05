@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dulybgj2h3l03"]
 
 [ext_resource type="Script" uid="uid://fxnhc4smsj41" path="res://scripts/enemies/static_enemy.gd" id="1_gbcqu"]
-[ext_resource type="Texture2D" uid="uid://cnjesh6kuh5up" path="res://sprites/enemies/enemy_circle_1-1.png" id="2_d2yl7"]
+[ext_resource type="Texture2D" uid="uid://6q5bje7ylale" path="res://sprites/enemies/enemy_triangle_1-1.png" id="2_hsw27"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_hsw27"]
 [ext_resource type="Script" uid="uid://crv1isw4q5df" path="res://scripts/area_2d/hurt_area_2d.gd" id="4_5dnuu"]
 
@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://cfoxu5f2arqna"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1177427738]
 rotation = 1.5707964
-texture = ExtResource("2_d2yl7")
+texture = ExtResource("2_hsw27")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1744728828]
 shape = SubResource("CircleShape2D_gbcqu")

@@ -31,6 +31,9 @@ var state: PlayerState
 var _is_dash: bool = false
 var _move_rate: float = 1.0
 
+func _init() -> void:
+	GameManager.player = self
+
 func _ready() -> void:
 	set_up_player()
 	pass
