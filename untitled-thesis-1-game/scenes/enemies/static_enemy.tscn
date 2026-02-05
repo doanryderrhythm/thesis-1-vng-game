@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dulybgj2h3l03"]
 
-[ext_resource type="Script" uid="uid://fxnhc4smsj41" path="res://scripts/enemies/static_enemy.gd" id="1_gbcqu"]
+[ext_resource type="Script" uid="uid://fxnhc4smsj41" path="res://scripts/enemies/base_enemy.gd" id="1_gbcqu"]
 [ext_resource type="Texture2D" uid="uid://6q5bje7ylale" path="res://sprites/enemies/enemy_triangle_1-1.png" id="2_hsw27"]
+[ext_resource type="Resource" uid="uid://n0iycdu7o335" path="res://resources/bullets/bullet_triangle_1-1.tres" id="2_rfjyv"]
+[ext_resource type="PackedScene" uid="uid://ccs1cb8eeq3sc" path="res://scenes/bullets/base_bullet.tscn" id="3_7oa8i"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_hsw27"]
 [ext_resource type="Script" uid="uid://crv1isw4q5df" path="res://scripts/area_2d/hurt_area_2d.gd" id="4_5dnuu"]
 
@@ -14,10 +16,13 @@ radius = 50.159744
 [sub_resource type="CircleShape2D" id="CircleShape2D_7oa8i"]
 radius = 55.326305
 
-[node name="StaticEnemy" type="CharacterBody2D" unique_id=957259601]
+[node name="StaticEnemy" type="CharacterBody2D" unique_id=957259601 node_paths=PackedStringArray("shoot_markers")]
 collision_layer = 0
-collision_mask = 0
 script = ExtResource("1_gbcqu")
+shoot_markers = [NodePath("ShootingMarker")]
+bullet_stats = ExtResource("2_rfjyv")
+bullet_scene = ExtResource("3_7oa8i")
+shoot_delay = 1.0
 metadata/_custom_type_script = "uid://cfoxu5f2arqna"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1177427738]
@@ -44,3 +49,11 @@ metadata/_custom_type_script = "uid://crv1isw4q5df"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D" unique_id=169896554]
 shape = SubResource("CircleShape2D_7oa8i")
+
+[node name="ShootingMarker" type="Marker2D" parent="." unique_id=225315]
+position = Vector2(68, 0)
+
+[node name="ShootingDelayTimer" type="Timer" parent="." unique_id=729399604]
+autostart = true
+
+[connection signal="timeout" from="ShootingDelayTimer" to="." method="_on_shooting_delay_timer_timeout"]
