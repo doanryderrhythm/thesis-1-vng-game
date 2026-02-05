@@ -87,6 +87,7 @@ func state_check() -> void:
 
 func set_up_player() -> void:
 	hit_collision = $HitAreas/HitArea2D/CollisionShape2D
+	hit_collision.disabled = true
 	
 	_triangle_hurt_collision.disabled = true
 	_square_hurt_collision.disabled = true
