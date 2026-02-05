@@ -2,9 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://dkk35nx33o3ps" path="res://sprites/player/player_circle_1-1.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://4ntrfrdt4iyl" path="res://scripts/player/player.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://crv1isw4q5df" path="res://scripts/area_2d/hurt_area_2d.gd" id="3_gmlin"]
+[ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_lvxji"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
 radius = 43.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p47bc"]
+radius = 52.009613
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
 size = Vector2(98, 98)
@@ -24,30 +29,54 @@ texture = ExtResource("1_8afob")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1744166195]
 shape = SubResource("CircleShape2D_dovo2")
 
-[node name="HurtArea2D" type="Node2D" parent="." unique_id=1943471864]
+[node name="HitAreas" type="Node2D" parent="." unique_id=217046150]
 
-[node name="TriangleHurtArea2D" type="Area2D" parent="HurtArea2D" unique_id=157640539]
-visible = false
+[node name="HitArea2D" type="Area2D" parent="HitAreas" unique_id=2067713978]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("3_lvxji")
+metadata/_custom_type_script = "uid://2jniw3exf4mu"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtArea2D/TriangleHurtArea2D" unique_id=1203226930]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitAreas/HitArea2D" unique_id=2117859114]
+shape = SubResource("CircleShape2D_p47bc")
+debug_color = Color(0.9571369, 0.20984316, 3.85046e-07, 0.41960785)
+
+[node name="HurtAreas" type="Node2D" parent="." unique_id=1943471864]
+
+[node name="TriangleHurtArea2D" type="Area2D" parent="HurtAreas" unique_id=1804987015]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("3_gmlin")
+metadata/_custom_type_script = "uid://crv1isw4q5df"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtAreas/TriangleHurtArea2D" unique_id=1203226930]
 polygon = PackedVector2Array(0, -46, 40, 23, -40, 23)
 
-[node name="SquareHurtArea2D" type="Area2D" parent="HurtArea2D" unique_id=505988169]
-visible = false
+[node name="SquareHurtArea2D" type="Area2D" parent="HurtAreas" unique_id=1938122938]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("3_gmlin")
+metadata/_custom_type_script = "uid://crv1isw4q5df"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D/SquareHurtArea2D" unique_id=615332251]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtAreas/SquareHurtArea2D" unique_id=615332251]
 shape = SubResource("RectangleShape2D_gmlin")
 
-[node name="DiamondHurtArea2D" type="Area2D" parent="HurtArea2D" unique_id=234653207]
-visible = false
+[node name="DiamondHurtArea2D" type="Area2D" parent="HurtAreas" unique_id=1413402496]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("3_gmlin")
+metadata/_custom_type_script = "uid://crv1isw4q5df"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtArea2D/DiamondHurtArea2D" unique_id=769423035]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtAreas/DiamondHurtArea2D" unique_id=769423035]
 polygon = PackedVector2Array(47, 0, 0, 47, -47, 0, 0, -47)
 
-[node name="CircleHurtArea2D" type="Area2D" parent="HurtArea2D" unique_id=259787778]
-visible = false
+[node name="CircleHurtArea2D" type="Area2D" parent="HurtAreas" unique_id=1074516629]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("3_gmlin")
+metadata/_custom_type_script = "uid://crv1isw4q5df"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D/CircleHurtArea2D" unique_id=783319219]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtAreas/CircleHurtArea2D" unique_id=783319219]
 shape = SubResource("CircleShape2D_lvxji")
 
 [node name="DashTimer" type="Timer" parent="." unique_id=2064906837]

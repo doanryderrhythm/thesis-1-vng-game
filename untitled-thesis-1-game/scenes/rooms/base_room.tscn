@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://csy031tuegoeb"]
+
+[ext_resource type="Texture2D" uid="uid://crid1aovmbnj1" path="res://sprites/rooms/room_floor.png" id="1_43ixu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43ixu"]
+size = Vector2(200, 200)
+
+[node name="BaseRoom" type="Node2D" unique_id=1792470563]
+
+[node name="Floor" type="Sprite2D" parent="." unique_id=36058597]
+modulate = Color(0.21230483, 0.21230483, 0.21230483, 1)
+scale = Vector2(12, 12)
+texture = ExtResource("1_43ixu")
+
+[node name="Walls" type="Node2D" parent="." unique_id=1420746415]
+
+[node name="Left Wall" type="Sprite2D" parent="Walls" unique_id=405796347]
+position = Vector2(-1200, 0)
+scale = Vector2(0.4, 12)
+texture = ExtResource("1_43ixu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Left Wall" unique_id=1973191555]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Left Wall/StaticBody2D" unique_id=1561589415]
+shape = SubResource("RectangleShape2D_43ixu")
+
+[node name="Right Wall" type="Sprite2D" parent="Walls" unique_id=1881871133]
+position = Vector2(1200, 0)
+scale = Vector2(0.4, 12)
+texture = ExtResource("1_43ixu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Right Wall" unique_id=290142339]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Right Wall/StaticBody2D" unique_id=316436035]
+shape = SubResource("RectangleShape2D_43ixu")
+
+[node name="Top Wall" type="Sprite2D" parent="Walls" unique_id=2095857546]
+position = Vector2(0, -1200)
+rotation = 1.5707964
+scale = Vector2(0.4, 12)
+texture = ExtResource("1_43ixu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Top Wall" unique_id=462537301]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Top Wall/StaticBody2D" unique_id=533125750]
+shape = SubResource("RectangleShape2D_43ixu")
+
+[node name="Bottom Wall" type="Sprite2D" parent="Walls" unique_id=1966770423]
+position = Vector2(0, 1200)
+rotation = 1.5707964
+scale = Vector2(0.4, 12)
+texture = ExtResource("1_43ixu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls/Bottom Wall" unique_id=1011662779]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom Wall/StaticBody2D" unique_id=1516408967]
+shape = SubResource("RectangleShape2D_43ixu")
