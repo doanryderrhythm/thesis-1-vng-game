@@ -52,7 +52,11 @@ func manage_move() -> void:
 		Input.get_action_strength(ValueStorer.key_down) - Input.get_action_strength(ValueStorer.key_up)
 	)
 	
-	direction_vector = input_vector.normalized()
+	if state != PlayerState.DASH:
+		direction_vector = input_vector.normalized()
+	else:
+		direction_vector = Vector2(cos(rotation), sin(rotation))
+		
 	velocity = ValueStorer.velocity * _move_rate * direction_vector
 	move_and_slide()
 
@@ -78,11 +82,11 @@ func manage_dash() -> void:
 func state_check() -> void:
 	if direction_vector == Vector2.ZERO:
 		state = PlayerState.IDLE
+		
+	if _is_dash:
+		state = PlayerState.DASH
 	else:
-		if _is_dash:
-			state = PlayerState.DASH
-		else:
-			state = PlayerState.MOVE
+		state = PlayerState.MOVE
 	pass
 
 func set_up_player() -> void:

@@ -24,6 +24,4 @@ func hurt(area: Area2D) -> void:
 			break
 	if temp is Player:
 		queue_free()
-	else:
-		print("Enemies hurt player")
 	pass
