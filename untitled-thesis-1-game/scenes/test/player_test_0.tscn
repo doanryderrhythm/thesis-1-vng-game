@@ -10,6 +10,7 @@
 
 [node name="StaticEnemy" parent="." unique_id=957259601 instance=ExtResource("2_q56r2")]
 position = Vector2(521, 0)
+shoot_delay = 1.0
 
 [node name="Player" parent="." unique_id=556700346 instance=ExtResource("1_vwf23")]
 

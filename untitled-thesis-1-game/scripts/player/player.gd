@@ -19,7 +19,11 @@ enum CharacterType
 }
 
 @export var _character_type: CharacterType
+@export var _bullet_stats: BulletStats
+@export var _bullet_scene: PackedScene
+@export var _shoot_markers: Array[Marker2D]
 
+@onready var _shooting_delay_timer: Timer = $ShootingDelayTimer
 @onready var _dash_timer: Timer = $DashTimer
 
 @onready var _triangle_hurt_collision: CollisionPolygon2D = $HurtAreas/TriangleHurtArea2D/CollisionPolygon2D
@@ -82,6 +86,24 @@ func manage_dash() -> void:
 		_move_rate = ValueStorer.player_default_rate
 	pass
 
+func shoot_bullet() -> void:
+	for i in range(_shoot_markers.size()):
+		var bullet = _bullet_scene.instantiate()
+		bullet.global_position = _shoot_markers[i].global_position
+		bullet.texture = _bullet_stats.texture
+		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed)
+		bullet.angle = rotation
+		bullet.damage = _bullet_stats.damage
+		get_tree().current_scene.add_child(bullet)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+			shoot_bullet()
+			_shooting_delay_timer.start()
+		elif event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
+			_shooting_delay_timer.stop()
+
 func state_check() -> void:
 	if direction_vector == Vector2.ZERO:
 		state = PlayerState.IDLE
@@ -120,3 +142,8 @@ func toggle_dash(is_toggled: bool) -> void:
 	_is_dash = is_toggled
 	hurt_collision.disabled = is_toggled
 	hit_collision.disabled = !is_toggled
+
+func _on_shooting_delay_timer_timeout() -> void:
+	_shooting_delay_timer.start()
+	shoot_bullet()
+	pass

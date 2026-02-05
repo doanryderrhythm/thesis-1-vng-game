@@ -22,7 +22,8 @@ script = ExtResource("1_gbcqu")
 shoot_markers = [NodePath("ShootingMarker")]
 bullet_stats = ExtResource("2_rfjyv")
 bullet_scene = ExtResource("3_7oa8i")
-shoot_delay = 1.0
+shoot_delay = 0.05
+health = 100.0
 metadata/_custom_type_script = "uid://cfoxu5f2arqna"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1177427738]

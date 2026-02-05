@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name BaseCharacter
 
-var health: float
+@export var health: float
 var direction_vector: Vector2 = Vector2.ZERO
 
 var hit_collision
@@ -16,6 +16,11 @@ func _process(_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	pass
 
+func take_damage(_damage: float) -> void:
+	health -= _damage
+	if health <= 0:
+		queue_free()
+
 func hurt(area: Area2D) -> void:
 	var temp = area
 	while temp.get_parent() != null:
@@ -24,4 +29,6 @@ func hurt(area: Area2D) -> void:
 			break
 	if temp is Player:
 		queue_free()
+	else:
+		take_damage(5.0)
 	pass

@@ -15,3 +15,7 @@ var player_dash_rate: float = 3.0
 # HEALTH
 var player_health: float = 100.0
 var enemy_health: float = 50.0
+
+# BULLETS
+var bullet_min_angular_velocity: float = -6.0
+var bullet_max_angular_velocity: float = 6.0

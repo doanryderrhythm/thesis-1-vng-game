@@ -13,7 +13,8 @@ func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	look_at(GameManager.player.position)
+	if GameManager.player:
+		look_at(GameManager.player.position)
 
 func shoot_bullets() -> void:
 	for i in range(shoot_markers.size()):

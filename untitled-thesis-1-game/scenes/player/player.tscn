@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dkk35nx33o3ps" path="res://sprites/player/player_circle_1-1.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://4ntrfrdt4iyl" path="res://scripts/player/player.gd" id="1_dovo2"]
+[ext_resource type="Resource" uid="uid://n0iycdu7o335" path="res://resources/bullets/bullet_triangle_1-1.tres" id="2_75vfm"]
+[ext_resource type="PackedScene" uid="uid://vtxwdqpa14io" path="res://scenes/bullets/player_bullet.tscn" id="3_0owmy"]
 [ext_resource type="Script" uid="uid://crv1isw4q5df" path="res://scripts/area_2d/hurt_area_2d.gd" id="3_gmlin"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_lvxji"]
 
@@ -17,11 +19,15 @@ size = Vector2(98, 98)
 [sub_resource type="CircleShape2D" id="CircleShape2D_lvxji"]
 radius = 49.09175
 
-[node name="Player" type="CharacterBody2D" unique_id=556700346]
+[node name="Player" type="CharacterBody2D" unique_id=556700346 node_paths=PackedStringArray("_shoot_markers")]
 collision_layer = 0
 motion_mode = 1
 platform_floor_layers = 4294967040
 script = ExtResource("1_dovo2")
+_bullet_stats = ExtResource("2_75vfm")
+_bullet_scene = ExtResource("3_0owmy")
+_shoot_markers = [NodePath("ShootingMarker")]
+health = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=768663192]
 rotation = 1.5707964
@@ -80,6 +86,13 @@ metadata/_custom_type_script = "uid://crv1isw4q5df"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtAreas/CircleHurtArea2D" unique_id=783319219]
 shape = SubResource("CircleShape2D_lvxji")
 
+[node name="ShootingMarker" type="Marker2D" parent="." unique_id=1095881050]
+
 [node name="DashTimer" type="Timer" parent="." unique_id=2064906837]
 wait_time = 0.2
 one_shot = true
+
+[node name="ShootingDelayTimer" type="Timer" parent="." unique_id=1597221770]
+wait_time = 0.05
+
+[connection signal="timeout" from="ShootingDelayTimer" to="." method="_on_shooting_delay_timer_timeout"]
