@@ -10,7 +10,7 @@
 [node name="Player" parent="." unique_id=556700346 instance=ExtResource("1_vwf23")]
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=625576348]
-zoom = Vector2(0.2, 0.2)
+zoom = Vector2(0.4, 0.4)
 position_smoothing_enabled = true
 
 [node name="Enemies" type="Node2D" parent="." unique_id=1806347260]

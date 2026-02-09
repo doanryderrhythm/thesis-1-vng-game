@@ -21,7 +21,9 @@ enum CharacterType
 @export var _character_type: CharacterType
 @export var _bullet_stats: BulletStats
 @export var _bullet_scene: PackedScene
-@export var _shoot_markers: Array[Marker2D]
+
+@onready var _shoot_markers_storer = $ShootingMarkers
+var _shoot_markers: Array[Marker2D]
 
 @onready var _shooting_delay_timer: Timer = $ShootingDelayTimer
 @onready var _dash_timer: Timer = $DashTimer
@@ -43,7 +45,6 @@ func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	print(hit_collision)
 	state_check()
 	
 	var mouse_pos = get_global_mouse_position()
@@ -116,6 +117,9 @@ func state_check() -> void:
 	pass
 
 func set_up_player() -> void:
+	for marker in _shoot_markers_storer.get_children():
+		_shoot_markers.push_back(marker)
+	
 	hit_collision = $HitAreas/HitArea2D/CollisionShape2D
 	hit_collision.disabled = true
 	

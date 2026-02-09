@@ -18,7 +18,6 @@ max_contacts_reported = 3
 script = ExtResource("1_3u0jw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2096521337]
-rotation = 1.5707964
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_0xma0")
 
