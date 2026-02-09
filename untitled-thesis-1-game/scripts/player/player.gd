@@ -43,6 +43,7 @@ func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
+	print(hit_collision)
 	state_check()
 	
 	var mouse_pos = get_global_mouse_position()

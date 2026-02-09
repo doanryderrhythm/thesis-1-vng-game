@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_fq1na")
 texture = ExtResource("2_i8kl6")
-min_speed = 800.0
-max_speed = 900.0
+min_speed = 850.0
+max_speed = 950.0
 damage = 10.0
 metadata/_custom_type_script = "uid://f5tg3n012yi5"

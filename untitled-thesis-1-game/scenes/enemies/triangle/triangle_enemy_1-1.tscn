@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b5dex5jq2h8p"]
+
+[ext_resource type="PackedScene" uid="uid://dulybgj2h3l03" path="res://scenes/enemies/base_enemy.tscn" id="1_vjhit"]
+[ext_resource type="Resource" uid="uid://n0iycdu7o335" path="res://resources/bullets/bullet_triangle_1-1.tres" id="2_3lypp"]
+
+[node name="TriangleEnemy1-1" unique_id=957259601 node_paths=PackedStringArray("shoot_markers") instance=ExtResource("1_vjhit")]
+shoot_markers = [NodePath("ShootingMarker")]
+bullet_stats = ExtResource("2_3lypp")
+shoot_delay = 1.0
