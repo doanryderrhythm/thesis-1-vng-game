@@ -55,3 +55,11 @@ texture = ExtResource("1_43ixu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Bottom Wall/StaticBody2D" unique_id=1516408967]
 shape = SubResource("RectangleShape2D_43ixu")
+
+[node name="WayPoints" type="Node2D" parent="." unique_id=131790729]
+
+[node name="FirstPoint" type="Marker2D" parent="WayPoints" unique_id=1747017055]
+position = Vector2(-1000, -1000)
+
+[node name="LastPoint" type="Marker2D" parent="WayPoints" unique_id=826193183]
+position = Vector2(1000, 1000)
