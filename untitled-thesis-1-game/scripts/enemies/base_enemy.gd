@@ -1,7 +1,9 @@
 extends BaseCharacter
 class_name BaseEnemy
 
-@export var shoot_markers: Array[Marker2D]
+@onready var shoot_markers_storer = $ShootingMarkers
+var shoot_markers: Array[Marker2D]
+
 @export var bullet_stats: BulletStats
 @export var bullet_scene: PackedScene
 @export var shoot_delay: float
@@ -9,6 +11,9 @@ class_name BaseEnemy
 @onready var shoot_delay_timer: Timer = $ShootingDelayTimer
 
 func _ready() -> void:
+	for marker in shoot_markers_storer.get_children():
+		shoot_markers.push_back(marker)
+		
 	shoot_delay_timer.wait_time = shoot_delay
 	pass
 

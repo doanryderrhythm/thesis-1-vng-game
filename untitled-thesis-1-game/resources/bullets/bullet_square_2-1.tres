@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BulletStats" format=3 uid="uid://dcwhola32vj8p"]
+
+[ext_resource type="Script" uid="uid://f5tg3n012yi5" path="res://scripts/resources/resource_bullet.gd" id="1_b8e5p"]
+[ext_resource type="Texture2D" uid="uid://barwb7w7myh20" path="res://sprites/bullets/bullet_diamond.png" id="2_jou4v"]
+
+[resource]
+script = ExtResource("1_b8e5p")
+texture = ExtResource("2_jou4v")
+min_speed = 750.0
+max_speed = 850.0
+damage = 6.5
+metadata/_custom_type_script = "uid://f5tg3n012yi5"

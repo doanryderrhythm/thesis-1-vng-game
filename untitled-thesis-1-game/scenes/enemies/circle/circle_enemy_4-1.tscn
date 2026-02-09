@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cspfvmafj6w0w"]
+
+[ext_resource type="PackedScene" uid="uid://dulybgj2h3l03" path="res://scenes/enemies/base_enemy.tscn" id="1_5kkyc"]
+[ext_resource type="Resource" uid="uid://d3etdv0q85l8x" path="res://resources/bullets/bullet_circle_4-1.tres" id="2_5kkyc"]
+[ext_resource type="Texture2D" uid="uid://23qii2y166de" path="res://sprites/enemies/enemy_circle_4-1.png" id="3_m6v5y"]
+
+[node name="CircleEnemy4-1" unique_id=957259601 instance=ExtResource("1_5kkyc")]
+bullet_stats = ExtResource("2_5kkyc")
+shoot_delay = 1.35
+
+[node name="Sprite2D" parent="." index="0" unique_id=1177427738]
+texture = ExtResource("3_m6v5y")
+
+[node name="Marker2D" type="Marker2D" parent="ShootingMarkers" parent_id_path=PackedInt32Array(1299119042) index="0" unique_id=722575140]
+position = Vector2(68, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="ShootingMarkers" parent_id_path=PackedInt32Array(1299119042) index="1" unique_id=374913387]
+position = Vector2(-68, 0)
+
+[node name="Marker2D3" type="Marker2D" parent="ShootingMarkers" parent_id_path=PackedInt32Array(1299119042) index="2" unique_id=118772957]
+position = Vector2(0, 68)
+
+[node name="Marker2D4" type="Marker2D" parent="ShootingMarkers" parent_id_path=PackedInt32Array(1299119042) index="3" unique_id=913650728]
+position = Vector2(0, -68)

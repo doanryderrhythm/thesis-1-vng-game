@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://lv1wtanadk56"]
+
+[ext_resource type="PackedScene" uid="uid://dulybgj2h3l03" path="res://scenes/enemies/base_enemy.tscn" id="1_iw2t5"]
+[ext_resource type="Resource" uid="uid://x0wlce3t7u2f" path="res://resources/bullets/bullet_triangle_3-2.tres" id="2_iw2t5"]
+[ext_resource type="Texture2D" uid="uid://c4vxeq44u0d5y" path="res://sprites/enemies/enemy_triangle_3-2.png" id="3_iw2t5"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_3xdlo"]
+points = PackedVector2Array(-58, 0, 29, -50, 29, 50)
+
+[node name="TriangleEnemy3-2" unique_id=957259601 instance=ExtResource("1_iw2t5")]
+bullet_stats = ExtResource("2_iw2t5")
+shoot_delay = 1.5
+
+[node name="Sprite2D" parent="." index="0" unique_id=1177427738]
+rotation = -1.5707964
+texture = ExtResource("3_iw2t5")
+
+[node name="CollisionShape2D" parent="HitArea2D" parent_id_path=PackedInt32Array(1689290571) index="0" unique_id=183456335]
+shape = SubResource("ConvexPolygonShape2D_3xdlo")
+
+[node name="CollisionShape2D" parent="HurtArea2D" parent_id_path=PackedInt32Array(1849207007) index="0" unique_id=169896554]
+shape = SubResource("ConvexPolygonShape2D_3xdlo")
+
+[node name="Marker2D" type="Marker2D" parent="ShootingMarkers" parent_id_path=PackedInt32Array(1299119042) index="0" unique_id=1259831604]
+position = Vector2(38, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="ShootingMarkers" parent_id_path=PackedInt32Array(1299119042) index="1" unique_id=772576855]
+position = Vector2(-19, -33)
+
+[node name="Marker2D3" type="Marker2D" parent="ShootingMarkers" parent_id_path=PackedInt32Array(1299119042) index="2" unique_id=312228544]
+position = Vector2(-19, 33)

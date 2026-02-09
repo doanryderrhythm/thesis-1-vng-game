@@ -3,7 +3,18 @@
 [ext_resource type="PackedScene" uid="uid://dulybgj2h3l03" path="res://scenes/enemies/base_enemy.tscn" id="1_vjhit"]
 [ext_resource type="Resource" uid="uid://n0iycdu7o335" path="res://resources/bullets/bullet_triangle_1-1.tres" id="2_3lypp"]
 
-[node name="TriangleEnemy1-1" unique_id=957259601 node_paths=PackedStringArray("shoot_markers") instance=ExtResource("1_vjhit")]
-shoot_markers = [NodePath("ShootingMarker")]
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_vjhit"]
+points = PackedVector2Array(58, 0, -29, -50, -29, 50)
+
+[node name="TriangleEnemy1-1" unique_id=957259601 instance=ExtResource("1_vjhit")]
 bullet_stats = ExtResource("2_3lypp")
 shoot_delay = 1.0
+
+[node name="CollisionShape2D" parent="HitArea2D" parent_id_path=PackedInt32Array(1689290571) index="0" unique_id=183456335]
+shape = SubResource("ConvexPolygonShape2D_vjhit")
+
+[node name="CollisionShape2D" parent="HurtArea2D" parent_id_path=PackedInt32Array(1849207007) index="0" unique_id=169896554]
+shape = SubResource("ConvexPolygonShape2D_vjhit")
+
+[node name="Marker2D" type="Marker2D" parent="ShootingMarkers" parent_id_path=PackedInt32Array(1299119042) index="0" unique_id=722575140]
+position = Vector2(68, 0)

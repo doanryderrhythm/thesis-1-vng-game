@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bf7tv2i3hp1ak"]
+
+[ext_resource type="PackedScene" uid="uid://dulybgj2h3l03" path="res://scenes/enemies/base_enemy.tscn" id="1_iw5un"]
+[ext_resource type="Resource" uid="uid://bsdrkhprypdg4" path="res://resources/bullets/bullet_diamond_1-1.tres" id="2_7jypm"]
+[ext_resource type="Texture2D" uid="uid://bx0vg5sohdiiv" path="res://sprites/enemies/enemy_diamond_1-1.png" id="3_vbswh"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_vbswh"]
+points = PackedVector2Array(0, -55, 55, 0, 0, 55, -55, 0)
+
+[node name="DiamondEnemy1-1" unique_id=957259601 instance=ExtResource("1_iw5un")]
+bullet_stats = ExtResource("2_7jypm")
+shoot_delay = 1.2
+
+[node name="Sprite2D" parent="." index="0" unique_id=1177427738]
+texture = ExtResource("3_vbswh")
+
+[node name="CollisionShape2D" parent="HitArea2D" parent_id_path=PackedInt32Array(1689290571) index="0" unique_id=183456335]
+shape = SubResource("ConvexPolygonShape2D_vbswh")
+
+[node name="CollisionShape2D" parent="HurtArea2D" parent_id_path=PackedInt32Array(1849207007) index="0" unique_id=169896554]
+shape = SubResource("ConvexPolygonShape2D_vbswh")
+
+[node name="Marker2D" type="Marker2D" parent="ShootingMarkers" parent_id_path=PackedInt32Array(1299119042) index="0" unique_id=722575140]
+position = Vector2(68, 0)

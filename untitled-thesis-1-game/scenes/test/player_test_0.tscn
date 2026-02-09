@@ -2,33 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://csy031tuegoeb" path="res://scenes/rooms/base_room.tscn" id="1_7o7u2"]
 [ext_resource type="PackedScene" uid="uid://bmne7bel88n5p" path="res://scenes/player/player.tscn" id="1_vwf23"]
-[ext_resource type="PackedScene" uid="uid://b5dex5jq2h8p" path="res://scenes/enemies/triangle/triangle_enemy_1-1.tscn" id="2_q56r2"]
-[ext_resource type="PackedScene" uid="uid://bibrjcwhh3fup" path="res://scenes/enemies/triangle/triangle_enemy_1-2.tscn" id="3_gbh86"]
 
 [node name="PlayerTest0" type="Node2D" unique_id=1295586615]
 
 [node name="BaseRoom" parent="." unique_id=1792470563 instance=ExtResource("1_7o7u2")]
-
-[node name="TriangleEnemy1-1" parent="." unique_id=957259601 instance=ExtResource("2_q56r2")]
-position = Vector2(801, 0)
-
-[node name="TriangleEnemy1-4" parent="." unique_id=1581021526 instance=ExtResource("2_q56r2")]
-position = Vector2(297, 577)
-
-[node name="TriangleEnemy1-6" parent="." unique_id=2073819647 instance=ExtResource("2_q56r2")]
-position = Vector2(577, -469)
-
-[node name="TriangleEnemy1-2" parent="." unique_id=1592625924 instance=ExtResource("3_gbh86")]
-position = Vector2(-777, 473)
-
-[node name="TriangleEnemy1-5" parent="." unique_id=79221358 instance=ExtResource("3_gbh86")]
-position = Vector2(-256, 911)
-
-[node name="TriangleEnemy1-3" parent="." unique_id=1869925247 instance=ExtResource("3_gbh86")]
-position = Vector2(-411, -507)
 
 [node name="Player" parent="." unique_id=556700346 instance=ExtResource("1_vwf23")]
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=625576348]
 zoom = Vector2(0.2, 0.2)
 position_smoothing_enabled = true
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1806347260]

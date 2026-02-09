@@ -47,8 +47,7 @@ metadata/_custom_type_script = "uid://crv1isw4q5df"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D" unique_id=169896554]
 shape = SubResource("CircleShape2D_7oa8i")
 
-[node name="ShootingMarker" type="Marker2D" parent="." unique_id=225315]
-position = Vector2(68, 0)
+[node name="ShootingMarkers" type="Node2D" parent="." unique_id=1299119042]
 
 [node name="ShootingDelayTimer" type="Timer" parent="." unique_id=729399604]
 autostart = true
