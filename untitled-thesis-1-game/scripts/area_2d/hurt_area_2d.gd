@@ -17,4 +17,5 @@ func on_hurt(area: Area2D) -> void:
 		if temp is BaseCharacter:
 			break
 	temp.hurt(area)
+	area.get_parent().queue_free()
 	pass
