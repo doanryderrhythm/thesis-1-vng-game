@@ -13,15 +13,12 @@ var enemies_num: int
 
 var enemy_scenes: Array[PackedScene] = []
 
+var base_room: PackedScene = preload("res://scenes/rooms/base_room.tscn")
+var rooms: Array[Room] = []
+
 func _ready() -> void:
 	set_up_enemies()
-	
-	enemies_num = randi_range(5, 20);
-	for i in range(enemies_num):
-		var rand_enemy = enemy_scenes[randi_range(0, enemy_scenes.size() - 1)]
-		var inst_enemy = rand_enemy.instantiate()
-		inst_enemy.position = Vector2(randf_range(-1000, 1000), randf_range(-1000, 1000))
-		get_tree().current_scene.add_child(inst_enemy)
+	create_available_rooms(0, 0)
 	pass
 
 func set_up_enemies() -> void:
@@ -50,3 +47,58 @@ func set_up_enemies() -> void:
 			file_name = dir.get_next()
 
 		dir.list_dir_end()
+
+func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
+	var parent = get_tree().current_scene.find_child(ValueStorer.enemies_node)
+	if parent == null:
+		push_error("Enemies node not found!")
+		return
+	
+	enemies_num = randi_range(min_enemies_num, max_enemies_num);
+	for i in range(enemies_num):
+		var rand_enemy = enemy_scenes[randi_range(0, enemy_scenes.size() - 1)]
+		var inst_enemy = rand_enemy.instantiate()
+		inst_enemy.position = Vector2(
+			randf_range(first_point.x, first_point.y),
+			randf_range(last_point.x, last_point.y))
+		parent.call_deferred("add_child", inst_enemy)
+
+func create_room(id_x: int, id_y: int) -> void:
+	var parent = get_tree().current_scene.find_child(ValueStorer.rooms_node)
+	if parent == null:
+		push_error("Rooms node not found!")
+		return
+	
+	var new_room = base_room.instantiate()
+	new_room.init_detail(id_x, id_y)
+	parent.call_deferred("add_child", new_room)
+
+func create_available_rooms(id_x: int, id_y: int) -> void:
+	var is_left_available: bool = true
+	var is_right_available: bool = true
+	var is_up_available: bool = true
+	var is_down_available: bool = true
+	
+	for room in rooms:
+		if id_x == room.id_x and id_y == room.id_y:
+			continue
+		
+		if id_x == room.id_x:
+			if id_y - 1 == room.id_y:
+				is_down_available = false
+			elif id_y + 1 == room.id_y:
+				is_up_available = false
+		elif id_y == room.id_y:
+			if id_x - 1 == room.id_x:
+				is_left_available = false
+			elif id_x + 1 == room.id_x:
+				is_right_available = false
+	
+	if is_left_available:
+		create_room(id_x - 1, id_y)
+	if is_right_available:
+		create_room(id_x + 1, id_y)
+	if is_up_available:
+		create_room(id_x, id_y + 1)
+	if is_down_available:
+		create_room(id_x, id_y - 1)

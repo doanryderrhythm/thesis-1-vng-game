@@ -10,6 +10,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
 radius = 43.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_75vfm"]
+radius = 52.009613
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_p47bc"]
 radius = 52.009613
 
@@ -35,6 +38,14 @@ texture = ExtResource("1_8afob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1744166195]
 shape = SubResource("CircleShape2D_dovo2")
+
+[node name="StartArea2D" type="Area2D" parent="." unique_id=268927989]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartArea2D" unique_id=1507501069]
+shape = SubResource("CircleShape2D_75vfm")
+debug_color = Color(0, 0.63632345, 0.41024104, 0.41960785)
 
 [node name="HitAreas" type="Node2D" parent="." unique_id=217046150]
 
