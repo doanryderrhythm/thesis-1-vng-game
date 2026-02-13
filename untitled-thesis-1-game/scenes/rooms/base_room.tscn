@@ -17,6 +17,54 @@ modulate = Color(0.21230483, 0.21230483, 0.21230483, 1)
 scale = Vector2(12, 12)
 texture = ExtResource("1_43ixu")
 
+[node name="Doors" type="Node2D" parent="." unique_id=1265182340]
+
+[node name="LeftDoor" type="Sprite2D" parent="Doors" unique_id=1635673156]
+modulate = Color(0.7413847, 0.7413847, 0.7413844, 1)
+position = Vector2(-1200, 0)
+scale = Vector2(0.2, 3)
+texture = ExtResource("1_43ixu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Doors/LeftDoor" unique_id=2072005931]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/LeftDoor/StaticBody2D" unique_id=97572936]
+shape = SubResource("RectangleShape2D_43ixu")
+
+[node name="RightDoor" type="Sprite2D" parent="Doors" unique_id=1133344729]
+modulate = Color(0.7413847, 0.7413847, 0.7413844, 1)
+position = Vector2(1200, 0)
+scale = Vector2(0.2, 3)
+texture = ExtResource("1_43ixu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Doors/RightDoor" unique_id=1426432018]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/RightDoor/StaticBody2D" unique_id=1488851910]
+shape = SubResource("RectangleShape2D_43ixu")
+
+[node name="TopDoor" type="Sprite2D" parent="Doors" unique_id=793812438]
+modulate = Color(0.7413847, 0.7413847, 0.7413844, 1)
+position = Vector2(0, -1200)
+rotation = 1.5707964
+scale = Vector2(0.2, 3)
+texture = ExtResource("1_43ixu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Doors/TopDoor" unique_id=2063901262]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/TopDoor/StaticBody2D" unique_id=1072977803]
+shape = SubResource("RectangleShape2D_43ixu")
+
+[node name="BottomDoor" type="Sprite2D" parent="Doors" unique_id=821949933]
+modulate = Color(0.7413847, 0.7413847, 0.7413844, 1)
+position = Vector2(0, 1200)
+rotation = 1.5707964
+scale = Vector2(0.2, 3)
+texture = ExtResource("1_43ixu")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Doors/BottomDoor" unique_id=34872234]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/BottomDoor/StaticBody2D" unique_id=1393627466]
+shape = SubResource("RectangleShape2D_43ixu")
+
 [node name="Walls" type="Node2D" parent="." unique_id=1420746415]
 
 [node name="LeftWall" type="Node2D" parent="Walls" unique_id=564278159]

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://7hve4728seki"]
+
+[ext_resource type="PackedScene" uid="uid://bmne7bel88n5p" path="res://scenes/player/player.tscn" id="1_tt14s"]
+
+[node name="PlayScene" type="Node2D" unique_id=1264302626]
+
+[node name="Rooms" type="Node2D" parent="." unique_id=1728958944]
+
+[node name="Enemies" type="Node2D" parent="." unique_id=95174209]
+
+[node name="Player" parent="." unique_id=556700346 instance=ExtResource("1_tt14s")]
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1918493937]
+zoom = Vector2(0.175, 0.175)
+position_smoothing_enabled = true

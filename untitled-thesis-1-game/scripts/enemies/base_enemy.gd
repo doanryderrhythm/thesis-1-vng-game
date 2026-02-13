@@ -11,6 +11,8 @@ var shoot_markers: Array[Marker2D]
 @onready var shoot_delay_timer: Timer = $ShootingDelayTimer
 
 func _ready() -> void:
+	dead.connect(GameManager.deduct_enemies)
+	
 	for marker in shoot_markers_storer.get_children():
 		shoot_markers.push_back(marker)
 		

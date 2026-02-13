@@ -1,5 +1,8 @@
 extends Node
 
+var current_id_x: int = 0
+var current_id_y: int = 0
+
 var player: Player
 
 var current_level: int = 0
@@ -10,6 +13,7 @@ var max_phase: int = 0
 var min_enemies_num: int
 var max_enemies_num: int
 var enemies_num: int
+var current_enemies_num: int
 
 var enemy_scenes: Array[PackedScene] = []
 
@@ -18,7 +22,7 @@ var rooms: Array[Room] = []
 
 func _ready() -> void:
 	set_up_enemies()
-	create_available_rooms(0, 0)
+	create_available_rooms(current_id_x, current_id_y)
 	pass
 
 func set_up_enemies() -> void:
@@ -47,6 +51,9 @@ func set_up_enemies() -> void:
 			file_name = dir.get_next()
 
 		dir.list_dir_end()
+		
+		min_enemies_num = 0
+		max_enemies_num = enemy_scenes.size()
 
 func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 	var parent = get_tree().current_scene.find_child(ValueStorer.enemies_node)
@@ -55,12 +62,14 @@ func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 		return
 	
 	enemies_num = randi_range(min_enemies_num, max_enemies_num);
+	current_enemies_num = enemies_num
+	
 	for i in range(enemies_num):
 		var rand_enemy = enemy_scenes[randi_range(0, enemy_scenes.size() - 1)]
 		var inst_enemy = rand_enemy.instantiate()
 		inst_enemy.position = Vector2(
-			randf_range(first_point.x, first_point.y),
-			randf_range(last_point.x, last_point.y))
+			randf_range(first_point.x, last_point.x),
+			randf_range(first_point.y, last_point.y))
 		parent.call_deferred("add_child", inst_enemy)
 
 func create_room(id_x: int, id_y: int) -> void:
@@ -72,6 +81,7 @@ func create_room(id_x: int, id_y: int) -> void:
 	var new_room = base_room.instantiate()
 	new_room.init_detail(id_x, id_y)
 	parent.call_deferred("add_child", new_room)
+	rooms.append(new_room)
 
 func create_available_rooms(id_x: int, id_y: int) -> void:
 	var is_left_available: bool = true
@@ -102,3 +112,20 @@ func create_available_rooms(id_x: int, id_y: int) -> void:
 		create_room(id_x, id_y + 1)
 	if is_down_available:
 		create_room(id_x, id_y - 1)
+
+func deduct_enemies() -> void:
+	current_enemies_num -= 1
+	if current_enemies_num <= 0:
+		var _room: Room = find_room(current_id_x, current_id_y)
+		print(_room)
+		if _room == null:
+			return
+		_room.is_executed = true
+		_room.call_deferred("toggle_doors", false)
+		create_available_rooms(current_id_x, current_id_y)
+
+func find_room(_id_x: int, _id_y: int) -> Room:
+	for room in rooms:
+		if room.id_x == _id_x and room.id_y == _id_y:
+			return room
+	return null
