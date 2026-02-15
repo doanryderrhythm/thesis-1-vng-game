@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bc555d4f3jr8q"]
+
+[ext_resource type="Texture2D" uid="uid://crid1aovmbnj1" path="res://sprites/rooms/room_floor.png" id="1_h1lom"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxyh5"]
+size = Vector2(200, 200.125)
+
+[node name="Corridor" type="Sprite2D" unique_id=515311878]
+self_modulate = Color(0.08468992, 0.08468994, 0.08468989, 1)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_h1lom")
+
+[node name="Wall0" type="Sprite2D" parent="." unique_id=271725570]
+position = Vector2(0, 100)
+scale = Vector2(1, 0.020000001)
+texture = ExtResource("1_h1lom")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall0" unique_id=1098184171]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall0/StaticBody2D" unique_id=1678873356]
+shape = SubResource("RectangleShape2D_oxyh5")
+
+[node name="Wall1" type="Sprite2D" parent="." unique_id=1002996910]
+position = Vector2(0, -100)
+scale = Vector2(1, 0.020000001)
+texture = ExtResource("1_h1lom")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall1" unique_id=1368185683]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1/StaticBody2D" unique_id=2089838137]
+shape = SubResource("RectangleShape2D_oxyh5")

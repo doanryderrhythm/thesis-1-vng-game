@@ -33,7 +33,7 @@ func toggle_doors(is_toggled: bool) -> void:
 	start_area_collision.disabled = is_toggled
 
 func _on_start_area_2d_area_entered(_area: Area2D) -> void:
-	if is_executed:
+	if is_executed or (id_x == 0 and id_y == 0):
 		return
 		
 	call_deferred("toggle_doors", true)

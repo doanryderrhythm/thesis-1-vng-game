@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dwsmw7jk5xheo" path="res://scripts/room/base_room.gd" id="1_4x8xk"]
 [ext_resource type="Texture2D" uid="uid://crid1aovmbnj1" path="res://sprites/rooms/room_floor.png" id="1_43ixu"]
+[ext_resource type="PackedScene" uid="uid://bc555d4f3jr8q" path="res://scenes/rooms/corridor.tscn" id="2_oxyh5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43ixu"]
 size = Vector2(200, 200)
@@ -11,6 +12,22 @@ size = Vector2(2250, 2250)
 
 [node name="BaseRoom" type="Node2D" unique_id=1792470563]
 script = ExtResource("1_4x8xk")
+
+[node name="Corridors" type="Node2D" parent="." unique_id=1702556723]
+
+[node name="LeftCorridor" parent="Corridors" unique_id=515311878 instance=ExtResource("2_oxyh5")]
+position = Vector2(-1450, 0)
+
+[node name="RightCorridor" parent="Corridors" unique_id=935448735 instance=ExtResource("2_oxyh5")]
+position = Vector2(1450, 0)
+
+[node name="TopCorridor" parent="Corridors" unique_id=1861214190 instance=ExtResource("2_oxyh5")]
+position = Vector2(0, -1450)
+rotation = 1.5707964
+
+[node name="BottomCorridor" parent="Corridors" unique_id=1879876378 instance=ExtResource("2_oxyh5")]
+position = Vector2(0, 1450)
+rotation = 1.5707964
 
 [node name="Floor" type="Sprite2D" parent="." unique_id=36058597]
 modulate = Color(0.21230483, 0.21230483, 0.21230483, 1)
@@ -170,6 +187,7 @@ position = Vector2(-1000, -1000)
 position = Vector2(1000, 1000)
 
 [node name="StartArea2D" type="Area2D" parent="." unique_id=2126767817]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
