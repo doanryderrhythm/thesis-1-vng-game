@@ -52,7 +52,7 @@ func set_up_enemies() -> void:
 
 		dir.list_dir_end()
 		
-		min_enemies_num = 0
+		min_enemies_num = 1
 		max_enemies_num = enemy_scenes.size()
 
 func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
@@ -138,7 +138,11 @@ func find_room(_id_x: int, _id_y: int) -> Room:
 			return room
 	return null
 
-func delete_room(_id_x: int, _id_y: int) -> void:
+func delete_room(_id_x: int, _id_y: int) -> void:	
+	rooms = rooms.filter(func(room):
+		return is_instance_valid(room)
+	)
+	
 	for room in rooms:
 		if _id_x == room.id_x and _id_y == room.id_y:
 			continue

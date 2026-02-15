@@ -14,5 +14,5 @@
 [node name="Player" parent="." unique_id=556700346 instance=ExtResource("1_tt14s")]
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1918493937]
-zoom = Vector2(0.175, 0.175)
+zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true

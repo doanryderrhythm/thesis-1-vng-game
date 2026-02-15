@@ -29,7 +29,10 @@ func shoot_bullets() -> void:
 		bullet.global_position = shoot_markers[i].global_position
 		bullet.texture = bullet_stats.texture
 		bullet.speed = randf_range(bullet_stats.min_speed, bullet_stats.max_speed)
-		bullet.angle = rotation
+		bullet.angle = atan2(
+			(shoot_markers[i].global_position.y - global_position.y),
+			(shoot_markers[i].global_position.x - global_position.x)
+			)
 		bullet.damage = bullet_stats.damage
 		get_tree().current_scene.add_child(bullet)
 
