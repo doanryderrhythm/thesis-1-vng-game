@@ -37,6 +37,7 @@ func _on_start_area_2d_area_entered(_area: Area2D) -> void:
 		return
 		
 	call_deferred("toggle_doors", true)
+	GameManager.delete_room(id_x, id_y)
 	GameManager.current_id_x = id_x
 	GameManager.current_id_y = id_y
 	GameManager.spawn_enemies(first_point.global_position, last_point.global_position)

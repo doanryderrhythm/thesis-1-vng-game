@@ -89,6 +89,10 @@ func create_available_rooms(id_x: int, id_y: int) -> void:
 	var is_up_available: bool = true
 	var is_down_available: bool = true
 	
+	rooms = rooms.filter(func(room):
+		return is_instance_valid(room)
+	)
+	
 	for room in rooms:
 		if id_x == room.id_x and id_y == room.id_y:
 			continue
@@ -125,7 +129,21 @@ func deduct_enemies() -> void:
 		create_available_rooms(current_id_x, current_id_y)
 
 func find_room(_id_x: int, _id_y: int) -> Room:
+	rooms = rooms.filter(func(room):
+		return is_instance_valid(room)
+	)
+	
 	for room in rooms:
 		if room.id_x == _id_x and room.id_y == _id_y:
 			return room
 	return null
+
+func delete_room(_id_x: int, _id_y: int) -> void:
+	for room in rooms:
+		if _id_x == room.id_x and _id_y == room.id_y:
+			continue
+		room.queue_free()
+	
+	rooms = rooms.filter(func(room):
+		return is_instance_valid(room)
+	)
