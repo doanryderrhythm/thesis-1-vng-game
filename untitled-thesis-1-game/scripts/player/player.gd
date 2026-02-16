@@ -27,6 +27,7 @@ var _shoot_markers: Array[Marker2D]
 
 @onready var _shooting_delay_timer: Timer = $ShootingDelayTimer
 @onready var _dash_timer: Timer = $DashTimer
+var _dash_direction_vector: Vector2 = Vector2(0, 0)
 
 @onready var _triangle_hurt_collision: CollisionPolygon2D = $HurtAreas/TriangleHurtArea2D/CollisionPolygon2D
 @onready var _square_hurt_collision: CollisionShape2D = $HurtAreas/SquareHurtArea2D/CollisionShape2D
@@ -64,13 +65,14 @@ func manage_move() -> void:
 	if state != PlayerState.DASH:
 		direction_vector = input_vector.normalized()
 	else:
-		direction_vector = Vector2(cos(rotation), sin(rotation))
+		direction_vector = _dash_direction_vector
 		
 	velocity = ValueStorer.velocity * _move_rate * direction_vector
 	move_and_slide()
 
 func manage_dash() -> void:
 	if Input.is_action_just_pressed(ValueStorer.key_dash):
+		_dash_direction_vector = Vector2(cos(rotation), sin(rotation))
 		toggle_dash(true)
 		_dash_timer.start()
 	
