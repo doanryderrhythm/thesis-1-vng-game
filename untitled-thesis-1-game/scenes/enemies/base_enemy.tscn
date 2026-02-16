@@ -61,6 +61,8 @@ autostart = true
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=381579731]
 path_postprocessing = 1
 avoidance_enabled = true
+radius = 260.56
+neighbor_distance = 35005.63
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0.99999994, 0.16973957, 0.28575546, 1)
