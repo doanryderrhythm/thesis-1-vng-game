@@ -19,6 +19,7 @@ radius = 55.326305
 collision_layer = 0
 script = ExtResource("1_gbcqu")
 bullet_scene = ExtResource("2_ylyo2")
+movement_speed = 500.0
 health = 100.0
 metadata/_custom_type_script = "uid://cfoxu5f2arqna"
 
@@ -52,4 +53,18 @@ shape = SubResource("CircleShape2D_7oa8i")
 [node name="ShootingDelayTimer" type="Timer" parent="." unique_id=729399604]
 autostart = true
 
+[node name="NavigationTimer" type="Timer" parent="." unique_id=1603720565]
+process_callback = 0
+wait_time = 0.25
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=381579731]
+path_postprocessing = 1
+avoidance_enabled = true
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.99999994, 0.16973957, 0.28575546, 1)
+
 [connection signal="timeout" from="ShootingDelayTimer" to="." method="_on_shooting_delay_timer_timeout"]
+[connection signal="timeout" from="NavigationTimer" to="." method="_on_navigation_timer_timeout"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

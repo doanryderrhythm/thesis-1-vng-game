@@ -22,6 +22,7 @@ var rooms: Array[Room] = []
 
 func _ready() -> void:
 	set_up_enemies()
+	create_room(0, 0)
 	create_available_rooms(current_id_x, current_id_y)
 	pass
 

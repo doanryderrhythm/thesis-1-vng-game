@@ -1,13 +1,10 @@
 [gd_scene format=3 uid="uid://7hve4728seki"]
 
-[ext_resource type="PackedScene" uid="uid://csy031tuegoeb" path="res://scenes/rooms/base_room.tscn" id="1_qvacy"]
 [ext_resource type="PackedScene" uid="uid://bmne7bel88n5p" path="res://scenes/player/player.tscn" id="1_tt14s"]
 
 [node name="PlayScene" type="Node2D" unique_id=1264302626]
 
 [node name="Rooms" type="Node2D" parent="." unique_id=1728958944]
-
-[node name="BaseRoom" parent="Rooms" unique_id=1792470563 instance=ExtResource("1_qvacy")]
 
 [node name="Enemies" type="Node2D" parent="." unique_id=95174209]
 

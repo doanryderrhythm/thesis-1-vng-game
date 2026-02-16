@@ -10,6 +10,11 @@ size = Vector2(200, 200)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4x8xk"]
 size = Vector2(2250, 2250)
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_oxyh5"]
+vertices = PackedVector2Array(1147.9922, -1147, 1147, 1146, -1147, 1146, -1147, -1147.9922)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1157, -1158, 1158, -1157, 1157, 1156, -1157, 1156)])
+
 [node name="BaseRoom" type="Node2D" unique_id=1792470563]
 script = ExtResource("1_4x8xk")
 
@@ -187,11 +192,13 @@ position = Vector2(-1000, -1000)
 position = Vector2(1000, 1000)
 
 [node name="StartArea2D" type="Area2D" parent="." unique_id=2126767817]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartArea2D" unique_id=11408061]
 shape = SubResource("RectangleShape2D_4x8xk")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1834800968]
+navigation_polygon = SubResource("NavigationPolygon_oxyh5")
 
 [connection signal="area_entered" from="StartArea2D" to="." method="_on_start_area_2d_area_entered"]
