@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://7hve4728seki"]
 
 [ext_resource type="PackedScene" uid="uid://bmne7bel88n5p" path="res://scenes/player/player.tscn" id="1_tt14s"]
+[ext_resource type="PackedScene" uid="uid://di78feag8gs8a" path="res://scenes/ui/debug_ui.tscn" id="2_qvacy"]
 
 [node name="PlayScene" type="Node2D" unique_id=1264302626]
+
+[node name="DebugUi" parent="." unique_id=2086543205 instance=ExtResource("2_qvacy")]
 
 [node name="Rooms" type="Node2D" parent="." unique_id=1728958944]
 

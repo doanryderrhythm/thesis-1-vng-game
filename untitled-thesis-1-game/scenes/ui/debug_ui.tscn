@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://di78feag8gs8a"]
+
+[sub_resource type="GDScript" id="GDScript_2bpog"]
+resource_name = "debug_ui"
+script/source = "extends CanvasLayer
+class_name DebugUI
+
+@onready var play_time_label: Label = $PlayTimeLabel
+@onready var max_min_enemy_label: Label = $MaxMinEnemyLabel
+
+func _ready() -> void:
+	change_play_time()
+	change_min_max_enemy()
+	
+	GameManager.play_time_change.connect(change_play_time)
+	GameManager.max_min_enemy_change.connect(change_min_max_enemy)
+
+func change_play_time() -> void:
+	play_time_label.text = \"Play Time: \" + str(GameManager.play_time_int)
+
+func change_min_max_enemy() -> void:
+	max_min_enemy_label.text = \"Min: \" + str(GameManager.min_enemies_num) + \", Max: \" + str(GameManager.max_enemies_num)
+"
+
+[node name="DebugUi" type="CanvasLayer" unique_id=2086543205]
+script = SubResource("GDScript_2bpog")
+
+[node name="PlayTimeLabel" type="Label" parent="." unique_id=493923743]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 477.0
+offset_bottom = 72.0
+theme_override_font_sizes/font_size = 30
+text = "Play Time"
+
+[node name="MaxMinEnemyLabel" type="Label" parent="." unique_id=318506730]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -472.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = 72.0
+grow_horizontal = 0
+pivot_offset = Vector2(442, 0)
+theme_override_font_sizes/font_size = 30
+text = "Max Min"
+horizontal_alignment = 2

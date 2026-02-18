@@ -21,7 +21,16 @@ var room_scenes: Array[PackedScene] = []
 var base_room: PackedScene = preload("res://scenes/rooms/base_room.tscn")
 var rooms: Array[Room] = []
 
+# STATS
+var play_time: float = 0.0
+var play_time_int: int = 0
+var stage_stats: Array[StageStats]
+
+signal play_time_change
+signal max_min_enemy_change
+
 func _ready() -> void:
+	set_up_stage_stats()
 	set_up_rooms()
 	set_up_enemies()
 	
@@ -29,12 +38,47 @@ func _ready() -> void:
 	create_available_rooms(current_id_x, current_id_y)
 	pass
 
+func _process(delta: float) -> void:
+	play_time += delta
+	if play_time_int != int(play_time):
+		play_time_int = int(play_time)
+		play_time_change.emit()
+		if play_time_int >= stage_stats[current_level].time_to_pass and current_level + 1 < stage_stats.size():
+			current_level += 1
+			min_enemies_num = stage_stats[current_level].min_enemy
+			max_enemies_num = stage_stats[current_level].max_enemy
+			max_min_enemy_change.emit()
+
 func set_up_rooms() -> void:
 	var paths: Array[String] = [
 		"res://scenes/rooms/rooms_design/"
 	]
 	
 	execute_directories(paths, room_scenes)
+
+func set_up_stage_stats() -> void:
+	var paths: Array[String] = [
+		"res://resources/stages/"
+	]
+	
+	for path in paths:
+		var dir := DirAccess.open(path)
+		if dir == null:
+			push_error("Failed to open dir: " + path)
+			continue
+
+		dir.list_dir_begin()
+		var file_name := dir.get_next()
+
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".tres"):
+				var resource_path = path + "/" + file_name
+				var resource = load(resource_path)
+				if resource:
+					stage_stats.push_back(resource)
+			file_name = dir.get_next()
+
+		dir.list_dir_end()
 
 func set_up_enemies() -> void:
 	var paths: Array[String] = [
@@ -49,8 +93,8 @@ func set_up_enemies() -> void:
 	if enemy_scenes.size() == 0:
 		return
 	
-	min_enemies_num = 1
-	max_enemies_num = enemy_scenes.size()
+	min_enemies_num = stage_stats[current_level].min_enemy
+	max_enemies_num = stage_stats[current_level].max_enemy
 
 func execute_directories(paths: Array[String], scenes: Array[PackedScene]) -> void:
 	for path in paths:
