@@ -1,0 +1,14 @@
+[gd_scene format=4 uid="uid://b88pqvvq52eqy"]
+
+[ext_resource type="PackedScene" uid="uid://csy031tuegoeb" path="res://scenes/rooms/base_room.tscn" id="1_r12vg"]
+[ext_resource type="TileSet" uid="uid://dn42u1a34klgj" path="res://tilesets/tile_set_test.tres" id="2_pvra3"]
+
+[node name="BaseRoom" unique_id=1792470563 instance=ExtResource("1_r12vg")]
+
+[node name="HindranceTilemap" type="TileMapLayer" parent="." index="6" unique_id=319143323]
+self_modulate = Color(0.76131123, 0.7360839, 0.6217099, 1)
+tile_map_data = PackedByteArray("AAD5//n/AAAAAAAAAAD5//r/AAAAAAAAAAD5//v/AAAAAAAAAAD6//n/AAAAAAAAAAD6//r/AAAAAAAAAAD6//v/AAAAAAAAAAD7//n/AAAAAAAAAAD7//r/AAAAAAAAAAD7//v/AAAAAAAAAAAEAPn/AAAAAAAAAAAEAPr/AAAAAAAAAAAEAPv/AAAAAAAAAAAFAPn/AAAAAAAAAAAFAPr/AAAAAAAAAAAFAPv/AAAAAAAAAAAGAPn/AAAAAAAAAAAGAPr/AAAAAAAAAAAGAPv/AAAAAAAAAAD5/wQAAAAAAAAAAAD5/wUAAAAAAAAAAAD5/wYAAAAAAAAAAAD6/wQAAAAAAAAAAAD6/wUAAAAAAAAAAAD6/wYAAAAAAAAAAAD7/wQAAAAAAAAAAAD7/wUAAAAAAAAAAAD7/wYAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAA=")
+tile_set = ExtResource("2_pvra3")
+
+[node name="NavigationRegion2D" parent="." index="7" unique_id=1834800968]
+visible = false

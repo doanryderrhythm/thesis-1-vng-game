@@ -16,15 +16,25 @@ var enemies_num: int
 var current_enemies_num: int
 
 var enemy_scenes: Array[PackedScene] = []
+var room_scenes: Array[PackedScene] = []
 
 var base_room: PackedScene = preload("res://scenes/rooms/base_room.tscn")
 var rooms: Array[Room] = []
 
 func _ready() -> void:
+	set_up_rooms()
 	set_up_enemies()
+	
 	create_room(0, 0)
 	create_available_rooms(current_id_x, current_id_y)
 	pass
+
+func set_up_rooms() -> void:
+	var paths: Array[String] = [
+		"res://scenes/rooms/rooms_design/"
+	]
+	
+	execute_directories(paths, room_scenes)
 
 func set_up_enemies() -> void:
 	var paths: Array[String] = [
@@ -34,6 +44,15 @@ func set_up_enemies() -> void:
 		"res://scenes/enemies/triangle/",
 	]
 	
+	execute_directories(paths, enemy_scenes)
+	
+	if enemy_scenes.size() == 0:
+		return
+	
+	min_enemies_num = 1
+	max_enemies_num = enemy_scenes.size()
+
+func execute_directories(paths: Array[String], scenes: Array[PackedScene]) -> void:
 	for path in paths:
 		var dir := DirAccess.open(path)
 		if dir == null:
@@ -48,13 +67,10 @@ func set_up_enemies() -> void:
 				var scene_path = path + "/" + file_name
 				var scene = load(scene_path)
 				if scene:
-					enemy_scenes.push_back(scene)
+					scenes.push_back(scene)
 			file_name = dir.get_next()
 
 		dir.list_dir_end()
-		
-		min_enemies_num = 1
-		max_enemies_num = enemy_scenes.size()
 
 func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 	var parent = get_tree().current_scene.find_child(ValueStorer.enemies_node)
@@ -68,9 +84,17 @@ func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 	for i in range(enemies_num):
 		var rand_enemy = enemy_scenes[randi_range(0, enemy_scenes.size() - 1)]
 		var inst_enemy = rand_enemy.instantiate()
-		inst_enemy.position = Vector2(
+		var confirmed_pos = Vector2(
 			randf_range(first_point.x, last_point.x),
 			randf_range(first_point.y, last_point.y))
+			
+		var current_room: Room = find_room(current_id_x, current_id_y)
+		while !current_room.is_valid_position(confirmed_pos):
+			confirmed_pos = Vector2(
+			randf_range(first_point.x, last_point.x),
+			randf_range(first_point.y, last_point.y))
+		inst_enemy.position = confirmed_pos
+		
 		parent.call_deferred("add_child", inst_enemy)
 
 func create_room(id_x: int, id_y: int) -> void:
@@ -79,7 +103,13 @@ func create_room(id_x: int, id_y: int) -> void:
 		push_error("Rooms node not found!")
 		return
 	
-	var new_room = base_room.instantiate()
+	var new_room = null
+	if id_x == 0 and id_y == 0:
+		new_room = base_room.instantiate()
+	else:
+		var random_room: PackedScene = room_scenes[randi_range(0, room_scenes.size() - 1)]
+		new_room = random_room.instantiate()
+	
 	new_room.init_detail(id_x, id_y)
 	parent.call_deferred("add_child", new_room)
 	rooms.append(new_room)
@@ -120,6 +150,7 @@ func create_available_rooms(id_x: int, id_y: int) -> void:
 
 func deduct_enemies() -> void:
 	current_enemies_num -= 1
+	print(current_enemies_num)
 	if current_enemies_num <= 0:
 		var _room: Room = find_room(current_id_x, current_id_y)
 		print(_room)

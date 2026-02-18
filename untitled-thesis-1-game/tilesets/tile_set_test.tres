@@ -1,0 +1,22 @@
+[gd_resource type="TileSet" format=3 uid="uid://dn42u1a34klgj"]
+
+[ext_resource type="Texture2D" uid="uid://crid1aovmbnj1" path="res://sprites/rooms/room_floor.png" id="1_d5xl4"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_bxdb8"]
+vertices = PackedVector2Array(64, 64, -64, 64, -64, -64, 64, -64)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k2k04"]
+texture = ExtResource("1_d5xl4")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_bxdb8")
+
+[resource]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_k2k04")

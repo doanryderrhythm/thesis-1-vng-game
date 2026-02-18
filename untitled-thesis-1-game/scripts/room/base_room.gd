@@ -42,3 +42,19 @@ func _on_start_area_2d_area_entered(_area: Area2D) -> void:
 	GameManager.current_id_y = id_y
 	GameManager.spawn_enemies(first_point.global_position, last_point.global_position)
 	pass # Replace with function body.
+
+	
+func is_valid_position(pos: Vector2) -> bool:
+	var space_state = get_world_2d().direct_space_state
+	
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.transform = Transform2D(0, pos)
+	query.shape = CircleShape2D.new()
+	query.shape.radius = ValueStorer.enemy_radius
+	query.collide_with_bodies = true
+	
+	var result = space_state.intersect_shape(query)
+	if result.is_empty():
+		return true
+		
+	return false
