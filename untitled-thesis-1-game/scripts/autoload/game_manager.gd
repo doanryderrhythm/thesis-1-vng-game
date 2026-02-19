@@ -137,7 +137,14 @@ func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 			confirmed_pos = Vector2(
 			randf_range(first_point.x, last_point.x),
 			randf_range(first_point.y, last_point.y))
+		
+		var move_ability: float = randf_range(0.0, 1.0)
+		var is_moving: bool = false
+		if move_ability > 0.5:
+			is_moving = true
+		
 		inst_enemy.position = confirmed_pos
+		inst_enemy.is_moving = is_moving
 		
 		parent.call_deferred("add_child", inst_enemy)
 

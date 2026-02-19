@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_ihssp")
-time_to_pass = 10
+time_to_pass = 35
 min_enemy = 2
 max_enemy = 3

@@ -28,9 +28,11 @@ rotation = 1.5707964
 texture = ExtResource("2_hsw27")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1744728828]
+visible = false
 shape = SubResource("CircleShape2D_gbcqu")
 
 [node name="HitArea2D" type="Area2D" parent="." unique_id=1689290571]
+visible = false
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("3_hsw27")
@@ -40,6 +42,7 @@ metadata/_custom_type_script = "uid://2jniw3exf4mu"
 shape = SubResource("CircleShape2D_rfjyv")
 
 [node name="HurtArea2D" type="Area2D" parent="." unique_id=1849207007]
+visible = false
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("4_5dnuu")

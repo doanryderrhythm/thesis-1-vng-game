@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://b5dex5jq2h8p"]
 
 [ext_resource type="PackedScene" uid="uid://dulybgj2h3l03" path="res://scenes/enemies/base_enemy.tscn" id="1_vjhit"]
-[ext_resource type="Resource" uid="uid://n0iycdu7o335" path="res://resources/bullets/bullet_triangle_1-1.tres" id="2_3lypp"]
+[ext_resource type="Resource" uid="uid://dmhvemlxtj53o" path="res://resources/enemies/enemy_triangle_1-1.tres" id="2_vjhit"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_vjhit"]
 points = PackedVector2Array(58, 0, -29, -50, -29, 50)
 
 [node name="TriangleEnemy1-1" unique_id=957259601 instance=ExtResource("1_vjhit")]
-bullet_stats = ExtResource("2_3lypp")
-shoot_delay = 1.0
+enemy_stats = ExtResource("2_vjhit")
 
 [node name="CollisionShape2D" parent="HitArea2D" parent_id_path=PackedInt32Array(1689290571) index="0" unique_id=183456335]
 shape = SubResource("ConvexPolygonShape2D_vjhit")

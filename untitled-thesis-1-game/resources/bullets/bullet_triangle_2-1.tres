@@ -9,4 +9,6 @@ texture = ExtResource("2_y30h2")
 min_speed = 825.0
 max_speed = 925.0
 damage = 7.5
+bullet_color = Color(1, 0.5882353, 0.81960785, 1)
+bullet_color_moving = Color(1, 0.5882353, 0.5882353, 1)
 metadata/_custom_type_script = "uid://f5tg3n012yi5"

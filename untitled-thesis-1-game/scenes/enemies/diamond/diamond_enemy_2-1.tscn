@@ -1,15 +1,14 @@
 [gd_scene format=3 uid="uid://cc584ro7soivf"]
 
 [ext_resource type="PackedScene" uid="uid://dulybgj2h3l03" path="res://scenes/enemies/base_enemy.tscn" id="1_jss52"]
-[ext_resource type="Resource" uid="uid://bi6c3qwr0p51c" path="res://resources/bullets/bullet_diamond_2-1.tres" id="2_jss52"]
+[ext_resource type="Resource" uid="uid://cims3g76b4uur" path="res://resources/enemies/enemy_diamond_2-1.tres" id="2_heos7"]
 [ext_resource type="Texture2D" uid="uid://bbu5sw1p2rqb7" path="res://sprites/enemies/enemy_diamond_2-1.png" id="3_heos7"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_heos7"]
 points = PackedVector2Array(0, -55, 55, 0, 0, 55, -55, 0)
 
 [node name="DiamondEnemy2-1" unique_id=957259601 instance=ExtResource("1_jss52")]
-bullet_stats = ExtResource("2_jss52")
-shoot_delay = 1.3
+enemy_stats = ExtResource("2_heos7")
 
 [node name="Sprite2D" parent="." index="0" unique_id=1177427738]
 texture = ExtResource("3_heos7")

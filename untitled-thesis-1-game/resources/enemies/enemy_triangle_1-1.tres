@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://dmhvemlxtj53o"]
+
+[ext_resource type="Script" uid="uid://b020yoq1euimu" path="res://scripts/resources/resource_enemy.gd" id="1_bcs57"]
+[ext_resource type="Resource" uid="uid://n0iycdu7o335" path="res://resources/bullets/bullet_triangle_1-1.tres" id="1_oefbl"]
+
+[resource]
+script = ExtResource("1_bcs57")
+bullet_stats = ExtResource("1_oefbl")
+shoot_delay = 1.0
+movement_speed = 500.0
+health = 100.0
+enemy_color = Color(1, 0, 0.5647059, 1)
+enemy_color_moving = Color(1, 0, 0, 1)
