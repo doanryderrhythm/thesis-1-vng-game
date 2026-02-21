@@ -19,7 +19,7 @@ func change_play_time() -> void:
 	play_time_label.text = \"Play Time: \" + str(GameManager.play_time_int)
 
 func change_min_max_enemy() -> void:
-	max_min_enemy_label.text = \"Min: \" + str(GameManager.min_enemies_num) + \", Max: \" + str(GameManager.max_enemies_num)
+	max_min_enemy_label.text = \"Min: \" + str(GameManager.min_enemies_num) + \", Max: \" + str(GameManager.max_enemies_num) + \", Phase: \" + str(GameManager.current_phase)
 "
 
 [node name="DebugUi" type="CanvasLayer" unique_id=2086543205]

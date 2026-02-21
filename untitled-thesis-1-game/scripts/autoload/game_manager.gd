@@ -6,7 +6,7 @@ var current_id_y: int = 0
 var player: Player
 
 var current_level: int = 0
-
+var ongoing_level: int = 0
 var current_phase: int = 0
 var max_phase: int = 0
 
@@ -115,6 +115,11 @@ func execute_directories(paths: Array[String], scenes: Array[PackedScene]) -> vo
 			file_name = dir.get_next()
 
 		dir.list_dir_end()
+		
+func start_stage() -> void:
+	ongoing_level = current_level
+	current_phase = stage_stats[ongoing_level].phase_count
+	pass
 
 func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 	var parent = get_tree().current_scene.find_child(ValueStorer.enemies_node)
@@ -122,7 +127,10 @@ func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 		push_error("Enemies node not found!")
 		return
 	
-	enemies_num = randi_range(min_enemies_num, max_enemies_num);
+	enemies_num = randi_range(
+		stage_stats[ongoing_level].min_enemy, 
+		stage_stats[ongoing_level].max_enemy
+		)
 	current_enemies_num = enemies_num
 	
 	for i in range(enemies_num):
@@ -203,6 +211,15 @@ func deduct_enemies() -> void:
 	current_enemies_num -= 1
 	print(current_enemies_num)
 	if current_enemies_num <= 0:
+		current_phase -= 1
+		if current_phase > 0:
+			var current_room = find_room(current_id_x, current_id_y)
+			spawn_enemies(
+				current_room.first_point.global_position,
+				current_room.last_point.global_position
+				)
+			return
+		
 		var _room: Room = find_room(current_id_x, current_id_y)
 		print(_room)
 		if _room == null:
