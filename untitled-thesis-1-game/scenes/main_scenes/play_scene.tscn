@@ -6,6 +6,8 @@
 
 [node name="Rooms" type="Node2D" parent="." unique_id=1728958944]
 
+[node name="EnemyParticles" type="Node2D" parent="." unique_id=472076047]
+
 [node name="Enemies" type="Node2D" parent="." unique_id=95174209]
 
 [node name="Player" parent="." unique_id=556700346 instance=ExtResource("1_tt14s")]

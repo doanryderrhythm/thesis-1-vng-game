@@ -15,6 +15,7 @@ var max_enemies_num: int
 var enemies_num: int
 var current_enemies_num: int
 
+var enemy_particles: PackedScene = preload("res://effects/base_enemy_spawn.tscn")
 var enemy_scenes: Array[PackedScene] = []
 var room_scenes: Array[PackedScene] = []
 
@@ -122,9 +123,9 @@ func start_stage() -> void:
 	pass
 
 func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
-	var parent = get_tree().current_scene.find_child(ValueStorer.enemies_node)
+	var parent = get_tree().current_scene.find_child(ValueStorer.enemy_particles_node)
 	if parent == null:
-		push_error("Enemies node not found!")
+		push_error("Enemy particles node not found!")
 		return
 	
 	enemies_num = randi_range(
@@ -135,7 +136,6 @@ func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 	
 	for i in range(enemies_num):
 		var rand_enemy = enemy_scenes[randi_range(0, enemy_scenes.size() - 1)]
-		var inst_enemy = rand_enemy.instantiate()
 		var confirmed_pos = Vector2(
 			randf_range(first_point.x, last_point.x),
 			randf_range(first_point.y, last_point.y))
@@ -146,15 +146,13 @@ func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 			randf_range(first_point.x, last_point.x),
 			randf_range(first_point.y, last_point.y))
 		
-		var move_ability: float = randf_range(0.0, 1.0)
-		var is_moving: bool = false
-		if move_ability > 0.5:
-			is_moving = true
+		var particles: EnemySpawnEffects = enemy_particles.instantiate()
+		particles.enemy_scene = rand_enemy
+		particles.first_point = first_point
+		particles.last_point = last_point
+		particles.position = confirmed_pos
 		
-		inst_enemy.position = confirmed_pos
-		inst_enemy.is_moving = is_moving
-		
-		parent.call_deferred("add_child", inst_enemy)
+		parent.call_deferred("add_child", particles)
 
 func create_room(id_x: int, id_y: int) -> void:
 	var parent = get_tree().current_scene.find_child(ValueStorer.rooms_node)

@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ed6q6p200gt3"]
+
+[ext_resource type="Script" uid="uid://dkm1vnhai3fa5" path="res://scripts/effects/enemy_spawn_effects.gd" id="1_1gyfs"]
+
+[sub_resource type="Gradient" id="Gradient_dd45t"]
+offsets = PackedFloat32Array(0, 0.109375, 0.7864583, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="BaseEnemySpawn" type="CPUParticles2D" unique_id=1169418286]
+emitting = false
+amount = 100
+lifetime = 1.5
+one_shot = true
+emission_shape = 1
+emission_sphere_radius = 60.0
+gravity = Vector2(0, 0)
+orbit_velocity_min = -0.3
+orbit_velocity_max = 0.3
+tangential_accel_max = 5.17
+angle_max = 360.0
+scale_amount_min = 5.0
+scale_amount_max = 9.13
+color_ramp = SubResource("Gradient_dd45t")
+script = ExtResource("1_1gyfs")
+
+[node name="WaitTimer" type="Timer" parent="." unique_id=173608541]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[connection signal="finished" from="." to="." method="_on_finished"]
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
