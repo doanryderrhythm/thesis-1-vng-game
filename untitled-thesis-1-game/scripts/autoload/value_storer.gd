@@ -19,6 +19,8 @@ var velocity: float = 1000.0
 var player_default_rate: float = 1.0
 var player_dash_rate: float = 3.0
 var enemy_radius: float = 55.0
+var player_bullet_speed_mult: float = 3.0
+var max_dash_count: int = 3
 #endregion
 
 #region HEALTH

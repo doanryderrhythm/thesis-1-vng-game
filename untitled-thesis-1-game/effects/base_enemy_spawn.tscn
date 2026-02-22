@@ -1,14 +1,20 @@
 [gd_scene format=3 uid="uid://ed6q6p200gt3"]
 
 [ext_resource type="Script" uid="uid://dkm1vnhai3fa5" path="res://scripts/effects/enemy_spawn_effects.gd" id="1_1gyfs"]
+[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="1_55x8x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_55x8x"]
+blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_dd45t"]
 offsets = PackedFloat32Array(0, 0.109375, 0.7864583, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="BaseEnemySpawn" type="CPUParticles2D" unique_id=1169418286]
+material = SubResource("CanvasItemMaterial_55x8x")
 emitting = false
 amount = 100
+texture = ExtResource("1_55x8x")
 lifetime = 1.5
 one_shot = true
 emission_shape = 1
@@ -18,8 +24,8 @@ orbit_velocity_min = -0.3
 orbit_velocity_max = 0.3
 tangential_accel_max = 5.17
 angle_max = 360.0
-scale_amount_min = 5.0
-scale_amount_max = 9.13
+scale_amount_min = 0.2
+scale_amount_max = 0.4
 color_ramp = SubResource("Gradient_dd45t")
 script = ExtResource("1_1gyfs")
 

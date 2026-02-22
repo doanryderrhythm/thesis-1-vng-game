@@ -106,7 +106,11 @@ position = Vector2(68, 0)
 wait_time = 0.2
 one_shot = true
 
+[node name="DashWaitTimer" type="Timer" parent="." unique_id=1809352841]
+wait_time = 2.0
+
 [node name="ShootingDelayTimer" type="Timer" parent="." unique_id=1597221770]
 wait_time = 0.05
 
+[connection signal="timeout" from="DashWaitTimer" to="." method="_on_dash_wait_timer_timeout"]
 [connection signal="timeout" from="ShootingDelayTimer" to="." method="_on_shooting_delay_timer_timeout"]

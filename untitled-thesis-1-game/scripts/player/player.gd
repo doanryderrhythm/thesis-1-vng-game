@@ -24,10 +24,12 @@ enum CharacterType
 
 @onready var _shoot_markers_storer = $ShootingMarkers
 var _shoot_markers: Array[Marker2D]
-
 @onready var _shooting_delay_timer: Timer = $ShootingDelayTimer
+
 @onready var _dash_timer: Timer = $DashTimer
+@onready var _dash_wait_timer: Timer = $DashWaitTimer
 var _dash_direction_vector: Vector2 = Vector2(0, 0)
+var _dash_count: int = ValueStorer.max_dash_count
 
 @onready var _triangle_hurt_collision: CollisionPolygon2D = $HurtAreas/TriangleHurtArea2D/CollisionPolygon2D
 @onready var _square_hurt_collision: CollisionShape2D = $HurtAreas/SquareHurtArea2D/CollisionShape2D
@@ -72,9 +74,16 @@ func manage_move() -> void:
 
 func manage_dash() -> void:
 	if Input.is_action_just_pressed(ValueStorer.key_dash):
+		if _dash_count <= 0:
+			return
+		
+		_dash_count -= 1
 		_dash_direction_vector = Vector2(cos(rotation), sin(rotation))
 		toggle_dash(true)
 		_dash_timer.start()
+		
+		if _dash_count <= 0:
+			_dash_wait_timer.start()
 	
 	if Input.is_action_pressed(ValueStorer.key_dash):
 		if _dash_timer.is_stopped():
@@ -95,7 +104,7 @@ func shoot_bullet() -> void:
 		var bullet = _bullet_scene.instantiate()
 		bullet.global_position = _shoot_markers[i].global_position
 		bullet.texture = _bullet_stats.texture
-		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed)
+		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed) * ValueStorer.player_bullet_speed_mult
 		bullet.angle = rotation
 		bullet.damage = _bullet_stats.damage
 		get_tree().current_scene.add_child(bullet)
@@ -154,3 +163,7 @@ func _on_shooting_delay_timer_timeout() -> void:
 	_shooting_delay_timer.start()
 	shoot_bullet()
 	pass
+
+func _on_dash_wait_timer_timeout() -> void:
+	_dash_count = ValueStorer.max_dash_count
+	pass # Replace with function body.

@@ -6,7 +6,21 @@ var enemy_scene: PackedScene
 var first_point: Vector2
 var last_point: Vector2
 
+var is_moving: bool = false
+
+var inst_enemy: BaseEnemy = null
+
 func _ready() -> void:
+	var move_ability: float = randf_range(0.0, 1.0)
+	if move_ability > 0.5:
+		is_moving = true
+	
+	inst_enemy = enemy_scene.instantiate()
+	if is_moving:
+		color = inst_enemy.enemy_stats.enemy_color_moving
+	else:
+		color = inst_enemy.enemy_stats.enemy_color
+	
 	emitting = true
 	pass
 
@@ -15,12 +29,6 @@ func spawn_enemy() -> void:
 	if parent == null:
 		push_error("Enemies node not found!")
 		return
-
-	var inst_enemy = enemy_scene.instantiate()
-	var move_ability: float = randf_range(0.0, 1.0)
-	var is_moving: bool = false
-	if move_ability > 0.5:
-		is_moving = true
 
 	inst_enemy.position = self.position
 	inst_enemy.is_moving = is_moving
