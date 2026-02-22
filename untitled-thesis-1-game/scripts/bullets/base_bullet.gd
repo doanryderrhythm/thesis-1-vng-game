@@ -2,6 +2,7 @@ extends RigidBody2D
 class_name BaseBullet
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var particles: CPUParticles2D = $CPUParticles2D
 
 var texture: Texture2D
 
@@ -18,5 +19,12 @@ func _ready() -> void:
 	linear_velocity = speed * Vector2(cos(angle), sin(angle))
 
 func _on_body_entered(_body: Node) -> void:
+	var parent = get_tree().current_scene.find_child(ValueStorer.bullet_particles_node)
+	if parent == null:
+		return
+	particles.color = modulate
+	particles.one_shot = true
+	particles.explosiveness = 1
+	particles.reparent(parent)
 	queue_free()
 	pass

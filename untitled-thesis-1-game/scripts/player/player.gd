@@ -107,7 +107,9 @@ func shoot_bullet() -> void:
 		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed) * ValueStorer.player_bullet_speed_mult
 		bullet.angle = rotation
 		bullet.damage = _bullet_stats.damage
-		get_tree().current_scene.add_child(bullet)
+		
+		var parent = get_tree().current_scene.find_child(ValueStorer.bullets_node)
+		parent.add_child(bullet)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

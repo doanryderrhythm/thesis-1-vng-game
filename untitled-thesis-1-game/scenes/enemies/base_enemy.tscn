@@ -19,7 +19,6 @@ radius = 55.326305
 collision_layer = 0
 script = ExtResource("1_gbcqu")
 bullet_scene = ExtResource("2_ylyo2")
-movement_speed = 500.0
 health = 100.0
 metadata/_custom_type_script = "uid://cfoxu5f2arqna"
 

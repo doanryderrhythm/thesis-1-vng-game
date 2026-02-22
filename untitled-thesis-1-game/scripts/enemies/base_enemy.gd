@@ -64,7 +64,9 @@ func shoot_bullets() -> void:
 			bullet.modulate = enemy_stats.bullet_stats.bullet_color_moving
 		else:
 			bullet.modulate = enemy_stats.bullet_stats.bullet_color
-		get_tree().current_scene.add_child(bullet)
+		
+		var parent = get_tree().current_scene.find_child(ValueStorer.bullets_node)
+		parent.add_child(bullet)
 
 func _on_shooting_delay_timer_timeout() -> void:
 	shoot_bullets()

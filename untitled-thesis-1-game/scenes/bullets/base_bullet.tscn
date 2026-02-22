@@ -3,12 +3,20 @@
 [ext_resource type="Texture2D" uid="uid://barwb7w7myh20" path="res://sprites/bullets/bullet_diamond.png" id="1_0xma0"]
 [ext_resource type="Script" uid="uid://8lfsmj6rkody" path="res://scripts/bullets/base_bullet.gd" id="1_3u0jw"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="2_3u0jw"]
+[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="4_l68ur"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l68ur"]
 radius = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_08t8j"]
 radius = 17.029387
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l68ur"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_08t8j"]
+offsets = PackedFloat32Array(0, 0.625, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="BaseBullet" type="RigidBody2D" unique_id=1344972379]
 collision_layer = 0
@@ -32,5 +40,19 @@ metadata/_custom_type_script = "uid://2jniw3exf4mu"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D" unique_id=2080140476]
 shape = SubResource("CircleShape2D_08t8j")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=572060237]
+material = SubResource("CanvasItemMaterial_l68ur")
+rotation = -3.1415925
+amount = 40
+texture = ExtResource("4_l68ur")
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 60.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_08t8j")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

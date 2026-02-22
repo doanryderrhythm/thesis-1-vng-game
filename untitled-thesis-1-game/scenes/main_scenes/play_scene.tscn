@@ -10,6 +10,10 @@
 
 [node name="EnemyParticles" type="Node2D" parent="." unique_id=472076047]
 
+[node name="BulletParticles" type="Node2D" parent="." unique_id=1503721090]
+
+[node name="Bullets" type="Node2D" parent="." unique_id=1314244741]
+
 [node name="Player" parent="." unique_id=556700346 instance=ExtResource("1_tt14s")]
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1918493937]

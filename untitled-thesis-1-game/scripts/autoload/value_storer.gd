@@ -12,6 +12,8 @@ var key_dash: String = "dash"
 var rooms_node: String = "Rooms"
 var enemies_node: String = "Enemies"
 var enemy_particles_node: String = "EnemyParticles"
+var bullet_particles_node: String = "BulletParticles"
+var bullets_node: String = "Bullets"
 #endregion
 
 #region VALUES
