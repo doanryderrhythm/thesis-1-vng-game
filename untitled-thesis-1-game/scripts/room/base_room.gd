@@ -13,6 +13,9 @@ var is_executed: bool
 
 @onready var start_area_collision: CollisionShape2D = $StartArea2D/CollisionShape2D
 
+@onready var lazer_scene: PackedScene = preload("res://scenes/lazers/lazer_test.tscn")
+@onready var lazer_timer: Timer = $LazerTimer
+
 func _ready() -> void:
 	toggle_doors(false)
 	pass
@@ -26,12 +29,14 @@ func init_detail(_id_x: int, _id_y: int) -> void:
 
 func toggle_doors(is_toggled: bool) -> void:
 	doors.visible = is_toggled
-	doors.process_mode = (
-		Node.PROCESS_MODE_INHERIT if is_toggled
-		else Node.PROCESS_MODE_DISABLED
-	)
+	if is_toggled:
+		lazer_timer.start()
+		doors.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		lazer_timer.stop()
+		doors.process_mode = Node.PROCESS_MODE_DISABLED
 	start_area_collision.disabled = is_toggled
-
+	
 func _on_start_area_2d_area_entered(_area: Area2D) -> void:
 	if is_executed or (id_x == 0 and id_y == 0):
 		return
@@ -59,3 +64,18 @@ func is_valid_position(pos: Vector2) -> bool:
 		return true
 		
 	return false
+
+func _on_lazer_timer_timeout() -> void:
+	if is_executed:
+		return
+	
+	if not is_instance_valid(GameManager.player):
+		return
+	
+	var new_lazer = lazer_scene.instantiate()
+	var parent = self.find_child(ValueStorer.lazers_node)
+	parent.add_child(new_lazer)
+	new_lazer.global_position = GameManager.player.global_position
+	new_lazer.rotation = randf_range(0, 360)
+	print(parent.get_child_count())
+	pass # Replace with function body.

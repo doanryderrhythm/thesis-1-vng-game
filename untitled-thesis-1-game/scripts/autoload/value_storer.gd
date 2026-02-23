@@ -14,6 +14,7 @@ var enemies_node: String = "Enemies"
 var enemy_particles_node: String = "EnemyParticles"
 var bullet_particles_node: String = "BulletParticles"
 var bullets_node: String = "Bullets"
+var lazers_node: String = "Lazers"
 #endregion
 
 #region VALUES
