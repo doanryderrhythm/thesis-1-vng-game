@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="StageStats" format=3 uid="uid://cibrpm6ewxtac"]
+[gd_resource type="Resource" script_class="StageStats" format=3 uid="uid://fgbjawbsaai3"]
 
 [ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="1_j3fxr"]
 
 [resource]
 script = ExtResource("1_j3fxr")
-time_to_pass = 240
-phase_count = 3
-min_enemy = 9
-max_enemy = 12
+time_to_pass = 420
+phase_count = 2
+min_enemy = 5
+max_enemy = 7

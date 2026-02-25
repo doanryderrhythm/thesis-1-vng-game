@@ -21,7 +21,7 @@ var is_executed: bool
 @onready var spike_way_points: Node2D = $SpikeWayPoints
 
 func _ready() -> void:
-	toggle_doors(false)
+	start_stage(false)
 	pass
 
 func init_detail(_id_x: int, _id_y: int) -> void:
@@ -31,11 +31,11 @@ func init_detail(_id_x: int, _id_y: int) -> void:
 	is_executed = false
 	print(str(id_x) + ", " + str(id_y))
 
-func toggle_doors(is_toggled: bool) -> void:
+func start_stage(is_toggled: bool) -> void:
 	doors.visible = is_toggled
 	if is_toggled:
-		lazer_timer.start()
-		spike_timer.start()
+		if GameManager.is_lazer: lazer_timer.start()
+		if GameManager.is_spike: spike_timer.start()
 		doors.process_mode = Node.PROCESS_MODE_INHERIT
 	else:
 		lazer_timer.stop()
@@ -47,7 +47,7 @@ func _on_start_area_2d_area_entered(_area: Area2D) -> void:
 	if is_executed or (id_x == 0 and id_y == 0):
 		return
 		
-	call_deferred("toggle_doors", true)
+	call_deferred("start_stage", true)
 	GameManager.delete_room(id_x, id_y)
 	GameManager.current_id_x = id_x
 	GameManager.current_id_y = id_y

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StageStats" format=3 uid="uid://b1du0gdj7hwu4"]
+
+[ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="1_71wew"]
+
+[resource]
+script = ExtResource("1_71wew")
+time_to_pass = 920
+phase_count = 3
+min_enemy = 7
+max_enemy = 10
+is_lazer = true
+is_spike = true

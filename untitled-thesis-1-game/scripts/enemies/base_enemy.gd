@@ -19,6 +19,12 @@ func _ready() -> void:
 	
 	dead.connect(GameManager.deduct_enemies)
 	goal = GameManager.player
+	
+	if !is_instance_valid(goal):
+		if is_instance_valid(self):
+			queue_free()
+		return
+
 	navigation_agent.target_position = goal.global_transform.origin
 	
 	for marker in shoot_markers_storer.get_children():

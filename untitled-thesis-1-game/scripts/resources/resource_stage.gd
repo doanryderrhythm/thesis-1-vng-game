@@ -7,3 +7,6 @@ class_name StageStats
 
 @export var min_enemy: int
 @export var max_enemy: int
+
+@export var is_lazer: bool
+@export var is_spike: bool

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StageStats" format=3 uid="uid://cibrpm6ewxtac"]
+
+[ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="1_hq4sg"]
+
+[resource]
+script = ExtResource("1_hq4sg")
+time_to_pass = 1100
+phase_count = 3
+min_enemy = 9
+max_enemy = 12
+is_spike = true

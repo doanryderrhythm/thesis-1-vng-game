@@ -10,10 +10,11 @@ var ongoing_level: int = 0
 var current_phase: int = 0
 var max_phase: int = 0
 
-var min_enemies_num: int
-var max_enemies_num: int
 var enemies_num: int
 var current_enemies_num: int
+
+var is_lazer: bool
+var is_spike: bool
 
 var enemy_particles: PackedScene = preload("res://effects/base_enemy_spawn.tscn")
 var enemy_scenes: Array[PackedScene] = []
@@ -46,80 +47,25 @@ func _process(delta: float) -> void:
 		play_time_change.emit()
 		if play_time_int >= stage_stats[current_level].time_to_pass and current_level + 1 < stage_stats.size():
 			current_level += 1
-			min_enemies_num = stage_stats[current_level].min_enemy
-			max_enemies_num = stage_stats[current_level].max_enemy
 			max_min_enemy_change.emit()
 
 func set_up_rooms() -> void:
-	var paths: Array[String] = [
-		"res://scenes/rooms/rooms_design/"
-	]
+	var listener: RoomsListener = load("res://resources/rooms/rooms_listener.tres")
+	room_scenes = listener.rooms
 	
-	execute_directories(paths, room_scenes)
-
 func set_up_stage_stats() -> void:
-	var paths: Array[String] = [
-		"res://resources/stages/"
-	]
-	
-	for path in paths:
-		var dir := DirAccess.open(path)
-		if dir == null:
-			push_error("Failed to open dir: " + path)
-			continue
-
-		dir.list_dir_begin()
-		var file_name := dir.get_next()
-
-		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".tres"):
-				var resource_path = path + "/" + file_name
-				var resource = load(resource_path)
-				if resource:
-					stage_stats.push_back(resource)
-			file_name = dir.get_next()
-
-		dir.list_dir_end()
+	var listener: StageStatsListener = load("res://resources/stages/stage_stats_listener.tres")
+	stage_stats = listener.stages
 
 func set_up_enemies() -> void:
-	var paths: Array[String] = [
-		"res://scenes/enemies/circle/",
-		"res://scenes/enemies/diamond/",
-		"res://scenes/enemies/square/",
-		"res://scenes/enemies/triangle/",
-	]
+	var listener: EnemiesListener = load("res://resources/enemies/enemies_listener.tres")
+	enemy_scenes = listener.enemies
 	
-	execute_directories(paths, enemy_scenes)
-	
-	if enemy_scenes.size() == 0:
-		return
-	
-	min_enemies_num = stage_stats[current_level].min_enemy
-	max_enemies_num = stage_stats[current_level].max_enemy
-
-func execute_directories(paths: Array[String], scenes: Array[PackedScene]) -> void:
-	for path in paths:
-		var dir := DirAccess.open(path)
-		if dir == null:
-			push_error("Failed to open dir: " + path)
-			continue
-
-		dir.list_dir_begin()
-		var file_name := dir.get_next()
-
-		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".tscn"):
-				var scene_path = path + "/" + file_name
-				var scene = load(scene_path)
-				if scene:
-					scenes.push_back(scene)
-			file_name = dir.get_next()
-
-		dir.list_dir_end()
-		
 func start_stage() -> void:
 	ongoing_level = current_level
 	current_phase = stage_stats[ongoing_level].phase_count
+	is_lazer = stage_stats[ongoing_level].is_lazer
+	is_spike = stage_stats[ongoing_level].is_spike
 	pass
 
 func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
@@ -223,7 +169,7 @@ func deduct_enemies() -> void:
 		if _room == null:
 			return
 		_room.is_executed = true
-		_room.call_deferred("toggle_doors", false)
+		_room.call_deferred("start_stage", false)
 		create_available_rooms(current_id_x, current_id_y)
 
 func find_room(_id_x: int, _id_y: int) -> Room:
