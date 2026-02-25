@@ -185,6 +185,8 @@ texture = ExtResource("1_43ixu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall/WallB/StaticBody2D" unique_id=1620215694]
 shape = SubResource("RectangleShape2D_43ixu")
 
+[node name="Spikes" type="Node2D" parent="." unique_id=1409504448]
+
 [node name="WayPoints" type="Node2D" parent="." unique_id=131790729]
 
 [node name="FirstPoint" type="Marker2D" parent="WayPoints" unique_id=1747017055]
@@ -192,6 +194,40 @@ position = Vector2(-1000, -1000)
 
 [node name="LastPoint" type="Marker2D" parent="WayPoints" unique_id=826193183]
 position = Vector2(1000, 1000)
+
+[node name="SpikeWayPoints" type="Node2D" parent="." unique_id=828887346]
+
+[node name="Left" type="Node2D" parent="SpikeWayPoints" unique_id=828805507]
+
+[node name="FirstPoint" type="Marker2D" parent="SpikeWayPoints/Left" unique_id=1071276270]
+position = Vector2(-1176, -1068)
+
+[node name="LastPoint" type="Marker2D" parent="SpikeWayPoints/Left" unique_id=206744307]
+position = Vector2(-1176, 1068)
+
+[node name="Top" type="Node2D" parent="SpikeWayPoints" unique_id=1115107858]
+
+[node name="FirstPoint" type="Marker2D" parent="SpikeWayPoints/Top" unique_id=451662787]
+position = Vector2(-1068, -1176)
+
+[node name="LastPoint" type="Marker2D" parent="SpikeWayPoints/Top" unique_id=989316755]
+position = Vector2(1068, -1176)
+
+[node name="Right" type="Node2D" parent="SpikeWayPoints" unique_id=1112765160]
+
+[node name="FirstPoint" type="Marker2D" parent="SpikeWayPoints/Right" unique_id=1449814895]
+position = Vector2(1176, -1068)
+
+[node name="LastPoint" type="Marker2D" parent="SpikeWayPoints/Right" unique_id=911543765]
+position = Vector2(1176, 1068)
+
+[node name="Bottom" type="Node2D" parent="SpikeWayPoints" unique_id=1091630612]
+
+[node name="FirstPoint" type="Marker2D" parent="SpikeWayPoints/Bottom" unique_id=1629329654]
+position = Vector2(-1068, 1176)
+
+[node name="LastPoint" type="Marker2D" parent="SpikeWayPoints/Bottom" unique_id=1470320968]
+position = Vector2(1068, 1176)
 
 [node name="StartArea2D" type="Area2D" parent="." unique_id=2126767817]
 collision_layer = 0
@@ -206,5 +242,9 @@ navigation_polygon = SubResource("NavigationPolygon_oxyh5")
 [node name="LazerTimer" type="Timer" parent="." unique_id=1144469924]
 wait_time = 2.0
 
+[node name="SpikeTimer" type="Timer" parent="." unique_id=1878290429]
+wait_time = 4.0
+
 [connection signal="area_entered" from="StartArea2D" to="." method="_on_start_area_2d_area_entered"]
 [connection signal="timeout" from="LazerTimer" to="." method="_on_lazer_timer_timeout"]
+[connection signal="timeout" from="SpikeTimer" to="." method="_on_spike_timer_timeout"]

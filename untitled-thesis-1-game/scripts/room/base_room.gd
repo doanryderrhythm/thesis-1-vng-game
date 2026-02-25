@@ -16,6 +16,10 @@ var is_executed: bool
 @onready var lazer_scene: PackedScene = preload("res://scenes/lazers/lazer_test.tscn")
 @onready var lazer_timer: Timer = $LazerTimer
 
+@onready var spike_scene: PackedScene = preload("res://scenes/spikes/big_spike.tscn")
+@onready var spike_timer: Timer = $SpikeTimer
+@onready var spike_way_points: Node2D = $SpikeWayPoints
+
 func _ready() -> void:
 	toggle_doors(false)
 	pass
@@ -31,9 +35,11 @@ func toggle_doors(is_toggled: bool) -> void:
 	doors.visible = is_toggled
 	if is_toggled:
 		lazer_timer.start()
+		spike_timer.start()
 		doors.process_mode = Node.PROCESS_MODE_INHERIT
 	else:
 		lazer_timer.stop()
+		spike_timer.stop()
 		doors.process_mode = Node.PROCESS_MODE_DISABLED
 	start_area_collision.disabled = is_toggled
 	
@@ -77,5 +83,29 @@ func _on_lazer_timer_timeout() -> void:
 	parent.add_child(new_lazer)
 	new_lazer.global_position = GameManager.player.global_position
 	new_lazer.rotation = randf_range(0, 360)
-	print(parent.get_child_count())
+	pass # Replace with function body.
+
+func _on_spike_timer_timeout() -> void:
+	if is_executed:
+		return
+	
+	if not is_instance_valid(GameManager.player):
+		return
+	
+	var random_side: int = randi_range(0, 3)
+	var node_side = spike_way_points.get_child(random_side)
+	
+	var side_first_point: Vector2 = node_side.get_child(0).position
+	var side_last_point: Vector2 = node_side.get_child(1).position
+	var confirmed_position: Vector2 = Vector2(
+		randf_range(side_first_point.x, side_last_point.x),
+		randf_range(side_first_point.y, side_last_point.y)
+	)
+	var confirmed_rotation: float = 90 * float(random_side)
+	
+	var new_spike = spike_scene.instantiate()
+	var parent = find_child(ValueStorer.spikes_node)
+	parent.add_child(new_spike)
+	new_spike.position = confirmed_position
+	new_spike.rotation = deg_to_rad(confirmed_rotation)
 	pass # Replace with function body.
