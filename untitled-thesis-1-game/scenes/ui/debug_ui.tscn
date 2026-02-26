@@ -5,44 +5,59 @@ resource_name = "debug_ui"
 script/source = "extends CanvasLayer
 class_name DebugUI
 
-@onready var play_time_label: Label = $PlayTimeLabel
-@onready var max_min_enemy_label: Label = $MaxMinEnemyLabel
+@onready var health_bar: ProgressBar = $HealthBar
+@onready var dash_bar: ProgressBar = $DashBar
+@onready var fill_dash_bar: ProgressBar = $FillDashBar
 
 func _ready() -> void:
-	change_play_time()
-	change_min_max_enemy()
+	health_bar.min_value = 0
+	health_bar.max_value = GameManager.player.health
 	
-	GameManager.play_time_change.connect(change_play_time)
-	GameManager.max_min_enemy_change.connect(change_min_max_enemy)
+	dash_bar.min_value = 0
+	dash_bar.max_value = ValueStorer.max_dash_count
+	
+	fill_dash_bar.min_value = 0
+	fill_dash_bar.max_value = ValueStorer.dash_wait_time
+	
+	change_health()
+	change_dash()
+	
+	GameManager.health_change.connect(change_health)
+	GameManager.dash_change.connect(change_dash)
 
-func change_play_time() -> void:
-	play_time_label.text = \"Play Time: \" + str(GameManager.play_time_int)
+func _process(_delta: float) -> void:
+	fill_dash_bar.value = GameManager.player._dash_wait_timer.time_left
 
-func change_min_max_enemy() -> void:
-	max_min_enemy_label.text = \"Min: \" + str(GameManager.min_enemies_num) + \", Max: \" + str(GameManager.max_enemies_num) + \", Phase: \" + str(GameManager.current_phase)
+func change_health() -> void:
+	health_bar.value = GameManager.player.health
+
+func change_dash() -> void:
+	dash_bar.value = GameManager.player._dash_count
 "
 
 [node name="DebugUi" type="CanvasLayer" unique_id=2086543205]
 script = SubResource("GDScript_2bpog")
 
-[node name="PlayTimeLabel" type="Label" parent="." unique_id=493923743]
-offset_left = 30.0
-offset_top = 30.0
-offset_right = 477.0
-offset_bottom = 72.0
-theme_override_font_sizes/font_size = 30
-text = "Play Time"
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1895197231]
+modulate = Color(1, 0, 0, 1)
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 184.0
+offset_bottom = 37.0
+show_percentage = false
 
-[node name="MaxMinEnemyLabel" type="Label" parent="." unique_id=318506730]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -472.0
-offset_top = 30.0
-offset_right = -30.0
-offset_bottom = 72.0
-grow_horizontal = 0
-pivot_offset = Vector2(442, 0)
-theme_override_font_sizes/font_size = 30
-text = "Max Min"
-horizontal_alignment = 2
+[node name="DashBar" type="ProgressBar" parent="." unique_id=1040436508]
+modulate = Color(1, 0.8671875, 0, 1)
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 374.0
+offset_bottom = 37.0
+show_percentage = false
+
+[node name="FillDashBar" type="ProgressBar" parent="." unique_id=416679215]
+modulate = Color(1, 0.94375, 0.578125, 1)
+offset_left = 200.0
+offset_top = 39.0
+offset_right = 374.0
+offset_bottom = 46.0
+show_percentage = false

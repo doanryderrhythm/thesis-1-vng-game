@@ -24,18 +24,4 @@ func take_damage(_damage: float) -> void:
 	pass
 
 func hurt(area: Area2D) -> void:
-	if is_dead:
-		return
-		
-	var temp = area
-	while temp.get_parent() != null:
-		temp = temp.get_parent()
-		if temp is BaseCharacter:
-			break
-	if temp is Player:
-		is_dead = true
-		queue_free()
-		dead.emit()
-	else:
-		take_damage(5.0)
 	pass

@@ -15,6 +15,9 @@ var is_moving: bool = false
 var goal: Node
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var shoot_audio: AudioStreamPlayer2D = $ShootAudio
+@onready var hurt_audio: AudioStreamPlayer2D = $HurtAudio
+@onready var dead_audio: AudioStreamPlayer2D = $DeadAudio
 
 func _ready() -> void:
 	anim.play("default")
@@ -51,9 +54,13 @@ func take_damage(_damage: float) -> void:
 	
 	health -= _damage
 	anim.play("hurt")
+	hurt_audio.play()
 	if health <= 0:
 		is_dead = true
 		dead.emit()
+		dead_audio.play()
+		var parent = get_tree().current_scene
+		dead_audio.reparent(parent)
 		queue_free()
 
 func _process(_delta: float) -> void:
@@ -67,6 +74,7 @@ func _physics_process(_delta: float) -> void:
 	navigation_agent.set_velocity(new_velocity)
 
 func shoot_bullets() -> void:
+	shoot_audio.play()
 	for i in range(shoot_markers.size()):
 		var bullet = bullet_scene.instantiate()
 		bullet.global_position = shoot_markers[i].global_position
@@ -102,3 +110,22 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = velocity.move_toward(safe_velocity * enemy_stats.movement_speed, 10.0)
 	move_and_slide()
 	pass # Replace with function body.
+
+func hurt(area: Area2D) -> void:
+	if is_dead:
+		return
+		
+	var temp = area
+	while temp.get_parent() != null:
+		temp = temp.get_parent()
+		if temp is BaseCharacter:
+			break
+	if temp is Player:
+		is_dead = true
+		dead_audio.play()
+		var parent = get_tree().current_scene
+		dead_audio.reparent(parent)
+		queue_free()
+		dead.emit()
+	else:
+		take_damage(5.0)

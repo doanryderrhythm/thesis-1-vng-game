@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bcru1g7wj4ujy"]
 
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="1_1ulxr"]
+[ext_resource type="AudioStream" uid="uid://dbeo51i4e64wl" path="res://sfx/lazer.wav" id="2_6whbb"]
 
 [sub_resource type="GDScript" id="GDScript_1ulxr"]
 resource_name = "lazer"
@@ -16,6 +17,8 @@ script/source = "extends Node2D
 @onready var finish_timer: Timer = $FinishTimer
 
 @onready var lazer_hit_collision: CollisionShape2D = $HitArea2D/CollisionShape2D
+
+@onready var lazer_shoot_audio: AudioStreamPlayer2D = $LazerShootAudio
 
 var is_spawned: bool = false;
 
@@ -54,6 +57,7 @@ func _on_warning_timer_timeout() -> void:
 	finish_lazer.visible = true
 	finish_lazer.process_mode = Node.PROCESS_MODE_INHERIT
 	finish_timer.start()
+	lazer_shoot_audio.play()
 	
 	lazer_hit_collision.disabled = false
 	pass # Replace with function body.
@@ -108,6 +112,9 @@ metadata/_custom_type_script = "uid://2jniw3exf4mu"
 scale = Vector2(1, 10)
 shape = SubResource("SegmentShape2D_6whbb")
 debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="LazerShootAudio" type="AudioStreamPlayer2D" parent="." unique_id=1492291006]
+stream = ExtResource("2_6whbb")
 
 [connection signal="timeout" from="WarningTimer" to="." method="_on_warning_timer_timeout"]
 [connection signal="timeout" from="FinishTimer" to="." method="_on_finish_timer_timeout"]

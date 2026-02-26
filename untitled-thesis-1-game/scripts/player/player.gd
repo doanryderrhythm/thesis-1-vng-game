@@ -42,6 +42,9 @@ var _is_invulnerable: bool = false
 @onready var _circle_hurt_collision: CollisionShape2D = $HurtAreas/CircleHurtArea2D/CollisionShape2D
 
 @onready var _anim: AnimationPlayer = $AnimationPlayer
+@onready var _shoot_audio: AudioStreamPlayer = $ShootAudio
+@onready var _dash_audio: AudioStreamPlayer = $DashAudio
+@onready var _hurt_audio: AudioStreamPlayer = $HurtAudio
 
 var state: PlayerState
 var _is_dash: bool = false
@@ -88,7 +91,9 @@ func manage_dash() -> void:
 			return
 		
 		_dash_count -= 1
+		GameManager.dash_change.emit()
 		_dash_direction_vector = Vector2(cos(rotation), sin(rotation))
+		_dash_audio.play()
 		toggle_dash(true)
 		_dash_timer.start()
 		
@@ -110,6 +115,7 @@ func manage_dash() -> void:
 	pass
 
 func shoot_bullet() -> void:
+	_shoot_audio.play()
 	for i in range(_shoot_markers.size()):
 		var bullet = _bullet_scene.instantiate()
 		bullet.global_position = _shoot_markers[i].global_position
@@ -131,7 +137,9 @@ func take_damage(_damage: float) -> void:
 		return
 	
 	health -= _damage
+	GameManager.health_change.emit()
 	_anim.play("hurt")
+	_hurt_audio.play()
 	_invulnerable_timer.start()
 	_statue_timer.start()
 	_is_statue = true
@@ -205,6 +213,7 @@ func _on_shooting_delay_timer_timeout() -> void:
 
 func _on_dash_wait_timer_timeout() -> void:
 	_dash_count = ValueStorer.max_dash_count
+	GameManager.dash_change.emit()
 	pass # Replace with function body.
 
 func _on_invulnerable_timer_timeout() -> void:
@@ -215,3 +224,9 @@ func _on_invulnerable_timer_timeout() -> void:
 func _on_statue_timer_timeout() -> void:
 	_is_statue = false;
 	pass # Replace with function body.
+
+func hurt(_area: Area2D) -> void:
+	if is_dead:
+		return
+	
+	take_damage(5.0)

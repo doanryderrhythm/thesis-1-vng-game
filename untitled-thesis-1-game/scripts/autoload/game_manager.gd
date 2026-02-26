@@ -28,26 +28,41 @@ var play_time: float = 0.0
 var play_time_int: int = 0
 var stage_stats: Array[StageStats]
 
-signal play_time_change
-signal max_min_enemy_change
+signal health_change
+signal dash_change
 
 func _ready() -> void:
+	pass
+
+func reset() -> void:
+	current_id_x = 0
+	current_id_y = 0
+
+	current_level = 0
+	ongoing_level = 0
+	current_phase = 0
+	max_phase = 0
+
+	enemy_particles = preload("res://effects/base_enemy_spawn.tscn")
+	enemy_scenes = []
+	room_scenes = []
+
+	base_room = preload("res://scenes/rooms/base_room.tscn")
+	rooms = []
+	
 	set_up_stage_stats()
 	set_up_rooms()
 	set_up_enemies()
 	
 	create_room(0, 0)
 	create_available_rooms(current_id_x, current_id_y)
-	pass
 
 func _process(delta: float) -> void:
 	play_time += delta
 	if play_time_int != int(play_time):
 		play_time_int = int(play_time)
-		play_time_change.emit()
 		if play_time_int >= stage_stats[current_level].time_to_pass and current_level + 1 < stage_stats.size():
 			current_level += 1
-			max_min_enemy_change.emit()
 
 func set_up_rooms() -> void:
 	var listener: RoomsListener = load("res://resources/rooms/rooms_listener.tres")

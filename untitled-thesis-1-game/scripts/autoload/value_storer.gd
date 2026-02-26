@@ -25,6 +25,7 @@ var player_dash_rate: float = 3.0
 var enemy_radius: float = 55.0
 var player_bullet_speed_mult: float = 3.0
 var max_dash_count: int = 3
+var dash_wait_time: float = 2.0
 #endregion
 
 #region HEALTH

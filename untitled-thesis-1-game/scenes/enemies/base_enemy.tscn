@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://ccs1cb8eeq3sc" path="res://scenes/bullets/base_bullet.tscn" id="2_ylyo2"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_hsw27"]
 [ext_resource type="Script" uid="uid://crv1isw4q5df" path="res://scripts/area_2d/hurt_area_2d.gd" id="4_5dnuu"]
+[ext_resource type="AudioStream" uid="uid://kjqysipjyi6k" path="res://sfx/enemy_shoot.wav" id="6_n2ebm"]
+[ext_resource type="AudioStream" uid="uid://cwqp446t35x4d" path="res://sfx/enemy_hurt.wav" id="7_i1su5"]
+[ext_resource type="AudioStream" uid="uid://dpxrdf5q83rgv" path="res://sfx/enemy_dead.wav" id="8_i1su5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gbcqu"]
 radius = 55.03635
@@ -123,6 +126,15 @@ debug_path_custom_color = Color(0.99999994, 0.16973957, 0.28575546, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1481037309]
 libraries/ = SubResource("AnimationLibrary_n2ebm")
+
+[node name="ShootAudio" type="AudioStreamPlayer2D" parent="." unique_id=845705284]
+stream = ExtResource("6_n2ebm")
+
+[node name="HurtAudio" type="AudioStreamPlayer2D" parent="." unique_id=1071958891]
+stream = ExtResource("7_i1su5")
+
+[node name="DeadAudio" type="AudioStreamPlayer2D" parent="." unique_id=915990040]
+stream = ExtResource("8_i1su5")
 
 [connection signal="timeout" from="ShootingDelayTimer" to="." method="_on_shooting_delay_timer_timeout"]
 [connection signal="timeout" from="NavigationTimer" to="." method="_on_navigation_timer_timeout"]
