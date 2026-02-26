@@ -14,7 +14,10 @@ var is_moving: bool = false
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 var goal: Node
 
+@onready var anim: AnimationPlayer = $AnimationPlayer
+
 func _ready() -> void:
+	anim.play("default")
 	health = enemy_stats.health
 	
 	dead.connect(GameManager.deduct_enemies)
@@ -41,6 +44,17 @@ func check_move() -> void:
 	else:
 		modulate = enemy_stats.enemy_color_moving
 		navigation_agent.process_mode = Node.PROCESS_MODE_INHERIT
+
+func take_damage(_damage: float) -> void:
+	if is_dead:
+		return
+	
+	health -= _damage
+	anim.play("hurt")
+	if health <= 0:
+		is_dead = true
+		dead.emit()
+		queue_free()
 
 func _process(_delta: float) -> void:
 	if GameManager.player:

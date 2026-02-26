@@ -31,10 +31,17 @@ var _shoot_markers: Array[Marker2D]
 var _dash_direction_vector: Vector2 = Vector2(0, 0)
 var _dash_count: int = ValueStorer.max_dash_count
 
+@onready var _statue_timer: Timer = $StatueTimer
+@onready var _invulnerable_timer: Timer = $InvulnerableTimer
+var _is_statue: bool = false
+var _is_invulnerable: bool = false
+
 @onready var _triangle_hurt_collision: CollisionPolygon2D = $HurtAreas/TriangleHurtArea2D/CollisionPolygon2D
 @onready var _square_hurt_collision: CollisionShape2D = $HurtAreas/SquareHurtArea2D/CollisionShape2D
 @onready var _diamond_hurt_collision: CollisionPolygon2D = $HurtAreas/DiamondHurtArea2D/CollisionPolygon2D
 @onready var _circle_hurt_collision: CollisionShape2D = $HurtAreas/CircleHurtArea2D/CollisionShape2D
+
+@onready var _anim: AnimationPlayer = $AnimationPlayer
 
 var state: PlayerState
 var _is_dash: bool = false
@@ -59,6 +66,9 @@ func _physics_process(_delta: float) -> void:
 	pass
 
 func manage_move() -> void:
+	if _is_statue:
+		return
+	
 	var input_vector = Vector2(
 		Input.get_action_strength(ValueStorer.key_right) - Input.get_action_strength(ValueStorer.key_left),
 		Input.get_action_strength(ValueStorer.key_down) - Input.get_action_strength(ValueStorer.key_up)
@@ -105,11 +115,35 @@ func shoot_bullet() -> void:
 		bullet.global_position = _shoot_markers[i].global_position
 		bullet.texture = _bullet_stats.texture
 		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed) * ValueStorer.player_bullet_speed_mult
-		bullet.angle = rotation
+		bullet.angle = deg_to_rad(randf_range(
+			rotation_degrees - 2,
+			rotation_degrees + 2))
 		bullet.damage = _bullet_stats.damage
 		
 		var parent = get_tree().current_scene.find_child(ValueStorer.bullets_node)
 		parent.add_child(bullet)
+		
+func take_damage(_damage: float) -> void:
+	if is_dead:
+		return
+		
+	if _is_invulnerable:
+		return
+	
+	health -= _damage
+	_anim.play("hurt")
+	_invulnerable_timer.start()
+	_statue_timer.start()
+	_is_statue = true
+	call_deferred("set_invulnerable", true)
+	
+	if health <= 0:
+		is_dead = true
+		queue_free()
+
+func set_invulnerable(is_toggled: bool) -> void:
+	_is_invulnerable = is_toggled
+	hurt_collision.disabled = _is_invulnerable
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -158,7 +192,10 @@ func set_up_player() -> void:
 	
 func toggle_dash(is_toggled: bool) -> void:
 	_is_dash = is_toggled
-	hurt_collision.disabled = is_toggled
+	if _is_invulnerable and !_is_dash:
+		hurt_collision.disabled = true
+	else:
+		hurt_collision.disabled = is_toggled
 	hit_collision.disabled = !is_toggled
 
 func _on_shooting_delay_timer_timeout() -> void:
@@ -168,4 +205,13 @@ func _on_shooting_delay_timer_timeout() -> void:
 
 func _on_dash_wait_timer_timeout() -> void:
 	_dash_count = ValueStorer.max_dash_count
+	pass # Replace with function body.
+
+func _on_invulnerable_timer_timeout() -> void:
+	_anim.play("default")
+	call_deferred("set_invulnerable", false)
+	pass # Replace with function body.
+
+func _on_statue_timer_timeout() -> void:
+	_is_statue = false;
 	pass # Replace with function body.

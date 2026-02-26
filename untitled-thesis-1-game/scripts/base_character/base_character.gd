@@ -21,15 +21,7 @@ func _physics_process(_delta: float) -> void:
 	pass
 
 func take_damage(_damage: float) -> void:
-	if is_dead:
-		return
-	
-	health -= _damage
-	if health <= 0:
-		is_dead = true
-		if self is BaseEnemy:
-			dead.emit()
-		queue_free()
+	pass
 
 func hurt(area: Area2D) -> void:
 	if is_dead:

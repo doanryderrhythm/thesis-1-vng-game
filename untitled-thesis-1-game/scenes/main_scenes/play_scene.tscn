@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://7hve4728seki"]
 
 [ext_resource type="PackedScene" uid="uid://bmne7bel88n5p" path="res://scenes/player/player.tscn" id="1_tt14s"]
+[ext_resource type="PackedScene" uid="uid://dls40hpj5hhkq" path="res://scenes/cursors/aim_cursor.tscn" id="2_qvacy"]
 
 [node name="PlayScene" type="Node2D" unique_id=1264302626]
 
@@ -19,3 +20,8 @@
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1918493937]
 zoom = Vector2(0.35, 0.35)
 position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=728963286]
+layer = 300
+
+[node name="AimCursor" parent="CanvasLayer" unique_id=109126339 instance=ExtResource("2_qvacy")]
