@@ -9,6 +9,10 @@ class_name DebugUI
 @onready var dash_bar: ProgressBar = $DashBar
 @onready var fill_dash_bar: ProgressBar = $FillDashBar
 
+@onready var restart_label: Label = $RestartLabel
+@onready var score_label: Label = $ScoreLabel
+@onready var play_time_label: Label = $PlayTimeLabel
+
 func _ready() -> void:
 	health_bar.min_value = 0
 	health_bar.max_value = GameManager.player.health
@@ -19,21 +23,51 @@ func _ready() -> void:
 	fill_dash_bar.min_value = 0
 	fill_dash_bar.max_value = ValueStorer.dash_wait_time
 	
+	restart_label.visible = false
+	
 	change_health()
 	change_dash()
+	change_play_time()
+	change_score()
 	
 	GameManager.health_change.connect(change_health)
 	GameManager.dash_change.connect(change_dash)
+	GameManager.state_lose_change.connect(show_restart)
+	GameManager.play_time_change.connect(change_play_time)
+	GameManager.score_change.connect(change_score)
 
 func _process(_delta: float) -> void:
-	fill_dash_bar.value = GameManager.player._dash_wait_timer.time_left
+	if is_instance_valid(GameManager.player):
+		fill_dash_bar.value = GameManager.player._dash_wait_timer.time_left
 
 func change_health() -> void:
 	health_bar.value = GameManager.player.health
 
 func change_dash() -> void:
 	dash_bar.value = GameManager.player._dash_count
+
+func change_play_time() -> void:
+	play_time_label.text = \"Play Time: \" + str(GameManager.play_time_int)
+
+func change_score() -> void:
+	score_label.text = \"Score: \" + str(GameManager.total_score)
+
+func show_restart() -> void:
+	restart_label.visible = true
 "
+
+[sub_resource type="LabelSettings" id="LabelSettings_2bpog"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2fnn"]
+font_size = 40
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rmw4l"]
+font_size = 40
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
 
 [node name="DebugUi" type="CanvasLayer" unique_id=2086543205]
 script = SubResource("GDScript_2bpog")
@@ -61,3 +95,46 @@ offset_top = 39.0
 offset_right = 374.0
 offset_bottom = 46.0
 show_percentage = false
+
+[node name="RestartLabel" type="Label" parent="." unique_id=984615250]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = -34.5
+offset_right = 208.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press R to restart"
+label_settings = SubResource("LabelSettings_2bpog")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=1230115535]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.0
+offset_top = 10.0
+offset_right = 88.0
+offset_bottom = 93.0
+grow_horizontal = 2
+text = "Score:"
+label_settings = SubResource("LabelSettings_h2fnn")
+horizontal_alignment = 1
+
+[node name="PlayTimeLabel" type="Label" parent="." unique_id=1891983369]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 33.0
+grow_horizontal = 0
+text = "Play Time:"
+label_settings = SubResource("LabelSettings_rmw4l")
+horizontal_alignment = 2

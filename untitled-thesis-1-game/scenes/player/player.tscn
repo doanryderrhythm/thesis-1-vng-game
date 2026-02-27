@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://vtxwdqpa14io" path="res://scenes/bullets/player_bullet.tscn" id="3_0owmy"]
 [ext_resource type="Script" uid="uid://crv1isw4q5df" path="res://scripts/area_2d/hurt_area_2d.gd" id="3_gmlin"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_lvxji"]
+[ext_resource type="Texture2D" uid="uid://c3wrkt8gos3w8" path="res://sprites/bullets/bullet_square.png" id="5_h17s1"]
 [ext_resource type="AudioStream" uid="uid://r6ubrcbwu6p8" path="res://sfx/player_shoot.wav" id="7_0owmy"]
 [ext_resource type="AudioStream" uid="uid://bglthoh62y2ot" path="res://sfx/player_dash.wav" id="8_5gtgg"]
 [ext_resource type="AudioStream" uid="uid://cn0svmt1f6uuy" path="res://sfx/player_hurt.wav" id="9_h17s1"]
@@ -92,6 +93,12 @@ health = 100.0
 modulate = Color(3.465414e-06, 0.67638296, 0.88230026, 1)
 rotation = 1.5707964
 texture = ExtResource("1_8afob")
+
+[node name="ShootPOVSprite" type="Sprite2D" parent="." unique_id=1752820850]
+modulate = Color(0.484375, 0.948902, 1, 1)
+position = Vector2(52, 0)
+scale = Vector2(1, 0.5)
+texture = ExtResource("5_h17s1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1744166195]
 shape = SubResource("CircleShape2D_dovo2")

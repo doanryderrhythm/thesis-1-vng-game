@@ -20,6 +20,8 @@ var is_executed: bool
 @onready var spike_timer: Timer = $SpikeTimer
 @onready var spike_way_points: Node2D = $SpikeWayPoints
 
+@onready var door_close_audio: AudioStreamPlayer = $DoorCloseAudio
+
 func _ready() -> void:
 	start_stage(false)
 	pass
@@ -34,13 +36,17 @@ func init_detail(_id_x: int, _id_y: int) -> void:
 func start_stage(is_toggled: bool) -> void:
 	doors.visible = is_toggled
 	if is_toggled:
+		door_close_audio.play()
+		GameManager.room_start.emit()
 		if GameManager.is_lazer: lazer_timer.start()
 		if GameManager.is_spike: spike_timer.start()
 		doors.process_mode = Node.PROCESS_MODE_INHERIT
+		RenderingServer.set_default_clear_color(Color(0.1, 0.1, 0.1, 1.0))
 	else:
 		lazer_timer.stop()
 		spike_timer.stop()
 		doors.process_mode = Node.PROCESS_MODE_DISABLED
+		RenderingServer.set_default_clear_color(Color(0.3, 0.3, 0.3, 1.0))
 	start_area_collision.disabled = is_toggled
 	
 func _on_start_area_2d_area_entered(_area: Area2D) -> void:

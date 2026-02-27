@@ -19,6 +19,8 @@ var goal: Node
 @onready var hurt_audio: AudioStreamPlayer2D = $HurtAudio
 @onready var dead_audio: AudioStreamPlayer2D = $DeadAudio
 
+@onready var enemy_killed_particles: PackedScene = preload("res://effects/killed_particles.tscn")
+
 func _ready() -> void:
 	anim.play("default")
 	health = enemy_stats.health
@@ -53,12 +55,15 @@ func take_damage(_damage: float) -> void:
 		return
 	
 	health -= _damage
+	GameManager.add_score(1)
 	anim.play("hurt")
 	hurt_audio.play()
 	if health <= 0:
 		is_dead = true
+		GameManager.add_score(20)
 		dead.emit()
 		dead_audio.play()
+		spawn_killed_particles()
 		var parent = get_tree().current_scene
 		dead_audio.reparent(parent)
 		queue_free()
@@ -111,6 +116,12 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	move_and_slide()
 	pass # Replace with function body.
 
+func spawn_killed_particles() -> void:
+	var killed_particles = enemy_killed_particles.instantiate()
+	killed_particles.color = modulate
+	killed_particles.global_position = global_position
+	get_parent().add_child(killed_particles)
+
 func hurt(area: Area2D) -> void:
 	if is_dead:
 		return
@@ -122,9 +133,11 @@ func hurt(area: Area2D) -> void:
 			break
 	if temp is Player:
 		is_dead = true
+		GameManager.add_score(100)
 		dead_audio.play()
 		var parent = get_tree().current_scene
 		dead_audio.reparent(parent)
+		spawn_killed_particles()
 		queue_free()
 		dead.emit()
 	else:

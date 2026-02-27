@@ -3,20 +3,81 @@
 [ext_resource type="PackedScene" uid="uid://bmne7bel88n5p" path="res://scenes/player/player.tscn" id="1_tt14s"]
 [ext_resource type="PackedScene" uid="uid://di78feag8gs8a" path="res://scenes/ui/debug_ui.tscn" id="1_vrx0d"]
 [ext_resource type="PackedScene" uid="uid://dls40hpj5hhkq" path="res://scenes/cursors/aim_cursor.tscn" id="2_qvacy"]
+[ext_resource type="Texture2D" uid="uid://dkacfy5sk2ffo" path="res://sprites/tutorial/tutorial.png" id="4_5b3o3"]
 
 [sub_resource type="GDScript" id="GDScript_vrx0d"]
 resource_name = "play_scene"
 script/source = "extends Node2D
 
+@onready var anim: AnimationPlayer = $AnimationPlayer
+
 func _ready() -> void:
 	GameManager.reset()
+	GameManager.room_start.connect(room_start)
+	anim.play(\"default\")
 	pass
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(\"restart\"):
 		get_tree().reload_current_scene()
 	pass
+
+func room_start() -> void:
+	anim.play(\"room_start\")
 "
+
+[sub_resource type="Animation" id="Animation_y0n7b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/Camera2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(75, -75)]
+}
+
+[sub_resource type="Animation" id="Animation_u2vk8"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/Camera2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5b3o3"]
+resource_name = "room_start"
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player/Camera2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.050000004, 0.06666667, 0.083333336, 0.10000001, 0.116666675),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(75, -75), Vector2(-60, 60), Vector2(-50, -50), Vector2(35, 35), Vector2(20, -20), Vector2(-10, 10), Vector2(-5, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0n7b"]
+_data = {
+&"RESET": SubResource("Animation_y0n7b"),
+&"default": SubResource("Animation_u2vk8"),
+&"room_start": SubResource("Animation_5b3o3")
+}
 
 [node name="PlayScene" type="Node2D" unique_id=1264302626]
 script = SubResource("GDScript_vrx0d")
@@ -25,9 +86,14 @@ script = SubResource("GDScript_vrx0d")
 
 [node name="Rooms" type="Node2D" parent="." unique_id=1728958944]
 
+[node name="TutorialSprite" type="Sprite2D" parent="." unique_id=116100826]
+texture = ExtResource("4_5b3o3")
+
 [node name="Enemies" type="Node2D" parent="." unique_id=95174209]
 
 [node name="EnemyParticles" type="Node2D" parent="." unique_id=472076047]
+
+[node name="PlayerDashParticles" type="Node2D" parent="." unique_id=895546095]
 
 [node name="BulletParticles" type="Node2D" parent="." unique_id=1503721090]
 
@@ -36,6 +102,7 @@ script = SubResource("GDScript_vrx0d")
 [node name="Player" parent="." unique_id=556700346 instance=ExtResource("1_tt14s")]
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1918493937]
+offset = Vector2(75, -75)
 zoom = Vector2(0.35, 0.35)
 position_smoothing_enabled = true
 
@@ -43,3 +110,6 @@ position_smoothing_enabled = true
 layer = 300
 
 [node name="AimCursor" parent="CanvasLayer" unique_id=109126339 instance=ExtResource("2_qvacy")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=759961423]
+libraries/ = SubResource("AnimationLibrary_y0n7b")

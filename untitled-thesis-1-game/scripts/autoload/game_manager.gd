@@ -5,6 +5,8 @@ var current_id_y: int = 0
 
 var player: Player
 
+var total_score: int = 0
+
 var current_level: int = 0
 var ongoing_level: int = 0
 var current_phase: int = 0
@@ -30,6 +32,10 @@ var stage_stats: Array[StageStats]
 
 signal health_change
 signal dash_change
+signal state_lose_change
+signal score_change
+signal play_time_change
+signal room_start
 
 func _ready() -> void:
 	pass
@@ -37,11 +43,16 @@ func _ready() -> void:
 func reset() -> void:
 	current_id_x = 0
 	current_id_y = 0
+	
+	total_score = 0
 
 	current_level = 0
 	ongoing_level = 0
 	current_phase = 0
 	max_phase = 0
+	
+	play_time = 0
+	play_time_int = 0
 
 	enemy_particles = preload("res://effects/base_enemy_spawn.tscn")
 	enemy_scenes = []
@@ -56,11 +67,16 @@ func reset() -> void:
 	
 	create_room(0, 0)
 	create_available_rooms(current_id_x, current_id_y)
+	
+	health_change.emit()
+	dash_change.emit()
+	score_change.emit()
 
 func _process(delta: float) -> void:
 	play_time += delta
 	if play_time_int != int(play_time):
 		play_time_int = int(play_time)
+		play_time_change.emit()
 		if play_time_int >= stage_stats[current_level].time_to_pass and current_level + 1 < stage_stats.size():
 			current_level += 1
 
@@ -75,7 +91,11 @@ func set_up_stage_stats() -> void:
 func set_up_enemies() -> void:
 	var listener: EnemiesListener = load("res://resources/enemies/enemies_listener.tres")
 	enemy_scenes = listener.enemies
-	
+
+func add_score(num: int) -> void:
+	total_score += num
+	score_change.emit()
+
 func start_stage() -> void:
 	ongoing_level = current_level
 	current_phase = stage_stats[ongoing_level].phase_count

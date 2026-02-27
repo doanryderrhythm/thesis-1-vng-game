@@ -138,6 +138,7 @@ func take_damage(_damage: float) -> void:
 	
 	health -= _damage
 	GameManager.health_change.emit()
+	GameManager.add_score(-25)
 	_anim.play("hurt")
 	_hurt_audio.play()
 	_invulnerable_timer.start()
@@ -147,6 +148,7 @@ func take_damage(_damage: float) -> void:
 	
 	if health <= 0:
 		is_dead = true
+		GameManager.state_lose_change.emit()
 		queue_free()
 
 func set_invulnerable(is_toggled: bool) -> void:

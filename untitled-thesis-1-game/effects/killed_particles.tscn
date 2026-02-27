@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://mpo53na5akm8"]
+
+[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="1_t4lmv"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t4lmv"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_ca0t8"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_ca0t8"]
+_data = [Vector2(0, 1), 0.0, -2.3749998, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="GDScript" id="GDScript_t4lmv"]
+resource_name = "killed_particles"
+script/source = "extends CPUParticles2D
+
+func _ready() -> void:
+	emitting = true
+
+func _on_finished() -> void:
+	queue_free()
+	pass # Replace with function body.
+"
+
+[node name="KilledParticles" type="CPUParticles2D" unique_id=227687123]
+material = SubResource("CanvasItemMaterial_t4lmv")
+emitting = false
+amount = 40
+texture = ExtResource("1_t4lmv")
+lifetime = 2.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 50.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 800.0
+damping_min = 1500.0
+damping_max = 1700.0
+scale_amount_min = 0.1
+scale_amount_max = 0.55
+color_ramp = SubResource("Gradient_ca0t8")
+anim_speed_curve = SubResource("Curve_ca0t8")
+script = SubResource("GDScript_t4lmv")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
