@@ -228,7 +228,20 @@ func _on_statue_timer_timeout() -> void:
 	pass # Replace with function body.
 
 func hurt(_area: Area2D) -> void:
+	print(_area)
 	if is_dead:
 		return
+
+	var temp = _area
+	while temp.get_parent() != null:
+		temp = temp.get_parent()
+		if temp is BaseEnemy or temp is BaseBullet:
+			break
 	
-	take_damage(5.0)
+	if temp is BaseEnemy:
+		print("enemy")
+		take_damage(15.0)
+	elif temp is BaseBullet:
+		print("bullet")
+		take_damage(temp.damage)
+		
