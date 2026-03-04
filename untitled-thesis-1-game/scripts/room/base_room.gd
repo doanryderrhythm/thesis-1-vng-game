@@ -23,17 +23,16 @@ var is_executed: bool
 @onready var door_close_audio: AudioStreamPlayer = $DoorCloseAudio
 
 func _ready() -> void:
-	start_stage(false)
+	start_stage(false, true)
 	pass
 
-func init_detail(_id_x: int, _id_y: int) -> void:
+func init_detail(_id_x: int, _id_y: int, _is_executed: bool = false) -> void:
 	id_x = _id_x
 	id_y = _id_y
 	position = ValueStorer.room_distance * Vector2(float(id_x), float(id_y))
-	is_executed = false
-	print(str(id_x) + ", " + str(id_y))
+	is_executed = _is_executed
 
-func start_stage(is_toggled: bool) -> void:
+func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 	doors.visible = is_toggled
 	if is_toggled:
 		door_close_audio.play()
@@ -47,6 +46,12 @@ func start_stage(is_toggled: bool) -> void:
 		spike_timer.stop()
 		doors.process_mode = Node.PROCESS_MODE_DISABLED
 		RenderingServer.set_default_clear_color(Color(0.3, 0.3, 0.3, 1.0))
+		if not is_game_start:
+			var used_room: Dictionary = {
+				ValueStorer.used_room_x: id_x,
+				ValueStorer.used_room_y: id_y
+			}
+			GameManager.used_rooms.append(used_room)
 	start_area_collision.disabled = is_toggled
 	
 func _on_start_area_2d_area_entered(_area: Area2D) -> void:

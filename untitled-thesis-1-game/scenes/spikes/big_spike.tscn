@@ -1,37 +1,10 @@
 [gd_scene format=3 uid="uid://b0sf7c4dsqsl3"]
 
+[ext_resource type="Script" uid="uid://pgap6x6j4lnp" path="res://scripts/spikes/big_spike.gd" id="1_i4vqm"]
 [ext_resource type="Texture2D" uid="uid://cse7kwtvo1pmy" path="res://sprites/spikes/big_spike/spike_ready_0.png" id="1_p5mls"]
 [ext_resource type="Texture2D" uid="uid://dks7xljggup6r" path="res://sprites/spikes/big_spike/spike_ready_1.png" id="2_f6f1n"]
 [ext_resource type="Texture2D" uid="uid://dhe2n3yiusg42" path="res://sprites/spikes/big_spike/spike_spawn.png" id="2_o16r7"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_o16r7"]
-
-[sub_resource type="GDScript" id="GDScript_msm5u"]
-resource_name = "big_spike"
-script/source = "extends Node2D
-class_name BigSpike
-
-@onready var spike_ready: AnimatedSprite2D = $SpikeReady
-@onready var spike_spawn: Sprite2D = $SpikeSpawn
-
-@onready var spawn_timer: Timer = $SpawnTimer
-@onready var spawn_collider: CollisionShape2D = $HitArea2D/CollisionShape2D
-
-func _ready() -> void:
-	spike_ready.play(\"default\")
-	
-	spike_spawn.visible = false
-	spawn_collider.disabled = true
-
-func _on_ready_timer_timeout() -> void:
-	spike_spawn.visible = true
-	spawn_timer.start()
-	spawn_collider.disabled = false
-	pass # Replace with function body.
-
-func _on_spawn_timer_timeout() -> void:
-	queue_free()
-	pass # Replace with function body.
-"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i4vqm"]
 animations = [{
@@ -51,7 +24,7 @@ animations = [{
 points = PackedVector2Array(18, -56, 134, 0, 18, 56)
 
 [node name="BigSpike" type="Node2D" unique_id=2020051638]
-script = SubResource("GDScript_msm5u")
+script = ExtResource("1_i4vqm")
 
 [node name="SpikeReady" type="AnimatedSprite2D" parent="." unique_id=1211565796]
 position = Vector2(62, 0)

@@ -1,77 +1,14 @@
 [gd_scene format=3 uid="uid://bcru1g7wj4ujy"]
 
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="1_1ulxr"]
+[ext_resource type="Script" uid="uid://buucsp7l5nlbx" path="res://scripts/lazers/base_lazer.gd" id="1_5cyv3"]
 [ext_resource type="AudioStream" uid="uid://dbeo51i4e64wl" path="res://sfx/lazer.wav" id="2_6whbb"]
-
-[sub_resource type="GDScript" id="GDScript_1ulxr"]
-resource_name = "lazer"
-script/source = "extends Node2D
-
-@onready var raycast_A: RayCast2D = $RayCasts/RayCastA
-@onready var raycast_B: RayCast2D = $RayCasts/RayCastB
-
-@onready var warning_lazer: Line2D = $WarningLazer
-@onready var finish_lazer: Line2D = $FinishLazer
-
-@onready var warning_timer: Timer = $WarningTimer
-@onready var finish_timer: Timer = $FinishTimer
-
-@onready var lazer_hit_collision: CollisionShape2D = $HitArea2D/CollisionShape2D
-
-@onready var lazer_shoot_audio: AudioStreamPlayer2D = $LazerShootAudio
-
-var is_spawned: bool = false;
-
-var warning_timer_value: float = 1.5
-var finish_timer_value: float = 1
-
-func _ready() -> void:
-	lazer_hit_collision.disabled = true
-	
-	warning_timer.wait_time = warning_timer_value
-	finish_timer.wait_time = finish_timer_value
-	
-	warning_timer.start()
-
-func _process(_delta: float) -> void:
-	warning_lazer.default_color = Color(1, 1, 1, 0.5 * (1 - warning_timer.time_left / warning_timer_value))
-	pass
-
-func _physics_process(_delta: float) -> void:
-	if raycast_A.is_colliding() and raycast_B.is_colliding() and !is_spawned:
-		var pos_A = raycast_A.get_collision_point()
-		var pos_B = raycast_B.get_collision_point()
-		print(pos_A)
-		print(pos_B)
-		warning_lazer.clear_points()
-		warning_lazer.add_point(to_local(pos_A))
-		warning_lazer.add_point(to_local(pos_B))
-		finish_lazer.clear_points()
-		finish_lazer.add_point(to_local(pos_A))
-		finish_lazer.add_point(to_local(pos_B))
-		lazer_hit_collision.shape.a = to_local(pos_A)
-		lazer_hit_collision.shape.b = to_local(pos_B)
-		is_spawned = true
-
-func _on_warning_timer_timeout() -> void:
-	finish_lazer.visible = true
-	finish_lazer.process_mode = Node.PROCESS_MODE_INHERIT
-	finish_timer.start()
-	lazer_shoot_audio.play()
-	
-	lazer_hit_collision.disabled = false
-	pass # Replace with function body.
-
-func _on_finish_timer_timeout() -> void:
-	queue_free()
-	pass # Replace with function body.
-"
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_6whbb"]
 b = Vector2(0, 0)
 
 [node name="LazerTest" type="Node2D" unique_id=530482390]
-script = SubResource("GDScript_1ulxr")
+script = ExtResource("1_5cyv3")
 
 [node name="Markers" type="Node2D" parent="." unique_id=1365232032]
 

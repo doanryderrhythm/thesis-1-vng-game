@@ -24,6 +24,7 @@ var room_scenes: Array[PackedScene] = []
 
 var base_room: PackedScene = preload("res://scenes/rooms/base_room.tscn")
 var rooms: Array[Room] = []
+var used_rooms: Array[Dictionary] = []
 
 # STATS
 var play_time: float = 0.0
@@ -60,6 +61,7 @@ func reset() -> void:
 
 	base_room = preload("res://scenes/rooms/base_room.tscn")
 	rooms = []
+	used_rooms.clear()
 	
 	set_up_stage_stats()
 	set_up_rooms()
@@ -67,6 +69,10 @@ func reset() -> void:
 	
 	create_room(0, 0)
 	create_available_rooms(current_id_x, current_id_y)
+	used_rooms.append({
+		ValueStorer.used_room_x: 0,
+		ValueStorer.used_room_y: 0
+		})
 	
 	health_change.emit()
 	dash_change.emit()
@@ -101,6 +107,7 @@ func start_stage() -> void:
 	current_phase = stage_stats[ongoing_level].phase_count
 	is_lazer = stage_stats[ongoing_level].is_lazer
 	is_spike = stage_stats[ongoing_level].is_spike
+	print(used_rooms)
 	pass
 
 func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
@@ -141,15 +148,24 @@ func create_room(id_x: int, id_y: int) -> void:
 		push_error("Rooms node not found!")
 		return
 	
-	var new_room = null
+	var new_room: Room = null
 	if id_x == 0 and id_y == 0:
 		new_room = base_room.instantiate()
 	else:
 		var random_room: PackedScene = room_scenes[randi_range(0, room_scenes.size() - 1)]
 		new_room = random_room.instantiate()
 	
-	new_room.init_detail(id_x, id_y)
-	parent.call_deferred("add_child", new_room)
+	var is_used: bool = false
+	for room in used_rooms:
+		if room[ValueStorer.used_room_x] == id_x and room[ValueStorer.used_room_y] == id_y:
+			is_used = true
+			break
+			
+	new_room.init_detail(id_x, id_y, is_used)
+	parent.add_child(new_room)
+	if is_used:
+		new_room.doors.visible = true
+		new_room.doors.process_mode = Node.PROCESS_MODE_INHERIT
 	rooms.append(new_room)
 
 func create_available_rooms(id_x: int, id_y: int) -> void:
@@ -178,13 +194,13 @@ func create_available_rooms(id_x: int, id_y: int) -> void:
 				is_right_available = false
 	
 	if is_left_available:
-		create_room(id_x - 1, id_y)
+		call_deferred("create_room", id_x - 1, id_y)
 	if is_right_available:
-		create_room(id_x + 1, id_y)
+		call_deferred("create_room", id_x + 1, id_y)
 	if is_up_available:
-		create_room(id_x, id_y + 1)
+		call_deferred("create_room", id_x, id_y + 1)
 	if is_down_available:
-		create_room(id_x, id_y - 1)
+		call_deferred("create_room", id_x, id_y - 1)
 
 func deduct_enemies() -> void:
 	current_enemies_num -= 1
@@ -199,6 +215,7 @@ func deduct_enemies() -> void:
 				)
 			return
 		
+		print(used_rooms)
 		var _room: Room = find_room(current_id_x, current_id_y)
 		print(_room)
 		if _room == null:

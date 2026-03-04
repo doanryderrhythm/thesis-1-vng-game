@@ -231,17 +231,20 @@ func hurt(_area: Area2D) -> void:
 	print(_area)
 	if is_dead:
 		return
-
+	
 	var temp = _area
 	while temp.get_parent() != null:
 		temp = temp.get_parent()
-		if temp is BaseEnemy or temp is BaseBullet:
+		if temp is BaseEnemy:
+			take_damage(15.0)
 			break
-	
-	if temp is BaseEnemy:
-		print("enemy")
-		take_damage(15.0)
-	elif temp is BaseBullet:
-		print("bullet")
-		take_damage(temp.damage)
+		elif temp is BaseBullet:
+			take_damage(temp.damage)
+			break
+		elif temp is BaseLazer:
+			take_damage(temp.damage)
+			break
+		elif temp is BigSpike:
+			take_damage(temp.damage)
+			break
 		

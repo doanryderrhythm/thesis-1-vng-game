@@ -40,6 +40,9 @@ var bullet_max_angular_velocity: float = 6.0
 
 #region ROOM
 var room_distance: float = 3000.0
+
+var used_room_x: String = "x"
+var used_room_y: String = "y"
 #endregion
 
 #region COLORS
