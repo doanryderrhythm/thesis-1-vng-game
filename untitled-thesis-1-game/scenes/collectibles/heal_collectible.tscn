@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://lt3bs0q46xf2"]
+
+[ext_resource type="PackedScene" uid="uid://jtgds2sijxf4" path="res://scenes/collectibles/base_collectible.tscn" id="1_s70mr"]
+[ext_resource type="Script" uid="uid://bbh6s5cu61itr" path="res://scripts/collectibles/heal_collectible.gd" id="2_s70mr"]
+[ext_resource type="Texture2D" uid="uid://cvqe4lik6iy0c" path="res://sprites/collectibles/collectibles.png" id="3_rj87r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pswpq"]
+atlas = ExtResource("3_rj87r")
+region = Rect2(0, 0, 104, 104)
+
+[node name="HealCollectible" unique_id=1780334649 instance=ExtResource("1_s70mr")]
+gravity_scale = 0.0
+script = ExtResource("2_s70mr")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1319834975]
+texture = SubResource("AtlasTexture_pswpq")

@@ -95,6 +95,8 @@ texture = ExtResource("4_5b3o3")
 
 [node name="PlayerDashParticles" type="Node2D" parent="." unique_id=895546095]
 
+[node name="Rewards" type="Node2D" parent="." unique_id=147839502]
+
 [node name="BulletParticles" type="Node2D" parent="." unique_id=1503721090]
 
 [node name="Bullets" type="Node2D" parent="." unique_id=1314244741]

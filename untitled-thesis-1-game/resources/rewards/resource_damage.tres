@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RewardResource" format=3 uid="uid://i062lv15dcx2"]
+
+[ext_resource type="PackedScene" uid="uid://cr7y813amxki7" path="res://scenes/collectibles/damage_collectible.tscn" id="1_08hlb"]
+[ext_resource type="Script" uid="uid://cb1lnlijqd6c6" path="res://scripts/resources/resource_reward.gd" id="1_qjrl6"]
+
+[resource]
+script = ExtResource("1_qjrl6")
+collectible = ExtResource("1_08hlb")
+rate = 1
+metadata/_custom_type_script = "uid://cb1lnlijqd6c6"

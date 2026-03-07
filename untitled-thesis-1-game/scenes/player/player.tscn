@@ -114,7 +114,7 @@ debug_color = Color(0, 0.63632345, 0.41024104, 0.41960785)
 [node name="HitAreas" type="Node2D" parent="." unique_id=217046150]
 
 [node name="HitArea2D" type="Area2D" parent="HitAreas" unique_id=2067713978]
-collision_layer = 16
+collision_layer = 18
 collision_mask = 0
 script = ExtResource("3_lvxji")
 metadata/_custom_type_script = "uid://2jniw3exf4mu"

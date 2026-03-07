@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cr7y813amxki7"]
+
+[ext_resource type="PackedScene" uid="uid://jtgds2sijxf4" path="res://scenes/collectibles/base_collectible.tscn" id="1_43at4"]
+[ext_resource type="Texture2D" uid="uid://cvqe4lik6iy0c" path="res://sprites/collectibles/collectibles.png" id="2_lwafx"]
+[ext_resource type="Script" uid="uid://ck8qe302kuevw" path="res://scripts/collectibles/damage_collectible.gd" id="2_pswpq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pswpq"]
+atlas = ExtResource("2_lwafx")
+region = Rect2(208, 0, 104, 104)
+
+[node name="DamageCollectible" unique_id=1780334649 instance=ExtResource("1_43at4")]
+gravity_scale = 0.0
+script = ExtResource("2_pswpq")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1319834975]
+texture = SubResource("AtlasTexture_pswpq")

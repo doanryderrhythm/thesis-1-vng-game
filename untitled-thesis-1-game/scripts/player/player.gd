@@ -50,6 +50,10 @@ var state: PlayerState
 var _is_dash: bool = false
 var _move_rate: float = 1.0
 
+var _total_dash: float
+var _offset_bullet_speed: float
+var _offset_move_speed: float
+
 func _init() -> void:
 	GameManager.player = self
 
@@ -68,6 +72,9 @@ func _physics_process(_delta: float) -> void:
 	manage_move()
 	pass
 
+func increase_move_speed(_amount: float) -> void:
+	_offset_move_speed += _amount
+
 func manage_move() -> void:
 	if _is_statue:
 		return
@@ -78,7 +85,7 @@ func manage_move() -> void:
 	)
 	
 	if state != PlayerState.DASH:
-		direction_vector = input_vector.normalized()
+		direction_vector = input_vector.normalized() * _offset_move_speed
 	else:
 		direction_vector = _dash_direction_vector
 		
@@ -106,7 +113,7 @@ func manage_dash() -> void:
 			_move_rate = ValueStorer.player_default_rate
 		else:
 			toggle_dash(true)
-			_move_rate = ValueStorer.player_dash_rate
+			_move_rate = _total_dash
 			
 	if Input.is_action_just_released(ValueStorer.key_dash):
 		toggle_dash(false)
@@ -114,13 +121,16 @@ func manage_dash() -> void:
 		_move_rate = ValueStorer.player_default_rate
 	pass
 
+func increase_bullet_speed(_amount: float) -> void:
+	_offset_bullet_speed += _amount
+
 func shoot_bullet() -> void:
 	_shoot_audio.play()
 	for i in range(_shoot_markers.size()):
 		var bullet = _bullet_scene.instantiate()
 		bullet.global_position = _shoot_markers[i].global_position
 		bullet.texture = _bullet_stats.texture
-		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed) * ValueStorer.player_bullet_speed_mult
+		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed) * (ValueStorer.player_bullet_speed_mult + _offset_bullet_speed)
 		bullet.angle = deg_to_rad(randf_range(
 			rotation_degrees - 2,
 			rotation_degrees + 2))
@@ -128,7 +138,16 @@ func shoot_bullet() -> void:
 		
 		var parent = get_tree().current_scene.find_child(ValueStorer.bullets_node)
 		parent.add_child(bullet)
-		
+
+func increase_dash(_amount: float) -> void:
+	_total_dash += _amount;
+
+func heal(_amount: float) -> void:
+	health += _amount
+	if health > ValueStorer.player_health:
+		health = ValueStorer.player_health
+	GameManager.health_change.emit()
+
 func take_damage(_damage: float) -> void:
 	if is_dead:
 		return
@@ -199,6 +218,9 @@ func set_up_player() -> void:
 		hurt_collision = _circle_hurt_collision
 	
 	health = ValueStorer.player_health
+	_total_dash = ValueStorer.player_dash_rate
+	_offset_bullet_speed = 0
+	_offset_move_speed = 1
 	
 func toggle_dash(is_toggled: bool) -> void:
 	_is_dash = is_toggled

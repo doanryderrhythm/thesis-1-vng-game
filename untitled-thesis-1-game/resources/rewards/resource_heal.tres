@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RewardResource" format=3 uid="uid://ey2arnr5rhqr"]
+
+[ext_resource type="PackedScene" uid="uid://lt3bs0q46xf2" path="res://scenes/collectibles/heal_collectible.tscn" id="1_6ke6u"]
+[ext_resource type="Script" uid="uid://cb1lnlijqd6c6" path="res://scripts/resources/resource_reward.gd" id="1_ry72f"]
+
+[resource]
+script = ExtResource("1_ry72f")
+collectible = ExtResource("1_6ke6u")
+rate = 1
+metadata/_custom_type_script = "uid://cb1lnlijqd6c6"

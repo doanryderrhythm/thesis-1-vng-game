@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://jtgds2sijxf4"]
+
+[ext_resource type="Script" uid="uid://bjreuumda0cck" path="res://scripts/area_2d/interact_area_2d.gd" id="1_d3ltt"]
+[ext_resource type="Script" uid="uid://b25vymqgwcsro" path="res://scripts/collectibles/base_collectible.gd" id="1_d5deo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u7xa0"]
+radius = 43.046486
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d5deo"]
+radius = 52.086468
+
+[node name="BaseCollectible" type="RigidBody2D" unique_id=1780334649]
+script = ExtResource("1_d5deo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1319834975]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=435083227]
+shape = SubResource("CircleShape2D_u7xa0")
+
+[node name="InteractArea2D" type="Area2D" parent="." unique_id=1061273165]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_d3ltt")
+metadata/_custom_type_script = "uid://bjreuumda0cck"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea2D" unique_id=1821629557]
+shape = SubResource("CircleShape2D_d5deo")
+
+[connection signal="interact" from="InteractArea2D" to="." method="_on_interact_area_2d_interact"]

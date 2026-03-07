@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://k3apmerbc7c4"]
+
+[ext_resource type="PackedScene" uid="uid://jtgds2sijxf4" path="res://scenes/collectibles/base_collectible.tscn" id="1_b347s"]
+[ext_resource type="Script" uid="uid://cjftmdgre7777" path="res://scripts/collectibles/speed_collectible.gd" id="2_b347s"]
+[ext_resource type="Texture2D" uid="uid://cvqe4lik6iy0c" path="res://sprites/collectibles/collectibles.png" id="3_klylu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pswpq"]
+atlas = ExtResource("3_klylu")
+region = Rect2(104, 0, 104, 104)
+
+[node name="SpeedCollectible" unique_id=1780334649 instance=ExtResource("1_b347s")]
+gravity_scale = 0.0
+script = ExtResource("2_b347s")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1319834975]
+texture = SubResource("AtlasTexture_pswpq")

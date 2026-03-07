@@ -21,6 +21,8 @@ var goal: Node
 
 @onready var enemy_killed_particles: PackedScene = preload("res://effects/killed_particles.tscn")
 
+@onready var reward_listener: RewardListener = load("res://resources/rewards/reward_listener.tres")
+
 func _ready() -> void:
 	anim.play("default")
 	health = enemy_stats.health
@@ -64,6 +66,7 @@ func take_damage(_damage: float) -> void:
 		dead.emit()
 		dead_audio.play()
 		spawn_killed_particles()
+		throw_reward()
 		var parent = get_tree().current_scene
 		dead_audio.reparent(parent)
 		queue_free()
@@ -138,7 +141,33 @@ func hurt(area: Area2D) -> void:
 		var parent = get_tree().current_scene
 		dead_audio.reparent(parent)
 		spawn_killed_particles()
+		throw_reward()
 		queue_free()
 		dead.emit()
 	else:
 		take_damage(5.0)
+
+func throw_reward() -> void:
+	var total_value: int = 0
+	for reward in reward_listener.rewards:
+		total_value += reward.rate
+	
+	var random_value: int = randi_range(1, total_value + ValueStorer.reward_random_extra)
+	var compare_value: int = 0
+	for reward in reward_listener.rewards:
+		compare_value += reward.rate
+		if random_value <= compare_value:
+			instantiate_reward(reward.collectible)
+			return
+	pass
+
+func instantiate_reward(reward: PackedScene) -> void:
+	if reward == null:
+		return
+		
+	var reward_scene = reward.instantiate()
+	var parent = get_tree().current_scene.find_child(ValueStorer.rewards_node)
+	if parent:
+		parent.call_deferred("add_child", reward_scene)
+		reward_scene.position = self.position
+	pass

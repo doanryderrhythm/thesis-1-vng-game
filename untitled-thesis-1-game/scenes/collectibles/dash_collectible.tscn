@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dukkqrqwnp6ci"]
+
+[ext_resource type="PackedScene" uid="uid://jtgds2sijxf4" path="res://scenes/collectibles/base_collectible.tscn" id="1_7c6xy"]
+[ext_resource type="Script" uid="uid://dkyykrkgf582h" path="res://scripts/collectibles/dash_collectible.gd" id="2_7c6xy"]
+[ext_resource type="Texture2D" uid="uid://cvqe4lik6iy0c" path="res://sprites/collectibles/collectibles.png" id="3_q67yt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pswpq"]
+atlas = ExtResource("3_q67yt")
+region = Rect2(312, 0, 104, 104)
+
+[node name="DashCollectible" unique_id=1780334649 instance=ExtResource("1_7c6xy")]
+gravity_scale = 0.0
+script = ExtResource("2_7c6xy")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1319834975]
+texture = SubResource("AtlasTexture_pswpq")

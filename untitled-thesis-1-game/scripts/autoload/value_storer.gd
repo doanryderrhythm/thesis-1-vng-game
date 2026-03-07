@@ -16,6 +16,7 @@ var bullet_particles_node: String = "BulletParticles"
 var bullets_node: String = "Bullets"
 var lazers_node: String = "Lazers"
 var spikes_node: String = "Spikes"
+var rewards_node: String = "Rewards"
 #endregion
 
 #region VALUES
@@ -26,6 +27,8 @@ var enemy_radius: float = 55.0
 var player_bullet_speed_mult: float = 3.0
 var max_dash_count: int = 3
 var dash_wait_time: float = 2.0
+var reward_random_extra: int = 10
+var reward_enable_time: float = 0.5
 #endregion
 
 #region HEALTH

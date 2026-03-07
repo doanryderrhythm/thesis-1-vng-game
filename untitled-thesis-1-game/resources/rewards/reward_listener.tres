@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RewardListener" format=3 uid="uid://c12fy0b5vnh1v"]
+
+[ext_resource type="Script" uid="uid://cb1lnlijqd6c6" path="res://scripts/resources/resource_reward.gd" id="1_l12wp"]
+[ext_resource type="Resource" uid="uid://i062lv15dcx2" path="res://resources/rewards/resource_damage.tres" id="2_hrpcg"]
+[ext_resource type="Script" uid="uid://cs20vy6p25rry" path="res://scripts/resources/resource_reward_listener.gd" id="2_iin3g"]
+[ext_resource type="Resource" uid="uid://crnjbshos85yq" path="res://resources/rewards/resource_dash.tres" id="3_dwa6u"]
+[ext_resource type="Resource" uid="uid://ey2arnr5rhqr" path="res://resources/rewards/resource_heal.tres" id="4_iiryy"]
+[ext_resource type="Resource" uid="uid://dn21kciruh612" path="res://resources/rewards/resource_shoot.tres" id="5_a250x"]
+[ext_resource type="Resource" uid="uid://d0hdc2fl0l2u7" path="res://resources/rewards/resource_speed.tres" id="6_x2rrw"]
+
+[resource]
+script = ExtResource("2_iin3g")
+rewards = Array[ExtResource("1_l12wp")]([ExtResource("2_hrpcg"), ExtResource("3_dwa6u"), ExtResource("4_iiryy"), ExtResource("5_a250x"), ExtResource("6_x2rrw")])
+metadata/_custom_type_script = "uid://cs20vy6p25rry"
