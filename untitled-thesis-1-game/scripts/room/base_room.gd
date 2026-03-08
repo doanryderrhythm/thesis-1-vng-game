@@ -6,6 +6,18 @@ var id_y: int
 
 var is_executed: bool
 
+var lazer_warn_time: float
+var lazer_harm_time: float
+
+var spike_warn_time: float
+var spike_harm_time: float
+
+var bomb_warn_time: float
+var bomb_harm_time: float
+
+var bomb_four_warn_time: float
+var bomb_four_harm_time: float
+
 @onready var first_point: Marker2D = $WayPoints/FirstPoint
 @onready var last_point: Marker2D = $WayPoints/LastPoint
 
@@ -53,6 +65,7 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 		lazer_timer.stop()
 		spike_timer.stop()
 		bomb_timer.stop()
+		bomb_four_timer.stop()
 		doors.process_mode = Node.PROCESS_MODE_DISABLED
 		RenderingServer.set_default_clear_color(Color(0.3, 0.3, 0.3, 1.0))
 		if not is_game_start:
@@ -72,6 +85,7 @@ func _on_start_area_2d_area_entered(_area: Area2D) -> void:
 	GameManager.current_id_x = id_x
 	GameManager.current_id_y = id_y
 	GameManager.start_stage()
+	GameManager.confirm_stage(self)
 	GameManager.spawn_enemies(first_point.global_position, last_point.global_position)
 	pass # Replace with function body.
 
@@ -97,9 +111,11 @@ func _on_lazer_timer_timeout() -> void:
 	if not is_instance_valid(GameManager.player):
 		return
 	
-	var new_lazer = lazer_scene.instantiate()
+	var new_lazer: BaseLazer = lazer_scene.instantiate()
 	var parent = self.find_child(ValueStorer.lazers_node)
 	parent.add_child(new_lazer)
+	new_lazer.warning_timer_value = lazer_warn_time
+	new_lazer.finish_timer_value = lazer_harm_time
 	new_lazer.global_position = GameManager.player.global_position
 	new_lazer.rotation = randf_range(0, 360)
 	pass # Replace with function body.
@@ -122,9 +138,11 @@ func _on_spike_timer_timeout() -> void:
 	)
 	var confirmed_rotation: float = 90 * float(random_side)
 	
-	var new_spike = spike_scene.instantiate()
+	var new_spike: BigSpike = spike_scene.instantiate()
 	var parent = find_child(ValueStorer.spikes_node)
 	parent.add_child(new_spike)
+	new_spike.ready_timer.wait_time = spike_warn_time
+	new_spike.spawn_timer.wait_time = spike_harm_time
 	new_spike.position = confirmed_position
 	new_spike.rotation = deg_to_rad(confirmed_rotation)
 	pass # Replace with function body.
@@ -159,5 +177,11 @@ func respawn_bomb(scene: PackedScene) -> void:
 	var new_bomb = scene.instantiate()
 	var parent = find_child(ValueStorer.bombs_node)
 	parent.add_child(new_bomb)
+	if new_bomb is BombFour:
+		new_bomb.warning_timer.wait_time = bomb_four_warn_time
+		new_bomb.harmful_timer.wait_time = bomb_four_harm_time
+	else:
+		new_bomb.warning_timer.wait_time = bomb_warn_time
+		new_bomb.harmful_timer.wait_time = bomb_harm_time
 	new_bomb.position = confirmed_position
 	pass

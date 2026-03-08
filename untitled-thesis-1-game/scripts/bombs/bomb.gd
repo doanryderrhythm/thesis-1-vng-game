@@ -7,6 +7,7 @@ class_name Bomb
 
 @onready var bomb_collision: CollisionShape2D = $HitArea2D/CollisionShape2D
 
+@onready var warning_timer: Timer = $WarningTimer
 @onready var harmful_timer: Timer = $HarmfulTimer
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer

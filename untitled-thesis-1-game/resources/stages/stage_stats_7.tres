@@ -9,3 +9,6 @@ phase_count = 3
 min_enemy = 7
 max_enemy = 10
 is_lazer = true
+lazer_spawn_rate = 2.0
+lazer_warn_time = 2.0
+lazer_stay_time = 2.0

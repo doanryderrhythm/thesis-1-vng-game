@@ -228,6 +228,24 @@ func deduct_enemies() -> void:
 		_room.call_deferred("start_stage", false)
 		create_available_rooms(current_id_x, current_id_y)
 
+func confirm_stage(room: Room) -> void:
+	if is_lazer:
+		room.lazer_timer.wait_time = stage_stats[ongoing_level].lazer_spawn_rate
+		room.lazer_warn_time = stage_stats[ongoing_level].lazer_warn_time
+		room.lazer_harm_time = stage_stats[ongoing_level].lazer_stay_time
+	if is_spike:
+		room.spike_timer.wait_time = stage_stats[ongoing_level].spike_spawn_rate
+		room.spike_warn_time = stage_stats[ongoing_level].spike_warn_time
+		room.spike_harm_time = stage_stats[ongoing_level].spike_stay_time
+	if is_bomb:
+		room.bomb_timer.wait_time = stage_stats[ongoing_level].bomb_spawn_rate
+		room.bomb_warn_time = stage_stats[ongoing_level].bomb_warn_time
+		room.bomb_harm_time = stage_stats[ongoing_level].bomb_stay_time
+	if is_bomb_four:
+		room.bomb_four_timer.wait_time = stage_stats[ongoing_level].bomb_four_spawn_rate
+		room.bomb_four_warn_time = stage_stats[ongoing_level].bomb_four_warn_time
+		room.bomb_four_harm_time = stage_stats[ongoing_level].bomb_four_stay_time
+
 func find_room(_id_x: int, _id_y: int) -> Room:
 	rooms = rooms.filter(func(room):
 		return is_instance_valid(room)

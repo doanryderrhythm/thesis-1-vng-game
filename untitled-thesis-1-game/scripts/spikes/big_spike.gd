@@ -4,6 +4,7 @@ class_name BigSpike
 @onready var spike_ready: AnimatedSprite2D = $SpikeReady
 @onready var spike_spawn: Sprite2D = $SpikeSpawn
 
+@onready var ready_timer: Timer = $ReadyTimer
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var spawn_collider: CollisionShape2D = $HitArea2D/CollisionShape2D
 

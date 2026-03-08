@@ -9,3 +9,6 @@ phase_count = 2
 min_enemy = 5
 max_enemy = 7
 is_spike = true
+spike_spawn_rate = 1.0
+spike_warn_time = 1.0
+spike_stay_time = 1.0
