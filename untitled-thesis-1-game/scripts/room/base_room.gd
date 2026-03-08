@@ -22,6 +22,8 @@ var is_executed: bool
 
 @onready var bomb_scene: PackedScene = preload("res://scenes/bombs/bomb.tscn")
 @onready var bomb_timer: Timer = $BombTimer
+@onready var bomb_four_scene: PackedScene = preload("res://scenes/bombs/bomb_four.tscn")
+@onready var bomb_four_timer: Timer = $BombFourTimer
 @onready var bomb_way_points: Node2D = $BombWayPoints
 
 @onready var door_close_audio: AudioStreamPlayer = $DoorCloseAudio
@@ -44,6 +46,7 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 		if GameManager.is_lazer: lazer_timer.start()
 		if GameManager.is_spike: spike_timer.start()
 		if GameManager.is_bomb: bomb_timer.start()
+		if GameManager.is_bomb_four: bomb_four_timer.start()
 		doors.process_mode = Node.PROCESS_MODE_INHERIT
 		RenderingServer.set_default_clear_color(Color(0.1, 0.1, 0.1, 1.0))
 	else:
@@ -72,7 +75,6 @@ func _on_start_area_2d_area_entered(_area: Area2D) -> void:
 	GameManager.spawn_enemies(first_point.global_position, last_point.global_position)
 	pass # Replace with function body.
 
-	
 func is_valid_position(pos: Vector2, radius: float) -> bool:
 	var space_state = get_world_2d().direct_space_state
 	
@@ -128,6 +130,14 @@ func _on_spike_timer_timeout() -> void:
 	pass # Replace with function body.
 
 func _on_bomb_timer_timeout() -> void:
+	respawn_bomb(bomb_scene)
+	pass # Replace with function body.
+
+func _on_bomb_four_timer_timeout() -> void:
+	respawn_bomb(bomb_four_scene)
+	pass # Replace with function body.
+
+func respawn_bomb(scene: PackedScene) -> void:
 	if is_executed:
 		return
 	
@@ -146,8 +156,8 @@ func _on_bomb_timer_timeout() -> void:
 			randf_range(begin_point.y, end_point.y)
 		)
 	
-	var new_bomb = bomb_scene.instantiate()
+	var new_bomb = scene.instantiate()
 	var parent = find_child(ValueStorer.bombs_node)
 	parent.add_child(new_bomb)
 	new_bomb.position = confirmed_position
-	pass # Replace with function body.
+	pass

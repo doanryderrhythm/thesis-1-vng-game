@@ -21,6 +21,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 [node name="BaseBullet" type="RigidBody2D" unique_id=1344972379]
 collision_layer = 0
 gravity_scale = 0.0
+continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 3
 script = ExtResource("1_3u0jw")

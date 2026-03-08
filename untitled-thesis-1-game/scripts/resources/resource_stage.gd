@@ -11,3 +11,4 @@ class_name StageStats
 @export var is_lazer: bool
 @export var is_spike: bool
 @export var is_bomb: bool
+@export var is_bomb_four: bool

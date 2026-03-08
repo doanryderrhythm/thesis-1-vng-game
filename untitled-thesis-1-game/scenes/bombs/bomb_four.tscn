@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://c4vxt0y7srwtb"]
+
+[ext_resource type="PackedScene" uid="uid://hasb2k7kag83" path="res://scenes/bombs/bomb.tscn" id="1_qixpw"]
+[ext_resource type="Texture2D" uid="uid://dymkun504dt3u" path="res://sprites/bombs/bomb_four_ready.png" id="2_1sgeh"]
+[ext_resource type="Script" uid="uid://cm6roxvo4g6co" path="res://scripts/bombs/bomb_four.gd" id="2_umfrk"]
+[ext_resource type="Texture2D" uid="uid://11war78o3nr1" path="res://sprites/bombs/bomb_four_warn.png" id="3_krlfx"]
+[ext_resource type="Texture2D" uid="uid://68i0syuvejc" path="res://sprites/bombs/bomb_four_wing.png" id="4_snepi"]
+[ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="5_nyy2y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umfrk"]
+size = Vector2(28, 298)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snepi"]
+size = Vector2(298, 28)
+
+[node name="BombFour" unique_id=1248930214 instance=ExtResource("1_qixpw")]
+script = ExtResource("2_umfrk")
+
+[node name="WarningSprite" parent="." index="0" unique_id=481958605]
+texture = ExtResource("2_1sgeh")
+
+[node name="Wings" type="Node2D" parent="." index="1" unique_id=531377163]
+
+[node name="Wing0" type="Sprite2D" parent="Wings" index="0" unique_id=1644100735]
+modulate = Color(1, 0.910912, 0.6841424, 1)
+texture = ExtResource("4_snepi")
+
+[node name="Wing1" type="Sprite2D" parent="Wings" index="1" unique_id=366238857]
+modulate = Color(1, 0.910912, 0.6841424, 1)
+rotation = 1.5707964
+texture = ExtResource("4_snepi")
+
+[node name="HitArea2D" type="Area2D" parent="Wings" index="2" unique_id=1091146514]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_nyy2y")
+metadata/_custom_type_script = "uid://2jniw3exf4mu"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wings/HitArea2D" index="0" unique_id=580623457]
+shape = SubResource("RectangleShape2D_umfrk")
+
+[node name="HitArea2D2" type="Area2D" parent="Wings" index="3" unique_id=720170875]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_nyy2y")
+metadata/_custom_type_script = "uid://2jniw3exf4mu"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wings/HitArea2D2" index="0" unique_id=1104740188]
+shape = SubResource("RectangleShape2D_snepi")
+
+[node name="HarmfulSprite" parent="." index="2" unique_id=1518204916]
+texture = ExtResource("3_krlfx")
+
+[node name="HitArea2D" parent="." index="4" unique_id=902703]
+visible = false

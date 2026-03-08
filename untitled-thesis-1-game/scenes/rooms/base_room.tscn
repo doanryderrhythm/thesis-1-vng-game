@@ -259,6 +259,9 @@ wait_time = 4.0
 [node name="BombTimer" type="Timer" parent="." unique_id=1994053854]
 wait_time = 2.5
 
+[node name="BombFourTimer" type="Timer" parent="." unique_id=1264826648]
+wait_time = 3.5
+
 [node name="DoorCloseAudio" type="AudioStreamPlayer" parent="." unique_id=1696601352]
 stream = ExtResource("4_ativ4")
 pitch_scale = 0.5
@@ -267,3 +270,4 @@ pitch_scale = 0.5
 [connection signal="timeout" from="LazerTimer" to="." method="_on_lazer_timer_timeout"]
 [connection signal="timeout" from="SpikeTimer" to="." method="_on_spike_timer_timeout"]
 [connection signal="timeout" from="BombTimer" to="." method="_on_bomb_timer_timeout"]
+[connection signal="timeout" from="BombFourTimer" to="." method="_on_bomb_four_timer_timeout"]

@@ -18,6 +18,7 @@ var current_enemies_num: int
 var is_lazer: bool
 var is_spike: bool
 var is_bomb: bool
+var is_bomb_four: bool
 
 var enemy_particles: PackedScene = preload("res://effects/base_enemy_spawn.tscn")
 var enemy_scenes: Array[PackedScene] = []
@@ -109,6 +110,7 @@ func start_stage() -> void:
 	is_lazer = stage_stats[ongoing_level].is_lazer
 	is_spike = stage_stats[ongoing_level].is_spike
 	is_bomb = stage_stats[ongoing_level].is_bomb
+	is_bomb_four = stage_stats[ongoing_level].is_bomb_four
 	print(used_rooms)
 	pass
 
