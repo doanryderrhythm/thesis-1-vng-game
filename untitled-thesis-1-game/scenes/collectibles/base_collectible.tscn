@@ -4,12 +4,14 @@
 [ext_resource type="Script" uid="uid://b25vymqgwcsro" path="res://scripts/collectibles/base_collectible.gd" id="1_d5deo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u7xa0"]
-radius = 43.046486
+radius = 47.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d5deo"]
 radius = 52.086468
 
 [node name="BaseCollectible" type="RigidBody2D" unique_id=1780334649]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_d5deo")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1319834975]

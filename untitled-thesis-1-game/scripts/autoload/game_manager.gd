@@ -17,6 +17,7 @@ var current_enemies_num: int
 
 var is_lazer: bool
 var is_spike: bool
+var is_bomb: bool
 
 var enemy_particles: PackedScene = preload("res://effects/base_enemy_spawn.tscn")
 var enemy_scenes: Array[PackedScene] = []
@@ -107,6 +108,7 @@ func start_stage() -> void:
 	current_phase = stage_stats[ongoing_level].phase_count
 	is_lazer = stage_stats[ongoing_level].is_lazer
 	is_spike = stage_stats[ongoing_level].is_spike
+	is_bomb = stage_stats[ongoing_level].is_bomb
 	print(used_rooms)
 	pass
 
@@ -129,7 +131,7 @@ func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 			randf_range(first_point.y, last_point.y))
 			
 		var current_room: Room = find_room(current_id_x, current_id_y)
-		while !current_room.is_valid_position(confirmed_pos):
+		while !current_room.is_valid_position(confirmed_pos, ValueStorer.enemy_radius):
 			confirmed_pos = Vector2(
 			randf_range(first_point.x, last_point.x),
 			randf_range(first_point.y, last_point.y))

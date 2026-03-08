@@ -20,6 +20,10 @@ var is_executed: bool
 @onready var spike_timer: Timer = $SpikeTimer
 @onready var spike_way_points: Node2D = $SpikeWayPoints
 
+@onready var bomb_scene: PackedScene = preload("res://scenes/bombs/bomb.tscn")
+@onready var bomb_timer: Timer = $BombTimer
+@onready var bomb_way_points: Node2D = $BombWayPoints
+
 @onready var door_close_audio: AudioStreamPlayer = $DoorCloseAudio
 
 func _ready() -> void:
@@ -39,11 +43,13 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 		GameManager.room_start.emit()
 		if GameManager.is_lazer: lazer_timer.start()
 		if GameManager.is_spike: spike_timer.start()
+		if GameManager.is_bomb: bomb_timer.start()
 		doors.process_mode = Node.PROCESS_MODE_INHERIT
 		RenderingServer.set_default_clear_color(Color(0.1, 0.1, 0.1, 1.0))
 	else:
 		lazer_timer.stop()
 		spike_timer.stop()
+		bomb_timer.stop()
 		doors.process_mode = Node.PROCESS_MODE_DISABLED
 		RenderingServer.set_default_clear_color(Color(0.3, 0.3, 0.3, 1.0))
 		if not is_game_start:
@@ -67,13 +73,13 @@ func _on_start_area_2d_area_entered(_area: Area2D) -> void:
 	pass # Replace with function body.
 
 	
-func is_valid_position(pos: Vector2) -> bool:
+func is_valid_position(pos: Vector2, radius: float) -> bool:
 	var space_state = get_world_2d().direct_space_state
 	
 	var query = PhysicsShapeQueryParameters2D.new()
 	query.transform = Transform2D(0, pos)
 	query.shape = CircleShape2D.new()
-	query.shape.radius = ValueStorer.enemy_radius
+	query.shape.radius = radius
 	query.collide_with_bodies = true
 	
 	var result = space_state.intersect_shape(query)
@@ -119,4 +125,29 @@ func _on_spike_timer_timeout() -> void:
 	parent.add_child(new_spike)
 	new_spike.position = confirmed_position
 	new_spike.rotation = deg_to_rad(confirmed_rotation)
+	pass # Replace with function body.
+
+func _on_bomb_timer_timeout() -> void:
+	if is_executed:
+		return
+	
+	if not is_instance_valid(GameManager.player):
+		return
+	
+	var begin_point: Vector2 = bomb_way_points.get_child(0).position
+	var end_point: Vector2 = bomb_way_points.get_child(1).position
+	var confirmed_position: Vector2 = Vector2(
+		randf_range(begin_point.x, end_point.x),
+		randf_range(begin_point.y, end_point.y)
+	)
+	while not is_valid_position(confirmed_position, ValueStorer.bomb_radius):
+		confirmed_position = Vector2(
+			randf_range(begin_point.x, end_point.x),
+			randf_range(begin_point.y, end_point.y)
+		)
+	
+	var new_bomb = bomb_scene.instantiate()
+	var parent = find_child(ValueStorer.bombs_node)
+	parent.add_child(new_bomb)
+	new_bomb.position = confirmed_position
 	pass # Replace with function body.

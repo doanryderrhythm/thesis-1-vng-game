@@ -269,4 +269,6 @@ func hurt(_area: Area2D) -> void:
 		elif temp is BigSpike:
 			take_damage(temp.damage)
 			break
-		
+		elif temp is Bomb:
+			take_damage(temp.damage)
+			break

@@ -8,3 +8,4 @@ time_to_pass = 35
 phase_count = 1
 min_enemy = 2
 max_enemy = 3
+is_bomb = true

@@ -9,3 +9,4 @@ phase_count = 1
 min_enemy = 2
 max_enemy = 3
 is_spike = true
+is_bomb = true

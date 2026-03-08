@@ -9,3 +9,4 @@ phase_count = 2
 min_enemy = 3
 max_enemy = 5
 is_lazer = true
+is_bomb = true

@@ -188,6 +188,8 @@ shape = SubResource("RectangleShape2D_43ixu")
 
 [node name="Spikes" type="Node2D" parent="." unique_id=1409504448]
 
+[node name="Bombs" type="Node2D" parent="." unique_id=375486044]
+
 [node name="WayPoints" type="Node2D" parent="." unique_id=131790729]
 
 [node name="FirstPoint" type="Marker2D" parent="WayPoints" unique_id=1747017055]
@@ -230,6 +232,14 @@ position = Vector2(-1068, 1176)
 [node name="LastPoint" type="Marker2D" parent="SpikeWayPoints/Bottom" unique_id=1470320968]
 position = Vector2(1068, 1176)
 
+[node name="BombWayPoints" type="Node2D" parent="." unique_id=1756752421]
+
+[node name="BeginPoint" type="Marker2D" parent="BombWayPoints" unique_id=933898634]
+position = Vector2(-930, -930)
+
+[node name="EndPoint" type="Marker2D" parent="BombWayPoints" unique_id=1446450655]
+position = Vector2(930, 930)
+
 [node name="StartArea2D" type="Area2D" parent="." unique_id=2126767817]
 collision_layer = 0
 collision_mask = 2
@@ -246,6 +256,9 @@ wait_time = 2.0
 [node name="SpikeTimer" type="Timer" parent="." unique_id=1878290429]
 wait_time = 4.0
 
+[node name="BombTimer" type="Timer" parent="." unique_id=1994053854]
+wait_time = 2.5
+
 [node name="DoorCloseAudio" type="AudioStreamPlayer" parent="." unique_id=1696601352]
 stream = ExtResource("4_ativ4")
 pitch_scale = 0.5
@@ -253,3 +266,4 @@ pitch_scale = 0.5
 [connection signal="area_entered" from="StartArea2D" to="." method="_on_start_area_2d_area_entered"]
 [connection signal="timeout" from="LazerTimer" to="." method="_on_lazer_timer_timeout"]
 [connection signal="timeout" from="SpikeTimer" to="." method="_on_spike_timer_timeout"]
+[connection signal="timeout" from="BombTimer" to="." method="_on_bomb_timer_timeout"]

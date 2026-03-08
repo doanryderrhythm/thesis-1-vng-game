@@ -17,6 +17,7 @@ var bullets_node: String = "Bullets"
 var lazers_node: String = "Lazers"
 var spikes_node: String = "Spikes"
 var rewards_node: String = "Rewards"
+var bombs_node: String = "Bombs"
 #endregion
 
 #region VALUES
@@ -24,6 +25,7 @@ var velocity: float = 1000.0
 var player_default_rate: float = 1.0
 var player_dash_rate: float = 3.0
 var enemy_radius: float = 55.0
+var bomb_radius: float = 63.0
 var player_bullet_speed_mult: float = 3.0
 var max_dash_count: int = 3
 var dash_wait_time: float = 2.0
