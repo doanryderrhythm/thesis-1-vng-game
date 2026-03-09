@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StageStats" format=3 uid="uid://colt2n1y41s1g"]
+
+[ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="1_7150t"]
+
+[resource]
+script = ExtResource("1_7150t")
+time_to_pass = 1480
+phase_count = 3
+min_enemy = 9
+max_enemy = 12
+is_lazer = true
+lazer_spawn_rate = 1.25
+lazer_warn_time = 1.5
+lazer_stay_time = 1.75
+is_spike = true
+spike_spawn_rate = 1.25
+spike_warn_time = 1.0
+spike_stay_time = 1.75

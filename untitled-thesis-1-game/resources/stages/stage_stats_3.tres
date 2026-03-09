@@ -4,15 +4,17 @@
 
 [resource]
 script = ExtResource("1_x8jue")
-time_to_pass = 180
-phase_count = 2
-min_enemy = 3
-max_enemy = 5
-is_bomb = true
-bomb_spawn_rate = 1.0
-bomb_warn_time = 1.0
+time_to_pass = 140
+phase_count = 1
+min_enemy = 2
+max_enemy = 4
+is_spike = true
+spike_spawn_rate = 2.0
+spike_warn_time = 2.0
+spike_stay_time = 1.0
+bomb_spawn_rate = 2.0
+bomb_warn_time = 2.0
 bomb_stay_time = 1.0
-is_bomb_four = true
 bomb_four_spawn_rate = 1.5
 bomb_four_warn_time = 1.0
 bomb_four_stay_time = 1.0

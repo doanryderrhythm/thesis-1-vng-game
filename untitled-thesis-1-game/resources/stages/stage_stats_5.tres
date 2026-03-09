@@ -4,7 +4,11 @@
 
 [resource]
 script = ExtResource("1_j3fxr")
-time_to_pass = 420
+time_to_pass = 290
 phase_count = 2
-min_enemy = 5
-max_enemy = 7
+min_enemy = 3
+max_enemy = 5
+is_spike = true
+spike_spawn_rate = 1.5
+spike_warn_time = 2.0
+spike_stay_time = 1.25

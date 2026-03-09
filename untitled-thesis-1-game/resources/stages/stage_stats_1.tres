@@ -8,7 +8,6 @@ time_to_pass = 35
 phase_count = 1
 min_enemy = 2
 max_enemy = 3
-is_bomb = true
 bomb_spawn_rate = 1.0
 bomb_warn_time = 1.0
 bomb_stay_time = 1.0

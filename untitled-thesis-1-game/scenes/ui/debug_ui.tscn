@@ -15,7 +15,7 @@ class_name DebugUI
 @onready var dash_bar: TextureProgressBar = $DashBar
 @onready var fill_dash_bar: ProgressBar = $FillDashBar
 
-#@onready var restart_label: Label = $RestartLabel
+@onready var restart_label: Label = $RestartLabel
 @onready var score_label: Label = $ScoreLabel
 @onready var play_time_label: Label = $PlayTimeLabel
 
@@ -35,7 +35,7 @@ func _ready() -> void:
 	fill_dash_bar.min_value = 0
 	fill_dash_bar.max_value = ValueStorer.dash_wait_time
 	
-	#restart_label.visible = false
+	restart_label.visible = false
 	
 	change_health()
 	change_dash()
@@ -46,7 +46,7 @@ func _ready() -> void:
 	
 	GameManager.health_change.connect(change_health)
 	GameManager.dash_change.connect(change_dash)
-	#GameManager.state_lose_change.connect(show_restart)
+	GameManager.state_lose_change.connect(show_restart)
 	GameManager.play_time_change.connect(change_play_time)
 	GameManager.phase_change.connect(change_phase)
 	GameManager.level_change.connect(change_level_state.bind(false))
@@ -92,7 +92,7 @@ func change_phase(is_ongoing: bool) -> void:
 		phase_label.visible = false
 
 func show_restart() -> void:
-	#restart_label.visible = true
+	restart_label.visible = true
 	pass
 "
 
@@ -276,3 +276,20 @@ text = "Phase"
 label_settings = SubResource("LabelSettings_14mai")
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="RestartLabel" type="Label" parent="." unique_id=515180112]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.5
+offset_top = -27.5
+offset_right = 166.5
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press R to restart"
+label_settings = SubResource("LabelSettings_14mai")
+horizontal_alignment = 1
+vertical_alignment = 1

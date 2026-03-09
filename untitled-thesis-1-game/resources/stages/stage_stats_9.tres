@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_hq4sg")
-time_to_pass = 1100
-phase_count = 3
-min_enemy = 9
-max_enemy = 12
+time_to_pass = 640
+phase_count = 2
+min_enemy = 5
+max_enemy = 7
 is_spike = true
-spike_spawn_rate = 0.5
-spike_warn_time = 0.5
-spike_stay_time = 0.5
+spike_spawn_rate = 1.5
+spike_warn_time = 1.5
+spike_stay_time = 1.25

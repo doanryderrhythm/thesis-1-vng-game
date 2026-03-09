@@ -4,11 +4,14 @@
 
 [resource]
 script = ExtResource("1_8fori")
-time_to_pass = 750
-phase_count = 3
-min_enemy = 7
-max_enemy = 10
-is_lazer = true
+time_to_pass = 460
+phase_count = 2
+min_enemy = 4
+max_enemy = 5
 lazer_spawn_rate = 2.0
 lazer_warn_time = 2.0
 lazer_stay_time = 2.0
+is_bomb_four = true
+bomb_four_spawn_rate = 1.5
+bomb_four_warn_time = 2.0
+bomb_four_stay_time = 1.25
