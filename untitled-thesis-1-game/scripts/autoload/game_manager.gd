@@ -29,6 +29,7 @@ var rooms: Array[Room] = []
 var used_rooms: Array[Dictionary] = []
 
 # STATS
+var is_going: bool = false
 var play_time: float = 0.0
 var play_time_int: int = 0
 var stage_stats: Array[StageStats]
@@ -37,7 +38,10 @@ signal health_change
 signal dash_change
 signal state_lose_change
 signal score_change
+signal phase_change(is_ongoing: bool)
 signal play_time_change
+signal start_level
+signal level_change
 signal room_start
 
 func _ready() -> void:
@@ -87,6 +91,8 @@ func _process(delta: float) -> void:
 		play_time_change.emit()
 		if play_time_int >= stage_stats[current_level].time_to_pass and current_level + 1 < stage_stats.size():
 			current_level += 1
+			if !is_going:
+				level_change.emit()
 
 func set_up_rooms() -> void:
 	var listener: RoomsListener = load("res://resources/rooms/rooms_listener.tres")
@@ -111,6 +117,9 @@ func start_stage() -> void:
 	is_spike = stage_stats[ongoing_level].is_spike
 	is_bomb = stage_stats[ongoing_level].is_bomb
 	is_bomb_four = stage_stats[ongoing_level].is_bomb_four
+	is_going = true
+	start_level.emit()
+	phase_change.emit(true)
 	print(used_rooms)
 	pass
 
@@ -212,6 +221,7 @@ func deduct_enemies() -> void:
 	if current_enemies_num <= 0:
 		current_phase -= 1
 		if current_phase > 0:
+			phase_change.emit(true)
 			var current_room = find_room(current_id_x, current_id_y)
 			spawn_enemies(
 				current_room.first_point.global_position,
@@ -219,13 +229,14 @@ func deduct_enemies() -> void:
 				)
 			return
 		
-		print(used_rooms)
 		var _room: Room = find_room(current_id_x, current_id_y)
-		print(_room)
 		if _room == null:
 			return
 		_room.is_executed = true
 		_room.call_deferred("start_stage", false)
+		is_going = false
+		level_change.emit()
+		phase_change.emit(false)
 		create_available_rooms(current_id_x, current_id_y)
 
 func confirm_stage(room: Room) -> void:

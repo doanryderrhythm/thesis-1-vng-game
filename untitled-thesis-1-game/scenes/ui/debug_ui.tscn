@@ -1,17 +1,29 @@
 [gd_scene format=3 uid="uid://di78feag8gs8a"]
 
+[ext_resource type="Texture2D" uid="uid://dj6ajch28274c" path="res://sprites/bars/health_bar_main_sprite.png" id="1_14mai"]
+[ext_resource type="Texture2D" uid="uid://cmf4kh1kci1jp" path="res://sprites/bars/health_icon.png" id="2_pu33q"]
+[ext_resource type="Texture2D" uid="uid://b2of4763rak84" path="res://sprites/bars/health_progress.png" id="3_k7b8x"]
+[ext_resource type="Texture2D" uid="uid://ptbjvi1ww8ce" path="res://sprites/bars/dash_icon.png" id="4_fadvp"]
+[ext_resource type="Texture2D" uid="uid://bx5nkaqlcb8v0" path="res://sprites/bars/dash_progress.png" id="5_ukyxi"]
+
 [sub_resource type="GDScript" id="GDScript_2bpog"]
 resource_name = "debug_ui"
 script/source = "extends CanvasLayer
 class_name DebugUI
 
-@onready var health_bar: ProgressBar = $HealthBar
-@onready var dash_bar: ProgressBar = $DashBar
+@onready var health_bar: TextureProgressBar = $HealthBar
+@onready var dash_bar: TextureProgressBar = $DashBar
 @onready var fill_dash_bar: ProgressBar = $FillDashBar
 
-@onready var restart_label: Label = $RestartLabel
+#@onready var restart_label: Label = $RestartLabel
 @onready var score_label: Label = $ScoreLabel
 @onready var play_time_label: Label = $PlayTimeLabel
+
+@onready var level_title_label: Label = $LevelTitleLabel
+@onready var level_label: Label = $LevelLabel
+
+@onready var phase_title_label: Label = $PhaseTitleLabel
+@onready var phase_label: Label = $PhaseLabel
 
 func _ready() -> void:
 	health_bar.min_value = 0
@@ -23,22 +35,28 @@ func _ready() -> void:
 	fill_dash_bar.min_value = 0
 	fill_dash_bar.max_value = ValueStorer.dash_wait_time
 	
-	restart_label.visible = false
+	#restart_label.visible = false
 	
 	change_health()
 	change_dash()
 	change_play_time()
+	change_level_state(false)
+	change_phase(false)
 	change_score()
 	
 	GameManager.health_change.connect(change_health)
 	GameManager.dash_change.connect(change_dash)
-	GameManager.state_lose_change.connect(show_restart)
+	#GameManager.state_lose_change.connect(show_restart)
 	GameManager.play_time_change.connect(change_play_time)
+	GameManager.phase_change.connect(change_phase)
+	GameManager.level_change.connect(change_level_state.bind(false))
+	GameManager.start_level.connect(change_level_state.bind(true))
 	GameManager.score_change.connect(change_score)
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(GameManager.player):
 		fill_dash_bar.value = GameManager.player._dash_wait_timer.time_left
+	pass
 
 func change_health() -> void:
 	health_bar.value = GameManager.player.health
@@ -47,94 +65,214 @@ func change_dash() -> void:
 	dash_bar.value = GameManager.player._dash_count
 
 func change_play_time() -> void:
-	play_time_label.text = \"Play Time: \" + str(GameManager.play_time_int)
+	play_time_label.text = str(GameManager.play_time_int)
+	pass
+
+func change_level_state(is_ongoing: bool) -> void:
+	if is_ongoing:
+		level_title_label.text = \"Locked level\"
+		level_label.text = str(GameManager.ongoing_level + 1)
+	else:
+		level_title_label.text = \"Level to prepare\"
+		level_label.text = str(GameManager.current_level + 1)
+	pass
 
 func change_score() -> void:
-	score_label.text = \"Score: \" + str(GameManager.total_score)
+	score_label.text = str(GameManager.total_score)
+	pass
+	
+func change_phase(is_ongoing: bool) -> void:
+	if is_ongoing:
+		phase_title_label.visible = true
+		phase_label.visible = true
+		
+		phase_label.text = str(GameManager.current_phase)
+	else:
+		phase_title_label.visible = false
+		phase_label.visible = false
 
 func show_restart() -> void:
-	restart_label.visible = true
+	#restart_label.visible = true
+	pass
 "
 
-[sub_resource type="LabelSettings" id="LabelSettings_2bpog"]
-font_size = 50
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6xhk"]
+atlas = ExtResource("1_14mai")
+region = Rect2(0, 0, 253, 42)
 
-[sub_resource type="LabelSettings" id="LabelSettings_h2fnn"]
-font_size = 40
-outline_size = 7
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqpec"]
+atlas = ExtResource("1_14mai")
+region = Rect2(0, 42, 253, 42)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pu33q"]
+font_size = 20
+outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_rmw4l"]
+[sub_resource type="LabelSettings" id="LabelSettings_14mai"]
 font_size = 40
-outline_size = 7
+outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [node name="DebugUi" type="CanvasLayer" unique_id=2086543205]
 script = SubResource("GDScript_2bpog")
 
-[node name="HealthBar" type="ProgressBar" parent="." unique_id=1895197231]
-modulate = Color(1, 0, 0, 1)
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=775934055]
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 184.0
-offset_bottom = 37.0
-show_percentage = false
+offset_right = 263.0
+offset_bottom = 52.0
+step = 0.1
+value = 100.0
+texture_under = SubResource("AtlasTexture_f6xhk")
+texture_over = ExtResource("2_pu33q")
+texture_progress = ExtResource("3_k7b8x")
+texture_progress_offset = Vector2(38, 12)
 
-[node name="DashBar" type="ProgressBar" parent="." unique_id=1040436508]
-modulate = Color(1, 0.8671875, 0, 1)
-offset_left = 200.0
+[node name="DashBar" type="TextureProgressBar" parent="." unique_id=1801696908]
+offset_left = 273.0
 offset_top = 10.0
-offset_right = 374.0
-offset_bottom = 37.0
+offset_right = 526.0
+offset_bottom = 52.0
+value = 100.0
+texture_under = SubResource("AtlasTexture_hqpec")
+texture_over = ExtResource("4_fadvp")
+texture_progress = ExtResource("5_ukyxi")
+texture_progress_offset = Vector2(38, 12)
+
+[node name="FillDashBar" type="ProgressBar" parent="." unique_id=1908412617]
+modulate = Color(0.49411765, 0.90588236, 1, 1)
+offset_left = 309.0
+offset_top = 52.0
+offset_right = 526.0
+offset_bottom = 58.0
+value = 17.37
 show_percentage = false
 
-[node name="FillDashBar" type="ProgressBar" parent="." unique_id=416679215]
-modulate = Color(1, 0.94375, 0.578125, 1)
-offset_left = 200.0
-offset_top = 39.0
-offset_right = 374.0
-offset_bottom = 46.0
-show_percentage = false
+[node name="ScoreTitleLabel" type="Label" parent="." unique_id=764856100]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -108.0
+offset_right = 117.0
+offset_bottom = -53.0
+grow_vertical = 0
+text = "Score"
+label_settings = SubResource("LabelSettings_pu33q")
+vertical_alignment = 2
 
-[node name="RestartLabel" type="Label" parent="." unique_id=984615250]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -208.0
-offset_top = -34.5
-offset_right = 208.0
-offset_bottom = 34.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Press R to restart"
-label_settings = SubResource("LabelSettings_2bpog")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="ScoreLabel" type="Label" parent="." unique_id=98166711]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -65.0
+offset_right = 117.0
+offset_bottom = -10.0
+grow_vertical = 0
+text = "Score"
+label_settings = SubResource("LabelSettings_14mai")
+vertical_alignment = 2
 
-[node name="ScoreLabel" type="Label" parent="." unique_id=1230115535]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -88.0
-offset_top = 10.0
-offset_right = 88.0
-offset_bottom = 93.0
-grow_horizontal = 2
-text = "Score:"
-label_settings = SubResource("LabelSettings_h2fnn")
-horizontal_alignment = 1
-
-[node name="PlayTimeLabel" type="Label" parent="." unique_id=1891983369]
-anchors_preset = 1
+[node name="PlayTimeTitleLabel" type="Label" parent="." unique_id=2014312667]
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-offset_left = -50.0
-offset_top = 10.0
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -108.0
 offset_right = -10.0
-offset_bottom = 33.0
+offset_bottom = -53.0
 grow_horizontal = 0
-text = "Play Time:"
-label_settings = SubResource("LabelSettings_rmw4l")
+grow_vertical = 0
+text = "Time"
+label_settings = SubResource("LabelSettings_pu33q")
 horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="PlayTimeLabel" type="Label" parent="." unique_id=1077021869]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -65.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Time"
+label_settings = SubResource("LabelSettings_14mai")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="LevelTitleLabel" type="Label" parent="." unique_id=638328226]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -186.0
+offset_right = -10.0
+offset_bottom = -131.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Level"
+label_settings = SubResource("LabelSettings_pu33q")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="LevelLabel" type="Label" parent="." unique_id=1026685085]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -117.0
+offset_top = -143.0
+offset_right = -10.0
+offset_bottom = -88.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Level"
+label_settings = SubResource("LabelSettings_14mai")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="PhaseTitleLabel" type="Label" parent="." unique_id=1369473862]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -53.5
+offset_top = -108.0
+offset_right = 53.5
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Phase Remaining"
+label_settings = SubResource("LabelSettings_pu33q")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="PhaseLabel" type="Label" parent="." unique_id=1694173121]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -53.5
+offset_top = -65.0
+offset_right = 53.5
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Phase"
+label_settings = SubResource("LabelSettings_14mai")
+horizontal_alignment = 1
+vertical_alignment = 2
