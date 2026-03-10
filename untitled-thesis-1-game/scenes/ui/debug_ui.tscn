@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b2of4763rak84" path="res://sprites/bars/health_progress.png" id="3_k7b8x"]
 [ext_resource type="Texture2D" uid="uid://ptbjvi1ww8ce" path="res://sprites/bars/dash_icon.png" id="4_fadvp"]
 [ext_resource type="Texture2D" uid="uid://bx5nkaqlcb8v0" path="res://sprites/bars/dash_progress.png" id="5_ukyxi"]
+[ext_resource type="Texture2D" uid="uid://4s2cqw63nr6" path="res://sprites/gameplay/danger.png" id="6_pu33q"]
 
 [sub_resource type="GDScript" id="GDScript_2bpog"]
 resource_name = "debug_ui"
@@ -24,6 +25,8 @@ class_name DebugUI
 
 @onready var phase_title_label: Label = $PhaseTitleLabel
 @onready var phase_label: Label = $PhaseLabel
+
+@onready var danger_texture: TextureRect = $DangerTexture
 
 func _ready() -> void:
 	health_bar.min_value = 0
@@ -60,6 +63,12 @@ func _process(_delta: float) -> void:
 
 func change_health() -> void:
 	health_bar.value = GameManager.player.health
+	if GameManager.player.health <= 0:
+		danger_texture.modulate = Color(1, 1, 1, 0)
+	elif GameManager.player.health <= 0.3 * ValueStorer.player_health:
+		danger_texture.modulate = Color(1, 1, 1, 1 - GameManager.player.health / (0.3 * ValueStorer.player_health))
+	else:
+		danger_texture.modulate = Color(1, 1, 1, 0)
 
 func change_dash() -> void:
 	dash_bar.value = GameManager.player._dash_count
@@ -293,3 +302,12 @@ text = "Press R to restart"
 label_settings = SubResource("LabelSettings_14mai")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DangerTexture" type="TextureRect" parent="." unique_id=2061533906]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_pu33q")
+expand_mode = 1

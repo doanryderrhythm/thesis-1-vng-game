@@ -168,7 +168,8 @@ func take_damage(_damage: float) -> void:
 	if health <= 0:
 		is_dead = true
 		GameManager.state_lose_change.emit()
-		queue_free()
+		self.visible = false
+		self.process_mode = Node.PROCESS_MODE_DISABLED
 
 func set_invulnerable(is_toggled: bool) -> void:
 	_is_invulnerable = is_toggled
