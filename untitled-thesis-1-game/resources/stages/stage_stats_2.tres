@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_mhaby")
-time_to_pass = 80
+time_to_pass = 60
 phase_count = 1
 min_enemy = 2
 max_enemy = 3

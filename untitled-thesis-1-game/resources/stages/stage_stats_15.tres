@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_nrm48")
-time_to_pass = 1250
+time_to_pass = 740
 phase_count = 3
 min_enemy = 7
 max_enemy = 10

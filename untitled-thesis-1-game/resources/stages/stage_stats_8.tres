@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_71wew")
-time_to_pass = 550
+time_to_pass = 300
 phase_count = 2
 min_enemy = 4
 max_enemy = 6

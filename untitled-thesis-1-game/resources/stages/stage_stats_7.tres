@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_8fori")
-time_to_pass = 460
+time_to_pass = 250
 phase_count = 2
 min_enemy = 4
 max_enemy = 5

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_pipr8")
-time_to_pass = 370
+time_to_pass = 200
 phase_count = 2
 min_enemy = 3
 max_enemy = 5

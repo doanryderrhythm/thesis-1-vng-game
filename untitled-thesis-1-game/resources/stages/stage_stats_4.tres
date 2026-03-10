@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_xdsio")
-time_to_pass = 210
+time_to_pass = 120
 phase_count = 1
 min_enemy = 2
 max_enemy = 4
