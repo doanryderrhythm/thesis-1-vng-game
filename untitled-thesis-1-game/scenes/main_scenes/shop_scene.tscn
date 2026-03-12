@@ -18,7 +18,20 @@ func _ready() -> void:
 		var ui_item: SkinUI = skin_ui_item.instantiate()
 		ui_item.skin_stats = player
 		item_container.add_child(ui_item)
+		ui_item.equip_button.pressed.connect(select_skin.bind(ui_item))
 	pass
+
+func select_skin(selected_ui_item: SkinUI) -> void:
+	ProfileManager.update_profile(selected_ui_item.skin_stats)
+	for item in item_container.get_children():
+		if item == selected_ui_item:
+			item.modulate = Color(\"#a3fbff\")
+		else:
+			item.modulate = Color.WHITE
+
+func _on_start_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/main_scenes/play_scene.tscn\")
+	pass # Replace with function body.
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_8r8tc"]
@@ -90,3 +103,19 @@ text = "1234"
 label_settings = SubResource("LabelSettings_8r8tc")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="CanvasLayer" unique_id=947664123]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -60.0
+offset_right = 100.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "START"
+
+[connection signal="pressed" from="CanvasLayer/StartButton" to="." method="_on_start_button_pressed"]

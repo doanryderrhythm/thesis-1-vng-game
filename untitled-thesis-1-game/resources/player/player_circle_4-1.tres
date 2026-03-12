@@ -1,9 +1,17 @@
 [gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://uxa1i5kmbgtp"]
 
 [ext_resource type="Script" uid="uid://thvjb24rjrlp" path="res://scripts/resources/resource_player.gd" id="1_akdu5"]
+[ext_resource type="Resource" uid="uid://d3etdv0q85l8x" path="res://resources/bullets/bullet_circle_4-1.tres" id="1_tyyib"]
 [ext_resource type="Texture2D" uid="uid://b80gimgca15l7" path="res://sprites/player/player_circle_4-1.png" id="2_u18t6"]
 
 [resource]
 script = ExtResource("1_akdu5")
+character_type = 3
+markers_pos = Array[Vector2]([Vector2(68, 0), Vector2(-68, 0), Vector2(0, 68), Vector2(0, -68)])
+code = "player_circle_4-1"
 sprite = ExtResource("2_u18t6")
+health = 160.0
+move_speed = 1000.0
+dash_speed = 3.0
+bullet_res = ExtResource("1_tyyib")
 metadata/_custom_type_script = "uid://thvjb24rjrlp"

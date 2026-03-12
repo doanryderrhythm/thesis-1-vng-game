@@ -65,8 +65,8 @@ func change_health() -> void:
 	health_bar.value = GameManager.player.health
 	if GameManager.player.health <= 0:
 		danger_texture.modulate = Color(1, 1, 1, 0)
-	elif GameManager.player.health <= 0.3 * ValueStorer.player_health:
-		danger_texture.modulate = Color(1, 1, 1, 1 - GameManager.player.health / (0.3 * ValueStorer.player_health))
+	elif GameManager.player.health <= 0.3 * ProfileManager.health:
+		danger_texture.modulate = Color(1, 1, 1, 1 - GameManager.player.health / (0.3 * ProfileManager.health))
 	else:
 		danger_texture.modulate = Color(1, 1, 1, 0)
 

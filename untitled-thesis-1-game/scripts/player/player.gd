@@ -23,6 +23,7 @@ enum CharacterType
 @export var _bullet_scene: PackedScene
 
 @onready var _shoot_markers_storer = $ShootingMarkers
+var _markers_pos: Array[Vector2]
 var _shoot_markers: Array[Marker2D]
 @onready var _shooting_delay_timer: Timer = $ShootingDelayTimer
 
@@ -45,6 +46,8 @@ var _is_invulnerable: bool = false
 @onready var _shoot_audio: AudioStreamPlayer = $ShootAudio
 @onready var _dash_audio: AudioStreamPlayer = $DashAudio
 @onready var _hurt_audio: AudioStreamPlayer = $HurtAudio
+
+@onready var _player_sprite: Sprite2D = $Sprite2D
 
 var state: PlayerState
 var _is_dash: bool = false
@@ -89,7 +92,7 @@ func manage_move() -> void:
 	else:
 		direction_vector = _dash_direction_vector
 		
-	velocity = ValueStorer.velocity * _move_rate * direction_vector
+	velocity = ProfileManager.move_speed * _move_rate * direction_vector
 	move_and_slide()
 
 func manage_dash() -> void:
@@ -131,9 +134,11 @@ func shoot_bullet() -> void:
 		bullet.global_position = _shoot_markers[i].global_position
 		bullet.texture = _bullet_stats.texture
 		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed) * (ValueStorer.player_bullet_speed_mult + _offset_bullet_speed)
-		bullet.angle = deg_to_rad(randf_range(
-			rotation_degrees - 2,
-			rotation_degrees + 2))
+		var cal_angle: float = rad_to_deg(atan2(
+			(_shoot_markers[i].global_position.y - global_position.y),
+			(_shoot_markers[i].global_position.x - global_position.x)
+			))
+		bullet.angle = deg_to_rad(randf_range(cal_angle - 2, cal_angle + 2))
 		bullet.damage = _bullet_stats.damage
 		
 		var parent = get_tree().current_scene.find_child(ValueStorer.bullets_node)
@@ -194,6 +199,22 @@ func state_check() -> void:
 	pass
 
 func set_up_player() -> void:
+	_player_sprite.texture = ProfileManager.sprite
+	_character_type = ProfileManager.character_type
+	_bullet_stats = ProfileManager.bullet_res
+	health = ProfileManager.health
+	_total_dash = ProfileManager.dash_speed
+	_markers_pos = ProfileManager.markers_pos
+	
+	_offset_bullet_speed = 0
+	_offset_move_speed = 1
+	_dash_wait_timer.wait_time = ValueStorer.dash_wait_time
+	
+	for pos in _markers_pos:
+		var marker: Marker2D = Marker2D.new()
+		marker.position = pos
+		_shoot_markers_storer.add_child(marker)
+	
 	for marker in _shoot_markers_storer.get_children():
 		_shoot_markers.push_back(marker)
 	
@@ -217,11 +238,6 @@ func set_up_player() -> void:
 	elif _character_type == CharacterType.CIRCLE:
 		_circle_hurt_collision.disabled = false
 		hurt_collision = _circle_hurt_collision
-	
-	health = ValueStorer.player_health
-	_total_dash = ValueStorer.player_dash_rate
-	_offset_bullet_speed = 0
-	_offset_move_speed = 1
 	
 func toggle_dash(is_toggled: bool) -> void:
 	_is_dash = is_toggled

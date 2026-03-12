@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bmne7bel88n5p"]
 
-[ext_resource type="Texture2D" uid="uid://dkk35nx33o3ps" path="res://sprites/player/player_circle_1-1.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://4ntrfrdt4iyl" path="res://scripts/player/player.gd" id="1_dovo2"]
 [ext_resource type="Resource" uid="uid://bsdrkhprypdg4" path="res://resources/bullets/bullet_diamond_1-1.tres" id="2_75vfm"]
 [ext_resource type="PackedScene" uid="uid://vtxwdqpa14io" path="res://scenes/bullets/player_bullet.tscn" id="3_0owmy"]
 [ext_resource type="Script" uid="uid://crv1isw4q5df" path="res://scripts/area_2d/hurt_area_2d.gd" id="3_gmlin"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_lvxji"]
+[ext_resource type="Texture2D" uid="uid://eek56nfjnj62" path="res://sprites/player/player_circle_3-1.png" id="4_5gtgg"]
 [ext_resource type="AudioStream" uid="uid://r6ubrcbwu6p8" path="res://sfx/player_shoot.wav" id="7_0owmy"]
 [ext_resource type="AudioStream" uid="uid://bglthoh62y2ot" path="res://sfx/player_dash.wav" id="8_5gtgg"]
 [ext_resource type="AudioStream" uid="uid://cn0svmt1f6uuy" path="res://sfx/player_hurt.wav" id="9_h17s1"]
@@ -91,7 +91,7 @@ health = 100.0
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=768663192]
 modulate = Color(3.465414e-06, 0.67638296, 0.88230026, 1)
 rotation = 1.5707964
-texture = ExtResource("1_8afob")
+texture = ExtResource("4_5gtgg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1744166195]
 shape = SubResource("CircleShape2D_dovo2")
@@ -155,9 +155,6 @@ metadata/_custom_type_script = "uid://crv1isw4q5df"
 shape = SubResource("CircleShape2D_lvxji")
 
 [node name="ShootingMarkers" type="Node2D" parent="." unique_id=2096073461]
-
-[node name="Marker2D" type="Marker2D" parent="ShootingMarkers" unique_id=1095881050]
-position = Vector2(68, 0)
 
 [node name="DashTimer" type="Timer" parent="." unique_id=2064906837]
 wait_time = 0.2

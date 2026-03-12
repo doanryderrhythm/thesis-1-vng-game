@@ -34,7 +34,7 @@ var play_time: float = 0.0
 var play_time_int: int = 0
 var stage_stats: Array[StageStats]
 
-var is_gameplay: bool = true
+var is_gameplay: bool = false
 
 signal health_change
 signal dash_change
@@ -50,6 +50,8 @@ func _ready() -> void:
 	pass
 
 func reset() -> void:
+	is_gameplay = true
+	
 	current_id_x = 0
 	current_id_y = 0
 	

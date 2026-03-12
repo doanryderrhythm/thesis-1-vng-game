@@ -1,9 +1,17 @@
 [gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://cg8olh1e1d2va"]
 
+[ext_resource type="Resource" uid="uid://bi6c3qwr0p51c" path="res://resources/bullets/bullet_diamond_2-1.tres" id="1_3comk"]
 [ext_resource type="Script" uid="uid://thvjb24rjrlp" path="res://scripts/resources/resource_player.gd" id="1_fn1ce"]
 [ext_resource type="Texture2D" uid="uid://duflh2arbtrka" path="res://sprites/player/player_diamond_2-1.png" id="2_nnlmt"]
 
 [resource]
 script = ExtResource("1_fn1ce")
+character_type = 2
+markers_pos = Array[Vector2]([Vector2(68, 0), Vector2(-68, 0)])
+code = "player_diamond_2-1"
 sprite = ExtResource("2_nnlmt")
+health = 135.0
+move_speed = 1150.0
+dash_speed = 3.5
+bullet_res = ExtResource("1_3comk")
 metadata/_custom_type_script = "uid://thvjb24rjrlp"

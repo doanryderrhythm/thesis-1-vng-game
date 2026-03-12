@@ -8,7 +8,6 @@ time_to_pass = 35
 phase_count = 1
 min_enemy = 2
 max_enemy = 3
-is_lazer = true
 lazer_spawn_rate = 2.0
 lazer_warn_time = 2.0
 lazer_stay_time = 1.5
