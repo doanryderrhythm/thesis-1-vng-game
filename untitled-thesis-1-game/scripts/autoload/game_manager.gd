@@ -83,6 +83,8 @@ func reset() -> void:
 	health_change.emit()
 	dash_change.emit()
 	score_change.emit()
+	level_change.emit()
+	play_time_change.emit()
 
 func _process(delta: float) -> void:
 	play_time += delta
