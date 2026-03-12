@@ -6,13 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://vtxwdqpa14io" path="res://scenes/bullets/player_bullet.tscn" id="3_0owmy"]
 [ext_resource type="Script" uid="uid://crv1isw4q5df" path="res://scripts/area_2d/hurt_area_2d.gd" id="3_gmlin"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_lvxji"]
-[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="5_h17s1"]
 [ext_resource type="AudioStream" uid="uid://r6ubrcbwu6p8" path="res://sfx/player_shoot.wav" id="7_0owmy"]
 [ext_resource type="AudioStream" uid="uid://bglthoh62y2ot" path="res://sfx/player_dash.wav" id="8_5gtgg"]
 [ext_resource type="AudioStream" uid="uid://cn0svmt1f6uuy" path="res://sfx/player_hurt.wav" id="9_h17s1"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_je7p5"]
-blend_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
 radius = 43.0
@@ -92,22 +88,15 @@ _bullet_stats = ExtResource("2_75vfm")
 _bullet_scene = ExtResource("3_0owmy")
 health = 100.0
 
-[node name="PlayerGlow" type="Sprite2D" parent="." unique_id=616104901]
-material = SubResource("CanvasItemMaterial_je7p5")
-scale = Vector2(2.75, 2.75)
-texture = ExtResource("5_h17s1")
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=768663192]
 modulate = Color(3.465414e-06, 0.67638296, 0.88230026, 1)
 rotation = 1.5707964
 texture = ExtResource("1_8afob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1744166195]
-visible = false
 shape = SubResource("CircleShape2D_dovo2")
 
 [node name="StartArea2D" type="Area2D" parent="." unique_id=268927989]
-visible = false
 collision_layer = 2
 collision_mask = 0
 
@@ -116,7 +105,6 @@ shape = SubResource("CircleShape2D_75vfm")
 debug_color = Color(0, 0.63632345, 0.41024104, 0.41960785)
 
 [node name="HitAreas" type="Node2D" parent="." unique_id=217046150]
-visible = false
 
 [node name="HitArea2D" type="Area2D" parent="HitAreas" unique_id=2067713978]
 collision_layer = 18
@@ -129,7 +117,6 @@ shape = SubResource("CircleShape2D_p47bc")
 debug_color = Color(0.9571369, 0.20984316, 3.85046e-07, 0.41960785)
 
 [node name="HurtAreas" type="Node2D" parent="." unique_id=1943471864]
-visible = false
 
 [node name="TriangleHurtArea2D" type="Area2D" parent="HurtAreas" unique_id=1804987015]
 collision_layer = 0

@@ -4,6 +4,9 @@ class_name BaseLazer
 @onready var raycast_A: RayCast2D = $RayCasts/RayCastA
 @onready var raycast_B: RayCast2D = $RayCasts/RayCastB
 
+@onready var point_A: Sprite2D = $LazerPoints/PointA
+@onready var point_B: Sprite2D = $LazerPoints/PointB
+
 @onready var warning_lazer: Line2D = $WarningLazer
 @onready var finish_lazer: Line2D = $FinishLazer
 
@@ -18,6 +21,8 @@ var is_spawned: bool = false;
 
 var warning_timer_value: float = 1.5
 var finish_timer_value: float = 1
+
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 var damage: float = 12.5
 
@@ -37,8 +42,9 @@ func _physics_process(_delta: float) -> void:
 	if raycast_A.is_colliding() and raycast_B.is_colliding() and !is_spawned:
 		var pos_A = raycast_A.get_collision_point()
 		var pos_B = raycast_B.get_collision_point()
-		print(pos_A)
-		print(pos_B)
+		point_A.position = to_local(pos_A)
+		point_B.position = to_local(pos_B)
+		anim_player.play("default")
 		warning_lazer.clear_points()
 		warning_lazer.add_point(to_local(pos_A))
 		warning_lazer.add_point(to_local(pos_B))

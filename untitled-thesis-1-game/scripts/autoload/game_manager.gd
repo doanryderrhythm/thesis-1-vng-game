@@ -34,7 +34,7 @@ var play_time: float = 0.0
 var play_time_int: int = 0
 var stage_stats: Array[StageStats]
 
-var is_gameplay: bool = false
+var is_gameplay: bool = true
 
 signal health_change
 signal dash_change
