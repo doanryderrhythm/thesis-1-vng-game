@@ -34,6 +34,8 @@ var play_time: float = 0.0
 var play_time_int: int = 0
 var stage_stats: Array[StageStats]
 
+var is_gameplay: bool = false
+
 signal health_change
 signal dash_change
 signal state_lose_change
@@ -87,6 +89,9 @@ func reset() -> void:
 	play_time_change.emit()
 
 func _process(delta: float) -> void:
+	if not is_gameplay:
+		return
+		
 	play_time += delta
 	if play_time_int != int(play_time):
 		play_time_int = int(play_time)

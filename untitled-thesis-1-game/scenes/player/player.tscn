@@ -6,10 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://vtxwdqpa14io" path="res://scenes/bullets/player_bullet.tscn" id="3_0owmy"]
 [ext_resource type="Script" uid="uid://crv1isw4q5df" path="res://scripts/area_2d/hurt_area_2d.gd" id="3_gmlin"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_lvxji"]
-[ext_resource type="Texture2D" uid="uid://c3wrkt8gos3w8" path="res://sprites/bullets/bullet_square.png" id="5_h17s1"]
+[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="5_h17s1"]
 [ext_resource type="AudioStream" uid="uid://r6ubrcbwu6p8" path="res://sfx/player_shoot.wav" id="7_0owmy"]
 [ext_resource type="AudioStream" uid="uid://bglthoh62y2ot" path="res://sfx/player_dash.wav" id="8_5gtgg"]
 [ext_resource type="AudioStream" uid="uid://cn0svmt1f6uuy" path="res://sfx/player_hurt.wav" id="9_h17s1"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_je7p5"]
+blend_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
 radius = 43.0
@@ -53,7 +56,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(3.465414e-06, 0.67638296, 0.88230026, 1)]
+"values": [Color(0, 0.7682924, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_qek5x"]
@@ -67,10 +70,10 @@ tracks/0/path = NodePath("Sprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668, 0.3, 0.33333337, 0.36666667, 0.40000004, 0.43333337, 0.4666667, 0.50000006, 0.53333336, 0.5666667, 0.6, 0.6333334, 0.6666667, 0.70000005, 0.73333335, 0.7666667, 0.8000001, 0.83333343, 0.86666673, 0.9000001, 0.9333334, 0.96666676, 1, 1.0333333, 1.0666667, 1.1, 1.1333333, 1.1666666, 1.2, 1.2333333, 1.2666668, 1.3000001, 1.3333334, 1.3666667, 1.4000001, 1.4333334, 1.4666668, 1.5000001),
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.40000004, 0.43333337, 0.4666667, 0.50000006, 0.53333336, 0.5666667, 0.6, 0.6333334, 0.6666667, 0.70000005, 0.73333335, 0.7666667, 0.8000001, 0.83333343, 0.86666673, 0.9000001, 0.9333334, 0.96666676, 1, 1.0333333, 1.0666667, 1.1, 1.1333334, 1.1666667, 1.2, 1.2333333, 1.2666668, 1.3000001, 1.3333334, 1.3666667, 1.4000001, 1.4333334, 1.4666667, 1.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1), Color(0.88235295, 0, 0.26884192, 1), Color(3.465414e-06, 0.67638296, 0.88230026, 1)]
+"values": [Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1), Color(0.88235295, 0, 0.26884192, 1), Color(0, 0.76862746, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qek5x"]
@@ -89,21 +92,22 @@ _bullet_stats = ExtResource("2_75vfm")
 _bullet_scene = ExtResource("3_0owmy")
 health = 100.0
 
+[node name="PlayerGlow" type="Sprite2D" parent="." unique_id=616104901]
+material = SubResource("CanvasItemMaterial_je7p5")
+scale = Vector2(2.75, 2.75)
+texture = ExtResource("5_h17s1")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=768663192]
 modulate = Color(3.465414e-06, 0.67638296, 0.88230026, 1)
 rotation = 1.5707964
 texture = ExtResource("1_8afob")
 
-[node name="ShootPOVSprite" type="Sprite2D" parent="." unique_id=1752820850]
-modulate = Color(0.484375, 0.948902, 1, 1)
-position = Vector2(52, 0)
-scale = Vector2(1, 0.5)
-texture = ExtResource("5_h17s1")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1744166195]
+visible = false
 shape = SubResource("CircleShape2D_dovo2")
 
 [node name="StartArea2D" type="Area2D" parent="." unique_id=268927989]
+visible = false
 collision_layer = 2
 collision_mask = 0
 
@@ -112,6 +116,7 @@ shape = SubResource("CircleShape2D_75vfm")
 debug_color = Color(0, 0.63632345, 0.41024104, 0.41960785)
 
 [node name="HitAreas" type="Node2D" parent="." unique_id=217046150]
+visible = false
 
 [node name="HitArea2D" type="Area2D" parent="HitAreas" unique_id=2067713978]
 collision_layer = 18
@@ -124,6 +129,7 @@ shape = SubResource("CircleShape2D_p47bc")
 debug_color = Color(0.9571369, 0.20984316, 3.85046e-07, 0.41960785)
 
 [node name="HurtAreas" type="Node2D" parent="." unique_id=1943471864]
+visible = false
 
 [node name="TriangleHurtArea2D" type="Area2D" parent="HurtAreas" unique_id=1804987015]
 collision_layer = 0

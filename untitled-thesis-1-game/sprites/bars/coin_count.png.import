@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coitxn8acct2i"
-path="res://.godot/imported/player_diamond_4-1.png-24494d79f853e780c5847297a5219eb5.ctex"
+uid="uid://dak77hof5amf7"
+path="res://.godot/imported/coin_count.png-d0affe47c33bc3fe08f6496fb45a7d81.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/player/player_diamond_4-1.png"
-dest_files=["res://.godot/imported/player_diamond_4-1.png-24494d79f853e780c5847297a5219eb5.ctex"]
+source_file="res://sprites/bars/coin_count.png"
+dest_files=["res://.godot/imported/coin_count.png-d0affe47c33bc3fe08f6496fb45a7d81.ctex"]
 
 [params]
 

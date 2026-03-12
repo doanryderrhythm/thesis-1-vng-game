@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://dlyk6n6e8d77k"]
+
+[ext_resource type="Script" uid="uid://thvjb24rjrlp" path="res://scripts/resources/resource_player.gd" id="1_g50bw"]
+[ext_resource type="Texture2D" uid="uid://dkk35nx33o3ps" path="res://sprites/player/player_circle_1-1.png" id="2_nq65c"]
+
+[resource]
+script = ExtResource("1_g50bw")
+sprite = ExtResource("2_nq65c")
+metadata/_custom_type_script = "uid://thvjb24rjrlp"

@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://cl6xpd7qlb36r"]
+
+[ext_resource type="Texture2D" uid="uid://dak77hof5amf7" path="res://sprites/bars/coin_count.png" id="1_8r8tc"]
+
+[sub_resource type="GDScript" id="GDScript_8r8tc"]
+resource_name = "shop_scene"
+script/source = "extends Node2D
+
+var player_listener: PlayerListener = load(\"res://resources/player/player_listener.tres\")
+var all_players: Array[PlayerStats] = []
+
+@onready var item_container: HBoxContainer = $CanvasLayer/ShopBackground/Mask/ScrollContainer/PlayerItemContainer
+@onready var skin_ui_item: PackedScene = preload(\"res://scenes/ui/skin_ui_item.tscn\")
+
+func _ready() -> void:
+	all_players = player_listener.players
+	for player in all_players:
+		var ui_item: SkinUI = skin_ui_item.instantiate()
+		ui_item.skin_stats = player
+		item_container.add_child(ui_item)
+	pass
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_8r8tc"]
+font_size = 20
+
+[node name="ShopScene" type="Node2D" unique_id=232877183]
+script = SubResource("GDScript_8r8tc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1828509655]
+
+[node name="ShopBackground" type="ColorRect" parent="CanvasLayer" unique_id=800710412]
+self_modulate = Color(0.105409205, 0.105409205, 0.105409205, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 96.0
+offset_right = -30.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mask" type="TextureRect" parent="CanvasLayer/ShopBackground" unique_id=1979445986]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_right = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/ShopBackground/Mask" unique_id=1560367195]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerItemContainer" type="HBoxContainer" parent="CanvasLayer/ShopBackground/Mask/ScrollContainer" unique_id=1923791966]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="CoinCount" type="TextureRect" parent="CanvasLayer" unique_id=977572998]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = 70.0
+grow_horizontal = 0
+texture = ExtResource("1_8r8tc")
+
+[node name="CoinCountLabel" type="Label" parent="CanvasLayer/CoinCount" unique_id=1294384751]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1234"
+label_settings = SubResource("LabelSettings_8r8tc")
+horizontal_alignment = 1
+vertical_alignment = 1

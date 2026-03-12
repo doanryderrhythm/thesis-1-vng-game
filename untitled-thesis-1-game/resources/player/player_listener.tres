@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="PlayerListener" format=3 uid="uid://b6yv7euy3xx4r"]
+
+[ext_resource type="Script" uid="uid://thvjb24rjrlp" path="res://scripts/resources/resource_player.gd" id="1_lx082"]
+[ext_resource type="Script" uid="uid://clk8cvobgmokc" path="res://scripts/resources/resource_player_listener.gd" id="2_2y3li"]
+[ext_resource type="Resource" uid="uid://dlyk6n6e8d77k" path="res://resources/player/player_circle_1-1.tres" id="2_byyfp"]
+[ext_resource type="Resource" uid="uid://bloo8rucg2nht" path="res://resources/player/player_circle_2-1.tres" id="3_4fitq"]
+[ext_resource type="Resource" uid="uid://ce2w2uyakt8a4" path="res://resources/player/player_circle_3-1.tres" id="4_y4pt2"]
+[ext_resource type="Resource" uid="uid://uxa1i5kmbgtp" path="res://resources/player/player_circle_4-1.tres" id="5_c0lkq"]
+[ext_resource type="Resource" uid="uid://c3s2ndaaag677" path="res://resources/player/player_diamond_1-1.tres" id="6_rhi2b"]
+[ext_resource type="Resource" uid="uid://cg8olh1e1d2va" path="res://resources/player/player_diamond_2-1.tres" id="7_amnhu"]
+[ext_resource type="Resource" uid="uid://dulpuoebvtxjy" path="res://resources/player/player_diamond_4-1.tres" id="8_47hyb"]
+[ext_resource type="Resource" uid="uid://bnljbea5arlql" path="res://resources/player/player_square_1-1.tres" id="9_j01y6"]
+[ext_resource type="Resource" uid="uid://bv2yrn0u7ocr7" path="res://resources/player/player_square_2-1.tres" id="10_qjvq0"]
+[ext_resource type="Resource" uid="uid://dsw5hybmxtw1o" path="res://resources/player/player_square_4-1.tres" id="11_nvkxm"]
+[ext_resource type="Resource" uid="uid://dq7go06kkveb4" path="res://resources/player/player_triangle_1-1.tres" id="12_ylm4t"]
+[ext_resource type="Resource" uid="uid://dq0eqq6yuj6a1" path="res://resources/player/player_triangle_2-1.tres" id="13_u5ce1"]
+[ext_resource type="Resource" uid="uid://8xowtvyb4jwm" path="res://resources/player/player_triangle_3-1.tres" id="14_tsab7"]
+
+[resource]
+script = ExtResource("2_2y3li")
+players = Array[ExtResource("1_lx082")]([ExtResource("2_byyfp"), ExtResource("3_4fitq"), ExtResource("4_y4pt2"), ExtResource("5_c0lkq"), ExtResource("6_rhi2b"), ExtResource("7_amnhu"), ExtResource("8_47hyb"), ExtResource("9_j01y6"), ExtResource("10_qjvq0"), ExtResource("11_nvkxm"), ExtResource("12_ylm4t"), ExtResource("13_u5ce1"), ExtResource("14_tsab7")])
+metadata/_custom_type_script = "uid://clk8cvobgmokc"

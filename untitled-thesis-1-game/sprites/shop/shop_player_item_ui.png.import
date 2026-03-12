@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coitxn8acct2i"
-path="res://.godot/imported/player_diamond_4-1.png-24494d79f853e780c5847297a5219eb5.ctex"
+uid="uid://ct5t4fdfdlu21"
+path="res://.godot/imported/shop_player_item_ui.png-ac2d02ba49dd5db22d5444e7eef8db23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/player/player_diamond_4-1.png"
-dest_files=["res://.godot/imported/player_diamond_4-1.png-24494d79f853e780c5847297a5219eb5.ctex"]
+source_file="res://sprites/shop/shop_player_item_ui.png"
+dest_files=["res://.godot/imported/shop_player_item_ui.png-ac2d02ba49dd5db22d5444e7eef8db23.ctex"]
 
 [params]
 
