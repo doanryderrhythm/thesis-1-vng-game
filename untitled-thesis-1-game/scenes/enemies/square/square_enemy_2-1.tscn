@@ -8,6 +8,7 @@
 size = Vector2(110, 110)
 
 [node name="SquareEnemy2-1" unique_id=957259601 instance=ExtResource("1_cfw0u")]
+damage = 20.0
 enemy_stats = ExtResource("2_ff5ix")
 
 [node name="Sprite2D" parent="." index="0" unique_id=1177427738]

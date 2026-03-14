@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b2of4763rak84" path="res://sprites/bars/health_progress.png" id="3_k7b8x"]
 [ext_resource type="Texture2D" uid="uid://ptbjvi1ww8ce" path="res://sprites/bars/dash_icon.png" id="4_fadvp"]
 [ext_resource type="Texture2D" uid="uid://bx5nkaqlcb8v0" path="res://sprites/bars/dash_progress.png" id="5_ukyxi"]
+[ext_resource type="Texture2D" uid="uid://dak77hof5amf7" path="res://sprites/bars/coin_count.png" id="6_k7b8x"]
 [ext_resource type="Texture2D" uid="uid://4s2cqw63nr6" path="res://sprites/gameplay/danger.png" id="6_pu33q"]
 
 [sub_resource type="GDScript" id="GDScript_2bpog"]
@@ -15,6 +16,8 @@ class_name DebugUI
 @onready var health_bar: TextureProgressBar = $HealthBar
 @onready var dash_bar: TextureProgressBar = $DashBar
 @onready var fill_dash_bar: ProgressBar = $FillDashBar
+
+@onready var coin_value_label: Label = $CoinBar/CoinValueLabel
 
 @onready var restart_label: Label = $RestartLabel
 @onready var score_label: Label = $ScoreLabel
@@ -46,6 +49,7 @@ func _ready() -> void:
 	change_level_state(false)
 	change_phase(false)
 	change_score()
+	change_coin()
 	
 	GameManager.health_change.connect(change_health)
 	GameManager.dash_change.connect(change_dash)
@@ -55,6 +59,7 @@ func _ready() -> void:
 	GameManager.level_change.connect(change_level_state.bind(false))
 	GameManager.start_level.connect(change_level_state.bind(true))
 	GameManager.score_change.connect(change_score)
+	GameManager.coin_change.connect(change_coin)
 
 func _process(_delta: float) -> void:
 	if is_instance_valid(GameManager.player):
@@ -89,6 +94,9 @@ func change_level_state(is_ongoing: bool) -> void:
 func change_score() -> void:
 	score_label.text = str(GameManager.total_score)
 	pass
+
+func change_coin() -> void:
+	coin_value_label.text = str(GameManager.in_level_coins)
 	
 func change_phase(is_ongoing: bool) -> void:
 	if is_ongoing:
@@ -112,6 +120,9 @@ region = Rect2(0, 0, 253, 42)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqpec"]
 atlas = ExtResource("1_14mai")
 region = Rect2(0, 42, 253, 42)
+
+[sub_resource type="LabelSettings" id="LabelSettings_k7b8x"]
+font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_pu33q"]
 font_size = 20
@@ -157,6 +168,30 @@ offset_right = 526.0
 offset_bottom = 58.0
 value = 17.37
 show_percentage = false
+
+[node name="CoinBar" type="TextureRect" parent="." unique_id=2071009208]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 52.0
+grow_horizontal = 0
+texture = ExtResource("6_k7b8x")
+
+[node name="CoinValueLabel" type="Label" parent="CoinBar" unique_id=152435189]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_k7b8x")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ScoreTitleLabel" type="Label" parent="." unique_id=764856100]
 anchors_preset = 2

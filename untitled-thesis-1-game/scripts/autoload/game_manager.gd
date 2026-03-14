@@ -33,6 +33,7 @@ var is_going: bool = false
 var play_time: float = 0.0
 var play_time_int: int = 0
 var stage_stats: Array[StageStats]
+var in_level_coins: int = 0
 
 var is_gameplay: bool = false
 
@@ -45,12 +46,14 @@ signal play_time_change
 signal start_level
 signal level_change
 signal room_start
+signal coin_change
 
 func _ready() -> void:
 	pass
 
 func reset() -> void:
 	is_gameplay = true
+	in_level_coins = 0
 	
 	current_id_x = 0
 	current_id_y = 0
@@ -118,6 +121,10 @@ func set_up_enemies() -> void:
 func add_score(num: int) -> void:
 	total_score += num
 	score_change.emit()
+	
+func add_coin(num: int) -> void:
+	in_level_coins += num
+	coin_change.emit()
 
 func start_stage() -> void:
 	ongoing_level = current_level

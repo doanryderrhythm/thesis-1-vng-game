@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cq5yq62blfvmq"]
+
+[ext_resource type="PackedScene" uid="uid://jtgds2sijxf4" path="res://scenes/collectibles/base_collectible.tscn" id="1_h6jfl"]
+[ext_resource type="Script" uid="uid://cmpjdh8w55im7" path="res://scripts/collectibles/coin.gd" id="2_h6jfl"]
+[ext_resource type="Texture2D" uid="uid://dj8yoqoal50ng" path="res://sprites/collectibles/coin.png" id="3_h6jfl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_867vd"]
+radius = 26.019224
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bo6c2"]
+radius = 32.01562
+
+[node name="Coin" unique_id=1780334649 instance=ExtResource("1_h6jfl")]
+gravity_scale = 0.0
+linear_damp = 4.0
+script = ExtResource("2_h6jfl")
+
+[node name="Sprite2D" parent="." index="0" unique_id=1319834975]
+texture = ExtResource("3_h6jfl")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=435083227]
+shape = SubResource("CircleShape2D_867vd")
+
+[node name="CollisionShape2D" parent="InteractArea2D" parent_id_path=PackedInt32Array(1061273165) index="0" unique_id=1821629557]
+shape = SubResource("CircleShape2D_bo6c2")

@@ -8,6 +8,7 @@
 points = PackedVector2Array(58, 0, -29, -50, -29, 50)
 
 [node name="TriangleEnemy3-1" unique_id=957259601 instance=ExtResource("1_o5v2h")]
+damage = 10.0
 enemy_stats = ExtResource("2_o5v2h")
 
 [node name="Sprite2D" parent="." index="0" unique_id=1177427738]

@@ -8,6 +8,7 @@
 points = PackedVector2Array(0, -55, 55, 0, 0, 55, -55, 0)
 
 [node name="DiamondEnemy2-1" unique_id=957259601 instance=ExtResource("1_jss52")]
+damage = 12.5
 enemy_stats = ExtResource("2_heos7")
 
 [node name="Sprite2D" parent="." index="0" unique_id=1177427738]

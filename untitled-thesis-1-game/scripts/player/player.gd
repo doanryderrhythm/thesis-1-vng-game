@@ -274,18 +274,13 @@ func hurt(_area: Area2D) -> void:
 	var temp = _area
 	while temp.get_parent() != null:
 		temp = temp.get_parent()
-		if temp is BaseEnemy:
-			take_damage(15.0)
-			break
-		elif temp is BaseBullet:
+		if is_harmful_collided(temp):
 			take_damage(temp.damage)
 			break
-		elif temp is BaseLazer:
-			take_damage(temp.damage)
-			break
-		elif temp is BigSpike:
-			take_damage(temp.damage)
-			break
-		elif temp is Bomb:
-			take_damage(temp.damage)
-			break
+
+func is_harmful_collided(par: Variant) -> bool:
+	return par is BaseEnemy \
+		or par is BaseBullet \
+		or par is BaseLazer \
+		or par is BigSpike \
+		or par is Bomb

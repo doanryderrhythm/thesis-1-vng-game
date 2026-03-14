@@ -1,6 +1,8 @@
 extends BaseCharacter
 class_name BaseEnemy
 
+@export var damage: float
+
 @onready var shoot_markers_storer = $ShootingMarkers
 var shoot_markers: Array[Marker2D]
 

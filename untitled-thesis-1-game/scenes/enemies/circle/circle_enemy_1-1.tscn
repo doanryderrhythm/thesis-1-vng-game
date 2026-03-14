@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cnjesh6kuh5up" path="res://sprites/enemies/enemy_circle_1-1.png" id="3_qnt5p"]
 
 [node name="CircleEnemy1-1" unique_id=957259601 instance=ExtResource("1_8wrda")]
+damage = 15.0
 enemy_stats = ExtResource("2_qnt5p")
 
 [node name="Sprite2D" parent="." index="0" unique_id=1177427738]
