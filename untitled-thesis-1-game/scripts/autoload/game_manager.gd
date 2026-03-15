@@ -8,7 +8,6 @@ var player: Player
 var total_score: int = 0
 
 var current_level: int = 0
-var ongoing_level: int = 0
 var current_phase: int = 0
 var max_phase: int = 0
 
@@ -30,8 +29,6 @@ var used_rooms: Array[Dictionary] = []
 
 # STATS
 var is_going: bool = false
-var play_time: float = 0.0
-var play_time_int: int = 0
 var stage_stats: Array[StageStats]
 var in_level_coins: int = 0
 
@@ -42,9 +39,7 @@ signal dash_change
 signal state_lose_change
 signal score_change
 signal phase_change(is_ongoing: bool)
-signal play_time_change
 signal start_level
-signal level_change
 signal room_start
 signal coin_change
 
@@ -61,12 +56,8 @@ func reset() -> void:
 	total_score = 0
 
 	current_level = 0
-	ongoing_level = 0
 	current_phase = 0
 	max_phase = 0
-	
-	play_time = 0
-	play_time_int = 0
 
 	enemy_particles = preload("res://effects/base_enemy_spawn.tscn")
 	enemy_scenes = []
@@ -90,21 +81,6 @@ func reset() -> void:
 	health_change.emit()
 	dash_change.emit()
 	score_change.emit()
-	level_change.emit()
-	play_time_change.emit()
-
-func _process(delta: float) -> void:
-	if not is_gameplay:
-		return
-		
-	play_time += delta
-	if play_time_int != int(play_time):
-		play_time_int = int(play_time)
-		play_time_change.emit()
-		if play_time_int >= stage_stats[current_level].time_to_pass and current_level + 1 < stage_stats.size():
-			current_level += 1
-			if !is_going:
-				level_change.emit()
 
 func set_up_rooms() -> void:
 	var listener: RoomsListener = load("res://resources/rooms/rooms_listener.tres")
@@ -127,12 +103,11 @@ func add_coin(num: int) -> void:
 	coin_change.emit()
 
 func start_stage() -> void:
-	ongoing_level = current_level
-	current_phase = stage_stats[ongoing_level].phase_count
-	is_lazer = stage_stats[ongoing_level].is_lazer
-	is_spike = stage_stats[ongoing_level].is_spike
-	is_bomb = stage_stats[ongoing_level].is_bomb
-	is_bomb_four = stage_stats[ongoing_level].is_bomb_four
+	current_phase = stage_stats[current_level].phase_count
+	is_lazer = stage_stats[current_level].is_lazer
+	is_spike = stage_stats[current_level].is_spike
+	is_bomb = stage_stats[current_level].is_bomb
+	is_bomb_four = stage_stats[current_level].is_bomb_four
 	is_going = true
 	start_level.emit()
 	phase_change.emit(true)
@@ -146,8 +121,8 @@ func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 		return
 	
 	enemies_num = randi_range(
-		stage_stats[ongoing_level].min_enemy, 
-		stage_stats[ongoing_level].max_enemy
+		stage_stats[current_level].min_enemy, 
+		stage_stats[current_level].max_enemy
 		)
 	current_enemies_num = enemies_num
 	
@@ -251,27 +226,27 @@ func deduct_enemies() -> void:
 		_room.is_executed = true
 		_room.call_deferred("start_stage", false)
 		is_going = false
-		level_change.emit()
+		current_level += 1
 		phase_change.emit(false)
 		create_available_rooms(current_id_x, current_id_y)
 
 func confirm_stage(room: Room) -> void:
 	if is_lazer:
-		room.lazer_timer.wait_time = stage_stats[ongoing_level].lazer_spawn_rate
-		room.lazer_warn_time = stage_stats[ongoing_level].lazer_warn_time
-		room.lazer_harm_time = stage_stats[ongoing_level].lazer_stay_time
+		room.lazer_timer.wait_time = stage_stats[current_level].lazer_spawn_rate
+		room.lazer_warn_time = stage_stats[current_level].lazer_warn_time
+		room.lazer_harm_time = stage_stats[current_level].lazer_stay_time
 	if is_spike:
-		room.spike_timer.wait_time = stage_stats[ongoing_level].spike_spawn_rate
-		room.spike_warn_time = stage_stats[ongoing_level].spike_warn_time
-		room.spike_harm_time = stage_stats[ongoing_level].spike_stay_time
+		room.spike_timer.wait_time = stage_stats[current_level].spike_spawn_rate
+		room.spike_warn_time = stage_stats[current_level].spike_warn_time
+		room.spike_harm_time = stage_stats[current_level].spike_stay_time
 	if is_bomb:
-		room.bomb_timer.wait_time = stage_stats[ongoing_level].bomb_spawn_rate
-		room.bomb_warn_time = stage_stats[ongoing_level].bomb_warn_time
-		room.bomb_harm_time = stage_stats[ongoing_level].bomb_stay_time
+		room.bomb_timer.wait_time = stage_stats[current_level].bomb_spawn_rate
+		room.bomb_warn_time = stage_stats[current_level].bomb_warn_time
+		room.bomb_harm_time = stage_stats[current_level].bomb_stay_time
 	if is_bomb_four:
-		room.bomb_four_timer.wait_time = stage_stats[ongoing_level].bomb_four_spawn_rate
-		room.bomb_four_warn_time = stage_stats[ongoing_level].bomb_four_warn_time
-		room.bomb_four_harm_time = stage_stats[ongoing_level].bomb_four_stay_time
+		room.bomb_four_timer.wait_time = stage_stats[current_level].bomb_four_spawn_rate
+		room.bomb_four_warn_time = stage_stats[current_level].bomb_four_warn_time
+		room.bomb_four_harm_time = stage_stats[current_level].bomb_four_stay_time
 
 func find_room(_id_x: int, _id_y: int) -> Room:
 	rooms = rooms.filter(func(room):

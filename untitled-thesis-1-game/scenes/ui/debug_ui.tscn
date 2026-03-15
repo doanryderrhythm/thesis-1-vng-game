@@ -21,10 +21,6 @@ class_name DebugUI
 
 @onready var restart_label: Label = $RestartLabel
 @onready var score_label: Label = $ScoreLabel
-@onready var play_time_label: Label = $PlayTimeLabel
-
-@onready var level_title_label: Label = $LevelTitleLabel
-@onready var level_label: Label = $LevelLabel
 
 @onready var phase_title_label: Label = $PhaseTitleLabel
 @onready var phase_label: Label = $PhaseLabel
@@ -45,8 +41,6 @@ func _ready() -> void:
 	
 	change_health()
 	change_dash()
-	change_play_time()
-	change_level_state(false)
 	change_phase(false)
 	change_score()
 	change_coin()
@@ -54,10 +48,7 @@ func _ready() -> void:
 	GameManager.health_change.connect(change_health)
 	GameManager.dash_change.connect(change_dash)
 	GameManager.state_lose_change.connect(show_restart)
-	GameManager.play_time_change.connect(change_play_time)
 	GameManager.phase_change.connect(change_phase)
-	GameManager.level_change.connect(change_level_state.bind(false))
-	GameManager.start_level.connect(change_level_state.bind(true))
 	GameManager.score_change.connect(change_score)
 	GameManager.coin_change.connect(change_coin)
 
@@ -77,19 +68,6 @@ func change_health() -> void:
 
 func change_dash() -> void:
 	dash_bar.value = GameManager.player._dash_count
-
-func change_play_time() -> void:
-	play_time_label.text = str(GameManager.play_time_int)
-	pass
-
-func change_level_state(is_ongoing: bool) -> void:
-	if is_ongoing:
-		level_title_label.text = \"Locked level\"
-		level_label.text = str(GameManager.ongoing_level + 1)
-	else:
-		level_title_label.text = \"Level to prepare\"
-		level_label.text = str(GameManager.current_level + 1)
-	pass
 
 func change_score() -> void:
 	score_label.text = str(GameManager.total_score)
@@ -217,74 +195,6 @@ offset_bottom = -10.0
 grow_vertical = 0
 text = "Score"
 label_settings = SubResource("LabelSettings_14mai")
-vertical_alignment = 2
-
-[node name="PlayTimeTitleLabel" type="Label" parent="." unique_id=2014312667]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -117.0
-offset_top = -108.0
-offset_right = -10.0
-offset_bottom = -53.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Time"
-label_settings = SubResource("LabelSettings_pu33q")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="PlayTimeLabel" type="Label" parent="." unique_id=1077021869]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -117.0
-offset_top = -65.0
-offset_right = -10.0
-offset_bottom = -10.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Time"
-label_settings = SubResource("LabelSettings_14mai")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="LevelTitleLabel" type="Label" parent="." unique_id=638328226]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -117.0
-offset_top = -186.0
-offset_right = -10.0
-offset_bottom = -131.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Level"
-label_settings = SubResource("LabelSettings_pu33q")
-horizontal_alignment = 2
-vertical_alignment = 2
-
-[node name="LevelLabel" type="Label" parent="." unique_id=1026685085]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -117.0
-offset_top = -143.0
-offset_right = -10.0
-offset_bottom = -88.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Level"
-label_settings = SubResource("LabelSettings_14mai")
-horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="PhaseTitleLabel" type="Label" parent="." unique_id=1369473862]
