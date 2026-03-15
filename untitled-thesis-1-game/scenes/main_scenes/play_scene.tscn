@@ -9,11 +9,14 @@
 resource_name = "play_scene"
 script/source = "extends Node2D
 
+@onready var all_bullets: Node2D = $Bullets
+
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	GameManager.reset()
 	GameManager.room_start.connect(room_start)
+	GameManager.delete_bullets.connect(delete_bullets)
 	anim.play(\"default\")
 	pass
 
@@ -24,6 +27,10 @@ func _process(_delta: float) -> void:
 
 func room_start() -> void:
 	anim.play(\"room_start\")
+
+func delete_bullets() -> void:
+	for obj in all_bullets.get_children():
+		if is_instance_valid(obj) and obj is not PlayerBullet: obj.queue_free()
 "
 
 [sub_resource type="Animation" id="Animation_y0n7b"]

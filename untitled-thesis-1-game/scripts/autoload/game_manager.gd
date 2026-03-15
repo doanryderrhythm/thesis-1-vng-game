@@ -41,6 +41,7 @@ signal score_change
 signal phase_change(is_ongoing: bool)
 signal start_level
 signal room_start
+signal delete_bullets
 signal coin_change
 
 func _ready() -> void:
@@ -111,7 +112,6 @@ func start_stage() -> void:
 	is_going = true
 	start_level.emit()
 	phase_change.emit(true)
-	print(used_rooms)
 	pass
 
 func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
@@ -228,6 +228,7 @@ func deduct_enemies() -> void:
 		is_going = false
 		current_level += 1
 		phase_change.emit(false)
+		delete_bullets.emit()
 		create_available_rooms(current_id_x, current_id_y)
 
 func confirm_stage(room: Room) -> void:

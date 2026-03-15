@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://vtxwdqpa14io"]
 
 [ext_resource type="PackedScene" uid="uid://ccs1cb8eeq3sc" path="res://scenes/bullets/base_bullet.tscn" id="1_om8qi"]
+[ext_resource type="Script" uid="uid://h2ra0ayw6nxu" path="res://scripts/bullets/player_bullet.gd" id="2_48eg6"]
 
 [node name="PlayerBullet" unique_id=1344972379 instance=ExtResource("1_om8qi")]
+script = ExtResource("2_48eg6")
 
 [node name="Sprite2D" parent="." index="0" unique_id=2096521337]
 modulate = Color(0.38601565, 0.8163898, 0.9999998, 1)

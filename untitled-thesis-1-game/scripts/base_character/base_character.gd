@@ -23,5 +23,5 @@ func _physics_process(_delta: float) -> void:
 func take_damage(_damage: float) -> void:
 	pass
 
-func hurt(area: Area2D) -> void:
+func hurt(_area: Area2D) -> void:
 	pass

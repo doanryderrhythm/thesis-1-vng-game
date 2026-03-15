@@ -38,6 +38,10 @@ var bomb_four_harm_time: float
 @onready var bomb_four_timer: Timer = $BombFourTimer
 @onready var bomb_way_points: Node2D = $BombWayPoints
 
+@onready var all_spikes: Node2D = $Spikes
+@onready var all_bombs: Node2D = $Bombs
+@onready var all_lazers: Node2D = $Lazers
+
 @onready var door_close_audio: AudioStreamPlayer = $DoorCloseAudio
 
 func _ready() -> void:
@@ -66,8 +70,17 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 		spike_timer.stop()
 		bomb_timer.stop()
 		bomb_four_timer.stop()
+		
+		for obj in all_bombs.get_children():
+			if is_instance_valid(obj): obj.queue_free()
+		for obj in all_spikes.get_children():
+			if is_instance_valid(obj): obj.queue_free()
+		for obj in all_lazers.get_children():
+			if is_instance_valid(obj): obj.queue_free()
+			
 		doors.process_mode = Node.PROCESS_MODE_DISABLED
 		RenderingServer.set_default_clear_color(Color(0.3, 0.3, 0.3, 1.0))
+		
 		if not is_game_start:
 			var used_room: Dictionary = {
 				ValueStorer.used_room_x: id_x,
@@ -80,11 +93,11 @@ func _on_start_area_2d_area_entered(_area: Area2D) -> void:
 	if is_executed or (id_x == 0 and id_y == 0):
 		return
 		
-	call_deferred("start_stage", true)
 	GameManager.delete_room(id_x, id_y)
 	GameManager.current_id_x = id_x
 	GameManager.current_id_y = id_y
 	GameManager.start_stage()
+	call_deferred("start_stage", true)
 	GameManager.confirm_stage(self)
 	GameManager.spawn_enemies(first_point.global_position, last_point.global_position)
 	pass # Replace with function body.

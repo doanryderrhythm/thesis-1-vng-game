@@ -1,0 +1,2 @@
+extends BaseBullet
+class_name PlayerBullet
