@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_4vpj7")
+collectible_id = "speed"
 collectible = ExtResource("1_c6iq2")
 rate = 1
 metadata/_custom_type_script = "uid://cb1lnlijqd6c6"

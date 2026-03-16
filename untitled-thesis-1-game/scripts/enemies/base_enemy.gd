@@ -171,19 +171,24 @@ func throw_reward() -> void:
 	for reward in reward_listener.rewards:
 		compare_value += reward.rate
 		if random_value <= compare_value:
-			instantiate_reward(reward.collectible)
+			instantiate_reward(reward.collectible_id, reward.collectible)
 			return
 	pass
 
-func instantiate_reward(reward: PackedScene) -> void:
-	if reward == null:
+func instantiate_reward(id: String, reward: PackedScene) -> void:
+	if id == "":
 		return
-		
-	var reward_scene = reward.instantiate()
-	var parent = get_tree().current_scene.find_child(ValueStorer.rewards_node)
-	if parent:
-		parent.call_deferred("add_child", reward_scene)
-		reward_scene.position = self.position
+	
+	var num: int = 1
+	if id == "coin":
+		num = randi_range(1, 10)
+	
+	for i in range(num):
+		var reward_scene = reward.instantiate()
+		var parent = get_tree().current_scene.find_child(ValueStorer.rewards_node)
+		if parent:
+			parent.call_deferred("add_child", reward_scene)
+			reward_scene.position = self.position
 	pass
 
 func emit_dead_signal() -> void:

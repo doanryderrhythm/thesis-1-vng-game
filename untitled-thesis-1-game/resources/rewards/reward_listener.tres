@@ -7,8 +7,9 @@
 [ext_resource type="Resource" uid="uid://ey2arnr5rhqr" path="res://resources/rewards/resource_heal.tres" id="4_iiryy"]
 [ext_resource type="Resource" uid="uid://dn21kciruh612" path="res://resources/rewards/resource_shoot.tres" id="5_a250x"]
 [ext_resource type="Resource" uid="uid://d0hdc2fl0l2u7" path="res://resources/rewards/resource_speed.tres" id="6_x2rrw"]
+[ext_resource type="Resource" uid="uid://dcmyr5onkoln8" path="res://resources/rewards/resource_coin.tres" id="7_dwa6u"]
 
 [resource]
 script = ExtResource("2_iin3g")
-rewards = Array[ExtResource("1_l12wp")]([ExtResource("2_hrpcg"), ExtResource("3_dwa6u"), ExtResource("4_iiryy"), ExtResource("5_a250x"), ExtResource("6_x2rrw")])
+rewards = Array[ExtResource("1_l12wp")]([ExtResource("2_hrpcg"), ExtResource("3_dwa6u"), ExtResource("4_iiryy"), ExtResource("5_a250x"), ExtResource("6_x2rrw"), ExtResource("7_dwa6u")])
 metadata/_custom_type_script = "uid://cs20vy6p25rry"

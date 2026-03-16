@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RewardResource" format=3 uid="uid://dcmyr5onkoln8"]
+
+[ext_resource type="Script" uid="uid://cb1lnlijqd6c6" path="res://scripts/resources/resource_reward.gd" id="1_g8sa0"]
+[ext_resource type="PackedScene" uid="uid://cq5yq62blfvmq" path="res://scenes/collectibles/coin.tscn" id="1_iysui"]
+
+[resource]
+script = ExtResource("1_g8sa0")
+collectible_id = "coin"
+collectible = ExtResource("1_iysui")
+rate = 3
+metadata/_custom_type_script = "uid://cb1lnlijqd6c6"
