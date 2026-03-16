@@ -33,7 +33,7 @@ class_name DebugUI
 
 func _ready() -> void:
 	health_bar.min_value = 0
-	health_bar.max_value = GameManager.player.health
+	health_bar.max_value = ProfileManager.health
 	
 	dash_bar.min_value = 0
 	dash_bar.max_value = ValueStorer.max_dash_count
