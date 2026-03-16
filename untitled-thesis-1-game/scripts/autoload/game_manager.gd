@@ -225,7 +225,8 @@ func deduct_enemies() -> void:
 		_room.is_executed = true
 		_room.call_deferred("start_stage", false)
 		is_going = false
-		current_level += 1
+		if current_level < stage_stats.size() - 1:
+			current_level += 1
 		phase_change.emit(false)
 		delete_bullets.emit()
 		create_available_rooms(current_id_x, current_id_y)

@@ -46,12 +46,3 @@ metadata/_custom_type_script = "uid://2jniw3exf4mu"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D" unique_id=124113879]
 shape = SubResource("ConvexPolygonShape2D_f6f1n")
 debug_color = Color(1, 0.9609375, 0, 0.41960785)
-
-[node name="ReadyTimer" type="Timer" parent="." unique_id=1774028814]
-wait_time = 1.5
-autostart = true
-
-[node name="SpawnTimer" type="Timer" parent="." unique_id=708132154]
-
-[connection signal="timeout" from="ReadyTimer" to="." method="_on_ready_timer_timeout"]
-[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

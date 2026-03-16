@@ -132,7 +132,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 
 func spawn_killed_particles() -> void:
 	var killed_particles = enemy_killed_particles.instantiate()
-	killed_particles.color = modulate
+	killed_particles.color = sprite.modulate
 	killed_particles.global_position = global_position
 	
 	var parent = get_tree().current_scene.find_child(ValueStorer.enemy_particles_node)

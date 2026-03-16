@@ -97,8 +97,8 @@ func _on_start_area_2d_area_entered(_area: Area2D) -> void:
 	GameManager.current_id_x = id_x
 	GameManager.current_id_y = id_y
 	GameManager.start_stage()
-	call_deferred("start_stage", true)
 	GameManager.confirm_stage(self)
+	call_deferred("start_stage", true)
 	GameManager.spawn_enemies(first_point.global_position, last_point.global_position)
 	pass # Replace with function body.
 
@@ -154,8 +154,8 @@ func _on_spike_timer_timeout() -> void:
 	var new_spike: BigSpike = spike_scene.instantiate()
 	var parent = find_child(ValueStorer.spikes_node)
 	parent.add_child(new_spike)
-	new_spike.ready_timer.wait_time = spike_warn_time
-	new_spike.spawn_timer.wait_time = spike_harm_time
+	new_spike.ready_timer = spike_warn_time
+	new_spike.spawn_timer = spike_harm_time
 	new_spike.position = confirmed_position
 	new_spike.rotation = deg_to_rad(confirmed_rotation)
 	pass # Replace with function body.
