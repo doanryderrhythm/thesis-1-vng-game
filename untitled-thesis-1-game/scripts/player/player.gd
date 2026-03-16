@@ -27,6 +27,7 @@ var _markers_pos: Array[Vector2]
 var _shoot_markers: Array[Marker2D]
 @onready var _shooting_delay_timer: Timer = $ShootingDelayTimer
 
+@onready var _dash_particles: PackedScene = preload("res://effects/player_dash_particles.tscn")
 @onready var _dash_timer: Timer = $DashTimer
 @onready var _dash_wait_timer: Timer = $DashWaitTimer
 var _dash_direction_vector: Vector2 = Vector2(0, 0)
@@ -106,6 +107,14 @@ func manage_dash() -> void:
 		_dash_audio.play()
 		toggle_dash(true)
 		_dash_timer.start()
+		
+		var dash_par: CPUParticles2D = _dash_particles.instantiate()
+		var parent = get_tree().current_scene.find_child(ValueStorer.player_dash_particles_node)
+		if parent:
+			parent.add_child(dash_par)
+		dash_par.position = position
+		dash_par.rotation = rotation
+		dash_par.emitting = true
 		
 		if _dash_count <= 0:
 			_dash_wait_timer.start()

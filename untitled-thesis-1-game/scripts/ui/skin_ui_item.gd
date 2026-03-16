@@ -19,7 +19,8 @@ func update_stats() -> void:
 	skin_placeholder.texture = skin_stats.sprite
 	move_speed_value_text.text = str(skin_stats.move_speed / 100.0)
 	dash_speed_value_text.text = str(skin_stats.dash_speed)
-	shoot_speed_value_text.text = str(skin_stats.bullet_res.min_speed) + " - " + str(skin_stats.bullet_res.max_speed)
+	shoot_speed_value_text.text = str(skin_stats.bullet_res.min_speed / 100.0) \
+		+ " - " + str(skin_stats.bullet_res.max_speed / 100.0)
 	bullet_damage_value_text.text = str(skin_stats.bullet_res.damage)
 	health_value_text.text = str(skin_stats.health)
 	pass

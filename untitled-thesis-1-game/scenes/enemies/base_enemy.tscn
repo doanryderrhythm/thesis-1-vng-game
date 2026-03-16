@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://kjqysipjyi6k" path="res://sfx/enemy_shoot.wav" id="6_n2ebm"]
 [ext_resource type="AudioStream" uid="uid://cwqp446t35x4d" path="res://sfx/enemy_hurt.wav" id="7_i1su5"]
 [ext_resource type="AudioStream" uid="uid://dpxrdf5q83rgv" path="res://sfx/enemy_dead.wav" id="8_i1su5"]
+[ext_resource type="PackedScene" uid="uid://c8qylec1lrses" path="res://scenes/ui/enemy_health_bar.tscn" id="9_hwcqj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gbcqu"]
 radius = 55.03635
@@ -73,6 +74,9 @@ _data = {
 &"hurt": SubResource("Animation_n2ebm")
 }
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_h4c3k"]
+viewport_path = NodePath("HealthBarSubViewport")
+
 [node name="BaseEnemy" type="CharacterBody2D" unique_id=957259601]
 collision_layer = 0
 script = ExtResource("1_gbcqu")
@@ -120,7 +124,6 @@ path_postprocessing = 1
 avoidance_enabled = true
 radius = 260.56
 neighbor_distance = 35005.63
-debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0.99999994, 0.16973957, 0.28575546, 1)
 
@@ -135,6 +138,14 @@ stream = ExtResource("7_i1su5")
 
 [node name="DeadAudio" type="AudioStreamPlayer2D" parent="." unique_id=915990040]
 stream = ExtResource("8_i1su5")
+
+[node name="HealthBarSubViewport" type="SubViewport" parent="." unique_id=1692427199]
+transparent_bg = true
+
+[node name="EnemyHealthBar" parent="HealthBarSubViewport" unique_id=1327824101 instance=ExtResource("9_hwcqj")]
+
+[node name="HealthBarViewport" type="Sprite2D" parent="." unique_id=1871929559]
+texture = SubResource("ViewportTexture_h4c3k")
 
 [connection signal="timeout" from="ShootingDelayTimer" to="." method="_on_shooting_delay_timer_timeout"]
 [connection signal="timeout" from="NavigationTimer" to="." method="_on_navigation_timer_timeout"]

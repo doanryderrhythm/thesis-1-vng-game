@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bexujrptpsiec"]
+
+[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="1_kn73n"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kn73n"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_f55bl"]
+offsets = PackedFloat32Array(0, 0.65, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_tfv7c"]
+colors = PackedColorArray(0.4145053, 0.4145053, 0.4145053, 1, 1, 1, 1, 1)
+
+[sub_resource type="GDScript" id="GDScript_kn73n"]
+script/source = "extends CPUParticles2D
+
+var stay_time: float = 0.0
+
+func _process(delta: float) -> void:
+	stay_time += delta
+	if is_instance_valid(self) and stay_time > 1.0:
+		queue_free()
+"
+
+[node name="PlayerDashParticles" type="CPUParticles2D" unique_id=108549284]
+material = SubResource("CanvasItemMaterial_kn73n")
+emitting = false
+amount = 20
+texture = ExtResource("1_kn73n")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 30.0
+direction = Vector2(-1, 0)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 410.05
+initial_velocity_max = 1000.0
+scale_amount_min = 0.2
+scale_amount_max = 0.5
+color = Color(0, 0.7989783, 1, 1)
+color_ramp = SubResource("Gradient_f55bl")
+color_initial_ramp = SubResource("Gradient_tfv7c")
+script = SubResource("GDScript_kn73n")

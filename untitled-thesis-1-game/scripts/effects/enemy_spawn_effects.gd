@@ -25,6 +25,7 @@ func _ready() -> void:
 	pass
 
 func spawn_enemy() -> void:
+	GameManager.current_enemies_num += 1
 	var parent = get_tree().current_scene.find_child(ValueStorer.enemies_node)
 	if parent == null:
 		push_error("Enemies node not found!")

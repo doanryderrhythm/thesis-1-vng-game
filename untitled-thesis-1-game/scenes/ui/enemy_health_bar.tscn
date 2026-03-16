@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c8qylec1lrses"]
+
+[ext_resource type="Texture2D" uid="uid://bs76jafrhkgq8" path="res://sprites/bars/health_bar_sprite.png" id="1_aw7yj"]
+[ext_resource type="Script" uid="uid://cse7qd7ruki4b" path="res://scripts/ui/enemy_health_bar.gd" id="1_eniyr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eniyr"]
+atlas = ExtResource("1_aw7yj")
+region = Rect2(0, 0, 232, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynmrj"]
+atlas = ExtResource("1_aw7yj")
+region = Rect2(0, 68, 232, 34)
+
+[node name="EnemyHealthBar" type="CanvasLayer" unique_id=1327824101]
+script = ExtResource("1_eniyr")
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=112947772]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -100.0
+offset_right = 116.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(116, 17)
+value = 50.0
+texture_under = SubResource("AtlasTexture_eniyr")
+texture_progress = SubResource("AtlasTexture_ynmrj")

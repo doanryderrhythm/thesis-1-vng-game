@@ -124,7 +124,7 @@ func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
 		stage_stats[current_level].min_enemy, 
 		stage_stats[current_level].max_enemy
 		)
-	current_enemies_num = enemies_num
+	current_enemies_num = 0
 	
 	for i in range(enemies_num):
 		var rand_enemy = enemy_scenes[randi_range(0, enemy_scenes.size() - 1)]
@@ -208,7 +208,6 @@ func create_available_rooms(id_x: int, id_y: int) -> void:
 
 func deduct_enemies() -> void:
 	current_enemies_num -= 1
-	print(current_enemies_num)
 	if current_enemies_num <= 0:
 		current_phase -= 1
 		if current_phase > 0:

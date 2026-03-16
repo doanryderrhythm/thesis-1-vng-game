@@ -3,6 +3,8 @@ class_name BaseEnemy
 
 @export var damage: float
 
+@onready var sprite: Sprite2D = $Sprite2D
+
 @onready var shoot_markers_storer = $ShootingMarkers
 var shoot_markers: Array[Marker2D]
 
@@ -25,9 +27,13 @@ var goal: Node
 
 @onready var reward_listener: RewardListener = load("res://resources/rewards/reward_listener.tres")
 
+@onready var health_bar_sub_viewport: EnemyHealthBar = $HealthBarSubViewport/EnemyHealthBar
+@onready var health_bar_sprite: Sprite2D = $HealthBarViewport
+
 func _ready() -> void:
 	anim.play("default")
 	health = enemy_stats.health
+	health_bar_sub_viewport.set_up_health(enemy_stats.health, health)
 	
 	dead.connect(GameManager.deduct_enemies)
 	goal = GameManager.player
@@ -48,10 +54,10 @@ func _ready() -> void:
 
 func check_move() -> void:
 	if not is_moving:
-		modulate = enemy_stats.enemy_color
+		sprite.modulate = enemy_stats.enemy_color
 		navigation_agent.process_mode = Node.PROCESS_MODE_DISABLED
 	else:
-		modulate = enemy_stats.enemy_color_moving
+		sprite.modulate = enemy_stats.enemy_color_moving
 		navigation_agent.process_mode = Node.PROCESS_MODE_INHERIT
 
 func take_damage(_damage: float) -> void:
@@ -59,23 +65,26 @@ func take_damage(_damage: float) -> void:
 		return
 	
 	health -= _damage
+	health_bar_sub_viewport.change_health(health)
 	GameManager.add_score(1)
 	anim.play("hurt")
 	hurt_audio.play()
 	if health <= 0:
 		is_dead = true
 		GameManager.add_score(20)
-		dead.emit()
 		dead_audio.play()
 		spawn_killed_particles()
 		throw_reward()
 		var parent = get_tree().current_scene
 		dead_audio.reparent(parent)
 		queue_free()
+		call_deferred("emit_dead_signal")
 
 func _process(_delta: float) -> void:
 	if GameManager.player:
 		look_at(GameManager.player.position)
+	
+	health_bar_sprite.rotation = -rotation
 
 func _physics_process(_delta: float) -> void:
 	var current_position: Vector2 = self.global_transform.origin
@@ -125,7 +134,10 @@ func spawn_killed_particles() -> void:
 	var killed_particles = enemy_killed_particles.instantiate()
 	killed_particles.color = modulate
 	killed_particles.global_position = global_position
-	get_parent().add_child(killed_particles)
+	
+	var parent = get_tree().current_scene.find_child(ValueStorer.enemy_particles_node)
+	if parent:
+		parent.add_child(killed_particles)
 
 func hurt(area: Area2D) -> void:
 	if is_dead:
@@ -145,7 +157,7 @@ func hurt(area: Area2D) -> void:
 		spawn_killed_particles()
 		throw_reward()
 		queue_free()
-		dead.emit()
+		call_deferred("emit_dead_signal")
 	else:
 		take_damage(5.0)
 
@@ -173,3 +185,6 @@ func instantiate_reward(reward: PackedScene) -> void:
 		parent.call_deferred("add_child", reward_scene)
 		reward_scene.position = self.position
 	pass
+
+func emit_dead_signal() -> void:
+	dead.emit()

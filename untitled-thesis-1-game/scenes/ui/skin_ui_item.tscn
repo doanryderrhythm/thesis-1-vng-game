@@ -4,9 +4,10 @@
 [ext_resource type="Script" uid="uid://c27ephbav11t1" path="res://scripts/ui/skin_ui_item.gd" id="2_kl2uk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_23vwc"]
-font_size = 12
+font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_nj366"]
+font_size = 24
 
 [node name="SkinUIItem" type="TextureRect" unique_id=293957393]
 custom_minimum_size = Vector2(262, 356)
@@ -45,7 +46,6 @@ text = "Movement Speed"
 label_settings = SubResource("LabelSettings_23vwc")
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="DashSpeedLabel" type="Label" parent="." unique_id=478212376]
 layout_mode = 1
