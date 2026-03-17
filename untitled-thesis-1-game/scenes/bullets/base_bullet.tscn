@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="2_3u0jw"]
 [ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="4_l68ur"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_08t8j"]
+blend_mode = 1
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_l68ur"]
 radius = 14.0
 
@@ -25,6 +28,11 @@ continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 3
 script = ExtResource("1_3u0jw")
+
+[node name="Glow" type="Sprite2D" parent="." unique_id=1829900171]
+material = SubResource("CanvasItemMaterial_08t8j")
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_l68ur")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2096521337]
 scale = Vector2(1.5, 1.5)
