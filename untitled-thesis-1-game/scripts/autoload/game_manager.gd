@@ -8,6 +8,7 @@ var player: Player
 var total_score: int = 0
 
 var current_level: int = 0
+var current_actual_level: int = 0
 var current_phase: int = 0
 var max_phase: int = 0
 
@@ -57,6 +58,7 @@ func reset() -> void:
 	total_score = 0
 
 	current_level = 0
+	current_actual_level = 0
 	current_phase = 0
 	max_phase = 0
 
@@ -227,6 +229,7 @@ func deduct_enemies() -> void:
 		is_going = false
 		if current_level < stage_stats.size() - 1:
 			current_level += 1
+		current_actual_level += 1
 		phase_change.emit(false)
 		delete_bullets.emit()
 		create_available_rooms(current_id_x, current_id_y)
@@ -272,3 +275,30 @@ func delete_room(_id_x: int, _id_y: int) -> void:
 	rooms = rooms.filter(func(room):
 		return is_instance_valid(room)
 	)
+
+func destroy_everything() -> void:
+	var play_scene = get_tree().current_scene
+	
+	var enemies_node = play_scene.find_child(ValueStorer.enemies_node)
+	var rewards_node = play_scene.find_child(ValueStorer.rewards_node)
+	var bullet_node = play_scene.find_child(ValueStorer.bullets_node)
+	
+	for obj in enemies_node.get_children():
+		if is_instance_valid(obj): obj.queue_free()
+	for obj in rewards_node.get_children():
+		if is_instance_valid(obj): obj.queue_free()
+	for obj in bullet_node.get_children():
+		if is_instance_valid(obj): obj.queue_free()
+	
+	var room: Room = find_room(current_id_x, current_id_y)
+	if room != null and is_instance_valid(room):
+		for obj in room.all_bombs.get_children():
+			if is_instance_valid(obj): obj.queue_free()
+		for obj in room.all_spikes.get_children():
+			if is_instance_valid(obj): obj.queue_free()
+		for obj in room.all_lazers.get_children():
+			if is_instance_valid(obj): obj.queue_free()
+		room.spike_timer.stop()
+		room.lazer_timer.stop()
+		room.bomb_timer.stop()
+		room.bomb_four_timer.stop()
