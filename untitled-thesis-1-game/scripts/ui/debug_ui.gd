@@ -17,7 +17,8 @@ class_name DebugUI
 
 @onready var danger_texture: TextureRect = $DangerTexture
 
-@onready var anim_player: AnimationPlayer = $AnimationPlayer
+@onready var gameplay_anim_player: AnimationPlayer = $GameplayAnimationPlayer
+@onready var result_anim_player: AnimationPlayer = $ResultAnimationPlayer
 
 @onready var pause_ui: ColorRect = $PauseNode
 @export var retire_string: String
@@ -77,7 +78,7 @@ func change_coin() -> void:
 	
 func change_level() -> void:
 	level_label.text = str(GameManager.current_actual_level + 1)
-	anim_player.play("level_appear")
+	gameplay_anim_player.play("level_appear")
 	
 func change_phase(is_ongoing: bool) -> void:
 	if is_ongoing:
@@ -90,6 +91,7 @@ func change_phase(is_ongoing: bool) -> void:
 		phase_label.visible = false
 
 func show_restart() -> void:
+	result_anim_player.play("default")
 	result_screen.visible = true
 	pass
 
