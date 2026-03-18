@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_akdu5")
+requirement = 200
 character_type = 3
 markers_pos = Array[Vector2]([Vector2(68, 0), Vector2(-68, 0), Vector2(0, 68), Vector2(0, -68)])
 code = "player_circle_4-1"

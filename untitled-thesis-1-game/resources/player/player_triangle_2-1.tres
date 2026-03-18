@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_ftu40")
+requirement = 105
 markers_pos = Array[Vector2]([Vector2(68, 0), Vector2(-45, 0)])
 code = "player_triangle_2-1"
 sprite = ExtResource("2_xwp8o")

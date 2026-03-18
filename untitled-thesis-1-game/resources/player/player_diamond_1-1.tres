@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_gp0x3")
+requirement = 80
 character_type = 2
 markers_pos = Array[Vector2]([Vector2(68, 0)])
 code = "player_diamond_1-1"

@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_gelcp")
+requirement = 320
 character_type = 1
 markers_pos = Array[Vector2]([Vector2(68, 0), Vector2(-68, 0), Vector2(0, 68), Vector2(0, -68)])
 code = "player_square_4-1"

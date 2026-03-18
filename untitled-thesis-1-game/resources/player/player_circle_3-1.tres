@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("1_e2xa7")
+requirement = 150
 character_type = 3
 markers_pos = Array[Vector2]([Vector2(68, 0), Vector2(-34, -59), Vector2(-34, 59)])
 code = "player_circle_3-1"

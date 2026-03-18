@@ -1,6 +1,8 @@
 extends Resource
 class_name PlayerStats
 
+@export var requirement: int
+
 @export var character_type: Player.CharacterType
 @export var markers_pos: Array[Vector2]
 

@@ -209,18 +209,69 @@ label_settings = SubResource("LabelSettings_nj366")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EquipButton" type="Button" parent="." unique_id=243860223]
+[node name="UnlockButton" type="Button" parent="." unique_id=1253539788]
+self_modulate = Color(0.0643487, 0, 1, 1)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.91400003
-anchor_right = 0.5
-anchor_bottom = 0.91400003
-offset_left = -30.0
-offset_top = -12.384003
-offset_right = 30.0
-offset_bottom = 12.615997
+anchor_left = 0.38500002
+anchor_top = 0.87900007
+anchor_right = 0.615
+anchor_bottom = 0.94900006
+offset_left = 0.12999725
+offset_top = 0.07598877
+offset_right = -0.13000488
+offset_bottom = 0.15597534
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 12
+
+[node name="UnlockLabel" type="Label" parent="UnlockButton" unique_id=81413799]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -12.5
+offset_right = 30.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Unlock"
+horizontal_alignment = 1
+
+[node name="EquipButton" type="Button" parent="." unique_id=243860223]
+process_mode = 4
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.38500002
+anchor_top = 0.87900007
+anchor_right = 0.615
+anchor_bottom = 0.94900006
+offset_left = 0.12999725
+offset_top = 0.07598877
+offset_right = -0.13000488
+offset_bottom = 0.15597534
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+
+[node name="Label" type="Label" parent="EquipButton" unique_id=1572666209]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -12.5
+offset_right = 30.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Equip"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="UnlockButton" to="." method="_on_unlock_button_pressed"]
