@@ -182,6 +182,7 @@ func take_damage(_damage: float) -> void:
 	if health <= 0:
 		is_dead = true
 		GameManager.destroy_everything()
+		GameManager.update_profile()
 		GameManager.state_lose_change.emit()
 		self.visible = false
 		self.call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)

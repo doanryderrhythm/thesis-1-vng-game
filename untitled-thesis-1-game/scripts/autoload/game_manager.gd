@@ -6,6 +6,9 @@ var current_id_y: int = 0
 var player: Player
 
 var total_score: int = 0
+var survival_time: float = 0.0
+var total_destroyed_enemies: int = 0
+var total_successful_phases: int = 0
 
 var current_level: int = 0
 var current_actual_level: int = 0
@@ -56,6 +59,9 @@ func reset() -> void:
 	current_id_y = 0
 	
 	total_score = 0
+	survival_time = 0.0
+	total_destroyed_enemies = 0
+	total_successful_phases = 0
 
 	current_level = 0
 	current_actual_level = 0
@@ -84,6 +90,10 @@ func reset() -> void:
 	health_change.emit()
 	dash_change.emit()
 	score_change.emit()
+
+func _process(delta: float) -> void:
+	if is_going:
+		survival_time += delta
 
 func set_up_rooms() -> void:
 	var listener: RoomsListener = load("res://resources/rooms/rooms_listener.tres")
@@ -210,8 +220,10 @@ func create_available_rooms(id_x: int, id_y: int) -> void:
 
 func deduct_enemies() -> void:
 	current_enemies_num -= 1
+	total_destroyed_enemies += 1
 	if current_enemies_num <= 0:
 		current_phase -= 1
+		total_successful_phases += 1
 		if current_phase > 0:
 			phase_change.emit(true)
 			var current_room = find_room(current_id_x, current_id_y)
@@ -302,3 +314,6 @@ func destroy_everything() -> void:
 		room.lazer_timer.stop()
 		room.bomb_timer.stop()
 		room.bomb_four_timer.stop()
+
+func update_profile() -> void:
+	ProfileManager.total_coins += in_level_coins

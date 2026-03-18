@@ -165,7 +165,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer/Score:modulate")
+tracks/3/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer/StatsValueLabel:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -189,7 +189,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer/Score:modulate")
+tracks/5/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer/RewardsValueLabel:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -278,7 +278,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer/Score:modulate")
+tracks/3/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer/StatsValueLabel:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -302,7 +302,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer/Score:modulate")
+tracks/5/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer/RewardsValueLabel:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -669,7 +669,7 @@ Total Successful Phases
 Overall Score"
 label_settings = SubResource("LabelSettings_j0te7")
 
-[node name="Score" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer" unique_id=196126999]
+[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer" unique_id=196126999]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "abc
@@ -701,7 +701,7 @@ text = "Coins
 Unique Achievements"
 label_settings = SubResource("LabelSettings_j0te7")
 
-[node name="Score" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer" unique_id=1649222714]
+[node name="RewardsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer" unique_id=1649222714]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "abc

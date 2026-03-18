@@ -14,9 +14,12 @@ var all_players: Array[PlayerStats] = []
 @onready var item_container: HBoxContainer = $CanvasLayer/ShopBackground/Mask/ScrollContainer/PlayerItemContainer
 @onready var skin_ui_item: PackedScene = preload(\"res://scenes/ui/skin_ui_item.tscn\")
 
+@onready var coin_count_label: Label = $CanvasLayer/CoinCount/CoinCountLabel
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	GameManager.is_gameplay = false
+	coin_count_label.text = str(ProfileManager.total_coins)
 	all_players = player_listener.players
 	for player in all_players:
 		var ui_item: SkinUI = skin_ui_item.instantiate()

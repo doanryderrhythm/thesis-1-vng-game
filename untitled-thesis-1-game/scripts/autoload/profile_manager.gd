@@ -1,5 +1,7 @@
 extends Node
 
+var total_coins: int = 0
+
 var player_code: String
 
 var character_type: Player.CharacterType

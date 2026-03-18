@@ -20,6 +20,9 @@ class_name DebugUI
 @onready var gameplay_anim_player: AnimationPlayer = $GameplayAnimationPlayer
 @onready var result_anim_player: AnimationPlayer = $ResultAnimationPlayer
 
+@onready var stats_value_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer/StatsValueLabel
+@onready var rewards_value_label: Label = $ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer/RewardsValueLabel
+
 @onready var pause_ui: ColorRect = $PauseNode
 @export var retire_string: String
 
@@ -90,8 +93,17 @@ func change_phase(is_ongoing: bool) -> void:
 		phase_title_label.visible = false
 		phase_label.visible = false
 
+func update_result_screen() -> void:
+	stats_value_label.text = str(int(GameManager.survival_time)) + "\n" + \
+							str(GameManager.total_destroyed_enemies) + "\n" + \
+							str(GameManager.current_actual_level + 1) + "\n" + \
+							str(GameManager.total_successful_phases) + "\n" + \
+							str(GameManager.total_score)
+	rewards_value_label.text = str(GameManager.in_level_coins) + "\nnope"
+
 func show_restart() -> void:
 	result_anim_player.play("default")
+	update_result_screen()
 	result_screen.visible = true
 	pass
 
