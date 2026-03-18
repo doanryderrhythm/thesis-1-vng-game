@@ -15,6 +15,7 @@ var all_players: Array[PlayerStats] = []
 @onready var skin_ui_item: PackedScene = preload(\"res://scenes/ui/skin_ui_item.tscn\")
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	GameManager.is_gameplay = false
 	all_players = player_listener.players
 	for player in all_players:

@@ -7,7 +7,7 @@ class_name DebugUI
 
 @onready var coin_value_label: Label = $CoinBar/CoinValueLabel
 
-@onready var restart_label: Label = $RestartLabel
+@onready var result_screen: ColorRect = $ResultNode
 @onready var score_label: Label = $ScoreLabel
 
 @onready var level_label: Label = $LevelLabel
@@ -40,7 +40,7 @@ func set_up() -> void:
 	fill_dash_bar.min_value = 0
 	fill_dash_bar.max_value = ValueStorer.dash_wait_time
 	
-	restart_label.visible = false
+	result_screen.visible = false
 	
 	change_health()
 	change_dash()
@@ -90,7 +90,7 @@ func change_phase(is_ongoing: bool) -> void:
 		phase_label.visible = false
 
 func show_restart() -> void:
-	restart_label.visible = true
+	result_screen.visible = true
 	pass
 
 func toggle_pause(is_toggled: bool) -> void:
