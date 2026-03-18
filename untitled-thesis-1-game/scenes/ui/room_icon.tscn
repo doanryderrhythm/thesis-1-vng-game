@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dlu558v0xtgq"]
+
+[ext_resource type="Script" uid="uid://hakcwovu2ygj" path="res://scenes/ui/room_icon.gd" id="1_0me3r"]
+
+[node name="RoomIcon" type="ColorRect" unique_id=187810484]
+offset_right = 30.0
+offset_bottom = 30.0
+script = ExtResource("1_0me3r")

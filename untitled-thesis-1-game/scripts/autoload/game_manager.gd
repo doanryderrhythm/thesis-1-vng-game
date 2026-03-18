@@ -44,6 +44,7 @@ signal state_lose_change
 signal score_change
 signal phase_change(is_ongoing: bool)
 signal start_level
+signal end_level
 signal room_start
 signal delete_bullets
 signal coin_change
@@ -239,6 +240,7 @@ func deduct_enemies() -> void:
 		_room.is_executed = true
 		_room.call_deferred("start_stage", false)
 		is_going = false
+		end_level.emit()
 		if current_level < stage_stats.size() - 1:
 			current_level += 1
 		current_actual_level += 1
@@ -273,6 +275,13 @@ func find_room(_id_x: int, _id_y: int) -> Room:
 		if room.id_x == _id_x and room.id_y == _id_y:
 			return room
 	return null
+
+func find_used_room(_id_x: int, _id_y: int) -> bool:
+	for room in used_rooms:
+		if room[ValueStorer.used_room_x] == _id_x and \
+		room[ValueStorer.used_room_y] == _id_y:
+			return true
+	return false
 
 func delete_room(_id_x: int, _id_y: int) -> void:	
 	rooms = rooms.filter(func(room):

@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bx5nkaqlcb8v0" path="res://sprites/bars/dash_progress.png" id="5_ukyxi"]
 [ext_resource type="Texture2D" uid="uid://dak77hof5amf7" path="res://sprites/bars/coin_count.png" id="6_k7b8x"]
 [ext_resource type="Texture2D" uid="uid://4s2cqw63nr6" path="res://sprites/gameplay/danger.png" id="6_pu33q"]
+[ext_resource type="PackedScene" uid="uid://dlu558v0xtgq" path="res://scenes/ui/room_icon.tscn" id="8_bcd6v"]
 [ext_resource type="Texture2D" uid="uid://br46pgblghmvf" path="res://sprites/ui/pause_button_unselected.png" id="8_f6xhk"]
 [ext_resource type="Texture2D" uid="uid://b2nua0rf6jexh" path="res://sprites/ui/pause_button_pressed.png" id="9_hqpec"]
 [ext_resource type="Texture2D" uid="uid://r0ku0idq14xt" path="res://sprites/ui/pause_button_selected.png" id="10_hr2xk"]
@@ -492,6 +493,194 @@ label_settings = SubResource("LabelSettings_14mai")
 horizontal_alignment = 1
 vertical_alignment = 2
 
+[node name="Minimap" type="ColorRect" parent="." unique_id=2115130126]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -200.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0, 0, 0, 0.4392157)
+
+[node name="RoomRow0" type="Control" parent="Minimap" unique_id=884671169]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RoomIcon" parent="Minimap/RoomRow0" unique_id=187810484 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="RoomIcon2" parent="Minimap/RoomRow0" unique_id=1132507183 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 60.0
+offset_bottom = 20.0
+
+[node name="RoomIcon3" parent="Minimap/RoomRow0" unique_id=1446522208 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 80.0
+offset_right = 100.0
+offset_bottom = 20.0
+
+[node name="RoomIcon4" parent="Minimap/RoomRow0" unique_id=1023034153 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 120.0
+offset_right = 140.0
+offset_bottom = 20.0
+
+[node name="RoomIcon5" parent="Minimap/RoomRow0" unique_id=1547057731 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 180.0
+offset_bottom = 20.0
+
+[node name="RoomRow1" type="Control" parent="Minimap" unique_id=444949788]
+anchors_preset = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 80.0
+
+[node name="RoomIcon" parent="Minimap/RoomRow1" unique_id=1219480230 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="RoomIcon2" parent="Minimap/RoomRow1" unique_id=801626255 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 60.0
+offset_bottom = 20.0
+
+[node name="RoomIcon3" parent="Minimap/RoomRow1" unique_id=318903952 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 80.0
+offset_right = 100.0
+offset_bottom = 20.0
+
+[node name="RoomIcon4" parent="Minimap/RoomRow1" unique_id=1911548625 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 120.0
+offset_right = 140.0
+offset_bottom = 20.0
+
+[node name="RoomIcon5" parent="Minimap/RoomRow1" unique_id=634918137 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 180.0
+offset_bottom = 20.0
+
+[node name="RoomRow2" type="Control" parent="Minimap" unique_id=134834069]
+anchors_preset = 0
+offset_top = 80.0
+offset_right = 40.0
+offset_bottom = 120.0
+
+[node name="RoomIcon" parent="Minimap/RoomRow2" unique_id=284648790 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="RoomIcon2" parent="Minimap/RoomRow2" unique_id=1544124669 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 60.0
+offset_bottom = 20.0
+
+[node name="RoomIcon3" parent="Minimap/RoomRow2" unique_id=357244642 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 80.0
+offset_right = 100.0
+offset_bottom = 20.0
+
+[node name="RoomIcon4" parent="Minimap/RoomRow2" unique_id=129121255 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 120.0
+offset_right = 140.0
+offset_bottom = 20.0
+
+[node name="RoomIcon5" parent="Minimap/RoomRow2" unique_id=1306323944 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 180.0
+offset_bottom = 20.0
+
+[node name="RoomRow3" type="Control" parent="Minimap" unique_id=1579174401]
+anchors_preset = 0
+offset_top = 120.0
+offset_right = 40.0
+offset_bottom = 160.0
+
+[node name="RoomIcon" parent="Minimap/RoomRow3" unique_id=358786521 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="RoomIcon2" parent="Minimap/RoomRow3" unique_id=1142148930 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 60.0
+offset_bottom = 20.0
+
+[node name="RoomIcon3" parent="Minimap/RoomRow3" unique_id=302733221 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 80.0
+offset_right = 100.0
+offset_bottom = 20.0
+
+[node name="RoomIcon4" parent="Minimap/RoomRow3" unique_id=1510305146 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 120.0
+offset_right = 140.0
+offset_bottom = 20.0
+
+[node name="RoomIcon5" parent="Minimap/RoomRow3" unique_id=68368630 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 180.0
+offset_bottom = 20.0
+
+[node name="RoomRow4" type="Control" parent="Minimap" unique_id=22842366]
+anchors_preset = 0
+offset_top = 160.0
+offset_right = 40.0
+offset_bottom = 200.0
+
+[node name="RoomIcon" parent="Minimap/RoomRow4" unique_id=132954981 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="RoomIcon2" parent="Minimap/RoomRow4" unique_id=162158878 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 60.0
+offset_bottom = 20.0
+
+[node name="RoomIcon3" parent="Minimap/RoomRow4" unique_id=1768832657 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 80.0
+offset_right = 100.0
+offset_bottom = 20.0
+
+[node name="RoomIcon4" parent="Minimap/RoomRow4" unique_id=1552508090 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 120.0
+offset_right = 140.0
+offset_bottom = 20.0
+
+[node name="RoomIcon5" parent="Minimap/RoomRow4" unique_id=1418051766 instance=ExtResource("8_bcd6v")]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 180.0
+offset_bottom = 20.0
+
 [node name="DangerTexture" type="TextureRect" parent="." unique_id=2061533906]
 anchors_preset = 15
 anchor_right = 1.0
@@ -594,6 +783,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ResultNode" type="ColorRect" parent="." unique_id=1507721967]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

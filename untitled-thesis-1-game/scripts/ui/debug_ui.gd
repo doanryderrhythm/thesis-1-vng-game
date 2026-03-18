@@ -26,6 +26,8 @@ class_name DebugUI
 @onready var pause_ui: ColorRect = $PauseNode
 @export var retire_string: String
 
+@onready var minimap: ColorRect = $Minimap
+
 func _ready() -> void:
 	pass
 
@@ -56,16 +58,20 @@ func set_up() -> void:
 	GameManager.dash_change.connect(change_dash)
 	GameManager.state_lose_change.connect(show_restart)
 	GameManager.start_level.connect(change_level)
+	GameManager.end_level.connect(update_minimap)
 	GameManager.phase_change.connect(change_phase)
 	GameManager.score_change.connect(change_score)
 	GameManager.coin_change.connect(change_coin)
+	
+	update_minimap()
 
 func change_health() -> void:
 	health_bar.value = GameManager.player.health
 	if GameManager.player.health <= 0:
 		danger_texture.modulate = Color(1, 1, 1, 0)
 	elif GameManager.player.health <= 0.3 * ProfileManager.health:
-		danger_texture.modulate = Color(1, 1, 1, 1 - GameManager.player.health / (0.3 * ProfileManager.health))
+		danger_texture.modulate = Color(1, 1, 1, 1 - \
+		GameManager.player.health / (0.3 * ProfileManager.health))
 	else:
 		danger_texture.modulate = Color(1, 1, 1, 0)
 
@@ -82,6 +88,7 @@ func change_coin() -> void:
 func change_level() -> void:
 	level_label.text = str(GameManager.current_actual_level + 1)
 	gameplay_anim_player.play("level_appear")
+	minimap.visible = false
 	
 func change_phase(is_ongoing: bool) -> void:
 	if is_ongoing:
@@ -106,6 +113,37 @@ func show_restart() -> void:
 	update_result_screen()
 	result_screen.visible = true
 	pass
+
+func update_minimap() -> void:
+	var id_x: int = GameManager.current_id_x
+	var id_y: int = GameManager.current_id_y
+	
+	var offset_y: int = -2
+	for row in minimap.get_children():
+		var offset_x: int = -2
+		for column in row.get_children():
+			if column is not RoomIcon:
+				return
+			
+			if GameManager.current_id_x == id_x + offset_x and \
+			GameManager.current_id_y == id_y + offset_y:
+				column.state = RoomIcon.RoomState.FOUGHT
+				column.change_state_visuals()
+				offset_x += 1
+				continue
+				
+			if GameManager.find_used_room(id_x + offset_x, id_y + offset_y):
+				column.state = RoomIcon.RoomState.LOCKED
+			elif (abs(offset_x) == 1 and abs(offset_y) == 0) or \
+			(abs(offset_x) == 0 and abs(offset_y) == 1):
+				column.state = RoomIcon.RoomState.AVAILABLE
+			else:
+				column.state = RoomIcon.RoomState.READY
+			column.change_state_visuals()
+			offset_x += 1
+		offset_y += 1
+		
+	minimap.visible = true
 
 func toggle_pause(is_toggled: bool) -> void:
 	pause_ui.visible = is_toggled
