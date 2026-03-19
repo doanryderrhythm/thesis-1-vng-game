@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://dj6ajch28274c" path="res://sprites/bars/health_bar_main_sprite.png" id="1_14mai"]
 [ext_resource type="Script" uid="uid://ddxe4rdo65rrj" path="res://scripts/ui/debug_ui.gd" id="1_hqpec"]
-[ext_resource type="FontFile" uid="uid://dfunwj2gxleet" path="res://fonts/monogram.ttf" id="2_bcx30"]
 [ext_resource type="Texture2D" uid="uid://cmf4kh1kci1jp" path="res://sprites/bars/health_icon.png" id="2_pu33q"]
 [ext_resource type="Texture2D" uid="uid://b2of4763rak84" path="res://sprites/bars/health_progress.png" id="3_k7b8x"]
 [ext_resource type="Texture2D" uid="uid://ptbjvi1ww8ce" path="res://sprites/bars/dash_icon.png" id="4_fadvp"]
@@ -12,12 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://dlu558v0xtgq" path="res://scenes/ui/room_icon.tscn" id="8_bcd6v"]
 [ext_resource type="Texture2D" uid="uid://br46pgblghmvf" path="res://sprites/ui/pause_button_unselected.png" id="8_f6xhk"]
 [ext_resource type="Texture2D" uid="uid://b2nua0rf6jexh" path="res://sprites/ui/pause_button_pressed.png" id="9_hqpec"]
+[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="9_j0te7"]
 [ext_resource type="Texture2D" uid="uid://r0ku0idq14xt" path="res://sprites/ui/pause_button_selected.png" id="10_hr2xk"]
 [ext_resource type="Texture2D" uid="uid://ccmhxs4mq68fr" path="res://sprites/ui/result_screen.png" id="12_hr2xk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fadvp"]
 line_spacing = 0.0
-font = ExtResource("2_bcx30")
+font = ExtResource("9_j0te7")
 font_size = 600
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f6xhk"]
@@ -29,25 +29,25 @@ atlas = ExtResource("1_14mai")
 region = Rect2(0, 42, 253, 42)
 
 [sub_resource type="LabelSettings" id="LabelSettings_k7b8x"]
-font = ExtResource("2_bcx30")
-font_size = 30
+font = ExtResource("9_j0te7")
+font_size = 26
 
 [sub_resource type="LabelSettings" id="LabelSettings_pu33q"]
-font = ExtResource("2_bcx30")
-font_size = 40
+font = ExtResource("9_j0te7")
+font_size = 26
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_14mai"]
-font = ExtResource("2_bcx30")
-font_size = 70
+font = ExtResource("9_j0te7")
+font_size = 46
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ukyxi"]
 line_spacing = 0.0
-font = ExtResource("2_bcx30")
-font_size = 150
+font = ExtResource("9_j0te7")
+font_size = 124
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
@@ -66,36 +66,36 @@ func _process(_delta: float) -> void:
 
 [sub_resource type="LabelSettings" id="LabelSettings_f6xhk"]
 line_spacing = 0.0
-font = ExtResource("2_bcx30")
-font_size = 60
+font = ExtResource("9_j0te7")
+font_size = 36
 
 [sub_resource type="LabelSettings" id="LabelSettings_hqpec"]
 line_spacing = 0.0
-font = ExtResource("2_bcx30")
-font_size = 60
+font = ExtResource("9_j0te7")
+font_size = 36
 
 [sub_resource type="LabelSettings" id="LabelSettings_hr2xk"]
 line_spacing = 0.0
-font = ExtResource("2_bcx30")
-font_size = 60
+font = ExtResource("9_j0te7")
+font_size = 36
 
 [sub_resource type="LabelSettings" id="LabelSettings_bcd6v"]
 line_spacing = 0.0
-font = ExtResource("2_bcx30")
-font_size = 170
+font = ExtResource("9_j0te7")
+font_size = 100
 font_color = Color(0.105409205, 0.105409205, 0.105409205, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bcx30"]
-font = ExtResource("2_bcx30")
-font_size = 100
+font = ExtResource("9_j0te7")
+font_size = 66
 
 [sub_resource type="LabelSettings" id="LabelSettings_j0te7"]
-font = ExtResource("2_bcx30")
-font_size = 40
+font = ExtResource("9_j0te7")
+font_size = 26
 
 [sub_resource type="LabelSettings" id="LabelSettings_141q6"]
-font = ExtResource("2_bcx30")
-font_size = 40
+font = ExtResource("9_j0te7")
+font_size = 26
 
 [sub_resource type="Animation" id="Animation_k7b8x"]
 length = 0.001
@@ -434,7 +434,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 36.0
+offset_left = 40.0
+offset_top = 7.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -825,7 +826,7 @@ anchor_bottom = 0.072000004
 offset_left = -350.0
 offset_top = -72.00001
 offset_right = 350.0
-offset_bottom = 63.999992
+offset_bottom = 71.999855
 text = "RESULT"
 label_settings = SubResource("LabelSettings_bcd6v")
 horizontal_alignment = 1
