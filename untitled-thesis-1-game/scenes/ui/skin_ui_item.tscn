@@ -2,12 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://ct5t4fdfdlu21" path="res://sprites/shop/shop_player_item_ui.png" id="1_8cldl"]
 [ext_resource type="Script" uid="uid://c27ephbav11t1" path="res://scripts/ui/skin_ui_item.gd" id="2_kl2uk"]
+[ext_resource type="FontFile" uid="uid://dfunwj2gxleet" path="res://fonts/monogram.ttf" id="3_hrgff"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_23vwc"]
-font_size = 20
+font = ExtResource("3_hrgff")
+font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_nj366"]
-font_size = 24
+font = ExtResource("3_hrgff")
+font_size = 36
 
 [node name="SkinUIItem" type="TextureRect" unique_id=293957393]
 custom_minimum_size = Vector2(262, 356)
