@@ -18,6 +18,7 @@ var all_players: Array[PlayerStats] = []
 @onready var coin_count_label: Label = $CanvasLayer/CoinCount/CoinCountLabel
 
 func _ready() -> void:
+	LoadSystem.load_game()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	GameManager.is_gameplay = false
 	coin_count_label.text = str(ProfileManager.total_coins)
@@ -26,7 +27,14 @@ func _ready() -> void:
 		var ui_item: SkinUI = skin_ui_item.instantiate()
 		ui_item.skin_stats = player
 		item_container.add_child(ui_item)
+		ui_item.unlock_button.pressed.connect(change_coin_text)
 		ui_item.equip_button.pressed.connect(select_skin.bind(ui_item))
+	for code in ProfileManager.unlocked_codes:
+		for item in item_container.get_children():
+			if item is not SkinUI:
+				continue
+			if item.skin_stats.code == code:
+				item.unlock_player()
 	pass
 
 func select_skin(selected_ui_item: SkinUI) -> void:
@@ -37,6 +45,9 @@ func select_skin(selected_ui_item: SkinUI) -> void:
 		else:
 			item.modulate = Color.WHITE
 	start_button.disabled = false
+
+func change_coin_text() -> void:
+	coin_count_label.text = str(ProfileManager.total_coins)
 
 func _on_start_button_pressed() -> void:
 	get_tree().change_scene_to_file(\"res://scenes/main_scenes/play_scene.tscn\")

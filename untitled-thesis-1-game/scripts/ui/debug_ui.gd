@@ -101,12 +101,26 @@ func change_phase(is_ongoing: bool) -> void:
 		phase_label.visible = false
 
 func update_result_screen() -> void:
-	stats_value_label.text = str(int(GameManager.survival_time)) + "\n" + \
-							str(GameManager.total_destroyed_enemies) + "\n" + \
-							str(GameManager.current_actual_level + 1) + "\n" + \
-							str(GameManager.total_successful_phases) + "\n" + \
-							str(GameManager.total_score)
-	rewards_value_label.text = str(GameManager.in_level_coins) + "\nnope"
+	var coins: int = GameManager.in_level_coins
+	var survival_time: int = int(GameManager.survival_time)
+	var total_destroyed_enemies: int = GameManager.total_destroyed_enemies
+	var level_reached: int = GameManager.current_actual_level + 1
+	var total_successful_phases: int = GameManager.total_successful_phases
+	var total_score: int = GameManager.total_score
+	
+	stats_value_label.text = str(survival_time) + "\n" + \
+							str(total_destroyed_enemies) + "\n" + \
+							str(level_reached) + "\n" + \
+							str(total_successful_phases) + "\n" + \
+							str(total_score)
+	rewards_value_label.text = str(coins) + "\nnope"
+	ProfileManager.update_data(coins, \
+								survival_time, \
+								total_destroyed_enemies, \
+								level_reached, \
+								total_successful_phases, \
+								total_score)
+	SaveSystem.save_game()
 
 func show_restart() -> void:
 	result_anim_player.play("default")

@@ -21,14 +21,21 @@ GameManager="*uid://cvck5mj1un6eb"
 ValueStorer="*uid://fls5guvqpn01"
 AudioStorer="*uid://i4hpi7gpx185"
 ProfileManager="*uid://p1t2iscvp605"
+SaveSystem="*uid://cbxu26vp46tdv"
+LoadSystem="*uid://cytaw6mh4a3bj"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/size/window_width_override=1600
 window/size/window_height_override=900
 window/stretch/mode="viewport"
+
+[global_group]
+
+Persist=""
 
 [input]
 
