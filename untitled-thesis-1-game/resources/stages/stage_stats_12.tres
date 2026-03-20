@@ -4,14 +4,13 @@
 
 [resource]
 script = ExtResource("1_x0y3p")
-time_to_pass = 540
-phase_count = 2
+phase_count = 1
 min_enemy = 6
 max_enemy = 8
+is_lazer = true
 lazer_spawn_rate = 1.5
-lazer_warn_time = 1.5
-lazer_stay_time = 1.5
-is_spike = true
+lazer_warn_time = 2.0
+lazer_stay_time = 1.0
 spike_spawn_rate = 1.25
 spike_warn_time = 1.0
 spike_stay_time = 1.5
@@ -19,7 +18,6 @@ is_bomb = true
 bomb_spawn_rate = 1.5
 bomb_warn_time = 1.5
 bomb_stay_time = 1.5
-is_bomb_four = true
 bomb_four_spawn_rate = 1.25
 bomb_four_warn_time = 1.25
 bomb_four_stay_time = 2.0

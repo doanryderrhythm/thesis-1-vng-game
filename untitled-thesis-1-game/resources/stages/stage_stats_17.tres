@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_7150t")
-time_to_pass = 905
 phase_count = 3
 min_enemy = 9
 max_enemy = 12
@@ -16,3 +15,7 @@ is_spike = true
 spike_spawn_rate = 1.25
 spike_warn_time = 1.0
 spike_stay_time = 1.75
+is_bomb = true
+bomb_spawn_rate = 1.25
+bomb_warn_time = 1.0
+bomb_stay_time = 1.75

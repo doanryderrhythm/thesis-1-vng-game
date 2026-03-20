@@ -4,8 +4,7 @@
 
 [resource]
 script = ExtResource("1_dvr0s")
-time_to_pass = 600
-phase_count = 3
+phase_count = 1
 min_enemy = 7
 max_enemy = 10
 is_lazer = true
@@ -15,3 +14,7 @@ lazer_stay_time = 1.0
 spike_spawn_rate = 1.0
 spike_warn_time = 1.0
 spike_stay_time = 1.0
+is_bomb_four = true
+bomb_four_spawn_rate = 1.25
+bomb_four_warn_time = 1.5
+bomb_four_stay_time = 1.5

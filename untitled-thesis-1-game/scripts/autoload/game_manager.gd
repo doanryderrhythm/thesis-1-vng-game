@@ -246,6 +246,11 @@ func deduct_enemies() -> void:
 		current_actual_level += 1
 		phase_change.emit(false)
 		delete_bullets.emit()
+		if is_all_surroundings_locked(current_id_x, current_id_y):
+			if is_instance_valid(GameManager.player):
+				GameManager.player.call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
+				GameManager.player.call_deferred("set_physics_process", false)
+				state_lose_change.emit()
 		create_available_rooms(current_id_x, current_id_y)
 
 func confirm_stage(room: Room) -> void:
@@ -265,6 +270,14 @@ func confirm_stage(room: Room) -> void:
 		room.bomb_four_timer.wait_time = stage_stats[current_level].bomb_four_spawn_rate
 		room.bomb_four_warn_time = stage_stats[current_level].bomb_four_warn_time
 		room.bomb_four_harm_time = stage_stats[current_level].bomb_four_stay_time
+	
+func is_all_surroundings_locked(_id_x: int, _id_y: int) -> bool:
+	if find_used_room(_id_x - 1, _id_y) and \
+		find_used_room(_id_x + 1, _id_y) and \
+		find_used_room(_id_x, _id_y - 1) and \
+		find_used_room(_id_x, _id_y + 1):
+		return true
+	return false
 
 func find_room(_id_x: int, _id_y: int) -> Room:
 	rooms = rooms.filter(func(room):

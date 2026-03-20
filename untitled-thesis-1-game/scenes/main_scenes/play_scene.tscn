@@ -120,6 +120,7 @@ texture = ExtResource("4_5b3o3")
 offset = Vector2(75, -75)
 zoom = Vector2(0.35, 0.35)
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=728963286]
 process_mode = 3

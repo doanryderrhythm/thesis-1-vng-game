@@ -23,7 +23,10 @@
 [ext_resource type="Resource" uid="uid://egub58fwrk0g" path="res://resources/stages/stage_stats_18.tres" id="21_algsn"]
 [ext_resource type="Resource" uid="uid://blx5r53q4bfb7" path="res://resources/stages/stage_stats_19.tres" id="22_lutob"]
 [ext_resource type="Resource" uid="uid://dmq3n3v8m2blg" path="res://resources/stages/stage_stats_20.tres" id="23_g8q0d"]
+[ext_resource type="Resource" uid="uid://dhkkg2gdjetvn" path="res://resources/stages/stage_stats_21.tres" id="24_57667"]
+[ext_resource type="Resource" uid="uid://dgannbsv88s2k" path="res://resources/stages/stage_stats_22.tres" id="25_582vm"]
+[ext_resource type="Resource" uid="uid://cyd5jfpgu06p8" path="res://resources/stages/stage_stats_23.tres" id="26_algsn"]
 
 [resource]
 script = ExtResource("1_rdugh")
-stages = Array[ExtResource("2_5a2ie")]([ExtResource("3_ri1mq"), ExtResource("4_sor4p"), ExtResource("5_da5ld"), ExtResource("6_fhvkv"), ExtResource("7_anbsa"), ExtResource("8_dqhjd"), ExtResource("9_fdkg8"), ExtResource("10_jkqwh"), ExtResource("11_ii5ww"), ExtResource("12_57667"), ExtResource("13_582vm"), ExtResource("14_algsn"), ExtResource("15_lutob"), ExtResource("16_fdkg8"), ExtResource("17_jkqwh"), ExtResource("18_ii5ww"), ExtResource("19_57667"), ExtResource("20_582vm"), ExtResource("21_algsn"), ExtResource("22_lutob"), ExtResource("23_g8q0d")])
+stages = Array[ExtResource("2_5a2ie")]([ExtResource("3_ri1mq"), ExtResource("4_sor4p"), ExtResource("5_da5ld"), ExtResource("6_fhvkv"), ExtResource("7_anbsa"), ExtResource("8_dqhjd"), ExtResource("9_fdkg8"), ExtResource("10_jkqwh"), ExtResource("11_ii5ww"), ExtResource("12_57667"), ExtResource("13_582vm"), ExtResource("14_algsn"), ExtResource("15_lutob"), ExtResource("16_fdkg8"), ExtResource("17_jkqwh"), ExtResource("18_ii5ww"), ExtResource("19_57667"), ExtResource("20_582vm"), ExtResource("21_algsn"), ExtResource("22_lutob"), ExtResource("23_g8q0d"), ExtResource("24_57667"), ExtResource("25_582vm"), ExtResource("26_algsn")])
