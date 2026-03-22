@@ -49,6 +49,7 @@ signal end_level
 signal room_start
 signal delete_bullets
 signal coin_change
+signal stats_change
 
 func _ready() -> void:
 	pass

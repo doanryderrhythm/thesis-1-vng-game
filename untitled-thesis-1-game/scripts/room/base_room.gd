@@ -22,6 +22,7 @@ var bomb_four_harm_time: float
 @onready var last_point: Marker2D = $WayPoints/LastPoint
 
 @onready var doors: Node2D = $Doors
+@onready var corridors: Node2D = $Corridors
 
 @onready var start_area_collision: CollisionShape2D = $StartArea2D/CollisionShape2D
 
@@ -60,6 +61,7 @@ func init_detail(_id_x: int, _id_y: int, _is_executed: bool = false) -> void:
 
 func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 	doors.visible = is_toggled
+	corridors.visible = !is_toggled
 	if is_toggled:
 		door_close_audio.play()
 		GameManager.room_start.emit()

@@ -33,6 +33,12 @@ class_name DebugUI
 @onready var achievements_label: Label = $ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer/RewardsValueLabel
 #endregion
 
+#region PLAYER STATS
+@onready var move_value: Label = $HBoxContainer/MoveStats/Value
+@onready var dash_value: Label = $HBoxContainer/DashStats/Value
+@onready var shoot_value: Label = $HBoxContainer/ShootStats/Value
+#endregion
+
 @onready var pause_ui: ColorRect = $PauseNode
 @export var retire_string: String
 
@@ -65,6 +71,7 @@ func set_up() -> void:
 	change_phase(false)
 	change_score()
 	change_coin()
+	change_in_game_stats()
 	
 	GameManager.health_change.connect(change_health)
 	GameManager.dash_change.connect(change_dash)
@@ -74,6 +81,7 @@ func set_up() -> void:
 	GameManager.phase_change.connect(change_phase)
 	GameManager.score_change.connect(change_score)
 	GameManager.coin_change.connect(change_coin)
+	GameManager.stats_change.connect(change_in_game_stats)
 	
 	update_minimap()
 
@@ -113,6 +121,14 @@ func change_phase(is_ongoing: bool) -> void:
 	else:
 		phase_title_label.visible = false
 		phase_label.visible = false
+
+func change_in_game_stats() -> void:
+	if !GameManager.player and is_instance_valid(GameManager.player):
+		pass
+	
+	move_value.text = "%.2f" % (ProfileManager.move_speed / 100.0 * GameManager.player._offset_move_speed)
+	dash_value.text = "%.2f" % (GameManager.player._total_dash)
+	shoot_value.text = "%.2f" % (ValueStorer.player_bullet_speed_mult + GameManager.player._offset_bullet_speed)
 
 func update_result_screen() -> void:
 	if GameManager.is_locked:

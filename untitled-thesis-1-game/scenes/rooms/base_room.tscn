@@ -173,8 +173,8 @@ texture = ExtResource("1_43ixu")
 
 [node name="LeftDoor" type="Sprite2D" parent="Doors" unique_id=1635673156]
 modulate = Color(0.7413847, 0.7413847, 0.7413844, 1)
-position = Vector2(-1200, 0)
-scale = Vector2(0.2, 3)
+position = Vector2(-1210, 0)
+scale = Vector2(0.3000005, 3)
 texture = ExtResource("1_43ixu")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Doors/LeftDoor" unique_id=2072005931]
@@ -184,8 +184,8 @@ shape = SubResource("RectangleShape2D_43ixu")
 
 [node name="RightDoor" type="Sprite2D" parent="Doors" unique_id=1133344729]
 modulate = Color(0.7413847, 0.7413847, 0.7413844, 1)
-position = Vector2(1200, 0)
-scale = Vector2(0.2, 3)
+position = Vector2(1210, 0)
+scale = Vector2(0.3, 4.5)
 texture = ExtResource("1_43ixu")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Doors/RightDoor" unique_id=1426432018]
@@ -195,9 +195,9 @@ shape = SubResource("RectangleShape2D_43ixu")
 
 [node name="TopDoor" type="Sprite2D" parent="Doors" unique_id=793812438]
 modulate = Color(0.7413847, 0.7413847, 0.7413844, 1)
-position = Vector2(0, -1200)
+position = Vector2(0, -1210)
 rotation = 1.5707964
-scale = Vector2(0.2, 3)
+scale = Vector2(0.3, 4.5)
 texture = ExtResource("1_43ixu")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Doors/TopDoor" unique_id=2063901262]
@@ -207,9 +207,9 @@ shape = SubResource("RectangleShape2D_43ixu")
 
 [node name="BottomDoor" type="Sprite2D" parent="Doors" unique_id=821949933]
 modulate = Color(0.7413847, 0.7413847, 0.7413844, 1)
-position = Vector2(0, 1200)
+position = Vector2(0, 1210)
 rotation = 1.5707964
-scale = Vector2(0.2, 3)
+scale = Vector2(0.3, 4.5)
 texture = ExtResource("1_43ixu")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Doors/BottomDoor" unique_id=34872234]

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dj6ajch28274c" path="res://sprites/bars/health_bar_main_sprite.png" id="1_14mai"]
 [ext_resource type="Script" uid="uid://ddxe4rdo65rrj" path="res://scripts/ui/debug_ui.gd" id="1_hqpec"]
+[ext_resource type="Texture2D" uid="uid://dadxxqbb0l40r" path="res://sprites/bars/player_stats.png" id="2_j0te7"]
 [ext_resource type="Texture2D" uid="uid://cmf4kh1kci1jp" path="res://sprites/bars/health_icon.png" id="2_pu33q"]
 [ext_resource type="Texture2D" uid="uid://b2of4763rak84" path="res://sprites/bars/health_progress.png" id="3_k7b8x"]
 [ext_resource type="Texture2D" uid="uid://ptbjvi1ww8ce" path="res://sprites/bars/dash_icon.png" id="4_fadvp"]
@@ -14,6 +15,16 @@
 [ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="9_j0te7"]
 [ext_resource type="Texture2D" uid="uid://r0ku0idq14xt" path="res://sprites/ui/pause_button_selected.png" id="10_hr2xk"]
 [ext_resource type="Texture2D" uid="uid://ccmhxs4mq68fr" path="res://sprites/ui/result_screen.png" id="12_hr2xk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j3jup"]
+font = ExtResource("9_j0te7")
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_71sgh"]
+line_spacing = 0.0
+font = ExtResource("9_j0te7")
+font_size = 60
 
 [sub_resource type="LabelSettings" id="LabelSettings_fadvp"]
 line_spacing = 0.0
@@ -371,6 +382,113 @@ _data = {
 [node name="DebugUi" type="CanvasLayer" unique_id=2086543205]
 process_mode = 3
 script = ExtResource("1_hqpec")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=683640922]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_top = 20.0
+offset_right = 250.0
+offset_bottom = 158.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="MoveStats" type="TextureRect" parent="HBoxContainer" unique_id=757924634]
+modulate = Color(0.047058824, 1, 0, 1)
+layout_mode = 2
+texture = ExtResource("2_j0te7")
+
+[node name="Title" type="Label" parent="HBoxContainer/MoveStats" unique_id=1731892562]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.261
+offset_bottom = 16.981998
+grow_horizontal = 2
+text = "move speed"
+label_settings = SubResource("LabelSettings_j3jup")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="HBoxContainer/MoveStats" unique_id=2090178684]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.261
+anchor_right = 1.0
+anchor_bottom = 0.97800004
+offset_top = 16.981998
+offset_right = 7.0
+offset_bottom = 8.0359955
+grow_horizontal = 2
+text = "0"
+label_settings = SubResource("LabelSettings_71sgh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DashStats" type="TextureRect" parent="HBoxContainer" unique_id=1769635347]
+modulate = Color(0, 0.88504267, 1, 1)
+layout_mode = 2
+texture = ExtResource("2_j0te7")
+
+[node name="Title" type="Label" parent="HBoxContainer/DashStats" unique_id=295631066]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.261
+offset_bottom = 16.981998
+grow_horizontal = 2
+text = "dash speed"
+label_settings = SubResource("LabelSettings_j3jup")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="HBoxContainer/DashStats" unique_id=2033410385]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.261
+anchor_right = 1.0
+anchor_bottom = 0.97800004
+offset_top = 16.981998
+offset_right = 7.0
+offset_bottom = 8.0359955
+grow_horizontal = 2
+text = "0"
+label_settings = SubResource("LabelSettings_71sgh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShootStats" type="TextureRect" parent="HBoxContainer" unique_id=358969262]
+modulate = Color(1, 0.90383136, 0, 1)
+layout_mode = 2
+texture = ExtResource("2_j0te7")
+
+[node name="Title" type="Label" parent="HBoxContainer/ShootStats" unique_id=1317134394]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.261
+offset_bottom = 16.981998
+grow_horizontal = 2
+text = "shoot speed"
+label_settings = SubResource("LabelSettings_j3jup")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="HBoxContainer/ShootStats" unique_id=665371134]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.261
+anchor_right = 1.0
+anchor_bottom = 0.97800004
+offset_top = 16.981998
+offset_right = 7.0
+offset_bottom = 8.0359955
+grow_horizontal = 2
+text = "0"
+label_settings = SubResource("LabelSettings_71sgh")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="LevelLabel" type="Label" parent="." unique_id=1343779444]
 modulate = Color(1, 1, 1, 0)
@@ -798,6 +916,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ResultNode" type="ColorRect" parent="." unique_id=1507721967]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
