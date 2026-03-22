@@ -51,5 +51,8 @@ shape = SubResource("RectangleShape2D_snepi")
 [node name="HarmfulSprite" parent="." index="2" unique_id=1518204916]
 texture = ExtResource("3_krlfx")
 
+[node name="BombGlow" parent="." index="3" unique_id=1459613062]
+self_modulate = Color(1, 0.78600913, 0.19607842, 1)
+
 [node name="HitArea2D" parent="." index="4" unique_id=902703]
 visible = false

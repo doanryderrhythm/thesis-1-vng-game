@@ -7,6 +7,8 @@ class_name BigSpike
 
 @onready var spawn_collider: CollisionShape2D = $HitArea2D/CollisionShape2D
 
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+
 var damage: float = 7.5
 
 var ready_timer: float
@@ -30,6 +32,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	current_timer += delta
 	if state == SpikeState.READY and current_timer >= ready_timer:
+		anim_player.play("default")
 		current_timer -= ready_timer
 		state = SpikeState.SPAWN
 		spike_spawn.visible = true
