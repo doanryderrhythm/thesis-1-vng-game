@@ -34,9 +34,9 @@ class_name DebugUI
 #endregion
 
 #region PLAYER STATS
-@onready var move_value: Label = $HBoxContainer/MoveStats/Value
-@onready var dash_value: Label = $HBoxContainer/DashStats/Value
-@onready var shoot_value: Label = $HBoxContainer/ShootStats/Value
+@onready var move_value: Label = $VBoxContainer/MoveStats/Value
+@onready var dash_value: Label = $VBoxContainer/DashStats/Value
+@onready var shoot_value: Label = $VBoxContainer/ShootStats/Value
 #endregion
 
 @onready var pause_ui: ColorRect = $PauseNode
