@@ -9,6 +9,7 @@ class_name BaseLazer
 
 @onready var warning_lazer: Line2D = $WarningLazer
 @onready var finish_lazer: Line2D = $FinishLazer
+@onready var glow_lazer: Line2D = $GlowLazer
 
 @onready var warning_timer: Timer = $WarningTimer
 @onready var finish_timer: Timer = $FinishTimer
@@ -51,6 +52,9 @@ func _physics_process(_delta: float) -> void:
 		finish_lazer.clear_points()
 		finish_lazer.add_point(to_local(pos_A))
 		finish_lazer.add_point(to_local(pos_B))
+		glow_lazer.clear_points()
+		glow_lazer.add_point(to_local(pos_A))
+		glow_lazer.add_point(to_local(pos_B))
 		lazer_hit_collision.shape.a = to_local(pos_A)
 		lazer_hit_collision.shape.b = to_local(pos_B)
 		is_spawned = true
@@ -58,6 +62,8 @@ func _physics_process(_delta: float) -> void:
 func _on_warning_timer_timeout() -> void:
 	finish_lazer.visible = true
 	finish_lazer.process_mode = Node.PROCESS_MODE_INHERIT
+	glow_lazer.visible = true
+	glow_lazer.process_mode = Node.PROCESS_MODE_INHERIT
 	finish_timer.start()
 	lazer_shoot_audio.play()
 	

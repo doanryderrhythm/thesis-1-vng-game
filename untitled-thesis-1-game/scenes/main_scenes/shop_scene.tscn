@@ -18,6 +18,7 @@ var all_players: Array[PlayerStats] = []
 @onready var coin_count_label: Label = $CanvasLayer/CoinCount/CoinCountLabel
 
 func _ready() -> void:
+	RenderingServer.set_default_clear_color(Color(0.0, 0.2, 0.302, 1.0))
 	LoadSystem.load_game()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	GameManager.is_gameplay = false
@@ -74,6 +75,7 @@ offset_right = -30.0
 offset_bottom = -69.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(1, 1, 1, 0.5529412)
 
 [node name="Mask" type="TextureRect" parent="CanvasLayer/ShopBackground" unique_id=1979445986]
 clip_contents = true

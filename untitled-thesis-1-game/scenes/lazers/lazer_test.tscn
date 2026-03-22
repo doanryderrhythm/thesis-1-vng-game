@@ -3,7 +3,11 @@
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="1_1ulxr"]
 [ext_resource type="Script" uid="uid://buucsp7l5nlbx" path="res://scripts/lazers/base_lazer.gd" id="1_5cyv3"]
 [ext_resource type="AudioStream" uid="uid://dbeo51i4e64wl" path="res://sfx/lazer.wav" id="2_6whbb"]
+[ext_resource type="Texture2D" uid="uid://dbnqdwdf85vk7" path="res://sprites/lazers/lazer.png" id="2_saxmh"]
 [ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="3_5m2v7"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lm0nn"]
+blend_mode = 1
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_6whbb"]
 b = Vector2(0, 0)
@@ -55,6 +59,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.6666667), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6666667), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6666667), Color(1, 1, 1, 1), Color(1, 1, 1, 0.6666667)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GlowLazer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lm0nn"]
 _data = {
@@ -85,7 +101,19 @@ end_cap_mode = 2
 [node name="FinishLazer" type="Line2D" parent="." unique_id=1138071405]
 process_mode = 4
 visible = false
-width = 35.0
+width = 50.0
+texture = ExtResource("2_saxmh")
+texture_mode = 2
+joint_mode = 2
+
+[node name="GlowLazer" type="Line2D" parent="." unique_id=1488997099]
+process_mode = 4
+visible = false
+modulate = Color(1, 1, 1, 0.66666657)
+material = SubResource("CanvasItemMaterial_lm0nn")
+width = 50.0
+texture = ExtResource("2_saxmh")
+texture_mode = 2
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -114,6 +142,7 @@ scale = Vector2(2.5, 2.5)
 texture = ExtResource("3_5m2v7")
 
 [node name="PointB" type="Sprite2D" parent="LazerPoints" unique_id=2125309306]
+modulate = Color(1, 1, 1, 0.6666667)
 material = SubResource("CanvasItemMaterial_saxmh")
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("3_5m2v7")

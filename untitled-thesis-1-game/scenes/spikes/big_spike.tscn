@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dks7xljggup6r" path="res://sprites/spikes/big_spike/spike_ready_1.png" id="2_f6f1n"]
 [ext_resource type="Texture2D" uid="uid://dhe2n3yiusg42" path="res://sprites/spikes/big_spike/spike_spawn.png" id="2_o16r7"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_o16r7"]
+[ext_resource type="Texture2D" uid="uid://cne38lrcuhf8s" path="res://sprites/spikes/big_spike/spike_blur.png" id="5_6cyp4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i4vqm"]
 animations = [{
@@ -19,6 +20,9 @@ animations = [{
 "name": &"default",
 "speed": 15.0
 }]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ed8bv"]
+blend_mode = 1
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_f6f1n"]
 points = PackedVector2Array(18, -56, 134, 0, 18, 56)
@@ -36,6 +40,12 @@ frame_progress = 0.6600226
 position = Vector2(78, 0)
 scale = Vector2(1.55, 1.55)
 texture = ExtResource("2_o16r7")
+
+[node name="SpikeBlur" type="Sprite2D" parent="." unique_id=93087376]
+material = SubResource("CanvasItemMaterial_ed8bv")
+position = Vector2(78, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("5_6cyp4")
 
 [node name="HitArea2D" type="Area2D" parent="." unique_id=59018989]
 collision_layer = 8
