@@ -37,6 +37,7 @@ var stage_stats: Array[StageStats]
 var in_level_coins: int = 0
 
 var is_gameplay: bool = false
+var is_locked: bool = false
 
 signal health_change
 signal dash_change
@@ -54,6 +55,7 @@ func _ready() -> void:
 
 func reset() -> void:
 	is_gameplay = true
+	is_locked = false
 	in_level_coins = 0
 	
 	current_id_x = 0
@@ -118,6 +120,7 @@ func add_coin(num: int) -> void:
 
 func start_stage() -> void:
 	current_phase = stage_stats[current_level].phase_count
+	max_phase = stage_stats[current_level].phase_count
 	is_lazer = stage_stats[current_level].is_lazer
 	is_spike = stage_stats[current_level].is_spike
 	is_bomb = stage_stats[current_level].is_bomb
@@ -250,6 +253,7 @@ func deduct_enemies() -> void:
 			if is_instance_valid(GameManager.player):
 				GameManager.player.call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
 				GameManager.player.call_deferred("set_physics_process", false)
+				is_locked = true
 				state_lose_change.emit()
 		create_available_rooms(current_id_x, current_id_y)
 

@@ -25,6 +25,8 @@ var bomb_four_harm_time: float
 
 @onready var start_area_collision: CollisionShape2D = $StartArea2D/CollisionShape2D
 
+@onready var room_particles: Node2D = $RoomParticles
+
 @onready var lazer_scene: PackedScene = preload("res://scenes/lazers/lazer_test.tscn")
 @onready var lazer_timer: Timer = $LazerTimer
 
@@ -41,6 +43,8 @@ var bomb_four_harm_time: float
 @onready var all_spikes: Node2D = $Spikes
 @onready var all_bombs: Node2D = $Bombs
 @onready var all_lazers: Node2D = $Lazers
+
+@onready var anim_player: AnimationPlayer = $RoomAnimationPlayer
 
 @onready var door_close_audio: AudioStreamPlayer = $DoorCloseAudio
 
@@ -82,6 +86,10 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 		RenderingServer.set_default_clear_color(Color(0.3, 0.3, 0.3, 1.0))
 		
 		if not is_game_start:
+			anim_player.play("finished")
+			for particle in room_particles.get_children():
+				particle.emitting = true
+			
 			var used_room: Dictionary = {
 				ValueStorer.used_room_x: id_x,
 				ValueStorer.used_room_y: id_y

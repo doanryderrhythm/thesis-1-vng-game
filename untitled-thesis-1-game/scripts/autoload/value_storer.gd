@@ -29,9 +29,14 @@ var enemy_radius: float = 55.0
 var bomb_radius: float = 63.0
 var player_bullet_speed_mult: float = 6.0
 var max_dash_count: int = 3
-var dash_wait_time: float = 2.0
+var dash_wait_time: float = 3.5
 var reward_random_extra: int = 10
 var reward_enable_time: float = 0.5
+#endregion
+
+#region STRINGS
+var died_string: String = "You died."
+var locked_string: String = "All surroundings are locked.\nYou can't escape."
 #endregion
 
 #region HEALTH

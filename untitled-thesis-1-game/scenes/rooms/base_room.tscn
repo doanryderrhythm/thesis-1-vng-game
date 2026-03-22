@@ -4,6 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://crid1aovmbnj1" path="res://sprites/rooms/room_floor.png" id="1_43ixu"]
 [ext_resource type="PackedScene" uid="uid://bc555d4f3jr8q" path="res://scenes/rooms/corridor.tscn" id="2_oxyh5"]
 [ext_resource type="AudioStream" uid="uid://d3bpal3wyq54m" path="res://sfx/door_close.wav" id="4_ativ4"]
+[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="4_u6ncq"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u6ncq"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_mhjnj"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43ixu"]
 size = Vector2(200, 200)
@@ -15,6 +22,42 @@ size = Vector2(2250, 2250)
 vertices = PackedVector2Array(1147.9922, -1147, 1147, 1146, -1147, 1146, -1147, -1147.9922)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1157, -1158, 1158, -1157, 1157, 1156, -1157, 1156)])
+
+[sub_resource type="Animation" id="Animation_u6ncq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FinishedFloorEffect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.6901961, 0.6901961, 0.6901961, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mhjnj"]
+resource_name = "finished"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FinishedFloorEffect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.6901961, 0.6901961, 0.6901961, 1), Color(0.6901961, 0.6901961, 0.6901961, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xp0a8"]
+_data = {
+&"RESET": SubResource("Animation_u6ncq"),
+&"finished": SubResource("Animation_mhjnj")
+}
 
 [node name="BaseRoom" type="Node2D" unique_id=1792470563]
 script = ExtResource("1_4x8xk")
@@ -35,8 +78,94 @@ rotation = 1.5707964
 position = Vector2(0, 1450)
 rotation = 1.5707964
 
+[node name="RoomParticles" type="Node2D" parent="." unique_id=791584095]
+
+[node name="FinishedParticles" type="CPUParticles2D" parent="RoomParticles" unique_id=1067399881]
+material = SubResource("CanvasItemMaterial_u6ncq")
+position = Vector2(0, -1200)
+emitting = false
+amount = 60
+texture = ExtResource("4_u6ncq")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(1200, 10)
+direction = Vector2(0, -1)
+spread = 109.24
+gravity = Vector2(0, 0)
+initial_velocity_max = 618.5
+linear_accel_min = -8.09
+linear_accel_max = -8.09
+color_ramp = SubResource("Gradient_mhjnj")
+
+[node name="FinishedParticles2" type="CPUParticles2D" parent="RoomParticles" unique_id=1540613113]
+material = SubResource("CanvasItemMaterial_u6ncq")
+position = Vector2(-1200, 0)
+rotation = -1.5707964
+emitting = false
+amount = 60
+texture = ExtResource("4_u6ncq")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(1200, 10)
+direction = Vector2(0, -1)
+spread = 109.24
+gravity = Vector2(0, 0)
+initial_velocity_max = 618.5
+linear_accel_min = -8.09
+linear_accel_max = -8.09
+color_ramp = SubResource("Gradient_mhjnj")
+
+[node name="FinishedParticles3" type="CPUParticles2D" parent="RoomParticles" unique_id=2056957446]
+material = SubResource("CanvasItemMaterial_u6ncq")
+position = Vector2(1200, 0)
+rotation = 1.5707964
+emitting = false
+amount = 60
+texture = ExtResource("4_u6ncq")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(1200, 10)
+direction = Vector2(0, -1)
+spread = 109.24
+gravity = Vector2(0, 0)
+initial_velocity_max = 618.5
+linear_accel_min = -8.09
+linear_accel_max = -8.09
+color_ramp = SubResource("Gradient_mhjnj")
+
+[node name="FinishedParticles4" type="CPUParticles2D" parent="RoomParticles" unique_id=543977424]
+material = SubResource("CanvasItemMaterial_u6ncq")
+position = Vector2(0, 1200)
+rotation = -3.1415925
+emitting = false
+amount = 60
+texture = ExtResource("4_u6ncq")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(1200, 10)
+direction = Vector2(0, -1)
+spread = 109.24
+gravity = Vector2(0, 0)
+initial_velocity_max = 618.5
+linear_accel_min = -8.09
+linear_accel_max = -8.09
+color_ramp = SubResource("Gradient_mhjnj")
+
 [node name="Floor" type="Sprite2D" parent="." unique_id=36058597]
-modulate = Color(0.21230483, 0.21230483, 0.21230483, 1)
+modulate = Color(0.11198568, 0.11198568, 0.11198568, 1)
+scale = Vector2(12, 12)
+texture = ExtResource("1_43ixu")
+
+[node name="FinishedFloorEffect" type="Sprite2D" parent="." unique_id=2102122323]
+modulate = Color(0.6901961, 0.6901961, 0.6901961, 0)
 scale = Vector2(12, 12)
 texture = ExtResource("1_43ixu")
 
@@ -241,6 +370,7 @@ position = Vector2(-930, -930)
 position = Vector2(930, 930)
 
 [node name="StartArea2D" type="Area2D" parent="." unique_id=2126767817]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -248,6 +378,7 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_4x8xk")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1834800968]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_oxyh5")
 
 [node name="LazerTimer" type="Timer" parent="." unique_id=1144469924]
@@ -265,6 +396,9 @@ wait_time = 3.5
 [node name="DoorCloseAudio" type="AudioStreamPlayer" parent="." unique_id=1696601352]
 stream = ExtResource("4_ativ4")
 pitch_scale = 0.5
+
+[node name="RoomAnimationPlayer" type="AnimationPlayer" parent="." unique_id=651746508]
+libraries/ = SubResource("AnimationLibrary_xp0a8")
 
 [connection signal="area_entered" from="StartArea2D" to="." method="_on_start_area_2d_area_entered"]
 [connection signal="timeout" from="LazerTimer" to="." method="_on_lazer_timer_timeout"]

@@ -158,8 +158,8 @@ func increase_dash(_amount: float) -> void:
 
 func heal(_amount: float) -> void:
 	health += _amount
-	if health > ValueStorer.player_health:
-		health = ValueStorer.player_health
+	if health > ProfileManager.health:
+		health = ProfileManager.health
 	GameManager.health_change.emit()
 
 func take_damage(_damage: float) -> void:

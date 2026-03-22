@@ -20,8 +20,18 @@ class_name DebugUI
 @onready var gameplay_anim_player: AnimationPlayer = $GameplayAnimationPlayer
 @onready var result_anim_player: AnimationPlayer = $ResultAnimationPlayer
 
-@onready var stats_value_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer/StatsValueLabel
-@onready var rewards_value_label: Label = $ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer/RewardsValueLabel
+#region RESULT
+@onready var reason_to_lose_label: Label = $ResultNode/Background/ReasonLabel
+
+@onready var survival_time_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/SurvivalTimeContainer/StatsValueLabel
+@onready var destroyed_enemies_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer/StatsValueLabel
+@onready var level_reached_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer/StatsValueLabel
+@onready var phases_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer/StatsValueLabel
+@onready var total_score_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer/StatsValueLabel
+
+@onready var coins_label: Label = $ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer/RewardsValueLabel
+@onready var achievements_label: Label = $ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer/RewardsValueLabel
+#endregion
 
 @onready var pause_ui: ColorRect = $PauseNode
 @export var retire_string: String
@@ -39,6 +49,8 @@ func _process(_delta: float) -> void:
 func set_up() -> void:
 	health_bar.min_value = 0
 	health_bar.max_value = ProfileManager.health
+	print(health_bar.min_value)
+	print(health_bar.max_value)
 	
 	dash_bar.min_value = 0
 	dash_bar.max_value = ValueStorer.max_dash_count
@@ -67,6 +79,7 @@ func set_up() -> void:
 
 func change_health() -> void:
 	health_bar.value = GameManager.player.health
+	print(GameManager.player.health)
 	if GameManager.player.health <= 0:
 		danger_texture.modulate = Color(1, 1, 1, 0)
 	elif GameManager.player.health <= 0.3 * ProfileManager.health:
@@ -95,12 +108,18 @@ func change_phase(is_ongoing: bool) -> void:
 		phase_title_label.visible = true
 		phase_label.visible = true
 		
-		phase_label.text = str(GameManager.current_phase)
+		phase_label.text = str(GameManager.max_phase - GameManager.current_phase + 1) \
+						+ "/" + str(GameManager.max_phase)
 	else:
 		phase_title_label.visible = false
 		phase_label.visible = false
 
 func update_result_screen() -> void:
+	if GameManager.is_locked:
+		reason_to_lose_label.text = ValueStorer.locked_string
+	else:
+		reason_to_lose_label.text = ValueStorer.died_string
+	
 	var coins: int = GameManager.in_level_coins
 	var survival_time: int = int(GameManager.survival_time)
 	var total_destroyed_enemies: int = GameManager.total_destroyed_enemies
@@ -108,12 +127,15 @@ func update_result_screen() -> void:
 	var total_successful_phases: int = GameManager.total_successful_phases
 	var total_score: int = GameManager.total_score
 	
-	stats_value_label.text = str(survival_time) + "\n" + \
-							str(total_destroyed_enemies) + "\n" + \
-							str(level_reached) + "\n" + \
-							str(total_successful_phases) + "\n" + \
-							str(total_score)
-	rewards_value_label.text = str(coins) + "\nnope"
+	survival_time_label.text = str(survival_time)
+	destroyed_enemies_label.text = str(total_destroyed_enemies)
+	level_reached_label.text = str(level_reached)
+	phases_label.text = str(total_successful_phases)
+	total_score_label.text = str(total_score)
+
+	coins_label.text = str(coins)
+	achievements_label.text = "nope"
+	
 	ProfileManager.update_data(coins, \
 								survival_time, \
 								total_destroyed_enemies, \

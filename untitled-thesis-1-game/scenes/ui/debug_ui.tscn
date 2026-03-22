@@ -85,6 +85,10 @@ font = ExtResource("9_j0te7")
 font_size = 100
 font_color = Color(0.105409205, 0.105409205, 0.105409205, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_qctl6"]
+font = ExtResource("9_j0te7")
+font_size = 32
+
 [sub_resource type="LabelSettings" id="LabelSettings_bcx30"]
 font = ExtResource("9_j0te7")
 font_size = 66
@@ -163,7 +167,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer/Description:modulate")
+tracks/2/path = NodePath("ResultNode/Background/ButtonsContainer:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -175,31 +179,31 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer/StatsValueLabel:modulate")
+tracks/3/path = NodePath("ResultNode/Background/ButtonsContainer:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer/Description:modulate")
+tracks/4/path = NodePath("ResultNode/Background/ButtonsContainer:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [4]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer/RewardsValueLabel:modulate")
+tracks/5/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/SurvivalTimeContainer:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -208,46 +212,10 @@ tracks/5/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("ResultNode/Background/ButtonsContainer:modulate")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("ResultNode/Background/ButtonsContainer:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("ResultNode/Background/ButtonsContainer:process_mode")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
 
 [sub_resource type="Animation" id="Animation_bcd6v"]
 resource_name = "default"
-length = 3.0
+length = 3.2
 step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -276,11 +244,11 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer/Description:modulate")
+tracks/2/path = NodePath("ResultNode/Background/ButtonsContainer:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1.2, 1.8000001),
+"times": PackedFloat32Array(2.6000001, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -288,35 +256,35 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer/StatsValueLabel:modulate")
+tracks/3/path = NodePath("ResultNode/Background/ButtonsContainer:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1.4, 2),
+"times": PackedFloat32Array(2, 2.6000001),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false, true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer/Description:modulate")
+tracks/4/path = NodePath("ResultNode/Background/ButtonsContainer:process_mode")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(1.6, 2.2),
+"times": PackedFloat32Array(2, 2.6000001),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"update": 1,
+"values": [4, 0]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer/RewardsValueLabel:modulate")
+tracks/5/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/SurvivalTimeContainer:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1.8000001, 2.4),
+"times": PackedFloat32Array(1, 1.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -324,11 +292,11 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("ResultNode/Background/ButtonsContainer:modulate")
+tracks/6/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(2.6000001, 3),
+"times": PackedFloat32Array(1.1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -336,26 +304,62 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("ResultNode/Background/ButtonsContainer:visible")
+tracks/7/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(2, 2.6000001),
+"times": PackedFloat32Array(1.2, 1.6),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("ResultNode/Background/ButtonsContainer:process_mode")
+tracks/8/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(2, 2.6000001),
+"times": PackedFloat32Array(1.3, 1.6999999),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [4, 0]
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(1.4, 1.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1.5, 1.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(1.6, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bcx30"]
@@ -482,7 +486,7 @@ offset_right = 53.5
 offset_bottom = -53.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Phase Remaining"
+text = "Phase Count"
 label_settings = SubResource("LabelSettings_pu33q")
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -811,7 +815,7 @@ anchor_bottom = 0.5
 offset_left = -350.0
 offset_top = -500.0
 offset_right = 350.0
-offset_bottom = 500.00195
+offset_bottom = 500.0027
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_hr2xk")
@@ -832,14 +836,30 @@ label_settings = SubResource("LabelSettings_bcd6v")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ReasonLabel" type="Label" parent="ResultNode/Background" unique_id=291131479]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.192
+anchor_right = 1.0
+anchor_bottom = 0.36200002
+offset_top = -0.00038146973
+offset_bottom = -0.0007324219
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reason to lose"
+label_settings = SubResource("LabelSettings_qctl6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ContentContainer" type="VBoxContainer" parent="ResultNode/Background" unique_id=803617258]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.14400001
+anchor_left = 0.023000002
+anchor_top = 0.31500003
 anchor_right = 1.0
 anchor_bottom = 0.874
-offset_left = 40.0
-offset_top = -1.5258789e-05
+offset_left = 23.899998
+offset_top = -18.00064
 offset_right = -40.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -855,30 +875,91 @@ label_settings = SubResource("LabelSettings_bcx30")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1463885046]
+[node name="SurvivalTimeContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1463885046]
 layout_mode = 2
 alignment = 1
 
-[node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer" unique_id=461019681]
+[node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/SurvivalTimeContainer" unique_id=461019681]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
-text = "Total Survival Time
-Total Destroyed Enemies
-Level Reached
-Total Successful Phases
-Overall Score"
+text = "total survival time"
 label_settings = SubResource("LabelSettings_j0te7")
 
-[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/HBoxContainer" unique_id=196126999]
+[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/SurvivalTimeContainer" unique_id=196126999]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "abc
-abc
-abc
-abc
-abc"
+text = "abc"
 label_settings = SubResource("LabelSettings_141q6")
 horizontal_alignment = 2
+
+[node name="DestroyedEnemiesContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1701723659]
+layout_mode = 2
+alignment = 1
+
+[node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer" unique_id=184615611]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+text = "total destroyed enemies"
+label_settings = SubResource("LabelSettings_j0te7")
+
+[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer" unique_id=1730458426]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "abc"
+label_settings = SubResource("LabelSettings_141q6")
+horizontal_alignment = 2
+
+[node name="LevelReachedContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1171083082]
+layout_mode = 2
+alignment = 1
+
+[node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer" unique_id=1411810909]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+text = "level reached"
+label_settings = SubResource("LabelSettings_j0te7")
+
+[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer" unique_id=1533919136]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "abc"
+label_settings = SubResource("LabelSettings_141q6")
+horizontal_alignment = 2
+
+[node name="PhasesContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1460814282]
+layout_mode = 2
+alignment = 1
+
+[node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer" unique_id=1688280108]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+text = "total successful phases"
+label_settings = SubResource("LabelSettings_j0te7")
+
+[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer" unique_id=1208740906]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "abc"
+label_settings = SubResource("LabelSettings_141q6")
+horizontal_alignment = 2
+
+[node name="ScoreContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1424393135]
+layout_mode = 2
+alignment = 1
+
+[node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer" unique_id=933965342]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+text = "overall score"
+label_settings = SubResource("LabelSettings_j0te7")
+
+[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer" unique_id=1789093891]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "abc"
+label_settings = SubResource("LabelSettings_141q6")
+horizontal_alignment = 2
+text_overrun_behavior = 1
 
 [node name="RewardsContainer" type="VBoxContainer" parent="ResultNode/Background/ContentContainer" unique_id=22887340]
 layout_mode = 2
@@ -890,22 +971,37 @@ label_settings = SubResource("LabelSettings_bcx30")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/RewardsContainer" unique_id=443130140]
+[node name="CoinsContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/RewardsContainer" unique_id=443130140]
 layout_mode = 2
 alignment = 1
 
-[node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer" unique_id=506726360]
+[node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer" unique_id=506726360]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
-text = "Coins
-Unique Achievements"
+text = "coins"
 label_settings = SubResource("LabelSettings_j0te7")
 
-[node name="RewardsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer/HBoxContainer" unique_id=1649222714]
+[node name="RewardsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer" unique_id=1649222714]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "abc
-abc"
+text = "abc"
+label_settings = SubResource("LabelSettings_141q6")
+horizontal_alignment = 2
+
+[node name="AchievementsContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/RewardsContainer" unique_id=628273482]
+layout_mode = 2
+alignment = 1
+
+[node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer" unique_id=681431161]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+text = "unique achievements"
+label_settings = SubResource("LabelSettings_j0te7")
+
+[node name="RewardsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer" unique_id=1614572973]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "abc"
 label_settings = SubResource("LabelSettings_141q6")
 horizontal_alignment = 2
 
