@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://crid1aovmbnj1" path="res://sprites/rooms/room_floor.png" id="1_43ixu"]
 [ext_resource type="PackedScene" uid="uid://bc555d4f3jr8q" path="res://scenes/rooms/corridor.tscn" id="2_oxyh5"]
 [ext_resource type="AudioStream" uid="uid://d3bpal3wyq54m" path="res://sfx/door_close.wav" id="4_ativ4"]
+[ext_resource type="Texture2D" uid="uid://x38dvjwk7jvm" path="res://sprites/rooms/room_normal_floor.png" id="4_mhjnj"]
 [ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="4_u6ncq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u6ncq"]
@@ -61,6 +62,8 @@ _data = {
 
 [node name="BaseRoom" type="Node2D" unique_id=1792470563]
 script = ExtResource("1_4x8xk")
+metadata/_edit_horizontal_guides_ = [-218.0, -109.0, -42.0]
+metadata/_edit_vertical_guides_ = [-1180.0, -1002.0, -1361.0]
 
 [node name="Corridors" type="Node2D" parent="." unique_id=1702556723]
 
@@ -160,9 +163,7 @@ linear_accel_max = -8.09
 color_ramp = SubResource("Gradient_mhjnj")
 
 [node name="Floor" type="Sprite2D" parent="." unique_id=36058597]
-modulate = Color(0.11198568, 0.11198568, 0.11198568, 1)
-scale = Vector2(12, 12)
-texture = ExtResource("1_43ixu")
+texture = ExtResource("4_mhjnj")
 
 [node name="FinishedFloorEffect" type="Sprite2D" parent="." unique_id=2102122323]
 modulate = Color(0.6901961, 0.6901961, 0.6901961, 0)

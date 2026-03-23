@@ -8,9 +8,14 @@ var last_point: Vector2
 
 var is_moving: bool = false
 
+@onready var glow: Sprite2D = $Glow
+
 var inst_enemy: BaseEnemy = null
 
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+
 func _ready() -> void:
+	anim_player.play("default")
 	var move_ability: float = randf_range(0.0, 1.0)
 	if move_ability > 0.5:
 		is_moving = true
@@ -20,6 +25,7 @@ func _ready() -> void:
 		color = inst_enemy.enemy_stats.enemy_color_moving
 	else:
 		color = inst_enemy.enemy_stats.enemy_color
+	glow.self_modulate = color
 	
 	emitting = true
 	pass
