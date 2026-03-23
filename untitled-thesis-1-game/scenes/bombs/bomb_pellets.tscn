@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://dhxorp0bbtv8q"]
+
+[ext_resource type="PackedScene" uid="uid://hasb2k7kag83" path="res://scenes/bombs/bomb.tscn" id="1_v7vcj"]
+[ext_resource type="Texture2D" uid="uid://chajwsbty8tag" path="res://sprites/bombs/bomb_pellets_ready.png" id="2_5hjll"]
+[ext_resource type="Script" uid="uid://d0itjivscfvkt" path="res://scripts/bombs/bomb_pellets.gd" id="2_7tjq4"]
+[ext_resource type="Texture2D" uid="uid://68i0syuvejc" path="res://sprites/bombs/bomb_four_wing.png" id="3_7tjq4"]
+[ext_resource type="PackedScene" uid="uid://ccs1cb8eeq3sc" path="res://scenes/bullets/base_bullet.tscn" id="3_715g7"]
+[ext_resource type="Texture2D" uid="uid://com13h3uylqte" path="res://sprites/bombs/bomb_pellets_warn.png" id="4_715g7"]
+[ext_resource type="Resource" uid="uid://v37vy1v7d8" path="res://resources/bullets/bullet_circle_1-1.tres" id="4_ldlgn"]
+
+[node name="BombPellets" unique_id=1248930214 instance=ExtResource("1_v7vcj")]
+script = ExtResource("2_7tjq4")
+bullet_scene = ExtResource("3_715g7")
+bullet_stats = ExtResource("4_ldlgn")
+
+[node name="WarningSprite" parent="." index="0" unique_id=481958605]
+texture = ExtResource("2_5hjll")
+
+[node name="Cannons" type="Node2D" parent="." index="1" unique_id=1268073960]
+
+[node name="Cannon0" type="Sprite2D" parent="Cannons" index="0" unique_id=276556188]
+modulate = Color(1, 0.76862746, 1, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_7tjq4")
+
+[node name="Cannon1" type="Sprite2D" parent="Cannons" index="1" unique_id=1812391033]
+modulate = Color(1, 0.7696371, 1, 1)
+rotation = 0.7853982
+scale = Vector2(0.49999997, 0.49999997)
+texture = ExtResource("3_7tjq4")
+
+[node name="Cannon2" type="Sprite2D" parent="Cannons" index="2" unique_id=262727382]
+modulate = Color(1, 0.7696371, 1, 1)
+rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_7tjq4")
+
+[node name="Cannon3" type="Sprite2D" parent="Cannons" index="3" unique_id=869060208]
+modulate = Color(1, 0.7696371, 1, 1)
+rotation = 2.3561945
+scale = Vector2(0.49999997, 0.49999997)
+texture = ExtResource("3_7tjq4")
+
+[node name="Markers" type="Node2D" parent="." index="2" unique_id=575723978]
+
+[node name="Marker2D" type="Marker2D" parent="Markers" index="0" unique_id=635978213]
+position = Vector2(53, -53)
+
+[node name="Marker2D2" type="Marker2D" parent="Markers" index="1" unique_id=909476239]
+position = Vector2(-53, 53)
+
+[node name="Marker2D3" type="Marker2D" parent="Markers" index="2" unique_id=1732049082]
+position = Vector2(53, 53)
+
+[node name="Marker2D4" type="Marker2D" parent="Markers" index="3" unique_id=714117721]
+position = Vector2(-53, -53)
+
+[node name="Marker2D5" type="Marker2D" parent="Markers" index="4" unique_id=1473372229]
+position = Vector2(0, -75)
+
+[node name="Marker2D6" type="Marker2D" parent="Markers" index="5" unique_id=814438469]
+position = Vector2(0, 75)
+
+[node name="Marker2D7" type="Marker2D" parent="Markers" index="6" unique_id=1587410276]
+position = Vector2(-75, 0)
+
+[node name="Marker2D8" type="Marker2D" parent="Markers" index="7" unique_id=2074617850]
+position = Vector2(75, 0)
+
+[node name="HarmfulSprite" parent="." index="3" unique_id=1518204916]
+texture = ExtResource("4_715g7")
+
+[node name="BombGlow" parent="." index="4" unique_id=1459613062]
+self_modulate = Color(0.9498669, 0.25666898, 1, 1)
+
+[node name="HitArea2D" parent="." index="5" unique_id=902703]
+visible = false
