@@ -7,7 +7,7 @@ func get_save_profile() -> Dictionary:
 		"best_score": ProfileManager.best_score,
 		"best_phase": ProfileManager.best_successful_phases,
 		"best_level": ProfileManager.best_level_reached,
-		"best_survival_time": ProfileManager.best_survival_time,
+		"best_enemies_destroyed": ProfileManager.best_enemies_destroyed,
 	}
 	return save_dict
 

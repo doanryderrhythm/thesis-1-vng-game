@@ -23,14 +23,13 @@ class_name DebugUI
 #region RESULT
 @onready var reason_to_lose_label: Label = $ResultNode/Background/ReasonLabel
 
-@onready var survival_time_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/SurvivalTimeContainer/StatsValueLabel
-@onready var destroyed_enemies_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer/StatsValueLabel
-@onready var level_reached_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer/StatsValueLabel
-@onready var phases_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer/StatsValueLabel
-@onready var total_score_label: Label = $ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer/StatsValueLabel
+@onready var destroyed_enemies_label: RichTextLabel = $ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer/StatsValueLabel
+@onready var level_reached_label: RichTextLabel = $ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer/StatsValueLabel
+@onready var phases_label: RichTextLabel = $ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer/StatsValueLabel
+@onready var total_score_label: RichTextLabel = $ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer/StatsValueLabel
 
-@onready var coins_label: Label = $ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer/RewardsValueLabel
-@onready var achievements_label: Label = $ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer/RewardsValueLabel
+@onready var coins_label: RichTextLabel = $ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer/RewardsValueLabel
+@onready var achievements_label: RichTextLabel = $ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer/RewardsValueLabel
 #endregion
 
 #region PLAYER STATS
@@ -135,25 +134,33 @@ func update_result_screen() -> void:
 		reason_to_lose_label.text = ValueStorer.locked_string
 	else:
 		reason_to_lose_label.text = ValueStorer.died_string
-	
+		
 	var coins: int = GameManager.in_level_coins
-	var survival_time: int = int(GameManager.survival_time)
+	
+	var origin_total_destroyed_enemies: int = ProfileManager.best_enemies_destroyed
+	var origin_level_reached: int = ProfileManager.best_level_reached
+	var origin_total_successful_phases: int = ProfileManager.best_successful_phases
+	var origin_total_score: int = ProfileManager.best_score
+	
 	var total_destroyed_enemies: int = GameManager.total_destroyed_enemies
 	var level_reached: int = GameManager.current_actual_level + 1
 	var total_successful_phases: int = GameManager.total_successful_phases
 	var total_score: int = GameManager.total_score
 	
-	survival_time_label.text = str(survival_time)
-	destroyed_enemies_label.text = str(total_destroyed_enemies)
-	level_reached_label.text = str(level_reached)
-	phases_label.text = str(total_successful_phases)
-	total_score_label.text = str(total_score)
+	var difference_total_destroyed_enemies: int = total_destroyed_enemies - origin_total_destroyed_enemies
+	var difference_level_reached: int = level_reached - origin_level_reached
+	var difference_total_successful_phases: int = total_successful_phases - origin_total_successful_phases
+	var difference_total_score: int = total_score - origin_total_score
+	
+	destroyed_enemies_label.text = str(total_destroyed_enemies) + " (" + convert_difference_string_int(difference_total_destroyed_enemies) + ")"
+	level_reached_label.text = str(level_reached) + " (" + convert_difference_string_int(difference_level_reached) + ")"
+	phases_label.text = str(total_successful_phases) + " (" + convert_difference_string_int(difference_total_successful_phases) + ")"
+	total_score_label.text = str(total_score) + " (" + convert_difference_string_int(difference_total_score) + ")"
 
 	coins_label.text = str(coins)
 	achievements_label.text = "nope"
 	
 	ProfileManager.update_data(coins, \
-								survival_time, \
 								total_destroyed_enemies, \
 								level_reached, \
 								total_successful_phases, \
@@ -196,6 +203,16 @@ func update_minimap() -> void:
 		offset_y += 1
 		
 	minimap.visible = true
+
+func convert_difference_string_int(num: int) -> String:
+	if num > 0: return "[color=green]+" + str(num) + "[/color]"
+	if num == 0: return "[color=yellow]+" + str(num) + "[/color]"
+	return "[color=red]" + str(num) + "[/color]"
+
+func convert_difference_string_float(num: float) -> String:
+	if num > 0.0: return "[color=green]+" + str(num) + "[/color]"
+	if num == 0.0: return "[color=yellow]+" + str(num) + "[/color]"
+	return "[color=red]" + str(num) + "[/color]"
 
 func toggle_pause(is_toggled: bool) -> void:
 	pause_ui.visible = is_toggled

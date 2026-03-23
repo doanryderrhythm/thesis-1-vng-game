@@ -21,4 +21,3 @@ func load_game():
 		ProfileManager.best_score = node_data["best_score"]
 		ProfileManager.best_successful_phases = node_data["best_phase"]
 		ProfileManager.best_level_reached = node_data["best_level"]
-		ProfileManager.best_survival_time = node_data["best_survival_time"]

@@ -43,7 +43,6 @@ func attempt_to_unlock() -> void:
 		return
 	
 	ProfileManager.total_coins -= skin_stats.requirement
-	unlock_button.pressed.emit()
 	unlock_player()
 	ProfileManager.unlocked_codes.append(skin_stats.code)
 	SaveSystem.save_game()

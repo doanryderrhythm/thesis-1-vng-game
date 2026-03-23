@@ -108,10 +108,6 @@ font_size = 66
 font = ExtResource("9_j0te7")
 font_size = 26
 
-[sub_resource type="LabelSettings" id="LabelSettings_141q6"]
-font = ExtResource("9_j0te7")
-font_size = 26
-
 [sub_resource type="Animation" id="Animation_k7b8x"]
 length = 0.001
 tracks/0/type = "value"
@@ -211,18 +207,6 @@ tracks/4/keys = {
 "update": 1,
 "values": [4]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/SurvivalTimeContainer:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_bcd6v"]
 resource_name = "default"
@@ -291,11 +275,11 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/SurvivalTimeContainer:modulate")
+tracks/5/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1, 1.4),
+"times": PackedFloat32Array(1.1, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -303,11 +287,11 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer:modulate")
+tracks/6/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(1.1, 1.5),
+"times": PackedFloat32Array(1.2, 1.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -315,11 +299,11 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer:modulate")
+tracks/7/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(1.2, 1.6),
+"times": PackedFloat32Array(1.3, 1.6999999),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -327,11 +311,11 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer:modulate")
+tracks/8/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(1.3, 1.6999999),
+"times": PackedFloat32Array(1.4, 1.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -339,11 +323,11 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer:modulate")
+tracks/9/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer:modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(1.4, 1.8),
+"times": PackedFloat32Array(1.5, 1.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -351,22 +335,10 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer:modulate")
+tracks/10/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer:modulate")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(1.5, 1.9),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer:modulate")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
 "times": PackedFloat32Array(1.6, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -927,7 +899,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ResultNode" type="ColorRect" parent="." unique_id=1507721967]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1005,23 +976,6 @@ label_settings = SubResource("LabelSettings_bcx30")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SurvivalTimeContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1463885046]
-layout_mode = 2
-alignment = 1
-
-[node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/SurvivalTimeContainer" unique_id=461019681]
-custom_minimum_size = Vector2(360, 0)
-layout_mode = 2
-text = "total survival time"
-label_settings = SubResource("LabelSettings_j0te7")
-
-[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/SurvivalTimeContainer" unique_id=196126999]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-text = "abc"
-label_settings = SubResource("LabelSettings_141q6")
-horizontal_alignment = 2
-
 [node name="DestroyedEnemiesContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1701723659]
 layout_mode = 2
 alignment = 1
@@ -1032,11 +986,14 @@ layout_mode = 2
 text = "total destroyed enemies"
 label_settings = SubResource("LabelSettings_j0te7")
 
-[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer" unique_id=1730458426]
+[node name="StatsValueLabel" type="RichTextLabel" parent="ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer" unique_id=2144481628]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("9_j0te7")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
 text = "abc"
-label_settings = SubResource("LabelSettings_141q6")
+scroll_active = false
 horizontal_alignment = 2
 
 [node name="LevelReachedContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1171083082]
@@ -1049,11 +1006,14 @@ layout_mode = 2
 text = "level reached"
 label_settings = SubResource("LabelSettings_j0te7")
 
-[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer" unique_id=1533919136]
+[node name="StatsValueLabel" type="RichTextLabel" parent="ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer" unique_id=1256294199]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("9_j0te7")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
 text = "abc"
-label_settings = SubResource("LabelSettings_141q6")
+scroll_active = false
 horizontal_alignment = 2
 
 [node name="PhasesContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1460814282]
@@ -1066,11 +1026,14 @@ layout_mode = 2
 text = "total successful phases"
 label_settings = SubResource("LabelSettings_j0te7")
 
-[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer" unique_id=1208740906]
+[node name="StatsValueLabel" type="RichTextLabel" parent="ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer" unique_id=203679116]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("9_j0te7")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
 text = "abc"
-label_settings = SubResource("LabelSettings_141q6")
+scroll_active = false
 horizontal_alignment = 2
 
 [node name="ScoreContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1424393135]
@@ -1083,13 +1046,15 @@ layout_mode = 2
 text = "overall score"
 label_settings = SubResource("LabelSettings_j0te7")
 
-[node name="StatsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer" unique_id=1789093891]
+[node name="StatsValueLabel" type="RichTextLabel" parent="ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer" unique_id=1543115216]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("9_j0te7")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
 text = "abc"
-label_settings = SubResource("LabelSettings_141q6")
+scroll_active = false
 horizontal_alignment = 2
-text_overrun_behavior = 1
 
 [node name="RewardsContainer" type="VBoxContainer" parent="ResultNode/Background/ContentContainer" unique_id=22887340]
 layout_mode = 2
@@ -1111,11 +1076,14 @@ layout_mode = 2
 text = "coins"
 label_settings = SubResource("LabelSettings_j0te7")
 
-[node name="RewardsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer" unique_id=1649222714]
+[node name="RewardsValueLabel" type="RichTextLabel" parent="ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer" unique_id=898613177]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("9_j0te7")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
 text = "abc"
-label_settings = SubResource("LabelSettings_141q6")
+scroll_active = false
 horizontal_alignment = 2
 
 [node name="AchievementsContainer" type="HBoxContainer" parent="ResultNode/Background/ContentContainer/RewardsContainer" unique_id=628273482]
@@ -1128,11 +1096,14 @@ layout_mode = 2
 text = "unique achievements"
 label_settings = SubResource("LabelSettings_j0te7")
 
-[node name="RewardsValueLabel" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer" unique_id=1614572973]
+[node name="RewardsValueLabel" type="RichTextLabel" parent="ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer" unique_id=1736407814]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("9_j0te7")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
 text = "abc"
-label_settings = SubResource("LabelSettings_141q6")
+scroll_active = false
 horizontal_alignment = 2
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="ResultNode/Background" unique_id=291403179]
