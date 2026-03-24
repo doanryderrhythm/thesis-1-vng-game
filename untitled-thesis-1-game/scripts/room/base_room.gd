@@ -18,6 +18,9 @@ var bomb_harm_time: float
 var bomb_four_warn_time: float
 var bomb_four_harm_time: float
 
+var bomb_pellet_warn_time: float
+var bomb_pellet_harm_time: float
+
 @onready var first_point: Marker2D = $WayPoints/FirstPoint
 @onready var last_point: Marker2D = $WayPoints/LastPoint
 
@@ -39,6 +42,8 @@ var bomb_four_harm_time: float
 @onready var bomb_timer: Timer = $BombTimer
 @onready var bomb_four_scene: PackedScene = preload("res://scenes/bombs/bomb_four.tscn")
 @onready var bomb_four_timer: Timer = $BombFourTimer
+@onready var bomb_pellet_scene: PackedScene = preload("res://scenes/bombs/bomb_pellets.tscn")
+@onready var bomb_pellet_timer: Timer = $BombPelletTimer
 @onready var bomb_way_points: Node2D = $BombWayPoints
 
 @onready var all_spikes: Node2D = $Spikes
@@ -69,6 +74,7 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 		if GameManager.is_spike: spike_timer.start()
 		if GameManager.is_bomb: bomb_timer.start()
 		if GameManager.is_bomb_four: bomb_four_timer.start()
+		if GameManager.is_bomb_pellet: bomb_pellet_timer.start()
 		doors.process_mode = Node.PROCESS_MODE_INHERIT
 		RenderingServer.set_default_clear_color(Color(0.1, 0.1, 0.1, 1.0))
 	else:
@@ -178,6 +184,10 @@ func _on_bomb_four_timer_timeout() -> void:
 	respawn_bomb(bomb_four_scene)
 	pass # Replace with function body.
 
+func _on_bomb_pellet_timer_timeout() -> void:
+	respawn_bomb(bomb_pellet_scene)
+	pass # Replace with function body.
+
 func respawn_bomb(scene: PackedScene) -> void:
 	if is_executed:
 		return
@@ -203,6 +213,9 @@ func respawn_bomb(scene: PackedScene) -> void:
 	if new_bomb is BombFour:
 		new_bomb.warning_timer.wait_time = bomb_four_warn_time
 		new_bomb.harmful_timer.wait_time = bomb_four_harm_time
+	elif new_bomb is BombPellets:
+		new_bomb.warning_timer.wait_time = bomb_pellet_warn_time
+		new_bomb.warning_timer.wait_time = bomb_pellet_harm_time
 	else:
 		new_bomb.warning_timer.wait_time = bomb_warn_time
 		new_bomb.harmful_timer.wait_time = bomb_harm_time

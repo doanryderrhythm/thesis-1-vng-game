@@ -22,6 +22,7 @@ var is_lazer: bool
 var is_spike: bool
 var is_bomb: bool
 var is_bomb_four: bool
+var is_bomb_pellet: bool
 
 var enemy_particles: PackedScene = preload("res://effects/base_enemy_spawn.tscn")
 var enemy_scenes: Array[PackedScene] = []
