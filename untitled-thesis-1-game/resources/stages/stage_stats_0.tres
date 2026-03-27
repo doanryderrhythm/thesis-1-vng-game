@@ -14,3 +14,6 @@ bomb_pellet_spawn_rate = 1.0
 bomb_pellet_warn_time = 1.0
 bomb_pellet_stay_time = 2.0
 bomb_pellet_shoot_attempts = 2
+is_bomb_move = true
+bomb_move_spawn_rate = 1.0
+bomb_move_warn_time = 1.0

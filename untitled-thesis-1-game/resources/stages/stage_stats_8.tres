@@ -21,3 +21,6 @@ is_bomb_four = true
 bomb_four_spawn_rate = 1.5
 bomb_four_warn_time = 1.75
 bomb_four_stay_time = 1.25
+is_bomb_move = true
+bomb_move_spawn_rate = 1.5
+bomb_move_warn_time = 1.0

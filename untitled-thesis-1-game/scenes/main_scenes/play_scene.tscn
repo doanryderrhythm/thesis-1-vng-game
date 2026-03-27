@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://di78feag8gs8a" path="res://scenes/ui/debug_ui.tscn" id="1_vrx0d"]
 [ext_resource type="PackedScene" uid="uid://dls40hpj5hhkq" path="res://scenes/cursors/aim_cursor.tscn" id="2_qvacy"]
 [ext_resource type="Texture2D" uid="uid://dkacfy5sk2ffo" path="res://sprites/tutorial/tutorial.png" id="4_5b3o3"]
-[ext_resource type="PackedScene" uid="uid://homwtkqusyd1" path="res://scenes/bombs/bomb_move.tscn" id="5_y0n7b"]
 
 [sub_resource type="GDScript" id="GDScript_vrx0d"]
 resource_name = "play_scene"
@@ -131,6 +130,3 @@ layer = 300
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=759961423]
 libraries/ = SubResource("AnimationLibrary_y0n7b")
-
-[node name="BombMove" parent="." unique_id=1248930214 instance=ExtResource("5_y0n7b")]
-position = Vector2(-157, 324)

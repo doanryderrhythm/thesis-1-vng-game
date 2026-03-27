@@ -22,6 +22,8 @@ var bomb_pellet_warn_time: float
 var bomb_pellet_harm_time: float
 var bomb_pellet_shoot_attempts: int
 
+var bomb_move_warn_time: float
+
 @onready var first_point: Marker2D = $WayPoints/FirstPoint
 @onready var last_point: Marker2D = $WayPoints/LastPoint
 
@@ -45,6 +47,8 @@ var bomb_pellet_shoot_attempts: int
 @onready var bomb_four_timer: Timer = $BombFourTimer
 @onready var bomb_pellet_scene: PackedScene = preload("res://scenes/bombs/bomb_pellets.tscn")
 @onready var bomb_pellet_timer: Timer = $BombPelletTimer
+@onready var bomb_move_scene: PackedScene = preload("res://scenes/bombs/bomb_move.tscn")
+@onready var bomb_move_timer: Timer = $BombMoveTimer
 @onready var bomb_way_points: Node2D = $BombWayPoints
 
 @onready var all_spikes: Node2D = $Spikes
@@ -76,6 +80,7 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 		if GameManager.is_bomb: bomb_timer.start()
 		if GameManager.is_bomb_four: bomb_four_timer.start()
 		if GameManager.is_bomb_pellet: bomb_pellet_timer.start()
+		if GameManager.is_bomb_move: bomb_move_timer.start()
 		doors.process_mode = Node.PROCESS_MODE_INHERIT
 		RenderingServer.set_default_clear_color(Color(0.1, 0.1, 0.1, 1.0))
 	else:
@@ -84,6 +89,7 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 		bomb_timer.stop()
 		bomb_four_timer.stop()
 		bomb_pellet_timer.stop()
+		bomb_move_timer.stop()
 		
 		for obj in all_bombs.get_children():
 			if is_instance_valid(obj): obj.queue_free()
@@ -190,6 +196,10 @@ func _on_bomb_pellet_timer_timeout() -> void:
 	respawn_bomb(bomb_pellet_scene)
 	pass # Replace with function body.
 
+func _on_bomb_move_timer_timeout() -> void:
+	respawn_bomb(bomb_move_scene)
+	pass # Replace with function body.
+
 func respawn_bomb(scene: PackedScene) -> void:
 	if is_executed:
 		return
@@ -219,6 +229,8 @@ func respawn_bomb(scene: PackedScene) -> void:
 		new_bomb.warning_timer.wait_time = bomb_pellet_warn_time
 		new_bomb.harmful_timer.wait_time = bomb_pellet_harm_time
 		new_bomb.shoot_timer.wait_time = bomb_pellet_harm_time / float(bomb_pellet_shoot_attempts)
+	elif new_bomb is BombMove:
+		new_bomb.warning_timer.wait_time = bomb_move_warn_time
 	else:
 		new_bomb.warning_timer.wait_time = bomb_warn_time
 		new_bomb.harmful_timer.wait_time = bomb_harm_time

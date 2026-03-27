@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://ccs1cb8eeq3sc" path="res://scenes/bullets/base_bullet.tscn" id="3_trtyo"]
 [ext_resource type="Resource" uid="uid://c5u7hqtyiwjip" path="res://resources/bullets/bullet_square_4-1.tres" id="4_g53q4"]
 [ext_resource type="Texture2D" uid="uid://cxjpn24ndkgd7" path="res://sprites/bombs/bomb_move_arrow.png" id="4_mrsqv"]
+[ext_resource type="PackedScene" uid="uid://eq0xlf50bfg2" path="res://effects/killed_glow.tscn" id="4_phefb"]
+
+[sub_resource type="Gradient" id="Gradient_g53q4"]
+colors = PackedColorArray(0.38039216, 1, 0.77254903, 0.38039216, 0.38039216, 1, 0.77254903, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mvuig"]
 radius = 63.07139
@@ -14,22 +18,31 @@ radius = 63.07139
 [node name="BombMove" unique_id=1248930214 instance=ExtResource("1_xj2vi")]
 script = ExtResource("2_mvuig")
 bullet_scene = ExtResource("3_trtyo")
+glow_scene = ExtResource("4_phefb")
 bullet_stats = ExtResource("4_g53q4")
 
-[node name="WarningSprite" parent="." index="0" unique_id=481958605]
+[node name="RayCast" type="RayCast2D" parent="." index="0" unique_id=1240676217]
+target_position = Vector2(4000, 0)
+
+[node name="WarningLine" type="Line2D" parent="." index="1" unique_id=1634376715]
+width = 100.0
+gradient = SubResource("Gradient_g53q4")
+begin_cap_mode = 2
+
+[node name="WarningSprite" parent="." index="2" unique_id=481958605]
 texture = ExtResource("2_svcno")
 
-[node name="HarmfulSprite" parent="." index="1" unique_id=1518204916]
+[node name="HarmfulSprite" parent="." index="3" unique_id=1518204916]
 texture = ExtResource("3_mvuig")
 
-[node name="BombGlow" parent="." index="2" unique_id=1459613062]
+[node name="BombGlow" parent="." index="4" unique_id=1459613062]
 self_modulate = Color(0.25666898, 1, 0.68926334, 1)
 
-[node name="Arrow" type="Sprite2D" parent="." index="3" unique_id=394930203]
+[node name="Arrow" type="Sprite2D" parent="." index="5" unique_id=394930203]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_mrsqv")
 
-[node name="Markers" type="Node2D" parent="." index="4" unique_id=1773967953]
+[node name="Markers" type="Node2D" parent="." index="6" unique_id=1773967953]
 
 [node name="Marker2D" type="Marker2D" parent="Markers" index="0" unique_id=1431570385]
 position = Vector2(-30, -57)
@@ -46,7 +59,7 @@ position = Vector2(-55, 33)
 [node name="Marker2D5" type="Marker2D" parent="Markers" index="4" unique_id=1694218560]
 position = Vector2(-30, 57)
 
-[node name="CollideArea2D" type="Area2D" parent="." index="6" unique_id=1646699877]
+[node name="CollideArea2D" type="Area2D" parent="." index="8" unique_id=1646699877]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollideArea2D" index="0" unique_id=8571907]

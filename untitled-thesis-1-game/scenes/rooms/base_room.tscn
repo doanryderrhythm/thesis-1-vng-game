@@ -397,6 +397,8 @@ wait_time = 3.5
 [node name="BombPelletTimer" type="Timer" parent="." unique_id=25640836]
 wait_time = 2.0
 
+[node name="BombMoveTimer" type="Timer" parent="." unique_id=179471555]
+
 [node name="DoorCloseAudio" type="AudioStreamPlayer" parent="." unique_id=1696601352]
 stream = ExtResource("4_ativ4")
 pitch_scale = 0.5
@@ -410,3 +412,4 @@ libraries/ = SubResource("AnimationLibrary_xp0a8")
 [connection signal="timeout" from="BombTimer" to="." method="_on_bomb_timer_timeout"]
 [connection signal="timeout" from="BombFourTimer" to="." method="_on_bomb_four_timer_timeout"]
 [connection signal="timeout" from="BombPelletTimer" to="." method="_on_bomb_pellet_timer_timeout"]
+[connection signal="timeout" from="BombMoveTimer" to="." method="_on_bomb_move_timer_timeout"]

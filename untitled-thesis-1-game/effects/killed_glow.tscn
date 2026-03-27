@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://eq0xlf50bfg2"]
+
+[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="1_eflyx"]
+
+[sub_resource type="GDScript" id="GDScript_eflyx"]
+resource_name = "killed_glow"
+script/source = "extends Node2D
+
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var anim_player: AnimationPlayer = $AnimationPlayer
+
+var total_time: float = 0.0
+
+func _ready() -> void:
+	anim_player.play(\"default\")
+
+func _process(delta: float) -> void:
+	total_time += delta
+	if total_time >= 1.5 and is_instance_valid(self):
+		queue_free()
+
+func set_color(color: Color) -> void:
+	sprite.self_modulate = color
+"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eflyx"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_bcxaw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_se55g"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uf2li"]
+_data = {
+&"RESET": SubResource("Animation_bcxaw"),
+&"default": SubResource("Animation_se55g")
+}
+
+[node name="KilledGlow" type="Node2D" unique_id=258596853]
+script = SubResource("GDScript_eflyx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=95829970]
+material = SubResource("CanvasItemMaterial_eflyx")
+scale = Vector2(5, 5)
+texture = ExtResource("1_eflyx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1185653381]
+libraries/ = SubResource("AnimationLibrary_uf2li")
