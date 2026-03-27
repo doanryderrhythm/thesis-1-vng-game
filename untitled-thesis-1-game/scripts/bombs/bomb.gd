@@ -1,4 +1,4 @@
-extends Node2D
+extends RigidBody2D
 class_name Bomb
 
 @onready var warning_sprite: Sprite2D = $WarningSprite

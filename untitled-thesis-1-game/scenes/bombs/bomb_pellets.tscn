@@ -6,12 +6,23 @@
 [ext_resource type="Texture2D" uid="uid://68i0syuvejc" path="res://sprites/bombs/bomb_four_wing.png" id="3_7tjq4"]
 [ext_resource type="PackedScene" uid="uid://ccs1cb8eeq3sc" path="res://scenes/bullets/base_bullet.tscn" id="3_715g7"]
 [ext_resource type="Texture2D" uid="uid://com13h3uylqte" path="res://sprites/bombs/bomb_pellets_warn.png" id="4_715g7"]
-[ext_resource type="Resource" uid="uid://v37vy1v7d8" path="res://resources/bullets/bullet_circle_1-1.tres" id="4_ldlgn"]
+[ext_resource type="Script" uid="uid://f5tg3n012yi5" path="res://scripts/resources/resource_bullet.gd" id="4_ldlgn"]
+[ext_resource type="Texture2D" uid="uid://5hn83ge5xptb" path="res://sprites/bullets/bullet_circle.png" id="5_lwv7t"]
+
+[sub_resource type="Resource" id="Resource_ojwv1"]
+script = ExtResource("4_ldlgn")
+texture = ExtResource("5_lwv7t")
+min_speed = 500.0
+max_speed = 600.0
+damage = 10.0
+bullet_color = Color(1, 1, 0, 1)
+bullet_color_moving = Color(1, 0.5137255, 0, 1)
+metadata/_custom_type_script = "uid://f5tg3n012yi5"
 
 [node name="BombPellets" unique_id=1248930214 instance=ExtResource("1_v7vcj")]
 script = ExtResource("2_7tjq4")
 bullet_scene = ExtResource("3_715g7")
-bullet_stats = ExtResource("4_ldlgn")
+bullet_stats = SubResource("Resource_ojwv1")
 
 [node name="WarningSprite" parent="." index="0" unique_id=481958605]
 texture = ExtResource("2_5hjll")
@@ -73,7 +84,7 @@ texture = ExtResource("4_715g7")
 [node name="BombGlow" parent="." index="4" unique_id=1459613062]
 self_modulate = Color(0.9498669, 0.25666898, 1, 1)
 
-[node name="HitArea2D" parent="." index="5" unique_id=902703]
+[node name="HitArea2D" parent="." index="6" unique_id=902703]
 visible = false
 
 [node name="ShootTimer" type="Timer" parent="." index="8" unique_id=1954062771]

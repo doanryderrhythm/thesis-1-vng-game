@@ -9,6 +9,9 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vm8jn"]
 blend_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_me2k2"]
+radius = 61.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6wp8"]
 radius = 63.007935
 
@@ -51,7 +54,9 @@ _data = {
 &"default": SubResource("Animation_akqh8")
 }
 
-[node name="Bomb" type="Node2D" unique_id=1248930214]
+[node name="Bomb" type="RigidBody2D" unique_id=20548186]
+collision_layer = 0
+gravity_scale = 0.0
 script = ExtResource("1_me2k2")
 
 [node name="WarningSprite" type="Sprite2D" parent="." unique_id=481958605]
@@ -68,6 +73,10 @@ self_modulate = Color(1, 0.19748032, 0.19748032, 1)
 material = SubResource("CanvasItemMaterial_vm8jn")
 scale = Vector2(4, 4)
 texture = ExtResource("4_toaus")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1060496575]
+shape = SubResource("CircleShape2D_me2k2")
+debug_color = Color(0.70196074, 0.56069094, 0, 0.41960785)
 
 [node name="HitArea2D" type="Area2D" parent="." unique_id=902703]
 collision_layer = 8

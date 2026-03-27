@@ -10,7 +10,6 @@ max_enemy = 2
 lazer_spawn_rate = 2.0
 lazer_warn_time = 2.0
 lazer_stay_time = 1.5
-is_bomb_pellet = true
 bomb_pellet_spawn_rate = 1.0
 bomb_pellet_warn_time = 1.0
 bomb_pellet_stay_time = 2.0
