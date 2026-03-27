@@ -20,6 +20,7 @@ var bomb_four_harm_time: float
 
 var bomb_pellet_warn_time: float
 var bomb_pellet_harm_time: float
+var bomb_pellet_shoot_attempts: int
 
 @onready var first_point: Marker2D = $WayPoints/FirstPoint
 @onready var last_point: Marker2D = $WayPoints/LastPoint
@@ -82,6 +83,7 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 		spike_timer.stop()
 		bomb_timer.stop()
 		bomb_four_timer.stop()
+		bomb_pellet_timer.stop()
 		
 		for obj in all_bombs.get_children():
 			if is_instance_valid(obj): obj.queue_free()
@@ -215,7 +217,8 @@ func respawn_bomb(scene: PackedScene) -> void:
 		new_bomb.harmful_timer.wait_time = bomb_four_harm_time
 	elif new_bomb is BombPellets:
 		new_bomb.warning_timer.wait_time = bomb_pellet_warn_time
-		new_bomb.warning_timer.wait_time = bomb_pellet_harm_time
+		new_bomb.harmful_timer.wait_time = bomb_pellet_harm_time
+		new_bomb.shoot_timer.wait_time = bomb_pellet_harm_time / float(bomb_pellet_shoot_attempts)
 	else:
 		new_bomb.warning_timer.wait_time = bomb_warn_time
 		new_bomb.harmful_timer.wait_time = bomb_harm_time

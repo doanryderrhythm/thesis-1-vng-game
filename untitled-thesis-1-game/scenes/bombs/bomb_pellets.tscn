@@ -75,3 +75,7 @@ self_modulate = Color(0.9498669, 0.25666898, 1, 1)
 
 [node name="HitArea2D" parent="." index="5" unique_id=902703]
 visible = false
+
+[node name="ShootTimer" type="Timer" parent="." index="8" unique_id=1954062771]
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

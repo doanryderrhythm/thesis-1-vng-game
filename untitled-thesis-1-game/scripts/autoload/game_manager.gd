@@ -127,6 +127,7 @@ func start_stage() -> void:
 	is_spike = stage_stats[current_level].is_spike
 	is_bomb = stage_stats[current_level].is_bomb
 	is_bomb_four = stage_stats[current_level].is_bomb_four
+	is_bomb_pellet = stage_stats[current_level].is_bomb_pellet
 	is_going = true
 	start_level.emit()
 	phase_change.emit(true)
@@ -276,6 +277,11 @@ func confirm_stage(room: Room) -> void:
 		room.bomb_four_timer.wait_time = stage_stats[current_level].bomb_four_spawn_rate
 		room.bomb_four_warn_time = stage_stats[current_level].bomb_four_warn_time
 		room.bomb_four_harm_time = stage_stats[current_level].bomb_four_stay_time
+	if is_bomb_pellet:
+		room.bomb_pellet_timer.wait_time = stage_stats[current_level].bomb_pellet_spawn_rate
+		room.bomb_pellet_warn_time = stage_stats[current_level].bomb_pellet_warn_time
+		room.bomb_pellet_harm_time = stage_stats[current_level].bomb_pellet_stay_time
+		room.bomb_pellet_shoot_attempts = stage_stats[current_level].bomb_pellet_shoot_attempts
 	
 func is_all_surroundings_locked(_id_x: int, _id_y: int) -> bool:
 	if find_used_room(_id_x - 1, _id_y) and \

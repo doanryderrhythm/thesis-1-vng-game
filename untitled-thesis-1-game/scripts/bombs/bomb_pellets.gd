@@ -7,23 +7,38 @@ class_name BombPellets
 @export var bullet_scene: PackedScene
 @export var bullet_stats: BulletStats
 
+@onready var shoot_timer: Timer = $ShootTimer
+
+var rotate_rate: float
+
 func _ready() -> void:
+	rotate_rate = randf_range(30, 150)
+	
 	warning_sprite.visible = true
 	harmful_sprite.visible = false
 	bomb_glow.visible = false
 	cannons.visible = false
 	bomb_collision.disabled = true
 
+func _process(delta: float) -> void:
+	rotate(deg_to_rad(rotate_rate) * delta)
+
 func _on_warning_timer_timeout() -> void:
 	is_ready = true
+	cannons.visible = true
 	warning_sprite.visible = false
 	harmful_sprite.visible = true
 	bomb_glow.visible = true
 	bomb_collision.disabled = false
 	anim_player.play("default")
 	harmful_timer.start()
+	shoot_timer.start()
 	shoot_bullets()
 	pass # Replace with function body.
+
+func _on_shoot_timer_timeout() -> void:
+	shoot_bullets()
+	pass
 
 func shoot_bullets() -> void:
 	for marker in shoot_markers.get_children():

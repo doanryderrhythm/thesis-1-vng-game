@@ -35,3 +35,4 @@ class_name StageStats
 @export var bomb_pellet_spawn_rate: float
 @export var bomb_pellet_warn_time: float
 @export var bomb_pellet_stay_time: float
+@export var bomb_pellet_shoot_attempts: int
