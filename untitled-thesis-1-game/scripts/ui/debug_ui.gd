@@ -19,6 +19,7 @@ class_name DebugUI
 
 @onready var gameplay_anim_player: AnimationPlayer = $GameplayAnimationPlayer
 @onready var result_anim_player: AnimationPlayer = $ResultAnimationPlayer
+@onready var debug_ui_anim_player: AnimationPlayer = $DebugUIAnimationPlayer
 
 #region RESULT
 @onready var reason_to_lose_label: Label = $ResultNode/Background/ReasonLabel
@@ -97,6 +98,10 @@ func change_health() -> void:
 
 func change_dash() -> void:
 	dash_bar.value = GameManager.player._dash_count
+	if dash_bar.value == 0:
+		debug_ui_anim_player.play("dash_waiting")
+	else:
+		debug_ui_anim_player.play("RESET")
 
 func change_score() -> void:
 	score_label.text = str(GameManager.total_score)

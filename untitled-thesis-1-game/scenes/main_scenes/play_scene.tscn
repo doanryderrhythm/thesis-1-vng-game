@@ -116,6 +116,7 @@ texture = ExtResource("4_5b3o3")
 [node name="Bullets" type="Node2D" parent="." unique_id=1314244741]
 
 [node name="Player" parent="." unique_id=556700346 instance=ExtResource("1_tt14s")]
+_physics_type = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1918493937]
 zoom = Vector2(0.35, 0.35)

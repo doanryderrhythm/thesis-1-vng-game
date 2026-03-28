@@ -18,7 +18,14 @@ enum CharacterType
 	CIRCLE,
 }
 
+enum PhysicsType
+{
+	NORMAL,
+	ICY,
+}
+
 @export var _character_type: CharacterType
+@export var _physics_type: PhysicsType
 @export var _bullet_stats: BulletStats
 @export var _bullet_scene: PackedScene
 
@@ -49,6 +56,11 @@ var _is_invulnerable: bool = false
 @onready var _hurt_audio: AudioStreamPlayer = $HurtAudio
 
 @onready var _player_sprite: Sprite2D = $Sprite2D
+
+var _current_velocity: Vector2 = Vector2.ZERO
+
+@export var ice_acceleration: float = 3500.0
+@export var ice_friction: float = 2000.0
 
 var state: PlayerState
 var _is_dash: bool = false
@@ -88,12 +100,31 @@ func manage_move() -> void:
 		Input.get_action_strength(ValueStorer.key_down) - Input.get_action_strength(ValueStorer.key_up)
 	)
 	
-	if state != PlayerState.DASH:
-		direction_vector = input_vector.normalized() * _offset_move_speed
-	else:
-		direction_vector = _dash_direction_vector
+	if _physics_type == PhysicsType.NORMAL:
+		if state != PlayerState.DASH:
+			direction_vector = input_vector.normalized() * _offset_move_speed
+		else:
+			direction_vector = _dash_direction_vector
+			
+		velocity = ProfileManager.move_speed * _move_rate * direction_vector
+	elif _physics_type == PhysicsType.ICY:
+		if state != PlayerState.DASH:
+			var target_velocity = input_vector * ProfileManager.move_speed * _offset_move_speed
+			if input_vector != Vector2.ZERO:
+				_current_velocity = _current_velocity.move_toward(
+					target_velocity,
+					ice_acceleration * get_physics_process_delta_time()
+				)
+			else:
+				_current_velocity = _current_velocity.move_toward(
+					Vector2.ZERO,
+					ice_friction * get_physics_process_delta_time()
+				)
+		else:
+			_current_velocity = ProfileManager.move_speed * _dash_direction_vector
 		
-	velocity = ProfileManager.move_speed * _move_rate * direction_vector
+		velocity = _current_velocity * _move_rate
+	
 	move_and_slide()
 
 func manage_dash() -> void:
