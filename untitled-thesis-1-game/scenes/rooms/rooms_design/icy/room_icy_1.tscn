@@ -1,0 +1,11 @@
+[gd_scene format=4 uid="uid://bjsgulmuq0rgw"]
+
+[ext_resource type="PackedScene" uid="uid://bi73nvnauvqwd" path="res://scenes/rooms/base_icy_room.tscn" id="1_nq117"]
+[ext_resource type="TileSet" uid="uid://dn42u1a34klgj" path="res://tilesets/tile_set_test.tres" id="2_ohwcy"]
+
+[node name="BaseRoom" unique_id=1792470563 instance=ExtResource("1_nq117")]
+
+[node name="HindranceTilemap" type="TileMapLayer" parent="." index="22" unique_id=982818370]
+self_modulate = Color(0.2901961, 0.63529414, 1, 1)
+tile_map_data = PackedByteArray("AAD///3/AAAAAAAAAAD///7/AAAAAAAAAAD/////AAAAAAAAAAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAAAAP3/AAAAAAAAAAAAAP7/AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAD///z/AAAAAAAAAAAAAPz/AAAAAAAAAAD//wMAAAAAAAAAAAAAAAMAAAAAAAAAAAD8////AAAAAAAAAAD8/wAAAAAAAAAAAAD9////AAAAAAAAAAD9/wAAAAAAAAAAAAD+////AAAAAAAAAAD+/wAAAAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAACAP//AAAAAAAAAAACAAAAAAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAA=")
+tile_set = ExtResource("2_ohwcy")

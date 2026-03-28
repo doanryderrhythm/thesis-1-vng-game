@@ -10,7 +10,8 @@ script/source = "extends Node2D
 var player_listener: PlayerListener = load(\"res://resources/player/player_listener.tres\")
 var all_players: Array[PlayerStats] = []
 
-@onready var start_button: Button = $CanvasLayer/StartButton
+@onready var start_normal_button: Button = $CanvasLayer/StartNormalButton
+@onready var start_icy_button: Button = $CanvasLayer/StartIcyButton
 
 @onready var item_container: HBoxContainer = $CanvasLayer/ShopBackground/Mask/ScrollContainer/PlayerItemContainer
 @onready var skin_ui_item: PackedScene = preload(\"res://scenes/ui/skin_ui_item.tscn\")
@@ -45,13 +46,22 @@ func select_skin(selected_ui_item: SkinUI) -> void:
 			item.modulate = Color(\"#a3fbff\")
 		else:
 			item.modulate = Color.WHITE
-	start_button.disabled = false
+	start_normal_button.disabled = false
+	start_icy_button.disabled = false
 
 func change_coin_text() -> void:
 	coin_count_label.text = str(ProfileManager.total_coins)
 
-func _on_start_button_pressed() -> void:
+func start_game(level_type: GameManager.LevelType) -> void:
+	GameManager.level_type = level_type
 	get_tree().change_scene_to_file(\"res://scenes/main_scenes/play_scene.tscn\")
+
+func _on_start_normal_button_pressed() -> void:
+	start_game(GameManager.LevelType.LEVEL_NORMAL)
+	pass # Replace with function body.
+
+func _on_start_icy_button_pressed() -> void:
+	start_game(GameManager.LevelType.LEVEL_ICY)
 	pass # Replace with function body.
 "
 
@@ -130,19 +140,35 @@ label_settings = SubResource("LabelSettings_8r8tc")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartButton" type="Button" parent="CanvasLayer" unique_id=947664123]
+[node name="StartNormalButton" type="Button" parent="CanvasLayer" unique_id=947664123]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -100.0
+offset_left = -250.0
 offset_top = -60.0
-offset_right = 100.0
+offset_right = -50.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 disabled = true
-text = "START"
+text = "START - NORMAL"
 
-[connection signal="pressed" from="CanvasLayer/StartButton" to="." method="_on_start_button_pressed"]
+[node name="StartIcyButton" type="Button" parent="CanvasLayer" unique_id=1831198907]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -60.0
+offset_right = 250.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+disabled = true
+text = "START - ICY"
+
+[connection signal="pressed" from="CanvasLayer/StartNormalButton" to="." method="_on_start_normal_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/StartIcyButton" to="." method="_on_start_icy_button_pressed"]

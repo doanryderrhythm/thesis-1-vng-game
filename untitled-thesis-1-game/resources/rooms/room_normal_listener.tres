@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="RoomsListener" format=3 uid="uid://ct527idcq8lti"]
+
+[ext_resource type="PackedScene" uid="uid://b88pqvvq52eqy" path="res://scenes/rooms/rooms_design/normal/room_0.tscn" id="1_0gpjw"]
+[ext_resource type="PackedScene" uid="uid://8gb0slnf4lms" path="res://scenes/rooms/rooms_design/normal/room_1.tscn" id="2_kfj16"]
+[ext_resource type="PackedScene" uid="uid://bk25p8otpm3d1" path="res://scenes/rooms/rooms_design/normal/room_2.tscn" id="3_sv6v0"]
+[ext_resource type="PackedScene" uid="uid://hjsgcrcnvn1o" path="res://scenes/rooms/rooms_design/normal/room_3.tscn" id="4_j47w8"]
+[ext_resource type="PackedScene" uid="uid://cehpvqresdr2s" path="res://scenes/rooms/rooms_design/normal/room_4.tscn" id="5_w5wuk"]
+[ext_resource type="PackedScene" uid="uid://uyjb82dws7ct" path="res://scenes/rooms/rooms_design/normal/room_5.tscn" id="6_5wdhn"]
+[ext_resource type="PackedScene" uid="uid://btmje44g4fy1u" path="res://scenes/rooms/rooms_design/normal/room_6.tscn" id="7_p74g2"]
+[ext_resource type="PackedScene" uid="uid://cqfnf74dvp5mf" path="res://scenes/rooms/rooms_design/normal/room_7.tscn" id="8_6aphp"]
+[ext_resource type="PackedScene" uid="uid://birox56j4wwti" path="res://scenes/rooms/rooms_design/normal/room_8.tscn" id="9_unepu"]
+[ext_resource type="PackedScene" uid="uid://c01anlqftamcu" path="res://scenes/rooms/rooms_design/normal/room_9.tscn" id="10_nhsp5"]
+[ext_resource type="PackedScene" uid="uid://ddigty0sawgc8" path="res://scenes/rooms/rooms_design/normal/room_10.tscn" id="11_3dcf4"]
+[ext_resource type="Script" uid="uid://c2jo4inf8j6aj" path="res://scripts/resources/resource_room_listener.gd" id="12_qg34l"]
+
+[resource]
+script = ExtResource("12_qg34l")
+rooms = Array[PackedScene]([ExtResource("1_0gpjw"), ExtResource("2_kfj16"), ExtResource("3_sv6v0"), ExtResource("4_j47w8"), ExtResource("5_w5wuk"), ExtResource("6_5wdhn"), ExtResource("7_p74g2"), ExtResource("8_6aphp"), ExtResource("9_unepu"), ExtResource("10_nhsp5"), ExtResource("11_3dcf4")])
+metadata/_custom_type_script = "uid://c2jo4inf8j6aj"

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bi73nvnauvqwd"]
+
+[ext_resource type="PackedScene" uid="uid://csy031tuegoeb" path="res://scenes/rooms/base_room.tscn" id="1_cvqwq"]
+[ext_resource type="Texture2D" uid="uid://d3le1nky5dbsk" path="res://sprites/rooms/room_icy_floor.png" id="2_m1ed3"]
+
+[node name="BaseRoom" unique_id=1792470563 instance=ExtResource("1_cvqwq")]
+
+[node name="LeftCorridor" parent="Corridors" parent_id_path=PackedInt32Array(1702556723) index="0" unique_id=515311878]
+self_modulate = Color(0, 0.101960786, 0.18431373, 1)
+
+[node name="RightCorridor" parent="Corridors" parent_id_path=PackedInt32Array(1702556723) index="1" unique_id=935448735]
+self_modulate = Color(0, 0.101960786, 0.18431373, 1)
+
+[node name="TopCorridor" parent="Corridors" parent_id_path=PackedInt32Array(1702556723) index="2" unique_id=1861214190]
+self_modulate = Color(0, 0.101960786, 0.18431373, 1)
+
+[node name="BottomCorridor" parent="Corridors" parent_id_path=PackedInt32Array(1702556723) index="3" unique_id=1879876378]
+self_modulate = Color(0, 0.101960786, 0.18431373, 1)
+
+[node name="Floor" parent="." index="2" unique_id=36058597]
+texture = ExtResource("2_m1ed3")

@@ -252,6 +252,11 @@ func set_up_player() -> void:
 	_offset_move_speed = 1
 	_dash_wait_timer.wait_time = ValueStorer.dash_wait_time
 	
+	if GameManager.level_type == GameManager.LevelType.LEVEL_NORMAL:
+		_physics_type = PhysicsType.NORMAL
+	elif GameManager.level_type == GameManager.LevelType.LEVEL_ICY:
+		_physics_type = PhysicsType.ICY
+	
 	for pos in _markers_pos:
 		var marker: Marker2D = Marker2D.new()
 		marker.position = pos

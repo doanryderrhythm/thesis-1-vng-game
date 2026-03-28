@@ -1,5 +1,13 @@
 extends Node
 
+enum LevelType
+{
+	LEVEL_NORMAL,
+	LEVEL_ICY,
+}
+
+var level_type: LevelType
+
 var current_id_x: int = 0
 var current_id_y: int = 0
 
@@ -29,7 +37,7 @@ var enemy_particles: PackedScene = preload("res://effects/base_enemy_spawn.tscn"
 var enemy_scenes: Array[PackedScene] = []
 var room_scenes: Array[PackedScene] = []
 
-var base_room: PackedScene = preload("res://scenes/rooms/base_room.tscn")
+var base_room: PackedScene
 var rooms: Array[Room] = []
 var used_rooms: Array[Dictionary] = []
 
@@ -78,7 +86,10 @@ func reset() -> void:
 	enemy_scenes = []
 	room_scenes = []
 
-	base_room = preload("res://scenes/rooms/base_room.tscn")
+	if level_type == LevelType.LEVEL_NORMAL:
+		base_room = preload("res://scenes/rooms/base_room.tscn")
+	elif level_type == LevelType.LEVEL_ICY:
+		base_room = preload("res://scenes/rooms/base_icy_room.tscn")
 	rooms = []
 	used_rooms.clear()
 	
@@ -102,7 +113,11 @@ func _process(delta: float) -> void:
 		survival_time += delta
 
 func set_up_rooms() -> void:
-	var listener: RoomsListener = load("res://resources/rooms/rooms_listener.tres")
+	var listener: RoomsListener
+	if level_type == LevelType.LEVEL_NORMAL:
+		listener = load("res://resources/rooms/room_normal_listener.tres")
+	elif level_type == LevelType.LEVEL_ICY:
+		listener = load("res://resources/rooms/room_icy_listener.tres")
 	room_scenes = listener.rooms
 	
 func set_up_stage_stats() -> void:
