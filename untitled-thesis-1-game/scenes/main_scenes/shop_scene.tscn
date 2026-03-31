@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dak77hof5amf7" path="res://sprites/bars/coin_count.png" id="1_8r8tc"]
 [ext_resource type="Texture2D" uid="uid://dhekw8y7qg2fm" path="res://sprites/player/player_square_4-1.png" id="1_nj366"]
+[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="2_0mw8q"]
 [ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="2_23vwc"]
 [ext_resource type="Texture2D" uid="uid://dr3qlf130cxs3" path="res://sprites/ui/player/player_highlighted.png" id="3_6cioo"]
 [ext_resource type="Texture2D" uid="uid://d3s2egp6m1js1" path="res://sprites/ui/player/player_highlighted_animated.png" id="3_uhyxf"]
@@ -42,13 +43,19 @@ var equipped_character_ui: CharacterUIItem
 @onready var start_terrain_button: Button = $CanvasLayer/StartTerrainButton
 @onready var start_icy_button: Button = $CanvasLayer/StartIcyButton
 
-@onready var player_selection_anim: AnimationPlayer = $PlayerSelecctionAnim
+@onready var player_selection_anim: AnimationPlayer = $PlayerSelectionAnim
+@onready var character_texture_anim: AnimationPlayer = $CharacterTextureAnim
+@onready var change_player_anim: AnimationPlayer = $ChangePlayerAnim
+@onready var glow_anim: AnimationPlayer = $GlowAnim
 
 func _ready() -> void:
+	RenderingServer.set_default_clear_color(Color(0.0, 0.139, 0.211, 1.0))
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	LoadSystem.load_game()
 	
 	add_character_items()
 	player_selection_anim.play(\"default\")
+	character_texture_anim.play(\"default\")
 	
 	GameManager.is_gameplay = false
 	coin_count_label.text = str(ProfileManager.total_coins)
@@ -63,10 +70,14 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(ValueStorer.key_left):
 		if character_index > 0:
 			character_index -= 1
+			change_player_anim.stop()
+			change_player_anim.play(\"left_select\")
 			select_character()
 	elif Input.is_action_just_pressed(ValueStorer.key_right):
 		if character_index < character_list_ui.get_child_count() - 1:
 			character_index += 1
+			change_player_anim.stop()
+			change_player_anim.play(\"right_select\")
 			select_character()
 
 func add_character_items() -> void:
@@ -112,6 +123,10 @@ func attempt_to_unlock() -> void:
 	if ProfileManager.total_coins < skin_stats.requirement:
 		return
 	
+	glow_anim.stop()
+	glow_anim.play(\"default\")
+	var unlocked_character_ui = character_list_ui.get_child(character_index)
+	unlocked_character_ui.unequip()
 	ProfileManager.total_coins -= skin_stats.requirement
 	ProfileManager.unlocked_codes.append(skin_stats.code)
 	change_coin_text()
@@ -231,6 +246,9 @@ func _on_start_terrain_button_pressed() -> void:
 	#pass # Replace with function body.
 "
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bk7nh"]
+blend_mode = 1
+
 [sub_resource type="LabelSettings" id="LabelSettings_6cioo"]
 font = ExtResource("2_23vwc")
 font_size = 100
@@ -302,6 +320,138 @@ _data = {
 &"default": SubResource("Animation_qttcf")
 }
 
+[sub_resource type="Animation" id="Animation_5rrvm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/PlayerTexture:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_0mw8q"]
+resource_name = "default"
+length = 10.0
+loop_mode = 1
+step = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/PlayerTexture:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.08726646259971647, 0.08726646259971647, -0.08726646259971647]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bk7nh"]
+_data = {
+&"RESET": SubResource("Animation_5rrvm"),
+&"default": SubResource("Animation_0mw8q")
+}
+
+[sub_resource type="Animation" id="Animation_bk7nh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/StatsContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(892.5, 250)]
+}
+
+[sub_resource type="Animation" id="Animation_5vnnh"]
+resource_name = "left_select"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/StatsContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.145, 1),
+"update": 0,
+"values": [Vector2(862.5, 250), Vector2(892.5, 250)]
+}
+
+[sub_resource type="Animation" id="Animation_cs7s0"]
+resource_name = "right_select"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/StatsContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.145, 1),
+"update": 0,
+"values": [Vector2(922.5, 250), Vector2(892.5, 250)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4phyk"]
+_data = {
+&"RESET": SubResource("Animation_bk7nh"),
+&"left_select": SubResource("Animation_5vnnh"),
+&"right_select": SubResource("Animation_cs7s0")
+}
+
+[sub_resource type="Animation" id="Animation_4phyk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/PlayerTexture/Glow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rdo8k"]
+resource_name = "default"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/PlayerTexture/Glow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_85bsg"]
+_data = {
+&"RESET": SubResource("Animation_4phyk"),
+&"default": SubResource("Animation_rdo8k")
+}
+
 [node name="ShopScene" type="Node2D" unique_id=232877183]
 script = SubResource("GDScript_8r8tc")
 
@@ -319,9 +469,23 @@ offset_right = 0.39996338
 offset_bottom = 0.52001953
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(250, 250)
 texture = ExtResource("1_nj366")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Glow" type="TextureRect" parent="CanvasLayer/PlayerTexture" unique_id=366227725]
+modulate = Color(1, 1, 1, 0)
+material = SubResource("CanvasItemMaterial_bk7nh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(250, 238)
+texture = ExtResource("2_0mw8q")
 
 [node name="StatsContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1905949676]
 anchors_preset = -1
@@ -329,9 +493,9 @@ anchor_left = 0.36600003
 anchor_top = 0.30600002
 anchor_right = 0.634
 anchor_bottom = 0.694
-offset_left = 257.27997
+offset_left = 189.77997
 offset_top = -80.48001
-offset_right = 257.71997
+offset_right = 325.22058
 offset_bottom = -79.52002
 grow_horizontal = 2
 grow_vertical = 2
@@ -620,8 +784,17 @@ grow_vertical = 0
 disabled = true
 text = "START - ICY"
 
-[node name="PlayerSelecctionAnim" type="AnimationPlayer" parent="." unique_id=1989948185]
+[node name="PlayerSelectionAnim" type="AnimationPlayer" parent="." unique_id=1989948185]
 libraries/ = SubResource("AnimationLibrary_6jdm4")
+
+[node name="CharacterTextureAnim" type="AnimationPlayer" parent="." unique_id=917025147]
+libraries/ = SubResource("AnimationLibrary_bk7nh")
+
+[node name="ChangePlayerAnim" type="AnimationPlayer" parent="." unique_id=274101739]
+libraries/ = SubResource("AnimationLibrary_4phyk")
+
+[node name="GlowAnim" type="AnimationPlayer" parent="." unique_id=743367226]
+libraries/ = SubResource("AnimationLibrary_85bsg")
 
 [connection signal="pressed" from="CanvasLayer/UnlockButton" to="." method="_on_unlock_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EquipButton" to="." method="_on_equip_button_pressed"]
