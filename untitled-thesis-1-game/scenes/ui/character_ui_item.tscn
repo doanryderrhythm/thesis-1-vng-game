@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://pa2b665p40m3"]
+
+[ext_resource type="Texture2D" uid="uid://deim48ugh2mkx" path="res://sprites/ui/player/player_locked.png" id="1_ppmx4"]
+[ext_resource type="Script" uid="uid://bn2f5ibt0w5uw" path="res://scripts/ui/character_ui_item.gd" id="2_kxld1"]
+
+[node name="CharacterUI" type="TextureRect" unique_id=1953606609]
+size_flags_horizontal = 4
+texture = ExtResource("1_ppmx4")
+expand_mode = 2
+stretch_mode = 4
+script = ExtResource("2_kxld1")
+
+[node name="CharacterTexture" type="TextureRect" parent="." unique_id=2126084784]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2

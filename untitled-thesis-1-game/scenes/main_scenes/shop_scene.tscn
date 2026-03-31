@@ -1,56 +1,156 @@
 [gd_scene format=3 uid="uid://cl6xpd7qlb36r"]
 
 [ext_resource type="Texture2D" uid="uid://dak77hof5amf7" path="res://sprites/bars/coin_count.png" id="1_8r8tc"]
+[ext_resource type="Texture2D" uid="uid://dhekw8y7qg2fm" path="res://sprites/player/player_square_4-1.png" id="1_nj366"]
 [ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="2_23vwc"]
+[ext_resource type="Texture2D" uid="uid://dr3qlf130cxs3" path="res://sprites/ui/player/player_highlighted.png" id="3_6cioo"]
+[ext_resource type="Texture2D" uid="uid://d3s2egp6m1js1" path="res://sprites/ui/player/player_highlighted_animated.png" id="3_uhyxf"]
+[ext_resource type="Texture2D" uid="uid://br46pgblghmvf" path="res://sprites/ui/pause_button_unselected.png" id="3_vic4h"]
+[ext_resource type="Texture2D" uid="uid://b2nua0rf6jexh" path="res://sprites/ui/pause_button_pressed.png" id="4_5rrvm"]
+[ext_resource type="Texture2D" uid="uid://r0ku0idq14xt" path="res://sprites/ui/pause_button_selected.png" id="5_0mw8q"]
+[ext_resource type="Texture2D" uid="uid://bdir8r45invrk" path="res://sprites/ui/button_disabled.png" id="6_5rrvm"]
 
 [sub_resource type="GDScript" id="GDScript_8r8tc"]
 resource_name = "shop_scene"
 script/source = "extends Node2D
 
-var player_listener: PlayerListener = load(\"res://resources/player/player_listener.tres\")
-var all_players: Array[PlayerStats] = []
-
-@onready var start_normal_button: Button = $CanvasLayer/StartNormalButton
-@onready var start_icy_button: Button = $CanvasLayer/StartIcyButton
-
-@onready var item_container: HBoxContainer = $CanvasLayer/ShopBackground/Mask/ScrollContainer/PlayerItemContainer
-@onready var skin_ui_item: PackedScene = preload(\"res://scenes/ui/skin_ui_item.tscn\")
-
 @onready var coin_count_label: Label = $CanvasLayer/CoinCount/CoinCountLabel
 
+@onready var control_ui: Control = $CanvasLayer/CharacterListBackground/PlayerChildren
+@onready var character_list_ui: HBoxContainer = $CanvasLayer/CharacterListBackground/PlayerChildren/CharacterList
+var character_index: int = 0
+var item_size: float
+@onready var player_texture: TextureRect = $CanvasLayer/PlayerTexture
+
+var skin_stats: PlayerStats
+
+var equipped_character_ui: CharacterUIItem
+
+@onready var movement_speed_value: Label = $CanvasLayer/StatsContainer/MovementSpeed/Value
+@onready var dash_speed_value: Label = $CanvasLayer/StatsContainer/DashSpeed/Value
+@onready var shoot_speed_value: Label = $CanvasLayer/StatsContainer/ShootSpeed/Value
+@onready var bullet_damage_value: Label = $CanvasLayer/StatsContainer/BulletDamage/Value
+@onready var health_value: Label = $CanvasLayer/StatsContainer/Health/Value
+
+@onready var character_sample_scene: PackedScene = preload(\"res://scenes/ui/character_ui_item.tscn\")
+@onready var player_listener: PlayerListener = load(\"res://resources/player/player_listener.tres\")
+
+@onready var unlock_button: TextureButton = $CanvasLayer/UnlockButton
+@onready var equip_button: TextureButton = $CanvasLayer/EquipButton
+
+@onready var start_normal_button: Button = $CanvasLayer/StartNormalButton
+@onready var start_terrain_button: Button = $CanvasLayer/StartTerrainButton
+@onready var start_icy_button: Button = $CanvasLayer/StartIcyButton
+
+@onready var player_selection_anim: AnimationPlayer = $PlayerSelecctionAnim
+
 func _ready() -> void:
-	RenderingServer.set_default_clear_color(Color(0.0, 0.2, 0.302, 1.0))
 	LoadSystem.load_game()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	add_character_items()
+	player_selection_anim.play(\"default\")
+	
 	GameManager.is_gameplay = false
 	coin_count_label.text = str(ProfileManager.total_coins)
-	all_players = player_listener.players
-	for player in all_players:
-		var ui_item: SkinUI = skin_ui_item.instantiate()
-		ui_item.skin_stats = player
-		item_container.add_child(ui_item)
-		ui_item.unlock_button.pressed.connect(change_coin_text)
-		ui_item.equip_button.pressed.connect(select_skin.bind(ui_item))
-	for code in ProfileManager.unlocked_codes:
-		for item in item_container.get_children():
-			if item is not SkinUI:
-				continue
-			if item.skin_stats.code == code:
-				item.unlock_player()
-	pass
+	
+	await get_tree().process_frame
+	
+	item_size = character_list_ui.get_child(0).size.x
+	character_index = 0
+	select_character()
 
-func select_skin(selected_ui_item: SkinUI) -> void:
-	ProfileManager.update_profile(selected_ui_item.skin_stats)
-	for item in item_container.get_children():
-		if item == selected_ui_item:
-			item.modulate = Color(\"#a3fbff\")
-		else:
-			item.modulate = Color.WHITE
-	start_normal_button.disabled = false
-	start_icy_button.disabled = false
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed(ValueStorer.key_left):
+		if character_index > 0:
+			character_index -= 1
+			select_character()
+	elif Input.is_action_just_pressed(ValueStorer.key_right):
+		if character_index < character_list_ui.get_child_count() - 1:
+			character_index += 1
+			select_character()
+
+func add_character_items() -> void:
+	for player in player_listener.players:
+		var new_item: CharacterUIItem = character_sample_scene.instantiate()
+		character_list_ui.add_child(new_item)
+		new_item.insert_player_stats(player)
+
+func select_character() -> void:
+	control_ui.position = Vector2(-(item_size / 2 + \\
+		character_index * (character_list_ui.get_theme_constant(\"separation\") + item_size)), 0)
+	
+	skin_stats = character_list_ui.get_child(character_index).player_stats
+	
+	player_texture.texture = skin_stats.sprite
+	movement_speed_value.text = str(skin_stats.move_speed / 100.0)
+	dash_speed_value.text = str(skin_stats.dash_speed)
+	shoot_speed_value.text = str(skin_stats.bullet_res.min_speed / 100.0) \\
+		+ \" - \" + str(skin_stats.bullet_res.max_speed / 100.0)
+	bullet_damage_value.text = str(skin_stats.bullet_res.damage)
+	health_value.text = str(skin_stats.health)
+	
+	check_unlocked_state()
 
 func change_coin_text() -> void:
 	coin_count_label.text = str(ProfileManager.total_coins)
+
+func equip_character() -> void:
+	ProfileManager.update_profile(skin_stats)
+	
+	start_normal_button.disabled = false
+	start_terrain_button.disabled = false
+	start_icy_button.disabled = false
+	
+	check_unlocked_state()
+	
+	if equipped_character_ui != null:
+		equipped_character_ui.unequip()
+	equipped_character_ui = character_list_ui.get_child(character_index)
+	equipped_character_ui.equip()
+
+func attempt_to_unlock() -> void:
+	if ProfileManager.total_coins < skin_stats.requirement:
+		return
+	
+	ProfileManager.total_coins -= skin_stats.requirement
+	ProfileManager.unlocked_codes.append(skin_stats.code)
+	change_coin_text()
+	check_unlocked_state()
+	SaveSystem.save_game()
+	pass
+
+func check_unlocked_state() -> void:
+	for unlocked_code in ProfileManager.unlocked_codes:
+		if unlocked_code == skin_stats.code:
+			switch_button(true)
+			return
+	switch_button(false)
+
+func switch_button(is_unlocked: bool) -> void:
+	if is_unlocked:
+		unlock_button.set_process_mode(Node.PROCESS_MODE_DISABLED)
+		equip_button.set_process_mode(Node.PROCESS_MODE_INHERIT)
+		if skin_stats.code == ProfileManager.player_code:
+			equip_button.disabled = true
+			equip_button.text.text = \"Equipped\"
+		else:
+			equip_button.disabled = false
+			equip_button.text.text = \"Equip\"
+	else:
+		unlock_button.set_process_mode(Node.PROCESS_MODE_INHERIT)
+		unlock_button.text.text = \"Unlock - $\" + str(skin_stats.requirement)
+		equip_button.set_process_mode(Node.PROCESS_MODE_DISABLED)
+	
+	unlock_button.visible = !is_unlocked
+	equip_button.visible = is_unlocked
+
+func _on_unlock_button_pressed() -> void:
+	attempt_to_unlock()
+	pass # Replace with function body.
+
+func _on_equip_button_pressed() -> void:
+	equip_character()
+	pass # Replace with function body.
 
 func start_game(level_type: GameManager.LevelType) -> void:
 	GameManager.level_type = level_type
@@ -63,65 +163,400 @@ func _on_start_normal_button_pressed() -> void:
 func _on_start_icy_button_pressed() -> void:
 	start_game(GameManager.LevelType.LEVEL_ICY)
 	pass # Replace with function body.
+
+func _on_start_terrain_button_pressed() -> void:
+	start_game(GameManager.LevelType.LEVEL_TERRAIN)
+	pass # Replace with function body.
+
+#
+#var player_listener: PlayerListener = load(\"res://resources/player/player_listener.tres\")
+#var all_players: Array[PlayerStats] = []
+#
+
+#
+#@onready var item_container: HBoxContainer = $CanvasLayer/ShopBackground/Mask/ScrollContainer/PlayerItemContainer
+#@onready var skin_ui_item: PackedScene = preload(\"res://scenes/ui/skin_ui_item.tscn\")
+#
+#@onready var coin_count_label: Label = $CanvasLayer/CoinCount/CoinCountLabel
+#
+#func _ready() -> void:
+	#RenderingServer.set_default_clear_color(Color(0.0, 0.2, 0.302, 1.0))
+	#LoadSystem.load_game()
+	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	#GameManager.is_gameplay = false
+	#coin_count_label.text = str(ProfileManager.total_coins)
+	#all_players = player_listener.players
+	#for player in all_players:
+		#var ui_item: SkinUI = skin_ui_item.instantiate()
+		#ui_item.skin_stats = player
+		#item_container.add_child(ui_item)
+		#ui_item.unlock_button.pressed.connect(change_coin_text)
+		#ui_item.equip_button.pressed.connect(select_skin.bind(ui_item))
+	#for code in ProfileManager.unlocked_codes:
+		#for item in item_container.get_children():
+			#if item is not SkinUI:
+				#continue
+			#if item.skin_stats.code == code:
+				#item.unlock_player()
+	#pass
+#
+#func select_skin(selected_ui_item: SkinUI) -> void:
+	#ProfileManager.update_profile(selected_ui_item.skin_stats)
+	#for item in item_container.get_children():
+		#if item == selected_ui_item:
+			#item.modulate = Color(\"#a3fbff\")
+		#else:
+			#item.modulate = Color.WHITE
+	#start_normal_button.disabled = false
+	#start_terrain_button.disabled = false
+	#start_icy_button.disabled = false
+#
+#func change_coin_text() -> void:
+	#coin_count_label.text = str(ProfileManager.total_coins)
+#
+#func start_game(level_type: GameManager.LevelType) -> void:
+	#GameManager.level_type = level_type
+	#get_tree().change_scene_to_file(\"res://scenes/main_scenes/play_scene.tscn\")
+#
+#func _on_start_normal_button_pressed() -> void:
+	#start_game(GameManager.LevelType.LEVEL_NORMAL)
+	#pass # Replace with function body.
+#
+#func _on_start_icy_button_pressed() -> void:
+	#start_game(GameManager.LevelType.LEVEL_ICY)
+	#pass # Replace with function body.
+#
+#func _on_start_terrain_button_pressed() -> void:
+	#start_game(GameManager.LevelType.LEVEL_TERRAIN)
+	#pass # Replace with function body.
 "
+
+[sub_resource type="LabelSettings" id="LabelSettings_6cioo"]
+font = ExtResource("2_23vwc")
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_uhyxf"]
+font = ExtResource("2_23vwc")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_nj366"]
+font = ExtResource("2_23vwc")
+font_size = 60
+
+[sub_resource type="GDScript" id="GDScript_bk7nh"]
+script/source = "extends TextureButton
+
+@onready var text: Label = $Label
+
+func _process(_delta: float) -> void:
+	if is_hovered() and disabled == false:
+		text.label_settings.font_color = Color.BLACK
+	else:
+		text.label_settings.font_color = Color.WHITE
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_5vnnh"]
+line_spacing = 0.0
+font = ExtResource("2_23vwc")
+font_size = 36
 
 [sub_resource type="LabelSettings" id="LabelSettings_8r8tc"]
 font = ExtResource("2_23vwc")
 font_size = 40
+
+[sub_resource type="Animation" id="Animation_uhyxf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/CharacterListBackground/BackgroundHighlighter:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.39607844)]
+}
+
+[sub_resource type="Animation" id="Animation_qttcf"]
+resource_name = "default"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/CharacterListBackground/BackgroundHighlighter:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.39607844), Color(1, 1, 1, 0.13725491), Color(1, 1, 1, 0.39607844)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6jdm4"]
+_data = {
+&"RESET": SubResource("Animation_uhyxf"),
+&"default": SubResource("Animation_qttcf")
+}
 
 [node name="ShopScene" type="Node2D" unique_id=232877183]
 script = SubResource("GDScript_8r8tc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1828509655]
 
-[node name="ShopBackground" type="ColorRect" parent="CanvasLayer" unique_id=800710412]
-self_modulate = Color(0.105409205, 0.105409205, 0.105409205, 1)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 30.0
-offset_top = 111.0
-offset_right = -30.0
-offset_bottom = -69.0
+[node name="PlayerTexture" type="TextureRect" parent="CanvasLayer" unique_id=2138626216]
+anchors_preset = -1
+anchor_left = 0.17
+anchor_top = 0.26900002
+anchor_right = 0.43
+anchor_bottom = 0.731
+offset_left = -0.3999939
+offset_top = -0.52001953
+offset_right = 0.39996338
+offset_bottom = 0.52001953
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 0.5529412)
+texture = ExtResource("1_nj366")
+expand_mode = 1
+stretch_mode = 4
 
-[node name="Mask" type="TextureRect" parent="CanvasLayer/ShopBackground" unique_id=1979445986]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-offset_right = -20.0
+[node name="StatsContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1905949676]
+anchors_preset = -1
+anchor_left = 0.36600003
+anchor_top = 0.30600002
+anchor_right = 0.634
+anchor_bottom = 0.694
+offset_left = 257.27997
+offset_top = -80.48001
+offset_right = 257.71997
+offset_bottom = -79.52002
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/ShopBackground/Mask" unique_id=1560367195]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 20.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PlayerItemContainer" type="HBoxContainer" parent="CanvasLayer/ShopBackground/Mask/ScrollContainer" unique_id=1923791966]
-custom_minimum_size = Vector2(0, 700)
+[node name="Title" type="Label" parent="CanvasLayer/StatsContainer" unique_id=448971215]
 layout_mode = 2
-size_flags_vertical = 6
-alignment = 1
+text = "STATS"
+label_settings = SubResource("LabelSettings_6cioo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MovementSpeed" type="HBoxContainer" parent="CanvasLayer/StatsContainer" unique_id=1729932169]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Description" type="Label" parent="CanvasLayer/StatsContainer/MovementSpeed" unique_id=915966228]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "movement speed"
+label_settings = SubResource("LabelSettings_uhyxf")
+
+[node name="Value" type="Label" parent="CanvasLayer/StatsContainer/MovementSpeed" unique_id=1161055303]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "value"
+label_settings = SubResource("LabelSettings_nj366")
+
+[node name="DashSpeed" type="HBoxContainer" parent="CanvasLayer/StatsContainer" unique_id=1654094601]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Description" type="Label" parent="CanvasLayer/StatsContainer/DashSpeed" unique_id=1590121591]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "dash speed"
+label_settings = SubResource("LabelSettings_uhyxf")
+
+[node name="Value" type="Label" parent="CanvasLayer/StatsContainer/DashSpeed" unique_id=1194368534]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "value"
+label_settings = SubResource("LabelSettings_nj366")
+
+[node name="ShootSpeed" type="HBoxContainer" parent="CanvasLayer/StatsContainer" unique_id=554836380]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Description" type="Label" parent="CanvasLayer/StatsContainer/ShootSpeed" unique_id=1644979292]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "shoot speed"
+label_settings = SubResource("LabelSettings_uhyxf")
+
+[node name="Value" type="Label" parent="CanvasLayer/StatsContainer/ShootSpeed" unique_id=1127548162]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "value"
+label_settings = SubResource("LabelSettings_nj366")
+
+[node name="BulletDamage" type="HBoxContainer" parent="CanvasLayer/StatsContainer" unique_id=531491870]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Description" type="Label" parent="CanvasLayer/StatsContainer/BulletDamage" unique_id=178823459]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "bullet damage"
+label_settings = SubResource("LabelSettings_uhyxf")
+
+[node name="Value" type="Label" parent="CanvasLayer/StatsContainer/BulletDamage" unique_id=326434313]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "value"
+label_settings = SubResource("LabelSettings_nj366")
+
+[node name="Health" type="HBoxContainer" parent="CanvasLayer/StatsContainer" unique_id=1539963375]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Description" type="Label" parent="CanvasLayer/StatsContainer/Health" unique_id=181213316]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "health"
+label_settings = SubResource("LabelSettings_uhyxf")
+
+[node name="Value" type="Label" parent="CanvasLayer/StatsContainer/Health" unique_id=974703357]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "value"
+label_settings = SubResource("LabelSettings_nj366")
+
+[node name="UnlockButton" type="TextureButton" parent="CanvasLayer" unique_id=1822784131]
+modulate = Color(0.61960787, 0.80784315, 1, 1)
+anchors_preset = -1
+anchor_left = 0.528
+anchor_top = 0.628
+anchor_right = 0.684
+anchor_bottom = 0.69600004
+offset_left = 51.23999
+offset_top = 2.7599487
+offset_right = 51.71997
+offset_bottom = 3.3199463
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_vic4h")
+texture_pressed = ExtResource("4_5rrvm")
+texture_hover = ExtResource("5_0mw8q")
+script = SubResource("GDScript_bk7nh")
+
+[node name="Label" type="Label" parent="CanvasLayer/UnlockButton" unique_id=1877068766]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Unlock"
+label_settings = SubResource("LabelSettings_5vnnh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EquipButton" type="TextureButton" parent="CanvasLayer" unique_id=2019356188]
+anchors_preset = -1
+anchor_left = 0.528
+anchor_top = 0.628
+anchor_right = 0.684
+anchor_bottom = 0.69600004
+offset_left = 51.23999
+offset_top = 2.7599487
+offset_right = 51.71997
+offset_bottom = 3.3199463
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_vic4h")
+texture_pressed = ExtResource("4_5rrvm")
+texture_hover = ExtResource("5_0mw8q")
+texture_disabled = ExtResource("6_5rrvm")
+script = SubResource("GDScript_bk7nh")
+
+[node name="Label" type="Label" parent="CanvasLayer/EquipButton" unique_id=810516231]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Equip"
+label_settings = SubResource("LabelSettings_5vnnh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharacterListBackground" type="ColorRect" parent="CanvasLayer" unique_id=1132366344]
+anchors_preset = -1
+anchor_top = 0.74100006
+anchor_right = 1.0
+anchor_bottom = 0.88000005
+offset_top = -0.28009033
+offset_bottom = -0.40008545
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.54901963)
+
+[node name="BackgroundHighlighter" type="TextureRect" parent="CanvasLayer/CharacterListBackground" unique_id=1872161081]
+modulate = Color(1, 1, 1, 0.39607844)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = -0.16700001
+anchor_right = 0.55200005
+anchor_bottom = 1.167
+offset_left = -0.16003418
+offset_top = 0.050001144
+offset_right = 0.15991211
+offset_bottom = -0.05000305
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_uhyxf")
+expand_mode = 1
+
+[node name="PlayerChildren" type="Control" parent="CanvasLayer/CharacterListBackground" unique_id=1313630354]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CharacterList" type="HBoxContainer" parent="CanvasLayer/CharacterListBackground/PlayerChildren" unique_id=1710110989]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_right = 1920.0012
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="Highlighter" type="TextureRect" parent="CanvasLayer/CharacterListBackground" unique_id=2124223199]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = -0.16700001
+anchor_right = 0.55200005
+anchor_bottom = 1.167
+offset_left = -0.16003418
+offset_top = 0.050001144
+offset_right = 0.15991211
+offset_bottom = -0.05000305
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6cioo")
+expand_mode = 1
 
 [node name="CoinCount" type="TextureRect" parent="CanvasLayer" unique_id=977572998]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -255.0
-offset_top = 30.0
-offset_right = -30.0
-offset_bottom = 93.0
+anchors_preset = -1
+anchor_left = 0.86700004
+anchor_top = 0.028
+anchor_right = 0.984
+anchor_bottom = 0.086
+offset_left = 0.35986328
+offset_top = -0.24000168
+offset_right = 0.7199707
+offset_bottom = 0.11999512
 grow_horizontal = 0
 texture = ExtResource("1_8r8tc")
 
@@ -146,14 +581,29 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -250.0
+offset_left = -320.0
 offset_top = -60.0
-offset_right = -50.0
+offset_right = -120.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 disabled = true
 text = "START - NORMAL"
+
+[node name="StartTerrainButton" type="Button" parent="CanvasLayer" unique_id=761693346]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -60.0
+offset_right = 100.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+disabled = true
+text = "START - TERRAIN"
 
 [node name="StartIcyButton" type="Button" parent="CanvasLayer" unique_id=1831198907]
 anchors_preset = 7
@@ -161,14 +611,20 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 50.0
+offset_left = 120.0
 offset_top = -60.0
-offset_right = 250.0
+offset_right = 320.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 disabled = true
 text = "START - ICY"
 
+[node name="PlayerSelecctionAnim" type="AnimationPlayer" parent="." unique_id=1989948185]
+libraries/ = SubResource("AnimationLibrary_6jdm4")
+
+[connection signal="pressed" from="CanvasLayer/UnlockButton" to="." method="_on_unlock_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/EquipButton" to="." method="_on_equip_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/StartNormalButton" to="." method="_on_start_normal_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/StartTerrainButton" to="." method="_on_start_terrain_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/StartIcyButton" to="." method="_on_start_icy_button_pressed"]

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RoomsListener" format=3 uid="uid://dy27a2u0qs7ol"]
+
+[ext_resource type="PackedScene" uid="uid://seqviwg6iaw2" path="res://scenes/rooms/base_terrain_room.tscn" id="1_g1u3b"]
+[ext_resource type="PackedScene" uid="uid://caudxq8birxc4" path="res://scenes/rooms/rooms_design/terrain/room_terrain_0.tscn" id="2_bbvkk"]
+[ext_resource type="PackedScene" uid="uid://cjnmejgeykvrb" path="res://scenes/rooms/rooms_design/terrain/room_terrain_1.tscn" id="3_f123h"]
+[ext_resource type="PackedScene" uid="uid://dsjexb5li5cuq" path="res://scenes/rooms/rooms_design/terrain/room_terrain_2.tscn" id="4_xubxn"]
+[ext_resource type="PackedScene" uid="uid://bwrc5p26vm4ed" path="res://scenes/rooms/rooms_design/terrain/room_terrain_3.tscn" id="5_8rr7o"]
+[ext_resource type="PackedScene" uid="uid://dbm33qvq5n6vk" path="res://scenes/rooms/rooms_design/terrain/room_terrain_4.tscn" id="6_p7ykk"]
+[ext_resource type="PackedScene" uid="uid://c6uxfm46348sr" path="res://scenes/rooms/rooms_design/terrain/room_terrain_5.tscn" id="7_o3oqu"]
+[ext_resource type="PackedScene" uid="uid://c5imu35maqa2" path="res://scenes/rooms/rooms_design/terrain/room_terrain_6.tscn" id="8_nb71w"]
+[ext_resource type="PackedScene" uid="uid://bchgfg5d8wckm" path="res://scenes/rooms/rooms_design/terrain/room_terrain_7.tscn" id="9_ig5ps"]
+[ext_resource type="Script" uid="uid://c2jo4inf8j6aj" path="res://scripts/resources/resource_room_listener.gd" id="12_1rivm"]
+
+[resource]
+script = ExtResource("12_1rivm")
+rooms = Array[PackedScene]([ExtResource("1_g1u3b"), ExtResource("2_bbvkk"), ExtResource("3_f123h"), ExtResource("4_xubxn"), ExtResource("5_8rr7o"), ExtResource("6_p7ykk"), ExtResource("7_o3oqu"), ExtResource("8_nb71w"), ExtResource("9_ig5ps")])
+metadata/_custom_type_script = "uid://c2jo4inf8j6aj"

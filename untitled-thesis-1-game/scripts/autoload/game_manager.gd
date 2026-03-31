@@ -3,6 +3,7 @@ extends Node
 enum LevelType
 {
 	LEVEL_NORMAL,
+	LEVEL_TERRAIN,
 	LEVEL_ICY,
 }
 
@@ -88,6 +89,8 @@ func reset() -> void:
 
 	if level_type == LevelType.LEVEL_NORMAL:
 		base_room = preload("res://scenes/rooms/base_room.tscn")
+	elif level_type == LevelType.LEVEL_TERRAIN:
+		base_room = preload("res://scenes/rooms/base_terrain_room.tscn")
 	elif level_type == LevelType.LEVEL_ICY:
 		base_room = preload("res://scenes/rooms/base_icy_room.tscn")
 	rooms = []
@@ -116,6 +119,8 @@ func set_up_rooms() -> void:
 	var listener: RoomsListener
 	if level_type == LevelType.LEVEL_NORMAL:
 		listener = load("res://resources/rooms/room_normal_listener.tres")
+	elif level_type == LevelType.LEVEL_TERRAIN:
+		listener = load("res://resources/rooms/room_terrain_listener.tres")
 	elif level_type == LevelType.LEVEL_ICY:
 		listener = load("res://resources/rooms/room_icy_listener.tres")
 	room_scenes = listener.rooms

@@ -21,6 +21,7 @@ enum CharacterType
 enum PhysicsType
 {
 	NORMAL,
+	TERRAIN,
 	ICY,
 }
 
@@ -100,7 +101,7 @@ func manage_move() -> void:
 		Input.get_action_strength(ValueStorer.key_down) - Input.get_action_strength(ValueStorer.key_up)
 	)
 	
-	if _physics_type == PhysicsType.NORMAL:
+	if _physics_type == PhysicsType.NORMAL or _physics_type == PhysicsType.TERRAIN:
 		if state != PlayerState.DASH:
 			direction_vector = input_vector.normalized() * _offset_move_speed
 		else:
@@ -126,6 +127,7 @@ func manage_move() -> void:
 		velocity = _current_velocity * _move_rate
 	
 	move_and_slide()
+	_current_velocity = velocity
 
 func manage_dash() -> void:
 	if Input.is_action_just_pressed(ValueStorer.key_dash):
@@ -254,6 +256,8 @@ func set_up_player() -> void:
 	
 	if GameManager.level_type == GameManager.LevelType.LEVEL_NORMAL:
 		_physics_type = PhysicsType.NORMAL
+	elif GameManager.level_type == GameManager.LevelType.LEVEL_TERRAIN:
+		_physics_type = PhysicsType.TERRAIN
 	elif GameManager.level_type == GameManager.LevelType.LEVEL_ICY:
 		_physics_type = PhysicsType.ICY
 	

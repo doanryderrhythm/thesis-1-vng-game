@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="RoomsListener" format=3 uid="uid://biqi51a3mq58u"]
 
+[ext_resource type="PackedScene" uid="uid://bi73nvnauvqwd" path="res://scenes/rooms/base_icy_room.tscn" id="1_enie3"]
 [ext_resource type="PackedScene" uid="uid://cnirp5saqv4vd" path="res://scenes/rooms/rooms_design/icy/room_icy_0.tscn" id="1_xmntf"]
 [ext_resource type="PackedScene" uid="uid://bjsgulmuq0rgw" path="res://scenes/rooms/rooms_design/icy/room_icy_1.tscn" id="2_enie3"]
 [ext_resource type="PackedScene" uid="uid://udyjg4pqs0g3" path="res://scenes/rooms/rooms_design/icy/room_icy_2.tscn" id="3_gn01l"]
@@ -15,5 +16,5 @@
 
 [resource]
 script = ExtResource("12_sfufs")
-rooms = Array[PackedScene]([ExtResource("1_xmntf"), ExtResource("2_enie3"), ExtResource("3_gn01l"), ExtResource("4_jho5r"), ExtResource("5_gblrg"), ExtResource("6_sxh74"), ExtResource("7_hwqn2"), ExtResource("8_yoyx8"), ExtResource("9_paqcf"), ExtResource("10_u7ghg"), ExtResource("11_ar034")])
+rooms = Array[PackedScene]([ExtResource("1_enie3"), ExtResource("1_xmntf"), ExtResource("2_enie3"), ExtResource("3_gn01l"), ExtResource("4_jho5r"), ExtResource("5_gblrg"), ExtResource("6_sxh74"), ExtResource("7_hwqn2"), ExtResource("8_yoyx8"), ExtResource("9_paqcf"), ExtResource("10_u7ghg"), ExtResource("11_ar034")])
 metadata/_custom_type_script = "uid://c2jo4inf8j6aj"
