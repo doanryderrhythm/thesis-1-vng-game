@@ -15,6 +15,8 @@
 resource_name = "shop_scene"
 script/source = "extends Node2D
 
+var sort_mode: int = 0
+
 @onready var coin_count_label: Label = $CanvasLayer/CoinCount/CoinCountLabel
 
 @onready var control_ui: Control = $CanvasLayer/CharacterListBackground/PlayerChildren
@@ -35,6 +37,8 @@ var equipped_character_ui: CharacterUIItem
 
 @onready var character_sample_scene: PackedScene = preload(\"res://scenes/ui/character_ui_item.tscn\")
 @onready var player_listener: PlayerListener = load(\"res://resources/player/player_listener.tres\")
+
+@onready var sort_button: Button = $CanvasLayer/SortButton
 
 @onready var unlock_button: TextureButton = $CanvasLayer/UnlockButton
 @onready var equip_button: TextureButton = $CanvasLayer/EquipButton
@@ -100,6 +104,14 @@ func select_character() -> void:
 	bullet_damage_value.text = str(skin_stats.bullet_res.damage)
 	health_value.text = str(skin_stats.health)
 	
+	for player_item in character_list_ui.get_children():
+		if player_item.player_stats.code == ProfileManager.player_code:
+			player_item.equip()
+			start_normal_button.disabled = false
+			start_terrain_button.disabled = false
+			start_icy_button.disabled = false
+			break
+	
 	check_unlocked_state()
 
 func change_coin_text() -> void:
@@ -159,6 +171,39 @@ func switch_button(is_unlocked: bool) -> void:
 	unlock_button.visible = !is_unlocked
 	equip_button.visible = is_unlocked
 
+func change_sort_mode() -> void:
+	var list = $CanvasLayer/CharacterListBackground/PlayerChildren/CharacterList
+	var players = list.get_children()
+	sort_mode += 1
+	players.sort_custom(func(a, b):
+		if sort_mode == 1: 
+			sort_button.text = \"Sort: Movement Speed\"
+			return a.player_stats.move_speed < b.player_stats.move_speed
+		elif sort_mode == 2: 
+			sort_button.text = \"Sort: Dash Speed\"
+			return a.player_stats.dash_speed < b.player_stats.dash_speed
+		elif sort_mode == 3: 
+			sort_button.text = \"Sort: Health\"
+			return a.player_stats.health < b.player_stats.health
+		elif sort_mode == 4: 
+			sort_button.text = \"Sort: Nozzle Count\"
+			return a.player_stats.markers_pos.size() < b.player_stats.markers_pos.size()
+		elif sort_mode == 5:
+			sort_button.text = \"Sort: Bullet Damage\"
+			return a.player_stats.bullet_res.damage < b.player_stats.bullet_res.damage
+		else:
+			sort_mode = 0
+			sort_button.text = \"Sort: Default\"
+			return a.player_stats.code < b.player_stats.code
+	)
+	for i in range(players.size()):
+		list.move_child(players[i], i)
+	for i in range(players.size()):
+		if players[i].player_stats.code == skin_stats.code:
+			character_index = i
+			select_character()
+			break
+
 func _on_unlock_button_pressed() -> void:
 	attempt_to_unlock()
 	pass # Replace with function body.
@@ -183,67 +228,9 @@ func _on_start_terrain_button_pressed() -> void:
 	start_game(GameManager.LevelType.LEVEL_TERRAIN)
 	pass # Replace with function body.
 
-#
-#var player_listener: PlayerListener = load(\"res://resources/player/player_listener.tres\")
-#var all_players: Array[PlayerStats] = []
-#
-
-#
-#@onready var item_container: HBoxContainer = $CanvasLayer/ShopBackground/Mask/ScrollContainer/PlayerItemContainer
-#@onready var skin_ui_item: PackedScene = preload(\"res://scenes/ui/skin_ui_item.tscn\")
-#
-#@onready var coin_count_label: Label = $CanvasLayer/CoinCount/CoinCountLabel
-#
-#func _ready() -> void:
-	#RenderingServer.set_default_clear_color(Color(0.0, 0.2, 0.302, 1.0))
-	#LoadSystem.load_game()
-	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	#GameManager.is_gameplay = false
-	#coin_count_label.text = str(ProfileManager.total_coins)
-	#all_players = player_listener.players
-	#for player in all_players:
-		#var ui_item: SkinUI = skin_ui_item.instantiate()
-		#ui_item.skin_stats = player
-		#item_container.add_child(ui_item)
-		#ui_item.unlock_button.pressed.connect(change_coin_text)
-		#ui_item.equip_button.pressed.connect(select_skin.bind(ui_item))
-	#for code in ProfileManager.unlocked_codes:
-		#for item in item_container.get_children():
-			#if item is not SkinUI:
-				#continue
-			#if item.skin_stats.code == code:
-				#item.unlock_player()
-	#pass
-#
-#func select_skin(selected_ui_item: SkinUI) -> void:
-	#ProfileManager.update_profile(selected_ui_item.skin_stats)
-	#for item in item_container.get_children():
-		#if item == selected_ui_item:
-			#item.modulate = Color(\"#a3fbff\")
-		#else:
-			#item.modulate = Color.WHITE
-	#start_normal_button.disabled = false
-	#start_terrain_button.disabled = false
-	#start_icy_button.disabled = false
-#
-#func change_coin_text() -> void:
-	#coin_count_label.text = str(ProfileManager.total_coins)
-#
-#func start_game(level_type: GameManager.LevelType) -> void:
-	#GameManager.level_type = level_type
-	#get_tree().change_scene_to_file(\"res://scenes/main_scenes/play_scene.tscn\")
-#
-#func _on_start_normal_button_pressed() -> void:
-	#start_game(GameManager.LevelType.LEVEL_NORMAL)
-	#pass # Replace with function body.
-#
-#func _on_start_icy_button_pressed() -> void:
-	#start_game(GameManager.LevelType.LEVEL_ICY)
-	#pass # Replace with function body.
-#
-#func _on_start_terrain_button_pressed() -> void:
-	#start_game(GameManager.LevelType.LEVEL_TERRAIN)
-	#pass # Replace with function body.
+func _on_sort_button_pressed() -> void:
+	change_sort_mode()
+	pass # Replace with function body.
 "
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bk7nh"]
@@ -452,6 +439,10 @@ _data = {
 &"default": SubResource("Animation_rdo8k")
 }
 
+[sub_resource type="Gradient" id="Gradient_0mw8q"]
+offsets = PackedFloat32Array(0, 0.215, 0.78, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.27450982, 1, 1, 1, 0.27450982, 1, 1, 1, 0)
+
 [node name="ShopScene" type="Node2D" unique_id=232877183]
 script = SubResource("GDScript_8r8tc")
 
@@ -649,6 +640,23 @@ label_settings = SubResource("LabelSettings_5vnnh")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SortButton" type="Button" parent="CanvasLayer" unique_id=359682511]
+anchors_preset = -1
+anchor_left = 0.874
+anchor_top = 0.68600005
+anchor_right = 0.99100006
+anchor_bottom = 0.72300005
+offset_left = 0.9199219
+offset_top = 0.11993408
+offset_right = 0.27990723
+offset_bottom = 0.15997314
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_23vwc")
+theme_override_font_sizes/font_size = 32
+text = "Sort: Default"
+alignment = 2
+
 [node name="CharacterListBackground" type="ColorRect" parent="CanvasLayer" unique_id=1132366344]
 anchors_preset = -1
 anchor_top = 0.74100006
@@ -796,8 +804,25 @@ libraries/ = SubResource("AnimationLibrary_4phyk")
 [node name="GlowAnim" type="AnimationPlayer" parent="." unique_id=743367226]
 libraries/ = SubResource("AnimationLibrary_85bsg")
 
+[node name="BackgroundParticles" type="CPUParticles2D" parent="." unique_id=1067113562]
+amount = 400
+texture = ExtResource("2_0mw8q")
+lifetime = 5.0
+preprocess = 5.0
+emission_shape = 3
+emission_rect_extents = Vector2(4000, 4000)
+direction = Vector2(0, 1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 50.0
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+color_ramp = SubResource("Gradient_0mw8q")
+
 [connection signal="pressed" from="CanvasLayer/UnlockButton" to="." method="_on_unlock_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EquipButton" to="." method="_on_equip_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SortButton" to="." method="_on_sort_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/StartNormalButton" to="." method="_on_start_normal_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/StartTerrainButton" to="." method="_on_start_terrain_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/StartIcyButton" to="." method="_on_start_icy_button_pressed"]

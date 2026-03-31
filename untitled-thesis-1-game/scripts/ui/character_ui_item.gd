@@ -20,10 +20,13 @@ var item_type: ItemType = ItemType.LOCKED
 func select_texture() -> void:
 	if item_type == ItemType.LOCKED:
 		texture = locked_sprite
+		character_texture.modulate = Color.WHITE
 	elif item_type == ItemType.UNLOCKED:
 		texture = unlocked_sprite
+		character_texture.modulate = Color.WHITE
 	elif item_type == ItemType.EQUIPPED:
 		texture = equipped_sprite
+		character_texture.modulate = Color.DEEP_SKY_BLUE
 
 func insert_player_stats(stats: PlayerStats) -> void:
 	player_stats = stats
