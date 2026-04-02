@@ -69,6 +69,8 @@ func _ready() -> void:
 	item_size = character_list_ui.get_child(0).size.x
 	character_index = 0
 	select_character()
+	
+	sort_button.text = \"Sort: Default\"
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(ValueStorer.key_left):
@@ -160,19 +162,22 @@ func switch_button(is_unlocked: bool) -> void:
 		if skin_stats.code == ProfileManager.player_code:
 			equip_button.disabled = true
 			equip_button.text.text = \"Equipped\"
+			player_texture.modulate = ValueStorer.player_equipped_color
 		else:
 			equip_button.disabled = false
 			equip_button.text.text = \"Equip\"
+			player_texture.modulate = ValueStorer.player_unlocked_color
 	else:
 		unlock_button.set_process_mode(Node.PROCESS_MODE_INHERIT)
 		unlock_button.text.text = \"Unlock - $\" + str(skin_stats.requirement)
 		equip_button.set_process_mode(Node.PROCESS_MODE_DISABLED)
+		player_texture.modulate = ValueStorer.player_locked_color
 	
 	unlock_button.visible = !is_unlocked
 	equip_button.visible = is_unlocked
 
 func change_sort_mode() -> void:
-	var list = $CanvasLayer/CharacterListBackground/PlayerChildren/CharacterList
+	var list = character_list_ui
 	var players = list.get_children()
 	sort_mode += 1
 	players.sort_custom(func(a, b):
@@ -654,7 +659,6 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_23vwc")
 theme_override_font_sizes/font_size = 32
-text = "Sort: Default"
 alignment = 2
 
 [node name="CharacterListBackground" type="ColorRect" parent="CanvasLayer" unique_id=1132366344]
@@ -708,12 +712,12 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.448
 anchor_top = -0.16700001
-anchor_right = 0.55200005
-anchor_bottom = 1.167
-offset_left = -0.16003418
-offset_top = 0.050001144
-offset_right = 0.15991211
-offset_bottom = -0.05000305
+anchor_right = 0.573
+anchor_bottom = 1.4330001
+offset_left = -20.160034
+offset_top = -19.949999
+offset_right = -20.160034
+offset_bottom = -19.950012
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_6cioo")

@@ -94,4 +94,8 @@ var triangle_color_1_2_moving: Color = Color.from_rgba8(255, 79, 79, 255)
 var triangle_color_2_1_moving: Color = Color.from_rgba8(255, 150, 150, 255)
 var triangle_color_3_1_moving: Color = Color.from_rgba8(255, 196, 196, 255)
 var triangle_color_3_2_moving: Color = Color.from_rgba8(255, 216, 216, 255)
+
+var player_equipped_color: Color = Color.from_rgba8(0, 172, 255, 255)
+var player_locked_color: Color = Color.from_rgba8(50, 50, 50, 255)
+var player_unlocked_color: Color = Color.from_rgba8(255, 255, 255, 255)
 #endregion
