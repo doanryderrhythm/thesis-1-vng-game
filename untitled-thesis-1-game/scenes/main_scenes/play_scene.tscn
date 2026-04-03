@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bmne7bel88n5p" path="res://scenes/player/player.tscn" id="1_tt14s"]
 [ext_resource type="PackedScene" uid="uid://di78feag8gs8a" path="res://scenes/ui/debug_ui.tscn" id="1_vrx0d"]
 [ext_resource type="PackedScene" uid="uid://dls40hpj5hhkq" path="res://scenes/cursors/aim_cursor.tscn" id="2_qvacy"]
-[ext_resource type="Texture2D" uid="uid://dkacfy5sk2ffo" path="res://sprites/tutorial/tutorial.png" id="4_5b3o3"]
+[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="4_y0n7b"]
 
 [sub_resource type="GDScript" id="GDScript_vrx0d"]
 resource_name = "play_scene"
@@ -14,7 +14,13 @@ script/source = "extends Node2D
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
+@onready var background_snow = $Player/Particles/Snow
+
 func _ready() -> void:
+	if GameManager.level_type == GameManager.LevelType.LEVEL_ICY:
+		background_snow.visible = true
+		background_snow.set_process_mode(Node.PROCESS_MODE_INHERIT)
+		
 	RenderingServer.set_default_clear_color(Color(0.3, 0.3, 0.3, 1.0))
 	GameManager.reset()
 	ui.set_up()
@@ -38,6 +44,13 @@ func delete_bullets() -> void:
 	for obj in all_bullets.get_children():
 		if is_instance_valid(obj) and obj is not PlayerBullet: obj.queue_free()
 "
+
+[sub_resource type="Gradient" id="Gradient_y0n7b"]
+offsets = PackedFloat32Array(0, 0.22522523, 0.7927928, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_u2vk8"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_y0n7b"]
 length = 0.001
@@ -100,9 +113,6 @@ retire_string = "res://scenes/main_scenes/shop_scene.tscn"
 
 [node name="Rooms" type="Node2D" parent="." unique_id=1728958944]
 
-[node name="TutorialSprite" type="Sprite2D" parent="." unique_id=116100826]
-texture = ExtResource("4_5b3o3")
-
 [node name="Enemies" type="Node2D" parent="." unique_id=95174209]
 
 [node name="EnemyParticles" type="Node2D" parent="." unique_id=472076047]
@@ -122,6 +132,24 @@ _physics_type = 1
 zoom = Vector2(0.35, 0.35)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="Particles" type="Node2D" parent="Player" unique_id=236228347]
+
+[node name="Snow" type="CPUParticles2D" parent="Player/Particles" unique_id=1323997503]
+process_mode = 4
+visible = false
+amount = 350
+texture = ExtResource("4_y0n7b")
+lifetime = 15.0
+preprocess = 10.0
+randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(4000, 4000)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 20)
+scale_amount_min = 0.1
+color_ramp = SubResource("Gradient_y0n7b")
+color_initial_ramp = SubResource("Gradient_u2vk8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=728963286]
 process_mode = 3

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://8gb0slnf4lms" path="res://scenes/rooms/rooms_design/normal/room_1.tscn" id="2_kfj16"]
 [ext_resource type="PackedScene" uid="uid://bk25p8otpm3d1" path="res://scenes/rooms/rooms_design/normal/room_2.tscn" id="3_sv6v0"]
 [ext_resource type="PackedScene" uid="uid://hjsgcrcnvn1o" path="res://scenes/rooms/rooms_design/normal/room_3.tscn" id="4_j47w8"]
-[ext_resource type="PackedScene" uid="uid://cehpvqresdr2s" path="res://scenes/rooms/rooms_design/normal/room_4.tscn" id="6_5wdhn"]
+[ext_resource type="PackedScene" uid="uid://uyjb82dws7ct" path="res://scenes/rooms/rooms_design/normal/room_4.tscn" id="6_5wdhn"]
 [ext_resource type="Script" uid="uid://c2jo4inf8j6aj" path="res://scripts/resources/resource_room_listener.gd" id="12_qg34l"]
 
 [resource]

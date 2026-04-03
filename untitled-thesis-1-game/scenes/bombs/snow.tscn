@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://w8e0lbwhxpen"]
+
+[ext_resource type="PackedScene" uid="uid://hasb2k7kag83" path="res://scenes/bombs/bomb.tscn" id="1_dm6tw"]
+[ext_resource type="Script" uid="uid://ylnnetsn6br1" path="res://scripts/bombs/snow.gd" id="2_bkt4l"]
+[ext_resource type="Texture2D" uid="uid://nyfva01h4hbc" path="res://sprites/bombs/snow_warn.png" id="3_dg7u0"]
+[ext_resource type="Texture2D" uid="uid://ck72y1q5cctje" path="res://sprites/bombs/snow_ready.png" id="4_d3gl5"]
+[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="5_dg7u0"]
+
+[sub_resource type="Gradient" id="Gradient_d3gl5"]
+offsets = PackedFloat32Array(0, 0.7873563, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Snow" unique_id=20548186 instance=ExtResource("1_dm6tw")]
+script = ExtResource("2_bkt4l")
+
+[node name="SnowParticles" type="CPUParticles2D" parent="." index="0" unique_id=1198639360]
+amount = 150
+texture = ExtResource("5_dg7u0")
+lifetime = 2.0
+emission_shape = 1
+emission_sphere_radius = 54.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 50.0
+scale_amount_min = 0.1
+scale_amount_max = 0.35
+color_ramp = SubResource("Gradient_d3gl5")
+
+[node name="WarningSprite" parent="." index="1" unique_id=481958605]
+texture = ExtResource("3_dg7u0")
+
+[node name="HarmfulSprite" parent="." index="2" unique_id=1518204916]
+texture = ExtResource("4_d3gl5")
+
+[node name="BombGlow" parent="." index="3" unique_id=1459613062]
+self_modulate = Color(1, 1, 1, 1)

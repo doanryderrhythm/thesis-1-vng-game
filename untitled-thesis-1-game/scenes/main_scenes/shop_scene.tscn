@@ -763,6 +763,7 @@ offset_right = -120.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_23vwc")
 disabled = true
 text = "START - NORMAL"
 
@@ -778,6 +779,7 @@ offset_right = 100.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_23vwc")
 disabled = true
 text = "START - TERRAIN"
 
@@ -793,6 +795,7 @@ offset_right = 320.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_23vwc")
 disabled = true
 text = "START - ICY"
 
