@@ -82,7 +82,13 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 		if GameManager.is_bomb_pellet: bomb_pellet_timer.start()
 		if GameManager.is_bomb_move: bomb_move_timer.start()
 		doors.process_mode = Node.PROCESS_MODE_INHERIT
-		RenderingServer.set_default_clear_color(Color(0.1, 0.1, 0.1, 1.0))
+		
+		if GameManager.level_type == GameManager.LevelType.LEVEL_NORMAL:
+			RenderingServer.set_default_clear_color(Color(0.1, 0.1, 0.1, 1.0))
+		elif GameManager.level_type == GameManager.LevelType.LEVEL_TERRAIN:
+			RenderingServer.set_default_clear_color(Color(0.171, 0.1, 0.0, 1.0))
+		elif GameManager.level_type == GameManager.LevelType.LEVEL_ICY:
+			RenderingServer.set_default_clear_color(Color(0.0, 0.12, 0.178, 1.0))
 	else:
 		lazer_timer.stop()
 		spike_timer.stop()
@@ -99,7 +105,13 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 			if is_instance_valid(obj): obj.queue_free()
 			
 		doors.process_mode = Node.PROCESS_MODE_DISABLED
-		RenderingServer.set_default_clear_color(Color(0.3, 0.3, 0.3, 1.0))
+		
+		if GameManager.level_type == GameManager.LevelType.LEVEL_NORMAL:
+			RenderingServer.set_default_clear_color(Color(0.3, 0.3, 0.3, 1.0))
+		elif GameManager.level_type == GameManager.LevelType.LEVEL_TERRAIN:
+			RenderingServer.set_default_clear_color(Color(0.29, 0.169, 0.0, 1.0))
+		elif GameManager.level_type == GameManager.LevelType.LEVEL_ICY:
+			RenderingServer.set_default_clear_color(Color(0.0, 0.196, 0.29, 1.0))
 		
 		if not is_game_start:
 			anim_player.play("finished")

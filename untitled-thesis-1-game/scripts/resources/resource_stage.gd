@@ -6,6 +6,10 @@ class_name StageStats
 @export var min_enemy: int
 @export var max_enemy: int
 
+@export_group("Theme Configuration")
+@export var is_icy: bool
+@export var number_of_snowball: int
+
 @export_group("Lazer")
 @export var is_lazer: bool
 @export var lazer_spawn_rate: float
