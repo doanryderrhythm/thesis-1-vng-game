@@ -1,7 +1,7 @@
 extends BaseCharacter
 class_name BaseEnemy
 
-@export var damage: float
+var damage: float
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -33,6 +33,7 @@ var goal: Node
 func _ready() -> void:
 	anim.play("default")
 	health = enemy_stats.health
+	damage = enemy_stats.damage
 	health_bar_sub_viewport.set_up_health(enemy_stats.health, health)
 	
 	dead.connect(GameManager.deduct_enemies)

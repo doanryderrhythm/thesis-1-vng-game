@@ -9,5 +9,6 @@ bullet_stats = ExtResource("1_wy0pd")
 shoot_delay = 1.5
 movement_speed = 500.0
 health = 100.0
+damage = 10.0
 enemy_color = Color(1, 0.7764706, 0.9019608, 1)
 enemy_color_moving = Color(1, 0.76862746, 0.76862746, 1)

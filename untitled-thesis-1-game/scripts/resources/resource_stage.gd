@@ -8,13 +8,7 @@ class_name StageStats
 
 @export_group("Theme Configuration")
 @export var is_icy: bool
-@export var number_of_snowball: int
-
-@export_group("Lazer")
-@export var is_lazer: bool
-@export var lazer_spawn_rate: float
-@export var lazer_warn_time: float
-@export var lazer_stay_time: float
+@export var number_of_snowball: int = 1
 
 @export_group("Spike")
 @export var is_spike: bool
@@ -33,6 +27,12 @@ class_name StageStats
 @export var bomb_four_spawn_rate: float
 @export var bomb_four_warn_time: float
 @export var bomb_four_stay_time: float
+
+@export_group("Lazer")
+@export var is_lazer: bool
+@export var lazer_spawn_rate: float
+@export var lazer_warn_time: float
+@export var lazer_stay_time: float
 
 @export_group("Bomb-Pellet")
 @export var is_bomb_pellet: bool

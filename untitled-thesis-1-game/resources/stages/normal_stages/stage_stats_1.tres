@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StageStats" format=3 uid="uid://ckh6l7nlntqew"]
+
+[ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="1_6sm4p"]
+
+[resource]
+script = ExtResource("1_6sm4p")
+phase_count = 1
+min_enemy = 3
+max_enemy = 6
+metadata/_custom_type_script = "uid://ckywq5677c365"

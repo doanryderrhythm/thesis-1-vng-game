@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="StageStatsListener" format=3 uid="uid://dilsorj8q08il"]
+
+[ext_resource type="Script" uid="uid://bjtl6d1tnj5e1" path="res://scripts/resources/resource_stage_listener.gd" id="1_rdugh"]
+[ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="2_5a2ie"]
+[ext_resource type="Resource" uid="uid://ckh6l7nlntqew" path="res://resources/stages/normal_stages/stage_stats_1.tres" id="3_tm4bd"]
+
+[resource]
+script = ExtResource("1_rdugh")
+stages = Array[ExtResource("2_5a2ie")]([ExtResource("3_tm4bd")])

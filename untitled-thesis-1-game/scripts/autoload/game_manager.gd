@@ -126,7 +126,13 @@ func set_up_rooms() -> void:
 	room_scenes = listener.rooms
 	
 func set_up_stage_stats() -> void:
-	var listener: StageStatsListener = load("res://resources/stages/stage_stats_listener.tres")
+	var listener: StageStatsListener
+	if level_type == LevelType.LEVEL_NORMAL:
+		listener = load("res://resources/stages/normal_stage_stats_listener.tres")
+	elif level_type == LevelType.LEVEL_TERRAIN:
+		listener = load("res://resources/stages/terrain_stage_stats_listener.tres")
+	elif level_type == LevelType.LEVEL_ICY:
+		listener = load("res://resources/stages/icy_stage_stats_listener.tres")
 	stage_stats = listener.stages
 
 func set_up_enemies() -> void:
