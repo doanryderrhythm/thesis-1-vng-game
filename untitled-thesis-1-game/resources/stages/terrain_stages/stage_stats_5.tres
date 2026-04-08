@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="StageStats" format=3 uid="uid://br8s7urtfsfse"]
+
+[ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="1_32d1t"]
+
+[resource]
+script = ExtResource("1_32d1t")
+phase_count = 1
+min_enemy = 2
+max_enemy = 4
+is_spike = true
+spike_spawn_rate = 2.5
+spike_warn_time = 2.5
+spike_stay_time = 1.75
+is_bomb = true
+bomb_spawn_rate = 2.5
+bomb_warn_time = 2.5
+bomb_stay_time = 1.5
+metadata/_custom_type_script = "uid://ckywq5677c365"

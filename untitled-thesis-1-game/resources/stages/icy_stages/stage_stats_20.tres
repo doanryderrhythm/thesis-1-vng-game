@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="StageStats" format=3 uid="uid://l65liq3w668o"]
+
+[ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="1_dm7u4"]
+
+[resource]
+script = ExtResource("1_dm7u4")
+phase_count = 2
+min_enemy = 7
+max_enemy = 9
+is_icy = true
+is_bomb_pellet = true
+bomb_pellet_spawn_rate = 2.0
+bomb_pellet_warn_time = 2.25
+bomb_pellet_stay_time = 2.5
+bomb_pellet_shoot_attempts = 2
+is_bomb_move = true
+bomb_move_spawn_rate = 2.0
+bomb_move_warn_time = 2.0
+metadata/_custom_type_script = "uid://ckywq5677c365"

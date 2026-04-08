@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_6sm4p")
 phase_count = 1
-min_enemy = 3
-max_enemy = 6
+min_enemy = 1
+max_enemy = 2
 metadata/_custom_type_script = "uid://ckywq5677c365"

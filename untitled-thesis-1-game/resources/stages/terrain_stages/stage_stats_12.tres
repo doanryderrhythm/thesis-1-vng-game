@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="StageStats" format=3 uid="uid://bo27aj6ppxi85"]
+
+[ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="1_kj2dc"]
+
+[resource]
+script = ExtResource("1_kj2dc")
+phase_count = 2
+min_enemy = 4
+max_enemy = 6
+is_bomb = true
+bomb_spawn_rate = 2.25
+bomb_warn_time = 2.5
+bomb_stay_time = 2.0
+is_bomb_four = true
+bomb_four_spawn_rate = 2.0
+bomb_four_warn_time = 2.0
+bomb_four_stay_time = 2.5
+is_lazer = true
+lazer_spawn_rate = 2.0
+lazer_warn_time = 2.0
+lazer_stay_time = 2.0
+metadata/_custom_type_script = "uid://ckywq5677c365"

@@ -3,7 +3,24 @@
 [ext_resource type="Script" uid="uid://bjtl6d1tnj5e1" path="res://scripts/resources/resource_stage_listener.gd" id="1_rdugh"]
 [ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="2_5a2ie"]
 [ext_resource type="Resource" uid="uid://ckh6l7nlntqew" path="res://resources/stages/normal_stages/stage_stats_1.tres" id="3_tm4bd"]
+[ext_resource type="Resource" uid="uid://t6hayf1ipu15" path="res://resources/stages/normal_stages/stage_stats_2.tres" id="4_iyfde"]
+[ext_resource type="Resource" uid="uid://ctgt2d4j5fh71" path="res://resources/stages/normal_stages/stage_stats_3.tres" id="5_mck0i"]
+[ext_resource type="Resource" uid="uid://d3esyj7tcl14o" path="res://resources/stages/normal_stages/stage_stats_4.tres" id="6_3bq22"]
+[ext_resource type="Resource" uid="uid://cxphvuggxdlaa" path="res://resources/stages/normal_stages/stage_stats_5.tres" id="7_7g5c2"]
+[ext_resource type="Resource" uid="uid://dw8d66ly0sou" path="res://resources/stages/normal_stages/stage_stats_6.tres" id="8_t4gwa"]
+[ext_resource type="Resource" uid="uid://db8p2abru5ylv" path="res://resources/stages/normal_stages/stage_stats_7.tres" id="9_sicpd"]
+[ext_resource type="Resource" uid="uid://bjcs0c48al3v1" path="res://resources/stages/normal_stages/stage_stats_8.tres" id="10_tcud5"]
+[ext_resource type="Resource" uid="uid://cnpjhq3h3yynr" path="res://resources/stages/normal_stages/stage_stats_9.tres" id="11_a1shc"]
+[ext_resource type="Resource" uid="uid://bgp21tjwh58mc" path="res://resources/stages/normal_stages/stage_stats_10.tres" id="12_ucvl5"]
+[ext_resource type="Resource" uid="uid://dl7p10f0sphe1" path="res://resources/stages/normal_stages/stage_stats_11.tres" id="13_g7txf"]
+[ext_resource type="Resource" uid="uid://dbo1mjp5ckhqg" path="res://resources/stages/normal_stages/stage_stats_12.tres" id="14_q2lgp"]
+[ext_resource type="Resource" uid="uid://ba5twd57umqc0" path="res://resources/stages/normal_stages/stage_stats_13.tres" id="15_rejr7"]
+[ext_resource type="Resource" uid="uid://bvia52sya5wjd" path="res://resources/stages/normal_stages/stage_stats_14.tres" id="16_rj0t4"]
+[ext_resource type="Resource" uid="uid://bvuelocvdtdry" path="res://resources/stages/normal_stages/stage_stats_15.tres" id="17_dkr18"]
+[ext_resource type="Resource" uid="uid://cufq86svc4dui" path="res://resources/stages/normal_stages/stage_stats_16.tres" id="18_dbdjd"]
+[ext_resource type="Resource" uid="uid://r8l0yyxhlavo" path="res://resources/stages/normal_stages/stage_stats_17.tres" id="19_15ynw"]
+[ext_resource type="Resource" uid="uid://hsexo36xd50t" path="res://resources/stages/normal_stages/stage_stats_18.tres" id="20_jd41p"]
 
 [resource]
 script = ExtResource("1_rdugh")
-stages = Array[ExtResource("2_5a2ie")]([ExtResource("3_tm4bd")])
+stages = Array[ExtResource("2_5a2ie")]([ExtResource("3_tm4bd"), ExtResource("4_iyfde"), ExtResource("5_mck0i"), ExtResource("6_3bq22"), ExtResource("7_7g5c2"), ExtResource("8_t4gwa"), ExtResource("9_sicpd"), ExtResource("10_tcud5"), ExtResource("11_a1shc"), ExtResource("12_ucvl5"), ExtResource("13_g7txf"), ExtResource("14_q2lgp"), ExtResource("15_rejr7"), ExtResource("16_rj0t4"), ExtResource("17_dkr18"), ExtResource("18_dbdjd"), ExtResource("19_15ynw"), ExtResource("20_jd41p")])

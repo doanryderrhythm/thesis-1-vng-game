@@ -19,6 +19,7 @@ var lazers_node: String = "Lazers"
 var spikes_node: String = "Spikes"
 var rewards_node: String = "Rewards"
 var bombs_node: String = "Bombs"
+var snows_node: String = "Snows"
 #endregion
 
 #region VALUES

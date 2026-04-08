@@ -24,6 +24,8 @@ var bomb_pellet_shoot_attempts: int
 
 var bomb_move_warn_time: float
 
+var snow_count: int
+
 @onready var first_point: Marker2D = $WayPoints/FirstPoint
 @onready var last_point: Marker2D = $WayPoints/LastPoint
 
@@ -51,9 +53,12 @@ var bomb_move_warn_time: float
 @onready var bomb_move_timer: Timer = $BombMoveTimer
 @onready var bomb_way_points: Node2D = $BombWayPoints
 
+@onready var snow_scene: PackedScene = preload("res://scenes/bombs/snow.tscn")
+
 @onready var all_spikes: Node2D = $Spikes
 @onready var all_bombs: Node2D = $Bombs
 @onready var all_lazers: Node2D = $Lazers
+@onready var all_snows: Node2D = $Snows
 
 @onready var anim_player: AnimationPlayer = $RoomAnimationPlayer
 
@@ -81,6 +86,7 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 		if GameManager.is_bomb_four: bomb_four_timer.start()
 		if GameManager.is_bomb_pellet: bomb_pellet_timer.start()
 		if GameManager.is_bomb_move: bomb_move_timer.start()
+		if GameManager.is_icy: respawn_snow()
 		doors.process_mode = Node.PROCESS_MODE_INHERIT
 		
 		if GameManager.level_type == GameManager.LevelType.LEVEL_NORMAL:
@@ -247,4 +253,30 @@ func respawn_bomb(scene: PackedScene) -> void:
 		new_bomb.warning_timer.wait_time = bomb_warn_time
 		new_bomb.harmful_timer.wait_time = bomb_harm_time
 	new_bomb.position = confirmed_position
+	pass
+
+func respawn_snow() -> void:
+	if is_executed:
+		return
+	
+	if not is_instance_valid(GameManager.player):
+		return
+	
+	for i in snow_count:
+		var begin_point: Vector2 = bomb_way_points.get_child(0).position
+		var end_point: Vector2 = bomb_way_points.get_child(1).position
+		var confirmed_position: Vector2 = Vector2(
+			randf_range(begin_point.x, end_point.x),
+			randf_range(begin_point.y, end_point.y)
+		)
+		while not is_valid_position(confirmed_position, ValueStorer.bomb_radius):
+			confirmed_position = Vector2(
+				randf_range(begin_point.x, end_point.x),
+				randf_range(begin_point.y, end_point.y)
+			)
+		
+		var new_snow = snow_scene.instantiate()
+		var parent = find_child(ValueStorer.snows_node)
+		parent.add_child(new_snow)
+		new_snow.position = confirmed_position
 	pass

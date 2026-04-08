@@ -320,6 +320,8 @@ shape = SubResource("RectangleShape2D_43ixu")
 
 [node name="Bombs" type="Node2D" parent="." unique_id=375486044]
 
+[node name="Snows" type="Node2D" parent="." unique_id=347706549]
+
 [node name="WayPoints" type="Node2D" parent="." unique_id=131790729]
 
 [node name="FirstPoint" type="Marker2D" parent="WayPoints" unique_id=1747017055]

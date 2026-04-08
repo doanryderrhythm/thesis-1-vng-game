@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="StageStats" format=3 uid="uid://1pefih34ly3a"]
+
+[ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="1_rnvpo"]
+
+[resource]
+script = ExtResource("1_rnvpo")
+phase_count = 3
+min_enemy = 12
+max_enemy = 14
+is_spike = true
+spike_spawn_rate = 1.5
+spike_warn_time = 1.5
+spike_stay_time = 3.25
+is_bomb = true
+bomb_spawn_rate = 1.5
+bomb_warn_time = 2.0
+bomb_stay_time = 2.75
+is_bomb_four = true
+bomb_four_spawn_rate = 1.5
+bomb_four_warn_time = 1.5
+bomb_four_stay_time = 3.5
+is_lazer = true
+lazer_spawn_rate = 1.5
+lazer_warn_time = 1.25
+lazer_stay_time = 3.25
+is_bomb_pellet = true
+bomb_pellet_spawn_rate = 1.5
+bomb_pellet_warn_time = 1.75
+bomb_pellet_stay_time = 4.5
+bomb_pellet_shoot_attempts = 3
+metadata/_custom_type_script = "uid://ckywq5677c365"

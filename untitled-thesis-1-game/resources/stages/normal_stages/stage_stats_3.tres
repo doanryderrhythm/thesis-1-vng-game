@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StageStats" format=3 uid="uid://ctgt2d4j5fh71"]
+
+[ext_resource type="Script" uid="uid://ckywq5677c365" path="res://scripts/resources/resource_stage.gd" id="1_hsvwo"]
+
+[resource]
+script = ExtResource("1_hsvwo")
+phase_count = 1
+min_enemy = 2
+max_enemy = 3
+is_spike = true
+spike_spawn_rate = 3.0
+spike_warn_time = 3.0
+spike_stay_time = 1.5
+metadata/_custom_type_script = "uid://ckywq5677c365"

@@ -34,6 +34,8 @@ var is_bomb_four: bool
 var is_bomb_pellet: bool
 var is_bomb_move: bool
 
+var is_icy: bool
+
 var enemy_particles: PackedScene = preload("res://effects/base_enemy_spawn.tscn")
 var enemy_scenes: Array[PackedScene] = []
 var room_scenes: Array[PackedScene] = []
@@ -156,6 +158,9 @@ func start_stage() -> void:
 	is_bomb_four = stage_stats[current_level].is_bomb_four
 	is_bomb_pellet = stage_stats[current_level].is_bomb_pellet
 	is_bomb_move = stage_stats[current_level].is_bomb_move
+	
+	is_icy = stage_stats[current_level].is_icy
+	
 	is_going = true
 	start_level.emit()
 	phase_change.emit(true)
@@ -313,6 +318,8 @@ func confirm_stage(room: Room) -> void:
 	if is_bomb_move:
 		room.bomb_move_timer.wait_time = stage_stats[current_level].bomb_move_spawn_rate
 		room.bomb_move_warn_time = stage_stats[current_level].bomb_move_warn_time
+	if is_icy:
+		room.snow_count = stage_stats[current_level].number_of_snowball
 	
 func is_all_surroundings_locked(_id_x: int, _id_y: int) -> bool:
 	if find_used_room(_id_x - 1, _id_y) and \
