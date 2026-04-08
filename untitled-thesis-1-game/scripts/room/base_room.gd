@@ -109,6 +109,8 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 			if is_instance_valid(obj): obj.queue_free()
 		for obj in all_lazers.get_children():
 			if is_instance_valid(obj): obj.queue_free()
+		for obj in all_snows.get_children():
+			if is_instance_valid(obj): obj.queue_free()
 			
 		doors.process_mode = Node.PROCESS_MODE_DISABLED
 		

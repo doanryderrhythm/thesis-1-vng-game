@@ -382,10 +382,14 @@ func destroy_everything() -> void:
 			if is_instance_valid(obj): obj.queue_free()
 		for obj in room.all_lazers.get_children():
 			if is_instance_valid(obj): obj.queue_free()
+		for obj in room.all_snows.get_children():
+			if is_instance_valid(obj): obj.queue_free()
 		room.spike_timer.stop()
 		room.lazer_timer.stop()
 		room.bomb_timer.stop()
 		room.bomb_four_timer.stop()
+		room.bomb_pellet_timer.stop()
+		room.bomb_move_timer.stop()
 
 func update_profile() -> void:
 	ProfileManager.total_coins += in_level_coins
