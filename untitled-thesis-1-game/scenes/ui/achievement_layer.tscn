@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://d1aie06ecrdup"]
+
+[node name="AchievementLayer" type="CanvasLayer" unique_id=2126949828]
+
+[node name="AchievementList" type="VBoxContainer" parent="." unique_id=414625146]
+custom_minimum_size = Vector2(600, 130)
+anchors_preset = -1
+anchor_left = 0.68700004
+anchor_right = 1.0
+offset_left = 600.95996
+offset_bottom = 1080.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 8

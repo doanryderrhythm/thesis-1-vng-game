@@ -16,4 +16,3 @@ class_name Achievement
 @export var total_rooms_no_dash: int
 @export var total_rooms_no_shoot: int
 @export var total_phases_finished: int
-@export var difficulties_played: int

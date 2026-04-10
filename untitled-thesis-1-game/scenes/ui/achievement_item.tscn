@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://huaeek2g7hd1"]
+
+[ext_resource type="Script" uid="uid://bphaxnd524ixp" path="res://scripts/achievements/achievement_item.gd" id="1_plkl0"]
+[ext_resource type="Texture2D" uid="uid://cpubcm1cpvub" path="res://sprites/ui/achievement_cup.png" id="2_ywwbx"]
+[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="3_f4yeg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxkpg"]
+bg_color = Color(0, 0.14382452, 0.269822, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.47369397, 0.7559161, 1, 1)
+border_blend = true
+corner_detail = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_j5ap0"]
+font = ExtResource("3_f4yeg")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_mc5it"]
+font = ExtResource("3_f4yeg")
+font_size = 24
+
+[node name="AchievementItem" type="PanelContainer" unique_id=1459059061]
+custom_minimum_size = Vector2(600, 130)
+theme_override_styles/panel = SubResource("StyleBoxFlat_mxkpg")
+script = ExtResource("1_plkl0")
+
+[node name="Image" type="TextureRect" parent="." unique_id=809226523]
+modulate = Color(0.74990755, 0.88401514, 1, 1)
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_ywwbx")
+
+[node name="Detail" type="VBoxContainer" parent="." unique_id=1119603589]
+custom_minimum_size = Vector2(440, 130)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+
+[node name="Title" type="Label" parent="Detail" unique_id=1023756559]
+layout_mode = 2
+text = "Title"
+label_settings = SubResource("LabelSettings_j5ap0")
+
+[node name="Description" type="Label" parent="Detail" unique_id=1007400934]
+layout_mode = 2
+text = "Description"
+label_settings = SubResource("LabelSettings_mc5it")
