@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://dollj4oiekx6w"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_38uja"]
+
+[resource]
+script = ExtResource("1_38uja")
+ach_code = "penta_kill"
+name = "penta_kill"
+description = "Dash into five enemies at the same time"
+enemies_destroyed_dash_same = 5
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

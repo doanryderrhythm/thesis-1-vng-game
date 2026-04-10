@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://bd078poxo70rq"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_kt1g1"]
+
+[resource]
+script = ExtResource("1_kt1g1")
+ach_code = "no_bullet_10"
+name = "What bullet?"
+description = "Complete 10 rooms without shooting"
+total_rooms_no_shoot = 10
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

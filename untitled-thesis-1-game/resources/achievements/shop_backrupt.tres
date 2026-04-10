@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://bjyadccio6kll"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_qrqbf"]
+
+[resource]
+script = ExtResource("1_qrqbf")
+ach_code = "shop_bankrupt"
+name = "The shop is now bankrupt"
+description = "Buy every skin in the shop"
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

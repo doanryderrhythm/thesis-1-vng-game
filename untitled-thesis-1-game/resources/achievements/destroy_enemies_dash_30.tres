@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://c56h5sio8h1xj"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_of12s"]
+
+[resource]
+script = ExtResource("1_of12s")
+ach_code = "destroy_enemies_dash_30"
+name = "Hero dasher"
+description = "Destroy 30 enemies by dashing in one run"
+enemies_destroyed_dash = 30
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

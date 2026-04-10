@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://dayp30fmqjea1"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_gycfp"]
+
+[resource]
+script = ExtResource("1_gycfp")
+ach_code = "stay_still_0"
+name = "You can’t lose if you do nothing"
+description = "Stay still for at least one minute"
+total_stay_still = 60.0
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

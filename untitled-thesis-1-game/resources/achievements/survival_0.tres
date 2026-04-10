@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://ql6j7ppqb804"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_qrcyc"]
+
+[resource]
+script = ExtResource("1_qrcyc")
+ach_code = "survival_0"
+name = "Still in one piece?"
+description = "Survive in locked rooms for at least two minutes in total"
+total_survival_time = 120.0
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

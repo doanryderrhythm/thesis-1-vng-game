@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://lagtoha0u5n1"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_3srxw"]
+
+[resource]
+script = ExtResource("1_3srxw")
+ach_code = "destroy_enemies_50"
+name = "A killer killer"
+description = "Destroy 50 enemies or more in one run"
+enemies_destroyed = 50
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

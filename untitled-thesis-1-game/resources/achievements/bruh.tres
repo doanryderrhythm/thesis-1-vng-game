@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://ju1m6n15k1p3"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_mi5kr"]
+
+[resource]
+script = ExtResource("1_mi5kr")
+ach_code = "bruh"
+name = "bruh."
+description = "Destroy yourself"
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

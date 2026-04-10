@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://brbeg1m30qne7"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_smed7"]
+
+[resource]
+script = ExtResource("1_smed7")
+ach_code = "triple_kill"
+name = "Triple kill"
+description = "Dash into three enemies at the same time"
+enemies_destroyed_dash_same = 3
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

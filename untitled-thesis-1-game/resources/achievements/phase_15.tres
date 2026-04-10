@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://dikqjryfu8duq"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_gdnvj"]
+
+[resource]
+script = ExtResource("1_gdnvj")
+ach_code = "phase_15"
+name = "Just getting started"
+description = "Finish 15 phases in one run"
+total_phases_finished = 15
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

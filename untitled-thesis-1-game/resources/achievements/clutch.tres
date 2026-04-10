@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://dp23jt8rfijcg"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_5b0xy"]
+
+[resource]
+script = ExtResource("1_5b0xy")
+ach_code = "clutch"
+name = "That was close..."
+description = "Finish a room with little health remaining"
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

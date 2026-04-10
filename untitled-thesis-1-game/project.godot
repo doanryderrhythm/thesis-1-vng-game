@@ -23,6 +23,7 @@ AudioStorer="*uid://i4hpi7gpx185"
 ProfileManager="*uid://p1t2iscvp605"
 SaveSystem="*uid://cbxu26vp46tdv"
 LoadSystem="*uid://cytaw6mh4a3bj"
+AchievementManager="*uid://cmpw7w2aq7lm0"
 
 [display]
 

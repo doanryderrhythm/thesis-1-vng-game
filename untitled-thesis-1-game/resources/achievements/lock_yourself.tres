@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://dpgm5m0gmchsp"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_xj0wy"]
+
+[resource]
+script = ExtResource("1_xj0wy")
+ach_code = "lock_yourself"
+name = "Where do I go now?"
+description = "Lock yourself"
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://cbe8btbyophoo"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_u81n0"]
+
+[resource]
+script = ExtResource("1_u81n0")
+ach_code = "fully_healed"
+name = "I’m ready, again!"
+description = "Heal yourself back to maximum health"
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://8jp37rcxnfsl"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_npvbb"]
+
+[resource]
+script = ExtResource("1_npvbb")
+ach_code = "no_dash_10"
+name = "What dash?"
+description = "Complete 10 rooms without dashing"
+total_rooms_no_dash = 10
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

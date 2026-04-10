@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://clpwyyqtvfv05"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_piw6w"]
+
+[resource]
+script = ExtResource("1_piw6w")
+ach_code = "coins_2000"
+name = "Just buy the whole store already…"
+description = "Store 2000 coins"
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

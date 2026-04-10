@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://c2h7cbw60x3uf"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_iuyai"]
+
+[resource]
+script = ExtResource("1_iuyai")
+ach_code = "coins_100"
+name = "Probably need some snacks"
+description = "Store 100 coins"
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

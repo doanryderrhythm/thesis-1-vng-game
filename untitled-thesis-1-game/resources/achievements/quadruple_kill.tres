@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" format=3 uid="uid://ocnaxf58y7kp"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_t4fwb"]
+
+[resource]
+script = ExtResource("1_t4fwb")
+ach_code = "quadruple_kill"
+name = "Quadruple kill"
+description = "Dash into four enemies at the same time"
+enemies_destroyed_dash_same = 4
+metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"
