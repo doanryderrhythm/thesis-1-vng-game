@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="AchievementListener" format=3 uid="uid://b46mfbvy65uda"]
+
+[ext_resource type="Script" uid="uid://cvcpr0dcw6r3t" path="res://scripts/achievements/achievement.gd" id="1_rd81i"]
+[ext_resource type="Script" uid="uid://dodvnbi81r0jg" path="res://scripts/achievements/achievement_listener.gd" id="2_823bj"]
+[ext_resource type="Resource" uid="uid://ju1m6n15k1p3" path="res://resources/achievements/bruh.tres" id="2_m867e"]
+[ext_resource type="Resource" uid="uid://dp23jt8rfijcg" path="res://resources/achievements/clutch.tres" id="3_ru705"]
+[ext_resource type="Resource" uid="uid://c2h7cbw60x3uf" path="res://resources/achievements/coins_100.tres" id="4_qj7n0"]
+[ext_resource type="Resource" uid="uid://dph4greheywpr" path="res://resources/achievements/coins_500.tres" id="5_71sy2"]
+[ext_resource type="Resource" uid="uid://clpwyyqtvfv05" path="res://resources/achievements/coins_2000.tres" id="6_u66w1"]
+[ext_resource type="Resource" uid="uid://lagtoha0u5n1" path="res://resources/achievements/destroy_enemies_50.tres" id="7_elw6i"]
+[ext_resource type="Resource" uid="uid://c56h5sio8h1xj" path="res://resources/achievements/destroy_enemies_dash_30.tres" id="8_aufcu"]
+[ext_resource type="Resource" uid="uid://fry7e1ib7thd" path="res://resources/achievements/destroy_enemies_shoot_30.tres" id="9_0rqhj"]
+[ext_resource type="Resource" uid="uid://c5xjhnssipysj" path="res://resources/achievements/double_kill.tres" id="10_ontek"]
+[ext_resource type="Resource" uid="uid://vdk8wfx25io3" path="res://resources/achievements/explorer.tres" id="11_8t3t8"]
+[ext_resource type="Resource" uid="uid://cbe8btbyophoo" path="res://resources/achievements/fully_healed.tres" id="12_gscbd"]
+[ext_resource type="Resource" uid="uid://dpgm5m0gmchsp" path="res://resources/achievements/lock_yourself.tres" id="13_6gifm"]
+[ext_resource type="Resource" uid="uid://bd078poxo70rq" path="res://resources/achievements/no_bullet_10.tres" id="14_og6vd"]
+[ext_resource type="Resource" uid="uid://8jp37rcxnfsl" path="res://resources/achievements/no_dash_10.tres" id="15_q00aj"]
+[ext_resource type="Resource" uid="uid://dollj4oiekx6w" path="res://resources/achievements/penta_kill.tres" id="16_g8x7w"]
+[ext_resource type="Resource" uid="uid://dikqjryfu8duq" path="res://resources/achievements/phase_15.tres" id="17_pq1ed"]
+[ext_resource type="Resource" uid="uid://yxifq5s6dbbu" path="res://resources/achievements/phase_30.tres" id="18_ri4u3"]
+[ext_resource type="Resource" uid="uid://ocnaxf58y7kp" path="res://resources/achievements/quadruple_kill.tres" id="19_7hbgm"]
+[ext_resource type="Resource" uid="uid://bjyadccio6kll" path="res://resources/achievements/shop_backrupt.tres" id="20_8ytum"]
+[ext_resource type="Resource" uid="uid://dayp30fmqjea1" path="res://resources/achievements/stay_still_0.tres" id="21_menfn"]
+[ext_resource type="Resource" uid="uid://ql6j7ppqb804" path="res://resources/achievements/survival_0.tres" id="22_a8u3s"]
+[ext_resource type="Resource" uid="uid://brbeg1m30qne7" path="res://resources/achievements/triple_kill.tres" id="23_re84c"]
+
+[resource]
+script = ExtResource("2_823bj")
+achievements = Array[ExtResource("1_rd81i")]([ExtResource("2_m867e"), ExtResource("3_ru705"), ExtResource("4_qj7n0"), ExtResource("5_71sy2"), ExtResource("6_u66w1"), ExtResource("7_elw6i"), ExtResource("8_aufcu"), ExtResource("9_0rqhj"), ExtResource("10_ontek"), ExtResource("11_8t3t8"), ExtResource("12_gscbd"), ExtResource("13_6gifm"), ExtResource("14_og6vd"), ExtResource("15_q00aj"), ExtResource("16_g8x7w"), ExtResource("17_pq1ed"), ExtResource("18_ri4u3"), ExtResource("19_7hbgm"), ExtResource("20_8ytum"), ExtResource("21_menfn"), ExtResource("22_a8u3s"), ExtResource("23_re84c")])
+metadata/_custom_type_script = "uid://dodvnbi81r0jg"

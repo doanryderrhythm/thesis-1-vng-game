@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://d1aie06ecrdup"]
 
+[ext_resource type="Script" uid="uid://gdjem0avgbgi" path="res://scripts/ui/achievement_layer.gd" id="1_7caiy"]
+
 [node name="AchievementLayer" type="CanvasLayer" unique_id=2126949828]
+script = ExtResource("1_7caiy")
 
 [node name="AchievementList" type="VBoxContainer" parent="." unique_id=414625146]
 custom_minimum_size = Vector2(600, 130)

@@ -9,6 +9,7 @@ var best_successful_phases: int = 0
 var player_code: String
 
 var unlocked_codes: Array[String]
+var unlocked_achs: Array[String]
 
 var character_type: Player.CharacterType
 var markers_pos: Array[Vector2]
@@ -35,3 +36,15 @@ func update_data(coins: int, enemies: int, level_reached: int, phases: int, scor
 	if enemies >= best_enemies_destroyed: best_enemies_destroyed = enemies
 	if level_reached >= best_level_reached: best_level_reached = level_reached
 	if phases >= best_successful_phases: best_successful_phases = phases
+
+func update_achievements(ach_code: String) -> void:
+	var is_found: bool = false
+	for ach in unlocked_achs:
+		if ach == ach_code:
+			is_found = true
+			break
+	
+	if is_found:
+		return
+	
+	unlocked_achs.append(ach_code)
