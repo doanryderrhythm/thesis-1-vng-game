@@ -7,4 +7,5 @@ script = ExtResource("1_u81n0")
 ach_code = "fully_healed"
 name = "I’m ready, again!"
 description = "Heal yourself back to maximum health"
+is_applicable = true
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

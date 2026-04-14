@@ -6,5 +6,6 @@
 script = ExtResource("1_mi5kr")
 ach_code = "bruh"
 name = "bruh."
-description = "Destroy yourself"
+description = "Destroy yourself after finishing a room"
+is_applicable = true
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

@@ -2,12 +2,16 @@ extends CanvasLayer
 
 @onready var achievement_list: VBoxContainer = $AchievementList
 
-@onready var achievement_listener: AchievementListener = load("res://resources/achievements/achievement_listener.tres")
 @onready var achievement_scene: PackedScene = preload("res://scenes/ui/achievement_item.tscn")
+
+@onready var state_label: Label = $StateLabel
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("test"):
-		receive_achievement("bruh")
+		ProfileManager.update_achievements("")
+	
+	if GameManager.player:
+		state_label.text = str(AchievementManager.total_survival_time)
 
 func receive_achievement(ach_code: String = "") -> void:
 	var ach_item: AchievementItem = achievement_scene.instantiate()
@@ -16,7 +20,7 @@ func receive_achievement(ach_code: String = "") -> void:
 	if ach_code == "":
 		return
 	
-	var all_achs: Array[Achievement] = achievement_listener.achievements
+	var all_achs: Array[Achievement] = AchievementManager.achievement_listener.achievements
 	var found_achievement: Achievement = null
 	for ach in all_achs:
 		if ach.ach_code == ach_code:

@@ -93,6 +93,12 @@ func increase_move_speed(_amount: float) -> void:
 	_offset_move_speed += _amount
 
 func manage_move() -> void:
+	if velocity == Vector2.ZERO and !GameManager.is_going:
+		AchievementManager.total_stay_still += get_physics_process_delta_time()
+		AchievementManager.check_achievement("stay_still_0")
+	else:
+		AchievementManager.total_stay_still = 0.0
+	
 	if _is_statue:
 		return
 	
@@ -170,12 +176,14 @@ func increase_bullet_speed(_amount: float) -> void:
 	_offset_bullet_speed += _amount
 
 func shoot_bullet() -> void:
+	AchievementManager.is_shoot = true
 	_shoot_audio.play()
 	for i in range(_shoot_markers.size()):
 		var bullet = _bullet_scene.instantiate()
 		bullet.global_position = _shoot_markers[i].global_position
 		bullet.texture = _bullet_stats.texture
-		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed) * (ValueStorer.player_bullet_speed_mult + _offset_bullet_speed)
+		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed) * \
+			(ValueStorer.player_bullet_speed_mult + _offset_bullet_speed)
 		var cal_angle: float = rad_to_deg(atan2(
 			(_shoot_markers[i].global_position.y - global_position.y),
 			(_shoot_markers[i].global_position.x - global_position.x)
@@ -190,6 +198,8 @@ func increase_dash(_amount: float) -> void:
 	_total_dash += _amount;
 
 func heal(_amount: float) -> void:
+	if health + _amount >= ProfileManager.health and health < ProfileManager.health:
+		AchievementManager.check_achievement("fully_healed")
 	health += _amount
 	if health > ProfileManager.health:
 		health = ProfileManager.health
@@ -214,6 +224,7 @@ func take_damage(_damage: float) -> void:
 	
 	if health <= 0:
 		is_dead = true
+		GameManager.is_going = false
 		GameManager.destroy_everything()
 		GameManager.update_profile()
 		GameManager.state_lose_change.emit()
@@ -233,7 +244,7 @@ func _input(event: InputEvent) -> void:
 			_shooting_delay_timer.stop()
 
 func state_check() -> void:
-	if direction_vector == Vector2.ZERO:
+	if direction_vector == Vector2.ZERO and velocity == Vector2.ZERO:
 		state = PlayerState.IDLE
 		
 	if _is_dash:
@@ -294,8 +305,24 @@ func toggle_dash(is_toggled: bool) -> void:
 	_is_dash = is_toggled
 	if _is_invulnerable and !_is_dash:
 		hurt_collision.disabled = true
+		
+		AchievementManager.is_dash = true
+		
+		AchievementManager.check_achievement("double_kill")
+		AchievementManager.check_achievement("triple_kill")
+		AchievementManager.check_achievement("quadruple_kill")
+		AchievementManager.check_achievement("penta_kill")
+		AchievementManager.enemies_destroyed_dash_same = 0
 	else:
 		hurt_collision.disabled = is_toggled
+		if !is_toggled:
+			AchievementManager.is_dash = true
+			
+			AchievementManager.check_achievement("double_kill")
+			AchievementManager.check_achievement("triple_kill")
+			AchievementManager.check_achievement("quadruple_kill")
+			AchievementManager.check_achievement("penta_kill")
+			AchievementManager.enemies_destroyed_dash_same = 0
 	hit_collision.disabled = !is_toggled
 
 func _on_shooting_delay_timer_timeout() -> void:

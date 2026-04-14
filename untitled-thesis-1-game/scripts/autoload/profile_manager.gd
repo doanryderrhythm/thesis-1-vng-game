@@ -48,3 +48,5 @@ func update_achievements(ach_code: String) -> void:
 		return
 	
 	unlocked_achs.append(ach_code)
+	AchievementLayer.receive_achievement(ach_code)
+	

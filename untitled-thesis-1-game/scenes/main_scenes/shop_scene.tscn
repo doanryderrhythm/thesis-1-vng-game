@@ -51,6 +51,7 @@ var equipped_character_ui: CharacterUIItem
 @onready var character_texture_anim: AnimationPlayer = $CharacterTextureAnim
 @onready var change_player_anim: AnimationPlayer = $ChangePlayerAnim
 @onready var glow_anim: AnimationPlayer = $GlowAnim
+@onready var insufficient_anim: AnimationPlayer = $InsufficientAnim
 
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color(0.0, 0.139, 0.211, 1.0))
@@ -109,6 +110,7 @@ func select_character() -> void:
 	for player_item in character_list_ui.get_children():
 		if player_item.player_stats.code == ProfileManager.player_code:
 			player_item.equip()
+			equipped_character_ui = player_item
 			start_normal_button.disabled = false
 			start_terrain_button.disabled = false
 			start_icy_button.disabled = false
@@ -135,6 +137,8 @@ func equip_character() -> void:
 
 func attempt_to_unlock() -> void:
 	if ProfileManager.total_coins < skin_stats.requirement:
+		insufficient_anim.stop()
+		insufficient_anim.play(\"insufficient\")
 		return
 	
 	glow_anim.stop()
@@ -145,6 +149,15 @@ func attempt_to_unlock() -> void:
 	ProfileManager.unlocked_codes.append(skin_stats.code)
 	change_coin_text()
 	check_unlocked_state()
+	
+	var is_still_locked: bool = false
+	for item in character_list_ui.get_children():
+		if item.item_type == CharacterUIItem.ItemType.LOCKED:
+			is_still_locked = true
+			break
+	if !is_still_locked:
+		AchievementManager.check_achievement(\"shop_bankrupt\")
+	
 	SaveSystem.save_game()
 	pass
 
@@ -442,6 +455,68 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_4phyk"),
 &"default": SubResource("Animation_rdo8k")
+}
+
+[sub_resource type="Animation" id="Animation_85bsg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/PlayerTexture:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/PlayerTexture:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ottf1"]
+resource_name = "insufficient"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/PlayerTexture:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/PlayerTexture:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45000002, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.08726646259971647, -0.07853982, 0.06981317, -0.061086524, 0.05235988, -0.04363323, 0.034906585, -0.02617994, 0.017453292, -0.008726646, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2jb01"]
+_data = {
+&"RESET": SubResource("Animation_85bsg"),
+&"insufficient": SubResource("Animation_ottf1")
 }
 
 [sub_resource type="Gradient" id="Gradient_0mw8q"]
@@ -810,6 +885,9 @@ libraries/ = SubResource("AnimationLibrary_4phyk")
 
 [node name="GlowAnim" type="AnimationPlayer" parent="." unique_id=743367226]
 libraries/ = SubResource("AnimationLibrary_85bsg")
+
+[node name="InsufficientAnim" type="AnimationPlayer" parent="." unique_id=589147171]
+libraries/ = SubResource("AnimationLibrary_2jb01")
 
 [node name="BackgroundParticles" type="CPUParticles2D" parent="." unique_id=1067113562]
 amount = 400

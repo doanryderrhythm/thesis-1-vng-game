@@ -7,5 +7,6 @@ script = ExtResource("1_qrcyc")
 ach_code = "survival_0"
 name = "Still in one piece?"
 description = "Survive in locked rooms for at least two minutes in total"
+total_survival_time_enable = true
 total_survival_time = 120.0
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

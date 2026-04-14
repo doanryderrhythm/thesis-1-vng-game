@@ -7,4 +7,5 @@ script = ExtResource("1_qrqbf")
 ach_code = "shop_bankrupt"
 name = "The shop is now bankrupt"
 description = "Buy every skin in the shop"
+is_applicable = true
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

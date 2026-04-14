@@ -7,4 +7,5 @@ script = ExtResource("1_xj0wy")
 ach_code = "lock_yourself"
 name = "Where do I go now?"
 description = "Lock yourself"
+is_applicable = true
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

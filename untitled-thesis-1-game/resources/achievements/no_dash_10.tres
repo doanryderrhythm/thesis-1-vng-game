@@ -7,5 +7,6 @@ script = ExtResource("1_npvbb")
 ach_code = "no_dash_10"
 name = "What dash?"
 description = "Complete 10 rooms without dashing"
+total_rooms_no_dash_enable = true
 total_rooms_no_dash = 10
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

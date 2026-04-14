@@ -7,5 +7,6 @@ script = ExtResource("1_ht2si")
 ach_code = "phase_30"
 name = "How are you still alive?"
 description = "Finish 30 phases in one run"
+total_phases_finished_enable = true
 total_phases_finished = 30
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

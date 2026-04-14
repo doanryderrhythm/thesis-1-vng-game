@@ -7,5 +7,6 @@ script = ExtResource("1_ai88g")
 ach_code = "double_kill"
 name = "Double kill"
 description = "Dash into two enemies at the same time"
+enemies_destroyed_dash_same_enable = true
 enemies_destroyed_dash_same = 2
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

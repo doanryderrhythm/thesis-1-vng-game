@@ -7,4 +7,5 @@ script = ExtResource("1_iuyai")
 ach_code = "coins_100"
 name = "Probably need some snacks"
 description = "Store 100 coins"
+is_applicable = true
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

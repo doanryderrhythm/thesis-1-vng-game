@@ -5,7 +5,8 @@
 [resource]
 script = ExtResource("1_38uja")
 ach_code = "penta_kill"
-name = "penta_kill"
+name = "Penta kill"
 description = "Dash into five enemies at the same time"
+enemies_destroyed_dash_same_enable = true
 enemies_destroyed_dash_same = 5
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

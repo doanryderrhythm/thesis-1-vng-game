@@ -7,5 +7,6 @@ script = ExtResource("1_3mypc")
 ach_code = "destroy_enemies_shoot_30"
 name = "Hero shooter"
 description = "Destroy 30 enemies by shooting in one run"
+enemies_destroyed_shoot_enable = true
 enemies_destroyed_shoot = 30
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

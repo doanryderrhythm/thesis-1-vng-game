@@ -7,5 +7,6 @@ script = ExtResource("1_gdnvj")
 ach_code = "phase_15"
 name = "Just getting started"
 description = "Finish 15 phases in one run"
+total_phases_finished_enable = true
 total_phases_finished = 15
 metadata/_custom_type_script = "uid://cvcpr0dcw6r3t"

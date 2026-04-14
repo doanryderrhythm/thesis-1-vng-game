@@ -73,6 +73,13 @@ func take_damage(_damage: float) -> void:
 	if health <= 0:
 		is_dead = true
 		GameManager.add_score(20)
+		
+		AchievementManager.enemies_destroyed += 1
+		AchievementManager.check_achievement("destroy_enemies_50")
+		
+		AchievementManager.enemies_destroyed_shoot += 1
+		AchievementManager.check_achievement("destroy_enemies_shoot_30")
+		
 		dead_audio.play()
 		spawn_killed_particles()
 		throw_reward()
@@ -152,6 +159,13 @@ func hurt(area: Area2D) -> void:
 	if temp is Player:
 		is_dead = true
 		GameManager.add_score(100)
+		AchievementManager.enemies_destroyed += 1
+		AchievementManager.check_achievement("destroy_enemies_50")
+		
+		AchievementManager.enemies_destroyed_dash += 1
+		AchievementManager.check_achievement("destroy_enemies_dash_30")
+		
+		AchievementManager.enemies_destroyed_dash_same += 1
 		dead_audio.play()
 		var parent = get_tree().current_scene
 		dead_audio.reparent(parent)
