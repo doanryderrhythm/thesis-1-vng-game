@@ -38,15 +38,16 @@ func update_data(coins: int, enemies: int, level_reached: int, phases: int, scor
 	if phases >= best_successful_phases: best_successful_phases = phases
 
 func update_achievements(ach_code: String) -> void:
-	var is_found: bool = false
-	for ach in unlocked_achs:
-		if ach == ach_code:
-			is_found = true
-			break
-	
+	var is_found: bool = is_achievement_unlocked(ach_code)
 	if is_found:
 		return
 	
 	unlocked_achs.append(ach_code)
 	AchievementLayer.receive_achievement(ach_code)
+
+func is_achievement_unlocked(ach_code: String) -> bool:
+	for ach in unlocked_achs:
+		if ach == ach_code:
+			return true
+	return false
 	

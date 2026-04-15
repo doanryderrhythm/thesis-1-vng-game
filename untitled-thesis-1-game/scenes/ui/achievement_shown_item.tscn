@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://c18xp86kyv6dq"]
+
+[ext_resource type="StyleBox" uid="uid://bn3ruoagmumjp" path="res://styles/style_achievement_locked.tres" id="1_8blqp"]
+[ext_resource type="Script" uid="uid://c0k0ly6mae0m1" path="res://scripts/ui/achievement_item.gd" id="2_gecmc"]
+[ext_resource type="Texture2D" uid="uid://cpubcm1cpvub" path="res://sprites/ui/achievement_cup.png" id="3_gf048"]
+[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="4_oyw70"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_juv1u"]
+font = ExtResource("4_oyw70")
+font_size = 32
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qtrd1"]
+font = ExtResource("4_oyw70")
+font_size = 28
+
+[node name="AchievementShownItem" type="Panel" unique_id=97140428]
+custom_minimum_size = Vector2(1080, 120)
+theme_override_styles/panel = ExtResource("1_8blqp")
+script = ExtResource("2_gecmc")
+
+[node name="StatusPic" type="TextureRect" parent="." unique_id=1517073562]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.009000001
+anchor_top = 0.083000004
+anchor_right = 0.102000006
+anchor_bottom = 0.91700006
+offset_left = 0.27999973
+offset_top = 0.03999901
+offset_right = -0.16000366
+offset_bottom = -0.040008545
+texture = ExtResource("3_gf048")
+expand_mode = 2
+
+[node name="Title" type="Label" parent="." unique_id=450645587]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13900001
+anchor_right = 0.517
+anchor_bottom = 1.0
+offset_left = -0.120010376
+offset_right = -0.3600464
+grow_horizontal = 2
+grow_vertical = 2
+text = "Title"
+label_settings = SubResource("LabelSettings_juv1u")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="." unique_id=34927034]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.53300005
+anchor_right = 0.9850001
+anchor_bottom = 1.0
+offset_left = 0.35992432
+offset_right = 0.19995117
+grow_horizontal = 2
+grow_vertical = 2
+text = "Description"
+label_settings = SubResource("LabelSettings_qtrd1")
+vertical_alignment = 1
+autowrap_mode = 2

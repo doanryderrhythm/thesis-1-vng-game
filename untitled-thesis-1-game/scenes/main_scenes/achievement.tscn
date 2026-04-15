@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bfhk0yuq4aj4d"]
+
+[ext_resource type="Script" uid="uid://clufluxtr7awu" path="res://scripts/achievements/achievement_scene.gd" id="1_3ooph"]
+[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="2_juv1u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qtrd1"]
+font = ExtResource("2_juv1u")
+font_size = 80
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
+
+[node name="Achievement" type="Node2D" unique_id=1705559252]
+script = ExtResource("1_3ooph")
+
+[node name="AchievementUI" type="CanvasLayer" parent="." unique_id=1773686825]
+
+[node name="Title" type="Label" parent="AchievementUI" unique_id=2142745708]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -280.0
+offset_top = 50.0
+offset_right = 280.0
+offset_bottom = 130.0
+grow_horizontal = 2
+text = "Achievements"
+label_settings = SubResource("LabelSettings_qtrd1")
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="AchievementUI" unique_id=603253424]
+anchors_preset = -1
+anchor_left = 0.21900001
+anchor_top = 0.157
+anchor_right = 0.781
+anchor_bottom = 0.89800006
+offset_left = -0.480011
+offset_top = 0.43998718
+offset_right = 0.47998047
+offset_bottom = 0.15991211
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(540, 400)
+size_flags_horizontal = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AchievementUI/Panel" unique_id=1111295252]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AchievementUI/Panel/ScrollContainer" unique_id=1395858575]
+custom_minimum_size = Vector2(1080, 160)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="AchievementUI" unique_id=1011565654]
+anchors_preset = -1
+anchor_left = 0.467
+anchor_top = 0.94500005
+anchor_right = 0.53300005
+anchor_bottom = 1.0
+offset_left = -0.14001465
+offset_top = -30.600037
+offset_right = 0.13989258
+offset_bottom = -30.999878
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_juv1u")
+theme_override_font_sizes/font_size = 50
+text = "Back"
+
+[connection signal="pressed" from="AchievementUI/BackButton" to="." method="_on_back_button_pressed"]

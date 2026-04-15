@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://b13r4d2kikn5r"]
+
+[sub_resource type="GDScript" id="GDScript_w3ui0"]
+resource_name = "main_menu"
+script/source = "extends Node2D
+
+func start_game(level_type: GameManager.LevelType) -> void:
+	if ProfileManager.player_code == \"\":
+		return
+	
+	GameManager.level_type = level_type
+	get_tree().change_scene_to_file(\"res://scenes/main_scenes/play_scene.tscn\")
+
+func _on_play_normal_button_pressed() -> void:
+	start_game(GameManager.LevelType.LEVEL_NORMAL)
+	pass # Replace with function body.
+
+func _on_play_terrain_button_pressed() -> void:
+	start_game(GameManager.LevelType.LEVEL_TERRAIN)
+	pass # Replace with function body.
+
+func _on_play_icy_button_pressed() -> void:
+	start_game(GameManager.LevelType.LEVEL_ICY)
+	pass # Replace with function body.
+
+func _on_achievement_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/main_scenes/achievement.tscn\")
+	pass # Replace with function body.
+
+func _on_shop_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/main_scenes/shop_scene.tscn\")
+	pass # Replace with function body.
+"
+
+[node name="MainMenu" type="Node2D" unique_id=163011442]
+script = SubResource("GDScript_w3ui0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1433341242]
+
+[node name="PlayNormalButton" type="Button" parent="CanvasLayer" unique_id=700325849]
+offset_left = 77.0
+offset_top = 43.0
+offset_right = 118.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 50
+text = "Play Normal"
+
+[node name="PlayTerrainButton" type="Button" parent="CanvasLayer" unique_id=1647588995]
+offset_left = 403.0
+offset_top = 43.0
+offset_right = 699.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 50
+text = "Play Terrain"
+
+[node name="PlayIcyButton" type="Button" parent="CanvasLayer" unique_id=634603117]
+offset_left = 725.0
+offset_top = 43.0
+offset_right = 833.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 50
+text = "Play Icy"
+
+[node name="AchievementButton" type="Button" parent="CanvasLayer" unique_id=1368482265]
+offset_left = 73.0
+offset_top = 342.0
+offset_right = 421.0
+offset_bottom = 419.0
+theme_override_font_sizes/font_size = 50
+text = "Achievements"
+
+[node name="ShopButton" type="Button" parent="CanvasLayer" unique_id=800837927]
+offset_left = 79.0
+offset_top = 189.0
+offset_right = 208.0
+offset_bottom = 266.0
+theme_override_font_sizes/font_size = 50
+text = "Shop"
+
+[connection signal="pressed" from="CanvasLayer/PlayNormalButton" to="." method="_on_play_normal_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayTerrainButton" to="." method="_on_play_terrain_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayIcyButton" to="." method="_on_play_icy_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/AchievementButton" to="." method="_on_achievement_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShopButton" to="." method="_on_shop_button_pressed"]

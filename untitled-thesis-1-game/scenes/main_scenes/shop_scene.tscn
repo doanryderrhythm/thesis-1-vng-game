@@ -43,9 +43,7 @@ var equipped_character_ui: CharacterUIItem
 @onready var unlock_button: TextureButton = $CanvasLayer/UnlockButton
 @onready var equip_button: TextureButton = $CanvasLayer/EquipButton
 
-@onready var start_normal_button: Button = $CanvasLayer/StartNormalButton
-@onready var start_terrain_button: Button = $CanvasLayer/StartTerrainButton
-@onready var start_icy_button: Button = $CanvasLayer/StartIcyButton
+@onready var back_button: Button = $CanvasLayer/BackButton
 
 @onready var player_selection_anim: AnimationPlayer = $PlayerSelectionAnim
 @onready var character_texture_anim: AnimationPlayer = $CharacterTextureAnim
@@ -111,9 +109,6 @@ func select_character() -> void:
 		if player_item.player_stats.code == ProfileManager.player_code:
 			player_item.equip()
 			equipped_character_ui = player_item
-			start_normal_button.disabled = false
-			start_terrain_button.disabled = false
-			start_icy_button.disabled = false
 			break
 	
 	check_unlocked_state()
@@ -123,11 +118,6 @@ func change_coin_text() -> void:
 
 func equip_character() -> void:
 	ProfileManager.update_profile(skin_stats)
-	
-	start_normal_button.disabled = false
-	start_terrain_button.disabled = false
-	start_icy_button.disabled = false
-	
 	check_unlocked_state()
 	
 	if equipped_character_ui != null:
@@ -222,6 +212,9 @@ func change_sort_mode() -> void:
 			select_character()
 			break
 
+func back_to_main_menu() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/main_scenes/main_menu.tscn\")
+
 func _on_unlock_button_pressed() -> void:
 	attempt_to_unlock()
 	pass # Replace with function body.
@@ -230,24 +223,12 @@ func _on_equip_button_pressed() -> void:
 	equip_character()
 	pass # Replace with function body.
 
-func start_game(level_type: GameManager.LevelType) -> void:
-	GameManager.level_type = level_type
-	get_tree().change_scene_to_file(\"res://scenes/main_scenes/play_scene.tscn\")
-
-func _on_start_normal_button_pressed() -> void:
-	start_game(GameManager.LevelType.LEVEL_NORMAL)
-	pass # Replace with function body.
-
-func _on_start_icy_button_pressed() -> void:
-	start_game(GameManager.LevelType.LEVEL_ICY)
-	pass # Replace with function body.
-
-func _on_start_terrain_button_pressed() -> void:
-	start_game(GameManager.LevelType.LEVEL_TERRAIN)
-	pass # Replace with function body.
-
 func _on_sort_button_pressed() -> void:
 	change_sort_mode()
+	pass # Replace with function body.
+
+func _on_back_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/main_scenes/main_menu.tscn\")
 	pass # Replace with function body.
 "
 
@@ -826,23 +807,7 @@ label_settings = SubResource("LabelSettings_8r8tc")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StartNormalButton" type="Button" parent="CanvasLayer" unique_id=947664123]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -320.0
-offset_top = -60.0
-offset_right = -120.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_23vwc")
-disabled = true
-text = "START - NORMAL"
-
-[node name="StartTerrainButton" type="Button" parent="CanvasLayer" unique_id=761693346]
+[node name="BackButton" type="Button" parent="CanvasLayer" unique_id=761693346]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -855,24 +820,8 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_23vwc")
-disabled = true
-text = "START - TERRAIN"
-
-[node name="StartIcyButton" type="Button" parent="CanvasLayer" unique_id=1831198907]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 120.0
-offset_top = -60.0
-offset_right = 320.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_23vwc")
-disabled = true
-text = "START - ICY"
+theme_override_font_sizes/font_size = 52
+text = "back"
 
 [node name="PlayerSelectionAnim" type="AnimationPlayer" parent="." unique_id=1989948185]
 libraries/ = SubResource("AnimationLibrary_6jdm4")
@@ -908,6 +857,4 @@ color_ramp = SubResource("Gradient_0mw8q")
 [connection signal="pressed" from="CanvasLayer/UnlockButton" to="." method="_on_unlock_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EquipButton" to="." method="_on_equip_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/SortButton" to="." method="_on_sort_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/StartNormalButton" to="." method="_on_start_normal_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/StartTerrainButton" to="." method="_on_start_terrain_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/StartIcyButton" to="." method="_on_start_icy_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BackButton" to="." method="_on_back_button_pressed"]

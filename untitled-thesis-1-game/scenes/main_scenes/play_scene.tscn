@@ -110,7 +110,7 @@ _data = {
 script = SubResource("GDScript_vrx0d")
 
 [node name="DebugUi" parent="." unique_id=2086543205 instance=ExtResource("1_vrx0d")]
-retire_string = "res://scenes/main_scenes/shop_scene.tscn"
+retire_string = "res://scenes/main_scenes/main_menu.tscn"
 
 [node name="Rooms" type="Node2D" parent="." unique_id=1728958944]
 
