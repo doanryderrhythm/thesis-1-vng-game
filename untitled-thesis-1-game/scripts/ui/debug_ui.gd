@@ -142,10 +142,18 @@ func update_result_screen() -> void:
 		
 	var coins: int = GameManager.in_level_coins
 	
-	var origin_total_destroyed_enemies: int = ProfileManager.best_enemies_destroyed
-	var origin_level_reached: int = ProfileManager.best_level_reached
-	var origin_total_successful_phases: int = ProfileManager.best_successful_phases
-	var origin_total_score: int = ProfileManager.best_score
+	var result_data: ResultData = null
+	if GameManager.level_type == GameManager.LevelType.LEVEL_NORMAL:
+		result_data = ProfileManager.normal_result_data
+	elif GameManager.level_type == GameManager.LevelType.LEVEL_TERRAIN:
+		result_data = ProfileManager.terrain_result_data
+	elif GameManager.level_type == GameManager.LevelType.LEVEL_ICY:
+		result_data = ProfileManager.icy_result_data
+	
+	var origin_total_destroyed_enemies: int = result_data.best_enemies_destroyed
+	var origin_level_reached: int = result_data.best_level_reached
+	var origin_total_successful_phases: int = result_data.best_successful_phases
+	var origin_total_score: int = result_data.best_score
 	
 	var total_destroyed_enemies: int = GameManager.total_destroyed_enemies
 	var level_reached: int = GameManager.current_actual_level + 1
@@ -165,7 +173,8 @@ func update_result_screen() -> void:
 	coins_label.text = str(coins)
 	achievements_label.text = "nope"
 	
-	ProfileManager.update_data(coins, \
+	ProfileManager.update_data(GameManager.level_type, \
+								coins, \
 								total_destroyed_enemies, \
 								level_reached, \
 								total_successful_phases, \

@@ -4,10 +4,25 @@ func get_save_profile() -> Dictionary:
 	var save_dict = {
 		"total_coins": ProfileManager.total_coins,
 		"unlocked_players": ProfileManager.unlocked_codes,
-		"best_score": ProfileManager.best_score,
-		"best_phase": ProfileManager.best_successful_phases,
-		"best_level": ProfileManager.best_level_reached,
-		"best_enemies_destroyed": ProfileManager.best_enemies_destroyed,
+		"unlocked_achs": ProfileManager.unlocked_achs,
+		"normal_result": {
+			"best_score": ProfileManager.normal_result_data.best_score,
+			"best_phase": ProfileManager.normal_result_data.best_successful_phases,
+			"best_level": ProfileManager.normal_result_data.best_level_reached,
+			"best_enemies_destroyed": ProfileManager.normal_result_data.best_enemies_destroyed,
+		},
+		"terrain_result": {
+			"best_score": ProfileManager.terrain_result_data.best_score,
+			"best_phase": ProfileManager.terrain_result_data.best_successful_phases,
+			"best_level": ProfileManager.terrain_result_data.best_level_reached,
+			"best_enemies_destroyed": ProfileManager.terrain_result_data.best_enemies_destroyed,
+		},
+		"icy_result": {
+			"best_score": ProfileManager.icy_result_data.best_score,
+			"best_phase": ProfileManager.icy_result_data.best_successful_phases,
+			"best_level": ProfileManager.icy_result_data.best_level_reached,
+			"best_enemies_destroyed": ProfileManager.icy_result_data.best_enemies_destroyed,
+		},
 	}
 	return save_dict
 

@@ -18,7 +18,19 @@ func load_game():
 
 		ProfileManager.total_coins = node_data["total_coins"]
 		ProfileManager.unlocked_codes.assign(node_data.get("unlocked_players", []))
-		ProfileManager.best_score = node_data["best_score"]
-		ProfileManager.best_successful_phases = node_data["best_phase"]
-		ProfileManager.best_level_reached = node_data["best_level"]
-		ProfileManager.best_enemies_destroyed = node_data["best_enemies_destroyed"]
+		ProfileManager.unlocked_achs.assign(node_data.get("unlocked_achs", []))
+		
+		ProfileManager.normal_result_data.best_score = node_data["normal_result"]["best_score"]
+		ProfileManager.normal_result_data.best_successful_phases = node_data["normal_result"]["best_phase"]
+		ProfileManager.normal_result_data.best_level_reached = node_data["normal_result"]["best_level"]
+		ProfileManager.normal_result_data.best_enemies_destroyed = node_data["normal_result"]["best_enemies_destroyed"]
+
+		ProfileManager.terrain_result_data.best_score = node_data["terrain_result"]["best_score"]
+		ProfileManager.terrain_result_data.best_successful_phases = node_data["terrain_result"]["best_phase"]
+		ProfileManager.terrain_result_data.best_level_reached = node_data["terrain_result"]["best_level"]
+		ProfileManager.terrain_result_data.best_enemies_destroyed = node_data["terrain_result"]["best_enemies_destroyed"]
+		
+		ProfileManager.icy_result_data.best_score = node_data["icy_result"]["best_score"]
+		ProfileManager.icy_result_data.best_successful_phases = node_data["icy_result"]["best_phase"]
+		ProfileManager.icy_result_data.best_level_reached = node_data["icy_result"]["best_level"]
+		ProfileManager.icy_result_data.best_enemies_destroyed = node_data["icy_result"]["best_enemies_destroyed"]

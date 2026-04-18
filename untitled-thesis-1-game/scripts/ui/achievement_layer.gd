@@ -22,4 +22,6 @@ func receive_achievement(ach_code: String = "") -> void:
 	
 	ach_item.title_label.text = found_achievement.name
 	ach_item.description_label.text = found_achievement.description
+	
+	SaveSystem.save_game()
 	pass

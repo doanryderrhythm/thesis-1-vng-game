@@ -1,10 +1,10 @@
 extends Node
 
 var total_coins: int = 0
-var best_score: int = 0
-var best_enemies_destroyed: int = 0
-var best_level_reached: int = 0
-var best_successful_phases: int = 0
+
+var normal_result_data: ResultData = ResultData.new()
+var terrain_result_data: ResultData = ResultData.new()
+var icy_result_data: ResultData = ResultData.new()
 
 var player_code: String
 
@@ -30,12 +30,24 @@ func update_profile(player: PlayerStats) -> void:
 	dash_speed = player.dash_speed
 	bullet_res = player.bullet_res
 
-func update_data(coins: int, enemies: int, level_reached: int, phases: int, score: int) -> void:
+func update_data(level_type: GameManager.LevelType, coins: int, enemies: int, level_reached: int, phases: int, score: int) -> void:
 	total_coins += coins
-	if score >= best_score: best_score = score
-	if enemies >= best_enemies_destroyed: best_enemies_destroyed = enemies
-	if level_reached >= best_level_reached: best_level_reached = level_reached
-	if phases >= best_successful_phases: best_successful_phases = phases
+	var result_data: ResultData = null
+	
+	if level_type == GameManager.LevelType.LEVEL_NORMAL:
+		result_data = normal_result_data
+	elif level_type == GameManager.LevelType.LEVEL_TERRAIN:
+		result_data = terrain_result_data
+	elif level_type == GameManager.LevelType.LEVEL_ICY:
+		result_data = icy_result_data
+	
+	if result_data == null:
+		return
+	
+	if score >= result_data.best_score: result_data.best_score = score
+	if enemies >= result_data.best_enemies_destroyed: result_data.best_enemies_destroyed = enemies
+	if level_reached >= result_data.best_level_reached: result_data.best_level_reached = level_reached
+	if phases >= result_data.best_successful_phases: result_data.best_successful_phases = phases
 
 func update_achievements(ach_code: String) -> void:
 	var is_found: bool = is_achievement_unlocked(ach_code)

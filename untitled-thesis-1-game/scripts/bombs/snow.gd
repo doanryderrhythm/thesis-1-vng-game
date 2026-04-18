@@ -3,7 +3,7 @@ class_name Snow
 
 @onready var snow_particles: CPUParticles2D = $SnowParticles
 
-var move_speed: float = 750.0
+var move_speed: float = 325.0
 
 func _ready() -> void:
 	warning_sprite.visible = true

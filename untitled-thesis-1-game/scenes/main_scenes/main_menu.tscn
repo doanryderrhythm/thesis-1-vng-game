@@ -4,6 +4,9 @@
 resource_name = "main_menu"
 script/source = "extends Node2D
 
+func _ready() -> void:
+	LoadSystem.load_game()
+
 func start_game(level_type: GameManager.LevelType) -> void:
 	if ProfileManager.player_code == \"\":
 		return
