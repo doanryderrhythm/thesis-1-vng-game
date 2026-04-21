@@ -180,12 +180,15 @@ libraries/ = SubResource("AnimationLibrary_qek5x")
 
 [node name="ShootAudio" type="AudioStreamPlayer" parent="." unique_id=2083168107]
 stream = ExtResource("7_0owmy")
+bus = &"SFX"
 
 [node name="DashAudio" type="AudioStreamPlayer" parent="." unique_id=1195684177]
 stream = ExtResource("8_5gtgg")
+bus = &"SFX"
 
 [node name="HurtAudio" type="AudioStreamPlayer" parent="." unique_id=82312015]
 stream = ExtResource("9_h17s1")
+bus = &"SFX"
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=2042102076]
 current = true

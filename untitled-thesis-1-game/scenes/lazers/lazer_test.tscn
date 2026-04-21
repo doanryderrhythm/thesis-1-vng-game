@@ -149,6 +149,7 @@ texture = ExtResource("3_5m2v7")
 
 [node name="LazerShootAudio" type="AudioStreamPlayer2D" parent="." unique_id=1492291006]
 stream = ExtResource("2_6whbb")
+bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=595028583]
 libraries/ = SubResource("AnimationLibrary_lm0nn")

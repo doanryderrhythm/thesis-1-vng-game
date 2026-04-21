@@ -132,12 +132,15 @@ libraries/ = SubResource("AnimationLibrary_n2ebm")
 
 [node name="ShootAudio" type="AudioStreamPlayer2D" parent="." unique_id=845705284]
 stream = ExtResource("6_n2ebm")
+bus = &"SFX"
 
 [node name="HurtAudio" type="AudioStreamPlayer2D" parent="." unique_id=1071958891]
 stream = ExtResource("7_i1su5")
+bus = &"SFX"
 
 [node name="DeadAudio" type="AudioStreamPlayer2D" parent="." unique_id=915990040]
 stream = ExtResource("8_i1su5")
+bus = &"SFX"
 
 [node name="HealthBarSubViewport" type="SubViewport" parent="." unique_id=1692427199]
 transparent_bg = true

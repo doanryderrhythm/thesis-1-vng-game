@@ -52,6 +52,8 @@ var equipped_character_ui: CharacterUIItem
 @onready var insufficient_anim: AnimationPlayer = $InsufficientAnim
 
 func _ready() -> void:
+	ProfileManager.custom_index_selected.connect(select_character_custom_index)
+	
 	RenderingServer.set_default_clear_color(Color(0.0, 0.139, 0.211, 1.0))
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	LoadSystem.load_game()
@@ -84,6 +86,14 @@ func _process(_delta: float) -> void:
 			change_player_anim.stop()
 			change_player_anim.play(\"right_select\")
 			select_character()
+
+func select_character_custom_index(index: int) -> void:
+	if index < 0 or index >= character_list_ui.get_child_count():
+		return
+	
+	character_index = index
+	change_player_anim.stop()
+	select_character()
 
 func add_character_items() -> void:
 	for player in player_listener.players:
@@ -231,6 +241,13 @@ func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file(\"res://scenes/main_scenes/main_menu.tscn\")
 	pass # Replace with function body.
 "
+
+[sub_resource type="LabelSettings" id="LabelSettings_0mw8q"]
+font = ExtResource("2_23vwc")
+font_size = 80
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bk7nh"]
 blend_mode = 1
@@ -508,6 +525,19 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.27450982, 1, 1, 1, 0.27450982, 
 script = SubResource("GDScript_8r8tc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1828509655]
+
+[node name="Title" type="Label" parent="CanvasLayer" unique_id=1963365170]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -280.0
+offset_top = 50.0
+offset_right = 280.0
+offset_bottom = 130.0
+grow_horizontal = 2
+text = "Shop"
+label_settings = SubResource("LabelSettings_0mw8q")
+horizontal_alignment = 1
 
 [node name="PlayerTexture" type="TextureRect" parent="CanvasLayer" unique_id=2138626216]
 anchors_preset = -1

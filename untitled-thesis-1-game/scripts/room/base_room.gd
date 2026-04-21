@@ -246,6 +246,7 @@ func respawn_bomb(scene: PackedScene) -> void:
 		new_bomb.warning_timer.wait_time = bomb_four_warn_time
 		new_bomb.harmful_timer.wait_time = bomb_four_harm_time
 	elif new_bomb is BombPellets:
+		new_bomb.shoot_attempts = bomb_pellet_shoot_attempts
 		new_bomb.warning_timer.wait_time = bomb_pellet_warn_time
 		new_bomb.harmful_timer.wait_time = bomb_pellet_harm_time
 		new_bomb.shoot_timer.wait_time = bomb_pellet_harm_time / float(bomb_pellet_shoot_attempts)

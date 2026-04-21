@@ -166,6 +166,8 @@ func start_stage() -> void:
 	is_going = true
 	start_level.emit()
 	phase_change.emit(true)
+	
+	MusicManager.toggle_filter_effect(false)
 	pass
 
 func spawn_enemies(first_point: Vector2, last_point: Vector2) -> void:
@@ -307,6 +309,8 @@ func deduct_enemies() -> void:
 				is_locked = true
 				state_lose_change.emit()
 		create_available_rooms(current_id_x, current_id_y)
+		
+		MusicManager.toggle_filter_effect(true)
 
 func confirm_stage(room: Room) -> void:
 	if is_lazer:

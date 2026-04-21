@@ -20,6 +20,8 @@ var move_speed: float
 var dash_speed: float
 var bullet_res: BulletStats
 
+signal custom_index_selected
+
 func update_profile(player: PlayerStats) -> void:
 	player_code = player.code
 	character_type = player.character_type

@@ -90,11 +90,15 @@ func change_health() -> void:
 	print(GameManager.player.health)
 	if GameManager.player.health <= 0:
 		danger_texture.modulate = Color(1, 1, 1, 0)
+		MusicManager.reset_pitch()
 	elif GameManager.player.health <= 0.3 * ProfileManager.health:
 		danger_texture.modulate = Color(1, 1, 1, 1 - \
 		GameManager.player.health / (0.3 * ProfileManager.health))
+		MusicManager.increase_pitch((0.3 * ProfileManager.health - GameManager.player.health) \
+			/ (0.3 * ProfileManager.health))
 	else:
 		danger_texture.modulate = Color(1, 1, 1, 0)
+		MusicManager.reset_pitch()
 
 func change_dash() -> void:
 	dash_bar.value = GameManager.player._dash_count

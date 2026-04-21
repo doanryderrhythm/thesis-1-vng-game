@@ -11,6 +11,8 @@ class_name BombPellets
 
 var rotate_rate: float
 
+var shoot_attempts: int
+
 func _ready() -> void:
 	rotate_rate = randf_range(30, 150)
 	
@@ -41,6 +43,9 @@ func _on_shoot_timer_timeout() -> void:
 	pass
 
 func shoot_bullets() -> void:
+	if shoot_attempts == 0:
+		return
+		
 	for marker in shoot_markers.get_children():
 		var bullet = bullet_scene.instantiate()
 		bullet.global_position = marker.global_position
@@ -48,7 +53,7 @@ func shoot_bullets() -> void:
 		bullet.speed = randf_range(
 			bullet_stats.min_speed,
 			bullet_stats.max_speed
-			) * 2.5
+			) * 1.25
 		bullet.angle = atan2(
 			(marker.global_position.y - global_position.y),
 			(marker.global_position.x - global_position.x)
@@ -58,3 +63,5 @@ func shoot_bullets() -> void:
 		var parent = get_tree().current_scene.find_child(ValueStorer.bullets_node)
 		parent.add_child(bullet)
 		bullet.modulate = Color("ffc4ffff")
+		
+	shoot_attempts -= 1

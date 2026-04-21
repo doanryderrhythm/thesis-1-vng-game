@@ -404,6 +404,7 @@ wait_time = 2.0
 [node name="DoorCloseAudio" type="AudioStreamPlayer" parent="." unique_id=1696601352]
 stream = ExtResource("4_ativ4")
 pitch_scale = 0.5
+bus = &"SFX"
 
 [node name="RoomAnimationPlayer" type="AnimationPlayer" parent="." unique_id=651746508]
 libraries/ = SubResource("AnimationLibrary_xp0a8")

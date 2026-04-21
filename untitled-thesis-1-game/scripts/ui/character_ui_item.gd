@@ -17,6 +17,15 @@ enum ItemType {
 
 var item_type: ItemType = ItemType.LOCKED
 
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			_on_clicked()
+
+func _on_clicked() -> void:
+	ProfileManager.custom_index_selected.emit(get_parent().get_children().find(self))
+	pass
+
 func select_texture() -> void:
 	if item_type == ItemType.LOCKED:
 		texture = locked_sprite

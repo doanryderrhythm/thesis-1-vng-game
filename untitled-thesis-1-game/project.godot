@@ -15,6 +15,10 @@ run/main_scene="uid://b13r4d2kikn5r"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://btj3o7pysosip"
+
 [autoload]
 
 GameManager="*uid://cvck5mj1un6eb"
@@ -25,6 +29,7 @@ SaveSystem="*uid://cbxu26vp46tdv"
 LoadSystem="*uid://cytaw6mh4a3bj"
 AchievementManager="*uid://cmpw7w2aq7lm0"
 AchievementLayer="*uid://d1aie06ecrdup"
+MusicManager="*uid://c6pagjlk4a3ow"
 
 [display]
 

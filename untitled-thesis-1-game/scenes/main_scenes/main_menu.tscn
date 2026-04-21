@@ -1,11 +1,42 @@
 [gd_scene format=3 uid="uid://b13r4d2kikn5r"]
 
+[ext_resource type="Texture2D" uid="uid://br46pgblghmvf" path="res://sprites/ui/pause_button_unselected.png" id="1_kt583"]
+[ext_resource type="Texture2D" uid="uid://b2nua0rf6jexh" path="res://sprites/ui/pause_button_pressed.png" id="2_qd03l"]
+[ext_resource type="Texture2D" uid="uid://r0ku0idq14xt" path="res://sprites/ui/pause_button_selected.png" id="3_bi8wh"]
+[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="4_qd03l"]
+[ext_resource type="PackedScene" uid="uid://dyx1viws6qqob" path="res://scenes/ui/difficulty_item.tscn" id="5_bi8wh"]
+
 [sub_resource type="GDScript" id="GDScript_w3ui0"]
 resource_name = "main_menu"
 script/source = "extends Node2D
 
+@onready var difficulty_selection: ColorRect = $UI/DifficultySelect
+@onready var character_warning: ColorRect = $UI/Warning
+
 func _ready() -> void:
+	RenderingServer.set_default_clear_color(Color(0.029, 0.0, 0.184, 1.0))
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	MusicManager.stop_gameplay_music()
+	MusicManager.reset_pitch()
+	MusicManager.toggle_filter_effect(false)
 	LoadSystem.load_game()
+
+func _on_play_button_pressed() -> void:
+	if ProfileManager.player_code == \"\":
+		show_overlay_info(character_warning, true)
+		return
+	
+	show_overlay_info(difficulty_selection, true)
+	pass # Replace with function body.
+
+func show_overlay_info(object, is_toggled: bool) -> void:
+	if is_toggled:
+		object.visible = true
+		object.set_process_mode(Node.PROCESS_MODE_INHERIT)
+	else:
+		object.visible = false
+		object.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func start_game(level_type: GameManager.LevelType) -> void:
 	if ProfileManager.player_code == \"\":
@@ -33,55 +64,515 @@ func _on_achievement_button_pressed() -> void:
 func _on_shop_button_pressed() -> void:
 	get_tree().change_scene_to_file(\"res://scenes/main_scenes/shop_scene.tscn\")
 	pass # Replace with function body.
+
+func _on_difficulty_back_button_pressed() -> void:
+	show_overlay_info(difficulty_selection, false)
+	pass # Replace with function body.
+
+func _on_warning_back_button_pressed() -> void:
+	show_overlay_info(character_warning, false)
+	pass # Replace with function body.
 "
+
+[sub_resource type="GDScript" id="GDScript_qd03l"]
+resource_name = "button_behaviour"
+script/source = "extends TextureButton
+
+@onready var text: Label = $Label
+
+func _process(_delta: float) -> void:
+	if is_hovered() and disabled == false:
+		text.label_settings.font_color = Color.BLACK
+	else:
+		text.label_settings.font_color = Color.WHITE
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_bi8wh"]
+font = ExtResource("4_qd03l")
+font_size = 80
+
+[sub_resource type="GDScript" id="GDScript_bi8wh"]
+resource_name = "button_behaviour"
+script/source = "extends TextureButton
+
+@onready var text: Label = $Label
+
+func _process(_delta: float) -> void:
+	if is_hovered() and disabled == false:
+		text.label_settings.font_color = Color.BLACK
+	else:
+		text.label_settings.font_color = Color.WHITE
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_qd03l"]
+font = ExtResource("4_qd03l")
+font_size = 50
+
+[sub_resource type="GDScript" id="GDScript_6r42y"]
+resource_name = "button_behaviour"
+script/source = "extends TextureButton
+
+@onready var text: Label = $Label
+
+func _process(_delta: float) -> void:
+	if is_hovered() and disabled == false:
+		text.label_settings.font_color = Color.BLACK
+	else:
+		text.label_settings.font_color = Color.WHITE
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_kllu6"]
+font = ExtResource("4_qd03l")
+font_size = 50
+
+[sub_resource type="GDScript" id="GDScript_enjcu"]
+resource_name = "button_behaviour"
+script/source = "extends TextureButton
+
+@onready var text: Label = $Label
+
+func _process(_delta: float) -> void:
+	if is_hovered() and disabled == false:
+		text.label_settings.font_color = Color.BLACK
+	else:
+		text.label_settings.font_color = Color.WHITE
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_6r42y"]
+font = ExtResource("4_qd03l")
+font_size = 50
+
+[sub_resource type="GDScript" id="GDScript_kllu6"]
+resource_name = "button_behaviour"
+script/source = "extends TextureButton
+
+@onready var text: Label = $Label
+
+func _process(_delta: float) -> void:
+	if is_hovered() and disabled == false:
+		text.label_settings.font_color = Color.BLACK
+	else:
+		text.label_settings.font_color = Color.WHITE
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_enjcu"]
+font = ExtResource("4_qd03l")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_gl8k6"]
+font = ExtResource("4_qd03l")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_q3f11"]
+font = ExtResource("4_qd03l")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_wukam"]
+font = ExtResource("4_qd03l")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_x6xjm"]
+font = ExtResource("4_qd03l")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_f6fxv"]
+font = ExtResource("4_qd03l")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_g3b7m"]
+font = ExtResource("4_qd03l")
+font_size = 32
 
 [node name="MainMenu" type="Node2D" unique_id=163011442]
 script = SubResource("GDScript_w3ui0")
+metadata/_edit_vertical_guides_ = [960.0]
+metadata/_edit_horizontal_guides_ = [540.0]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1433341242]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1901427611]
 
-[node name="PlayNormalButton" type="Button" parent="CanvasLayer" unique_id=700325849]
-offset_left = 77.0
-offset_top = 43.0
-offset_right = 118.0
-offset_bottom = 74.0
-theme_override_font_sizes/font_size = 50
-text = "Play Normal"
+[node name="PlayButton" type="TextureButton" parent="UI" unique_id=173604554]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -70.000015
+offset_right = 300.0
+offset_bottom = 70.000015
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(300.47998, 70.339966)
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_qd03l")
 
-[node name="PlayTerrainButton" type="Button" parent="CanvasLayer" unique_id=1647588995]
-offset_left = 403.0
-offset_top = 43.0
-offset_right = 699.0
-offset_bottom = 120.0
-theme_override_font_sizes/font_size = 50
-text = "Play Terrain"
+[node name="Label" type="Label" parent="UI/PlayButton" unique_id=1032920099]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+label_settings = SubResource("LabelSettings_bi8wh")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="PlayIcyButton" type="Button" parent="CanvasLayer" unique_id=634603117]
-offset_left = 725.0
-offset_top = 43.0
-offset_right = 833.0
-offset_bottom = 120.0
-theme_override_font_sizes/font_size = 50
-text = "Play Icy"
+[node name="AchievementsButton" type="TextureButton" parent="UI" unique_id=2131830801]
+modulate = Color(0.6315303, 0.8329358, 1, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = 80.0
+offset_right = 225.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(225, 53)
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_bi8wh")
 
-[node name="AchievementButton" type="Button" parent="CanvasLayer" unique_id=1368482265]
-offset_left = 73.0
-offset_top = 342.0
-offset_right = 421.0
-offset_bottom = 419.0
-theme_override_font_sizes/font_size = 50
+[node name="Label" type="Label" parent="UI/AchievementsButton" unique_id=62281171]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Achievements"
+label_settings = SubResource("LabelSettings_qd03l")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ShopButton" type="Button" parent="CanvasLayer" unique_id=800837927]
-offset_left = 79.0
-offset_top = 189.0
-offset_right = 208.0
-offset_bottom = 266.0
-theme_override_font_sizes/font_size = 50
+[node name="ShopButton" type="TextureButton" parent="UI" unique_id=614816000]
+modulate = Color(0.62495375, 1, 0.8213867, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = 195.0
+offset_right = 225.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(225, 53)
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_6r42y")
+
+[node name="Label" type="Label" parent="UI/ShopButton" unique_id=804648201]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Shop"
+label_settings = SubResource("LabelSettings_kllu6")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[connection signal="pressed" from="CanvasLayer/PlayNormalButton" to="." method="_on_play_normal_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/PlayTerrainButton" to="." method="_on_play_terrain_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/PlayIcyButton" to="." method="_on_play_icy_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/AchievementButton" to="." method="_on_achievement_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/ShopButton" to="." method="_on_shop_button_pressed"]
+[node name="CreditsButton" type="TextureButton" parent="UI" unique_id=424463802]
+modulate = Color(1, 0.97521, 0.64468336, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = 310.0
+offset_right = 225.0
+offset_bottom = 415.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(225, 53)
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_enjcu")
+
+[node name="Label" type="Label" parent="UI/CreditsButton" unique_id=455014211]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Credits"
+label_settings = SubResource("LabelSettings_6r42y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="UI" unique_id=506030700]
+modulate = Color(1, 0.5920712, 0.5920712, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 425.0
+offset_right = 150.0
+offset_bottom = 495.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 35)
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_kllu6")
+
+[node name="Label" type="Label" parent="UI/QuitButton" unique_id=1798190201]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+label_settings = SubResource("LabelSettings_enjcu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DifficultySelect" type="ColorRect" parent="UI" unique_id=1982931830]
+process_mode = 4
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8627451)
+
+[node name="Title" type="Label" parent="UI/DifficultySelect" unique_id=85559971]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -320.0
+offset_bottom = -269.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SELECT DIFFICULTY"
+label_settings = SubResource("LabelSettings_gl8k6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="UI/DifficultySelect" unique_id=1907777552]
+modulate = Color(1, 0.5920712, 0.5920712, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 245.0
+offset_right = 150.0
+offset_bottom = 315.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 35)
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_kllu6")
+
+[node name="Label" type="Label" parent="UI/DifficultySelect/BackButton" unique_id=51753915]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_q3f11")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Banner" type="ColorRect" parent="UI/DifficultySelect" unique_id=623383311]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.29200003
+anchor_right = 1.0
+anchor_bottom = 0.708
+offset_top = -0.36001587
+offset_bottom = 0.35998535
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 225)
+color = Color(0.105409205, 0.105409205, 0.105409205, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/DifficultySelect/Banner" unique_id=992855032]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Normal" parent="UI/DifficultySelect/Banner/HBoxContainer" unique_id=684363975 instance=ExtResource("5_bi8wh")]
+layout_mode = 2
+
+[node name="Description" parent="UI/DifficultySelect/Banner/HBoxContainer/Normal" index="1" unique_id=1782256861]
+text = "• basic room patterns
+• a few obstacle types
+• one phase each room
+• just fun!"
+
+[node name="Label" parent="UI/DifficultySelect/Banner/HBoxContainer/Normal/PlayButton" parent_id_path=PackedInt32Array(684363975, 1346189862) index="0" unique_id=1065253950]
+label_settings = SubResource("LabelSettings_wukam")
+
+[node name="Terrain" parent="UI/DifficultySelect/Banner/HBoxContainer" unique_id=1025124834 instance=ExtResource("5_bi8wh")]
+modulate = Color(1, 0.81572866, 0.67756593, 1)
+layout_mode = 2
+
+[node name="Title" parent="UI/DifficultySelect/Banner/HBoxContainer/Terrain" index="0" unique_id=1141201430]
+text = "TERRAIN"
+
+[node name="Description" parent="UI/DifficultySelect/Banner/HBoxContainer/Terrain" index="1" unique_id=1782256861]
+text = "• more room patterns
+• more obstacle types
+• multiple phases each room
+• hard fun!"
+
+[node name="Label" parent="UI/DifficultySelect/Banner/HBoxContainer/Terrain/PlayButton" parent_id_path=PackedInt32Array(1025124834, 1346189862) index="0" unique_id=1065253950]
+label_settings = SubResource("LabelSettings_x6xjm")
+
+[node name="Icy" parent="UI/DifficultySelect/Banner/HBoxContainer" unique_id=674928305 instance=ExtResource("5_bi8wh")]
+modulate = Color(0.7104485, 0.8367597, 1, 1)
+layout_mode = 2
+
+[node name="Title" parent="UI/DifficultySelect/Banner/HBoxContainer/Icy" index="0" unique_id=1141201430]
+text = "ICY"
+
+[node name="Description" parent="UI/DifficultySelect/Banner/HBoxContainer/Icy" index="1" unique_id=1782256861]
+text = "• skate on ice
+• with extra snow balls
+• extreme bullet hell
+• brutal fun!"
+
+[node name="Label" parent="UI/DifficultySelect/Banner/HBoxContainer/Icy/PlayButton" parent_id_path=PackedInt32Array(674928305, 1346189862) index="0" unique_id=1065253950]
+label_settings = SubResource("LabelSettings_f6fxv")
+
+[node name="Warning" type="ColorRect" parent="UI" unique_id=1488697586]
+process_mode = 4
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8627451)
+
+[node name="Title" type="Label" parent="UI/Warning" unique_id=1151343617]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -160.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "WARNING"
+label_settings = SubResource("LabelSettings_gl8k6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="UI/Warning" unique_id=913860529]
+modulate = Color(1, 0.5920712, 0.5920712, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 110.0
+offset_right = 150.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 35)
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_kllu6")
+
+[node name="Label" type="Label" parent="UI/Warning/BackButton" unique_id=2012542485]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_q3f11")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Banner" type="ColorRect" parent="UI/Warning" unique_id=1028974649]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.41700003
+anchor_right = 1.0
+anchor_bottom = 0.583
+offset_top = -0.36001587
+offset_bottom = 0.35998535
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07910311, 0.07910311, 0.07910311, 1)
+
+[node name="Label" type="Label" parent="UI/Warning/Banner" unique_id=473753401]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You have not selected a character to play.
+Please proceed to the shop to equip a character."
+label_settings = SubResource("LabelSettings_g3b7m")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="UI/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="UI/AchievementsButton" to="." method="_on_achievement_button_pressed"]
+[connection signal="pressed" from="UI/ShopButton" to="." method="_on_shop_button_pressed"]
+[connection signal="pressed" from="UI/DifficultySelect/BackButton" to="." method="_on_difficulty_back_button_pressed"]
+[connection signal="pressed" from="UI/DifficultySelect/Banner/HBoxContainer/Normal/PlayButton" to="." method="_on_play_normal_button_pressed"]
+[connection signal="pressed" from="UI/DifficultySelect/Banner/HBoxContainer/Terrain/PlayButton" to="." method="_on_play_terrain_button_pressed"]
+[connection signal="pressed" from="UI/DifficultySelect/Banner/HBoxContainer/Icy/PlayButton" to="." method="_on_play_icy_button_pressed"]
+[connection signal="pressed" from="UI/Warning/BackButton" to="." method="_on_warning_back_button_pressed"]
+
+[editable path="UI/DifficultySelect/Banner/HBoxContainer/Normal"]
+[editable path="UI/DifficultySelect/Banner/HBoxContainer/Terrain"]
+[editable path="UI/DifficultySelect/Banner/HBoxContainer/Icy"]
