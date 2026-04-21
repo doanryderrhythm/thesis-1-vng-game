@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bmne7bel88n5p" path="res://scenes/player/player.tscn" id="1_tt14s"]
 [ext_resource type="PackedScene" uid="uid://di78feag8gs8a" path="res://scenes/ui/debug_ui.tscn" id="1_vrx0d"]
 [ext_resource type="PackedScene" uid="uid://dls40hpj5hhkq" path="res://scenes/cursors/aim_cursor.tscn" id="2_qvacy"]
+[ext_resource type="Texture2D" uid="uid://cnujprsj7osik" path="res://sprites/effects/square_particle.png" id="3_y0n7b"]
 [ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="4_y0n7b"]
 
 [sub_resource type="GDScript" id="GDScript_vrx0d"]
@@ -14,6 +15,7 @@ script/source = "extends Node2D
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
+@onready var background = $Background
 @onready var background_snow = $Player/Particles/Snow
 
 func _ready() -> void:
@@ -35,6 +37,9 @@ func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
+	if GameManager.player != null and is_instance_valid(GameManager.player):
+		background.position = GameManager.player.position
+	
 	if Input.is_action_just_pressed(\"pause\"):
 		if GameManager.player != null and is_instance_valid(GameManager.player):
 			GameManager.player._shooting_delay_timer.stop()
@@ -115,6 +120,23 @@ script = SubResource("GDScript_vrx0d")
 
 [node name="DebugUi" parent="." unique_id=2086543205 instance=ExtResource("1_vrx0d")]
 retire_string = "res://scenes/main_scenes/main_menu.tscn"
+
+[node name="Background" type="CPUParticles2D" parent="." unique_id=1958138047]
+amount = 200
+texture = ExtResource("3_y0n7b")
+lifetime = 15.0
+preprocess = 30.0
+randomness = 0.35
+emission_shape = 3
+emission_rect_extents = Vector2(4000, 4000)
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_min = 0.1
+color_ramp = SubResource("Gradient_y0n7b")
+color_initial_ramp = SubResource("Gradient_u2vk8")
 
 [node name="Rooms" type="Node2D" parent="." unique_id=1728958944]
 

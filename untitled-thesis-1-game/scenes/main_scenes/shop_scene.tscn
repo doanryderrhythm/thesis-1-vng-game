@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://cl6xpd7qlb36r"]
 
+[ext_resource type="Shader" uid="uid://dpqb3l5tdyisr" path="res://shaders/scroll.gdshader" id="1_5vnnh"]
 [ext_resource type="Texture2D" uid="uid://dak77hof5amf7" path="res://sprites/bars/coin_count.png" id="1_8r8tc"]
 [ext_resource type="Texture2D" uid="uid://dhekw8y7qg2fm" path="res://sprites/player/player_square_4-1.png" id="1_nj366"]
 [ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="2_0mw8q"]
 [ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="2_23vwc"]
+[ext_resource type="Texture2D" uid="uid://btoh15dqs60rd" path="res://sprites/ui/scroll_background.png" id="2_cs7s0"]
 [ext_resource type="Texture2D" uid="uid://dr3qlf130cxs3" path="res://sprites/ui/player/player_highlighted.png" id="3_6cioo"]
 [ext_resource type="Texture2D" uid="uid://d3s2egp6m1js1" path="res://sprites/ui/player/player_highlighted_animated.png" id="3_uhyxf"]
 [ext_resource type="Texture2D" uid="uid://br46pgblghmvf" path="res://sprites/ui/pause_button_unselected.png" id="3_vic4h"]
@@ -54,7 +56,7 @@ var equipped_character_ui: CharacterUIItem
 func _ready() -> void:
 	ProfileManager.custom_index_selected.connect(select_character_custom_index)
 	
-	RenderingServer.set_default_clear_color(Color(0.0, 0.139, 0.211, 1.0))
+	RenderingServer.set_default_clear_color(Color(0.0, 0.211, 0.157, 1.0))
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	LoadSystem.load_game()
 	
@@ -241,6 +243,10 @@ func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file(\"res://scenes/main_scenes/main_menu.tscn\")
 	pass # Replace with function body.
 "
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4phyk"]
+shader = ExtResource("1_5vnnh")
+shader_parameter/time_multi = 0.5
 
 [sub_resource type="LabelSettings" id="LabelSettings_0mw8q"]
 font = ExtResource("2_23vwc")
@@ -517,14 +523,22 @@ _data = {
 &"insufficient": SubResource("Animation_ottf1")
 }
 
-[sub_resource type="Gradient" id="Gradient_0mw8q"]
-offsets = PackedFloat32Array(0, 0.215, 0.78, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.27450982, 1, 1, 1, 0.27450982, 1, 1, 1, 0)
-
 [node name="ShopScene" type="Node2D" unique_id=232877183]
 script = SubResource("GDScript_8r8tc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1828509655]
+
+[node name="Scroll" type="TextureRect" parent="CanvasLayer" unique_id=1657415609]
+modulate = Color(1, 1, 1, 0.23529412)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_4phyk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cs7s0")
+stretch_mode = 1
 
 [node name="Title" type="Label" parent="CanvasLayer" unique_id=1963365170]
 anchors_preset = 5
@@ -867,22 +881,6 @@ libraries/ = SubResource("AnimationLibrary_85bsg")
 
 [node name="InsufficientAnim" type="AnimationPlayer" parent="." unique_id=589147171]
 libraries/ = SubResource("AnimationLibrary_2jb01")
-
-[node name="BackgroundParticles" type="CPUParticles2D" parent="." unique_id=1067113562]
-amount = 400
-texture = ExtResource("2_0mw8q")
-lifetime = 5.0
-preprocess = 5.0
-emission_shape = 3
-emission_rect_extents = Vector2(4000, 4000)
-direction = Vector2(0, 1)
-spread = 20.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 30.0
-initial_velocity_max = 50.0
-scale_amount_min = 0.5
-scale_amount_max = 2.0
-color_ramp = SubResource("Gradient_0mw8q")
 
 [connection signal="pressed" from="CanvasLayer/UnlockButton" to="." method="_on_unlock_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EquipButton" to="." method="_on_equip_button_pressed"]
