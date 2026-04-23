@@ -7,6 +7,15 @@ enum LevelType
 	LEVEL_ICY,
 }
 
+enum CollectibleType
+{
+	NONE,
+	DASH_LENGTH,
+	WALK_SPEED,
+	SHOOT_SPEED,
+	HEALTH,
+}
+
 var level_type: LevelType
 
 var current_id_x: int = 0

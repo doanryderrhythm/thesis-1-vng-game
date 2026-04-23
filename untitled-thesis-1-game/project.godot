@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Untitled Thesis 1 GAME"
+config/name="Eschapist"
 run/main_scene="uid://b13r4d2kikn5r"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"

@@ -4,5 +4,6 @@ class_name HealCollectible
 func take_effect() -> void:
 	if GameManager.player:
 		GameManager.player.heal(15)
+		GameManager.stats_change.emit(GameManager.CollectibleType.HEALTH)
 	queue_free()
 	pass

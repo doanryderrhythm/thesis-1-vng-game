@@ -15,11 +15,14 @@ class_name DebugUI
 @onready var phase_title_label: Label = $PhaseTitleLabel
 @onready var phase_label: Label = $PhaseLabel
 
+@onready var collectible_alert_label: Label = $CollectibleAlertLabel
+
 @onready var danger_texture: TextureRect = $DangerTexture
 
 @onready var gameplay_anim_player: AnimationPlayer = $GameplayAnimationPlayer
 @onready var result_anim_player: AnimationPlayer = $ResultAnimationPlayer
 @onready var debug_ui_anim_player: AnimationPlayer = $DebugUIAnimationPlayer
+@onready var stats_change_anim_player: AnimationPlayer = $StatsChangeAnimationPlayer
 
 #region RESULT
 @onready var reason_to_lose_label: Label = $ResultNode/Background/ReasonLabel
@@ -129,13 +132,30 @@ func change_phase(is_ongoing: bool) -> void:
 		phase_title_label.visible = false
 		phase_label.visible = false
 
-func change_in_game_stats() -> void:
+func change_in_game_stats(collectible_type: GameManager.CollectibleType = GameManager.CollectibleType.NONE) -> void:
 	if !GameManager.player and is_instance_valid(GameManager.player):
 		pass
 	
 	move_value.text = "%.2f" % (ProfileManager.move_speed / 100.0 * GameManager.player._offset_move_speed)
 	dash_value.text = "%.2f" % (GameManager.player._total_dash)
 	shoot_value.text = "%.2f" % (ValueStorer.player_bullet_speed_mult + GameManager.player._offset_bullet_speed)
+	
+	if collectible_type == GameManager.CollectibleType.NONE:
+		return
+	elif collectible_type == GameManager.CollectibleType.DASH_LENGTH:
+		collectible_alert_label.text = "+ dash speed"
+		collectible_alert_label.label_settings.font_color = Color(0.493, 0.846, 1.0, 1.0)
+	elif collectible_type == GameManager.CollectibleType.SHOOT_SPEED:
+		collectible_alert_label.text = "+ shoot speed"
+		collectible_alert_label.label_settings.font_color = Color(1.0, 0.969, 0.493, 1.0)
+	elif collectible_type == GameManager.CollectibleType.WALK_SPEED:
+		collectible_alert_label.text = "+ move speed"
+		collectible_alert_label.label_settings.font_color = Color(0.493, 1.0, 0.625, 1.0)
+	elif collectible_type == GameManager.CollectibleType.HEALTH:
+		collectible_alert_label.text = "+ health"
+		collectible_alert_label.label_settings.font_color = Color(1.0, 0.522, 0.493, 1.0)
+	stats_change_anim_player.stop()
+	stats_change_anim_player.play("default")
 
 func update_result_screen() -> void:
 	if GameManager.is_locked:
