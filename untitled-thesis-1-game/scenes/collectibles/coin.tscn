@@ -19,7 +19,10 @@ script = ExtResource("2_h6jfl")
 [node name="Sprite2D" parent="." index="0" unique_id=1319834975]
 texture = ExtResource("3_h6jfl")
 
-[node name="CollisionShape2D" parent="." index="1" unique_id=435083227]
+[node name="Glow" parent="." index="1" unique_id=709504758]
+scale = Vector2(1, 1)
+
+[node name="CollisionShape2D" parent="." index="2" unique_id=435083227]
 shape = SubResource("CircleShape2D_867vd")
 
 [node name="CollisionShape2D" parent="InteractArea2D" parent_id_path=PackedInt32Array(1061273165) index="0" unique_id=1821629557]

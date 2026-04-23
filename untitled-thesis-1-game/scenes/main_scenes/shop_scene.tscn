@@ -56,7 +56,7 @@ var equipped_character_ui: CharacterUIItem
 func _ready() -> void:
 	ProfileManager.custom_index_selected.connect(select_character_custom_index)
 	
-	RenderingServer.set_default_clear_color(Color(0.0, 0.211, 0.157, 1.0))
+	RenderingServer.set_default_clear_color(Color(0.0, 0.184, 0.118, 1.0))
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	LoadSystem.load_game()
 	
@@ -246,7 +246,7 @@ func _on_back_button_pressed() -> void:
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4phyk"]
 shader = ExtResource("1_5vnnh")
-shader_parameter/time_multi = 0.5
+shader_parameter/speed = 0.1
 
 [sub_resource type="LabelSettings" id="LabelSettings_0mw8q"]
 font = ExtResource("2_23vwc")

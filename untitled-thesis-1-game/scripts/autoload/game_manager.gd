@@ -411,7 +411,6 @@ func destroy_everything() -> void:
 		room.bomb_move_timer.stop()
 
 func update_profile() -> void:
-	ProfileManager.total_coins += in_level_coins
 	var total_coins: int = ProfileManager.total_coins
 	if total_coins >= 100:
 		AchievementManager.check_achievement("coins_100")

@@ -30,7 +30,6 @@ class_name DebugUI
 @onready var total_score_label: RichTextLabel = $ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer/StatsValueLabel
 
 @onready var coins_label: RichTextLabel = $ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer/RewardsValueLabel
-@onready var achievements_label: RichTextLabel = $ResultNode/Background/ContentContainer/RewardsContainer/AchievementsContainer/RewardsValueLabel
 #endregion
 
 #region PLAYER STATS
@@ -175,7 +174,6 @@ func update_result_screen() -> void:
 	total_score_label.text = str(total_score) + " (" + convert_difference_string_int(difference_total_score) + ")"
 
 	coins_label.text = str(coins)
-	achievements_label.text = "nope"
 	
 	ProfileManager.update_data(GameManager.level_type, \
 								coins, \
