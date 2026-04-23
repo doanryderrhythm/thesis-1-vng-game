@@ -1,0 +1,231 @@
+[gd_scene format=3 uid="uid://1joxgi7wl716"]
+
+[ext_resource type="Script" uid="uid://ci1uop4ow7elq" path="res://scripts/ui/tutorial_canvas.gd" id="1_b4ly3"]
+[ext_resource type="Texture2D" uid="uid://br46pgblghmvf" path="res://sprites/ui/pause_button_unselected.png" id="2_gvlb1"]
+[ext_resource type="Texture2D" uid="uid://b2nua0rf6jexh" path="res://sprites/ui/pause_button_pressed.png" id="3_cqjee"]
+[ext_resource type="Texture2D" uid="uid://r0ku0idq14xt" path="res://sprites/ui/pause_button_selected.png" id="4_ccbv8"]
+[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="5_oxhaq"]
+[ext_resource type="Texture2D" uid="uid://eg5uhk50v6li" path="res://sprites/ui/tutorial/tutorial_0.png" id="6_ky8u4"]
+[ext_resource type="Texture2D" uid="uid://buhf866rod048" path="res://sprites/ui/tutorial/tutorial_1.png" id="7_ve4qq"]
+[ext_resource type="Texture2D" uid="uid://s28541im02nv" path="res://sprites/ui/tutorial/tutorial_2.png" id="8_ybx50"]
+[ext_resource type="Texture2D" uid="uid://d1ixdb54q28tp" path="res://sprites/ui/tutorial/tutorial_3.png" id="9_of8xf"]
+
+[sub_resource type="GDScript" id="GDScript_enjcu"]
+resource_name = "button_behaviour"
+script/source = "extends TextureButton
+
+@onready var text: Label = $Label
+
+func _process(_delta: float) -> void:
+	if is_hovered() and disabled == false:
+		text.label_settings.font_color = Color.BLACK
+	else:
+		text.label_settings.font_color = Color.WHITE
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_b4ly3"]
+font = ExtResource("5_oxhaq")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_6r42y"]
+font = ExtResource("5_oxhaq")
+font_size = 50
+
+[sub_resource type="GDScript" id="GDScript_kllu6"]
+resource_name = "button_behaviour"
+script/source = "extends TextureButton
+
+@onready var text: Label = $Label
+
+func _process(_delta: float) -> void:
+	if is_hovered() and disabled == false:
+		text.label_settings.font_color = Color.BLACK
+	else:
+		text.label_settings.font_color = Color.WHITE
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_enjcu"]
+font = ExtResource("5_oxhaq")
+font_size = 40
+
+[node name="TutorialCanvas" type="CanvasLayer" unique_id=1510277248]
+process_mode = 4
+visible = false
+script = ExtResource("1_b4ly3")
+
+[node name="Background" type="ColorRect" parent="." unique_id=412583831]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.627451)
+
+[node name="Tutorials" type="Control" parent="." unique_id=304037193]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tutorial0" type="TextureRect" parent="Tutorials" unique_id=1615074072]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -480.0
+offset_right = 480.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("6_ky8u4")
+
+[node name="Tutorial1" type="TextureRect" parent="Tutorials" unique_id=1623003455]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -480.0
+offset_right = 480.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("7_ve4qq")
+
+[node name="Tutorial2" type="TextureRect" parent="Tutorials" unique_id=648682762]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -480.0
+offset_right = 480.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("8_ybx50")
+
+[node name="Tutorial3" type="TextureRect" parent="Tutorials" unique_id=1335175400]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -480.0
+offset_right = 480.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("9_of8xf")
+
+[node name="PreviousButton" type="TextureButton" parent="." unique_id=1228630635]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -35.0
+offset_right = 320.0
+offset_bottom = 35.0
+grow_vertical = 2
+pivot_offset = Vector2(225, 53)
+texture_normal = ExtResource("2_gvlb1")
+texture_pressed = ExtResource("3_cqjee")
+texture_hover = ExtResource("4_ccbv8")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_enjcu")
+
+[node name="Label" type="Label" parent="PreviousButton" unique_id=1956086805]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Previous"
+label_settings = SubResource("LabelSettings_b4ly3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="TextureButton" parent="." unique_id=1774732989]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -35.0
+offset_right = -20.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset = Vector2(225, 53)
+texture_normal = ExtResource("2_gvlb1")
+texture_pressed = ExtResource("3_cqjee")
+texture_hover = ExtResource("4_ccbv8")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_enjcu")
+
+[node name="Label" type="Label" parent="NextButton" unique_id=2109553416]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Next"
+label_settings = SubResource("LabelSettings_6r42y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="." unique_id=991057034]
+modulate = Color(1, 0.5920712, 0.5920712, 1)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -90.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(150, 35)
+texture_normal = ExtResource("2_gvlb1")
+texture_pressed = ExtResource("3_cqjee")
+texture_hover = ExtResource("4_ccbv8")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_kllu6")
+
+[node name="Label" type="Label" parent="ExitButton" unique_id=119060516]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+label_settings = SubResource("LabelSettings_enjcu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]

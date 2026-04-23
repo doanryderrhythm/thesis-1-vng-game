@@ -46,6 +46,11 @@ class_name DebugUI
 
 @onready var minimap: ColorRect = $Minimap
 
+#region TUTORIAL
+var is_tutorial_on: bool = false
+@onready var tutorial_canvas: TutorialCanvas = $TutorialCanvas
+#endregion
+
 func _ready() -> void:
 	pass
 
@@ -53,6 +58,16 @@ func _process(_delta: float) -> void:
 	if is_instance_valid(GameManager.player):
 		fill_dash_bar.value = GameManager.player._dash_wait_timer.time_left
 	pass
+	
+func toggle_tutorial(is_toggled: bool) -> void:
+	is_tutorial_on = is_toggled
+	tutorial_canvas.visible = is_toggled
+	if is_toggled:
+		tutorial_canvas.tutorial_index = 0
+		tutorial_canvas.show_tutorial()
+		tutorial_canvas.set_process_mode(Node.PROCESS_MODE_INHERIT)
+	else:
+		tutorial_canvas.set_process_mode(Node.PROCESS_MODE_DISABLED)
 	
 func set_up() -> void:
 	health_bar.min_value = 0
@@ -272,4 +287,12 @@ func _on_retry_button_pressed() -> void:
 
 func _on_retire_button_pressed() -> void:
 	retire()
+	pass # Replace with function body.
+
+func _on_tutorial_exit_button_pressed() -> void:
+	toggle_tutorial(false)
+	pass # Replace with function body.
+
+func _on_tutorial_button_pressed() -> void:
+	toggle_tutorial(true)
 	pass # Replace with function body.

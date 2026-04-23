@@ -2,18 +2,26 @@ extends Node
 
 @onready var stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
+@onready var main_menu_music: AudioStreamOggVorbis = load("res://music/main_menu.ogg")
+
 @onready var normal_music: AudioStreamOggVorbis = load("res://music/normal.ogg")
 @onready var terrain_music: AudioStreamOggVorbis = load("res://music/terrain.ogg")
 @onready var icy_music: AudioStreamOggVorbis = load("res://music/icy.ogg")
 
+func change_music(music: AudioStreamOggVorbis) -> void:
+	if music == stream_player.stream:
+		return
+	
+	stream_player.stream = music
+	stream_player.play()
+
 func start_gameplay_music(level_type: GameManager.LevelType) -> void:
 	if level_type == GameManager.LevelType.LEVEL_NORMAL:
-		stream_player.stream = normal_music
+		change_music(normal_music)
 	elif level_type == GameManager.LevelType.LEVEL_TERRAIN:
-		stream_player.stream = terrain_music
+		change_music(terrain_music)
 	elif level_type == GameManager.LevelType.LEVEL_ICY:
-		stream_player.stream = icy_music
-	stream_player.play()
+		change_music(icy_music)
 
 func stop_gameplay_music() -> void:
 	stream_player.stop()
