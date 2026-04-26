@@ -16,6 +16,8 @@ func load_game():
 
 		var node_data = json.data
 
+		ProfileManager.is_tutorial_finished = node_data["is_tutorial_finished"]
+
 		ProfileManager.total_coins = node_data["total_coins"]
 		ProfileManager.unlocked_codes.assign(node_data.get("unlocked_players", []))
 		ProfileManager.unlocked_achs.assign(node_data.get("unlocked_achs", []))

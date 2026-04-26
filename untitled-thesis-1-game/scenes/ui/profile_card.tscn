@@ -1,0 +1,184 @@
+[gd_scene format=3 uid="uid://c684lugvbafdo"]
+
+[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="1_mdvc0"]
+[ext_resource type="Script" uid="uid://wknoaevctit5" path="res://scripts/ui/profile_card.gd" id="1_u2pok"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_85jtn"]
+font = ExtResource("1_mdvc0")
+font_size = 64
+font_color = Color(1, 1, 1, 0.14509805)
+shadow_size = 4
+shadow_color = Color(0.13333334, 0.13333334, 0.13333334, 0.654902)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u2pok"]
+font = ExtResource("1_mdvc0")
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_hbbax"]
+font = ExtResource("1_mdvc0")
+font_size = 32
+
+[node name="ProfileCard" type="ColorRect" unique_id=980893977]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -175.0
+offset_right = 400.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1514448, 0.1514448, 0.1514448, 1)
+script = ExtResource("1_u2pok")
+
+[node name="Title" type="Label" parent="." unique_id=1197736584]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 100.0
+grow_horizontal = 2
+text = "TITLE"
+label_settings = SubResource("LabelSettings_85jtn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsList" type="VBoxContainer" parent="." unique_id=1762738166]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.277
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.049995422
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HighestEnemies" type="Control" parent="StatsList" unique_id=1494497175]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="StatsList/HighestEnemies" unique_id=1324237202]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 68.0
+offset_right = -307.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "highest enemies destroyed"
+label_settings = SubResource("LabelSettings_u2pok")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="StatsList/HighestEnemies" unique_id=206577327]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 501.0
+offset_right = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1234"
+label_settings = SubResource("LabelSettings_hbbax")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighestLevel" type="Control" parent="StatsList" unique_id=1095152312]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="StatsList/HighestLevel" unique_id=120124976]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 68.0
+offset_right = -307.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "highest level reached"
+label_settings = SubResource("LabelSettings_u2pok")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="StatsList/HighestLevel" unique_id=1184074328]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 501.0
+offset_right = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1234"
+label_settings = SubResource("LabelSettings_hbbax")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighestPhases" type="Control" parent="StatsList" unique_id=1526153281]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="StatsList/HighestPhases" unique_id=1485054253]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 68.0
+offset_right = -307.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "highest successful phases"
+label_settings = SubResource("LabelSettings_u2pok")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="StatsList/HighestPhases" unique_id=942720321]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 501.0
+offset_right = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1234"
+label_settings = SubResource("LabelSettings_hbbax")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighestScore" type="Control" parent="StatsList" unique_id=2131006478]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="StatsList/HighestScore" unique_id=326766753]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 68.0
+offset_right = -307.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "highest score"
+label_settings = SubResource("LabelSettings_u2pok")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="StatsList/HighestScore" unique_id=1470493886]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 501.0
+offset_right = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1234"
+label_settings = SubResource("LabelSettings_hbbax")
+horizontal_alignment = 1
+vertical_alignment = 1

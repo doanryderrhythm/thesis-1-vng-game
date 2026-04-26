@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dhek3kutftyn3" path="res://sprites/logos/game_logo.png" id="3_kllu6"]
 [ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="4_qd03l"]
 [ext_resource type="PackedScene" uid="uid://dyx1viws6qqob" path="res://scenes/ui/difficulty_item.tscn" id="5_bi8wh"]
+[ext_resource type="Script" uid="uid://ctvsltp2r1iuw" path="res://scripts/ui/profiles_checker.gd" id="9_f6fxv"]
 [ext_resource type="PackedScene" uid="uid://1joxgi7wl716" path="res://scenes/ui/tutorial_canvas.tscn" id="9_wukam"]
+[ext_resource type="PackedScene" uid="uid://c684lugvbafdo" path="res://scenes/ui/profile_card.tscn" id="9_x6xjm"]
 
 [sub_resource type="GDScript" id="GDScript_w3ui0"]
 resource_name = "main_menu"
@@ -20,6 +22,12 @@ script/source = "extends Control
 @onready var character_warning: ColorRect = $UI/Warning
 @onready var character_warning_anim: AnimationPlayer = $WarningAnim
 
+@onready var profile: ColorRect = $UI/Profile
+@onready var normal_profile: ProfileCard = $UI/Profile/Banner/Cards/NormalCard
+@onready var terrain_profile: ProfileCard = $UI/Profile/Banner/Cards/TerrainCard
+@onready var icy_profile: ProfileCard = $UI/Profile/Banner/Cards/IcyCard
+
+@onready var tutorial_button: TextureButton = $UI/TutorialButton
 @onready var tutorial_canvas: TutorialCanvas = $TutorialCanvas
 
 func _ready() -> void:
@@ -30,6 +38,12 @@ func _ready() -> void:
 	MusicManager.toggle_filter_effect(false)
 	MusicManager.change_music(MusicManager.main_menu_music)
 	LoadSystem.load_game()
+	
+	if not ProfileManager.is_tutorial_finished:
+		tutorial_button.visible = false
+		tutorial_button.set_process_mode(Node.PROCESS_MODE_DISABLED)
+	
+	insert_profiles_data()
 
 func _on_play_button_pressed() -> void:
 	if ProfileManager.player_code == \"\":
@@ -40,6 +54,23 @@ func _on_play_button_pressed() -> void:
 	difficulty_selection_anim.play(\"default\")
 	show_overlay_info(difficulty_selection, true)
 	pass # Replace with function body.
+
+func insert_profiles_data() -> void:
+	normal_profile.insert_data(\\
+		ProfileManager.normal_result_data.best_enemies_destroyed, \\
+		ProfileManager.normal_result_data.best_level_reached, \\
+		ProfileManager.normal_result_data.best_successful_phases, \\
+		ProfileManager.normal_result_data.best_score)
+	terrain_profile.insert_data(\\
+		ProfileManager.terrain_result_data.best_enemies_destroyed, \\
+		ProfileManager.terrain_result_data.best_level_reached, \\
+		ProfileManager.terrain_result_data.best_successful_phases, \\
+		ProfileManager.terrain_result_data.best_score)
+	icy_profile.insert_data(\\
+		ProfileManager.icy_result_data.best_enemies_destroyed, \\
+		ProfileManager.icy_result_data.best_level_reached, \\
+		ProfileManager.icy_result_data.best_successful_phases, \\
+		ProfileManager.icy_result_data.best_score)
 
 func show_overlay_info(object, is_toggled: bool) -> void:
 	if is_toggled:
@@ -89,6 +120,10 @@ func _on_warning_back_button_pressed() -> void:
 	pass # Replace with function body.
 
 func _on_tutorial_button_pressed() -> void:
+	if not ProfileManager.is_tutorial_finished:
+		ProfileManager.is_tutorial_finished = true
+		SaveSystem.save_game()
+	
 	tutorial_canvas.tutorial_index = 0
 	tutorial_canvas.show_tutorial()
 	show_overlay_info(tutorial_canvas, true)
@@ -96,6 +131,14 @@ func _on_tutorial_button_pressed() -> void:
 
 func _on_tutorial_exit_button_pressed() -> void:
 	show_overlay_info(tutorial_canvas, false)
+	pass # Replace with function body.
+
+func _on_profile_button_pressed() -> void:
+	show_overlay_info(profile, true)
+	pass # Replace with function body.
+
+func _on_profile_back_button_pressed() -> void:
+	show_overlay_info(profile, false)
 	pass # Replace with function body.
 "
 
@@ -175,6 +218,10 @@ font_size = 50
 font = ExtResource("4_qd03l")
 font_size = 40
 
+[sub_resource type="LabelSettings" id="LabelSettings_y4rsf"]
+font = ExtResource("4_qd03l")
+font_size = 40
+
 [sub_resource type="GDScript" id="GDScript_kllu6"]
 resource_name = "button_behaviour"
 script/source = "extends TextureButton
@@ -215,6 +262,27 @@ font_size = 40
 [sub_resource type="LabelSettings" id="LabelSettings_g3b7m"]
 font = ExtResource("4_qd03l")
 font_size = 32
+
+[sub_resource type="GDScript" id="GDScript_gl8k6"]
+resource_name = "button_behaviour"
+script/source = "extends TextureButton
+
+@onready var text: Label = $Label
+
+func _process(_delta: float) -> void:
+	if is_hovered() and disabled == false:
+		text.label_settings.font_color = Color.BLACK
+	else:
+		text.label_settings.font_color = Color.WHITE
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_b4ly3"]
+font = ExtResource("4_qd03l")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_85jtn"]
+font = ExtResource("4_qd03l")
+font_size = 50
 
 [sub_resource type="Animation" id="Animation_kllu6"]
 length = 0.001
@@ -697,6 +765,35 @@ label_settings = SubResource("LabelSettings_kpo0u")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ProfileButton" type="TextureButton" parent="UI" unique_id=1733452130]
+modulate = Color(0.7925129, 0.6431373, 1, 1)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 90.0
+grow_horizontal = 0
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_enjcu")
+
+[node name="Label" type="Label" parent="UI/ProfileButton" unique_id=785281390]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Profile"
+label_settings = SubResource("LabelSettings_y4rsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="QuitButton" type="TextureButton" parent="UI" unique_id=506030700]
 modulate = Color(1, 0.5920712, 0.5920712, 1)
 anchors_preset = 8
@@ -953,6 +1050,170 @@ label_settings = SubResource("LabelSettings_g3b7m")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Profile" type="ColorRect" parent="UI" unique_id=927656763]
+process_mode = 4
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8627451)
+script = ExtResource("9_f6fxv")
+
+[node name="Title" type="Label" parent="UI/Profile" unique_id=297575460]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -275.0
+offset_bottom = -224.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PROFILE"
+label_settings = SubResource("LabelSettings_gl8k6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BackButton" type="TextureButton" parent="UI/Profile" unique_id=201279146]
+modulate = Color(1, 0.5920712, 0.5920712, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 230.0
+offset_right = 150.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 35)
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_kllu6")
+
+[node name="Label" type="Label" parent="UI/Profile/BackButton" unique_id=502117564]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+label_settings = SubResource("LabelSettings_q3f11")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Banner" type="ColorRect" parent="UI/Profile" unique_id=1121593853]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.31500003
+anchor_right = 1.0
+anchor_bottom = 0.68500006
+offset_top = -0.20004272
+offset_bottom = 0.19995117
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 90)
+color = Color(0.07910311, 0.07910311, 0.07910311, 1)
+
+[node name="Cards" type="Control" parent="UI/Profile/Banner" unique_id=210108455]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NormalCard" parent="UI/Profile/Banner/Cards" unique_id=980893977 instance=ExtResource("9_x6xjm")]
+layout_mode = 1
+
+[node name="Title" parent="UI/Profile/Banner/Cards/NormalCard" index="0" unique_id=1197736584]
+text = "NORMAL"
+
+[node name="TerrainCard" parent="UI/Profile/Banner/Cards" unique_id=1038220317 instance=ExtResource("9_x6xjm")]
+layout_mode = 1
+color = Color(0.16459775, 0.0753705, 0, 1)
+
+[node name="Title" parent="UI/Profile/Banner/Cards/TerrainCard" index="0" unique_id=1197736584]
+text = "TERRAIN"
+
+[node name="IcyCard" parent="UI/Profile/Banner/Cards" unique_id=1493023902 instance=ExtResource("9_x6xjm")]
+layout_mode = 1
+color = Color(0, 0.07983451, 0.15802127, 1)
+
+[node name="Title" parent="UI/Profile/Banner/Cards/IcyCard" index="0" unique_id=1197736584]
+text = "ICY"
+
+[node name="PreviousButton" type="TextureButton" parent="UI/Profile" unique_id=1965652739]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -35.0
+offset_right = 320.0
+offset_bottom = 35.0
+grow_vertical = 2
+pivot_offset = Vector2(225, 53)
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_gl8k6")
+
+[node name="Label" type="Label" parent="UI/Profile/PreviousButton" unique_id=538768429]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Previous"
+label_settings = SubResource("LabelSettings_b4ly3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="TextureButton" parent="UI/Profile" unique_id=1580673265]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -35.0
+offset_right = -20.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset = Vector2(225, 53)
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_gl8k6")
+
+[node name="Label" type="Label" parent="UI/Profile/NextButton" unique_id=1962051751]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Next"
+label_settings = SubResource("LabelSettings_85jtn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TutorialCanvas" parent="." unique_id=1510277248 instance=ExtResource("9_wukam")]
 
 [node name="DifficultySelectAnim" type="AnimationPlayer" parent="." unique_id=1553370032]
@@ -965,15 +1226,22 @@ libraries/ = SubResource("AnimationLibrary_gl8k6")
 [connection signal="pressed" from="UI/AchievementsButton" to="." method="_on_achievement_button_pressed"]
 [connection signal="pressed" from="UI/ShopButton" to="." method="_on_shop_button_pressed"]
 [connection signal="pressed" from="UI/TutorialButton" to="." method="_on_tutorial_button_pressed"]
+[connection signal="pressed" from="UI/ProfileButton" to="." method="_on_profile_button_pressed"]
 [connection signal="pressed" from="UI/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="UI/DifficultySelect/BackButton" to="." method="_on_difficulty_back_button_pressed"]
 [connection signal="pressed" from="UI/DifficultySelect/Banner/HBoxContainer/Normal/PlayButton" to="." method="_on_play_normal_button_pressed"]
 [connection signal="pressed" from="UI/DifficultySelect/Banner/HBoxContainer/Terrain/PlayButton" to="." method="_on_play_terrain_button_pressed"]
 [connection signal="pressed" from="UI/DifficultySelect/Banner/HBoxContainer/Icy/PlayButton" to="." method="_on_play_icy_button_pressed"]
 [connection signal="pressed" from="UI/Warning/BackButton" to="." method="_on_warning_back_button_pressed"]
+[connection signal="pressed" from="UI/Profile/BackButton" to="." method="_on_profile_back_button_pressed"]
+[connection signal="pressed" from="UI/Profile/PreviousButton" to="UI/Profile" method="_on_previous_button_pressed"]
+[connection signal="pressed" from="UI/Profile/NextButton" to="UI/Profile" method="_on_next_button_pressed"]
 [connection signal="pressed" from="TutorialCanvas/ExitButton" to="." method="_on_tutorial_exit_button_pressed"]
 
 [editable path="UI/DifficultySelect/Banner/HBoxContainer/Normal"]
 [editable path="UI/DifficultySelect/Banner/HBoxContainer/Terrain"]
 [editable path="UI/DifficultySelect/Banner/HBoxContainer/Icy"]
+[editable path="UI/Profile/Banner/Cards/NormalCard"]
+[editable path="UI/Profile/Banner/Cards/TerrainCard"]
+[editable path="UI/Profile/Banner/Cards/IcyCard"]
 [editable path="TutorialCanvas"]

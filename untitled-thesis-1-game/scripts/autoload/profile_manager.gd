@@ -1,5 +1,7 @@
 extends Node
 
+var is_tutorial_finished: bool = false
+
 var total_coins: int = 0
 
 var normal_result_data: ResultData = ResultData.new()

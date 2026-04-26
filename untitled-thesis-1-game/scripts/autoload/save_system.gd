@@ -2,6 +2,7 @@ extends Node
 
 func get_save_profile() -> Dictionary:
 	var save_dict = {
+		"is_tutorial_finished": ProfileManager.is_tutorial_finished,
 		"total_coins": ProfileManager.total_coins,
 		"unlocked_players": ProfileManager.unlocked_codes,
 		"unlocked_achs": ProfileManager.unlocked_achs,

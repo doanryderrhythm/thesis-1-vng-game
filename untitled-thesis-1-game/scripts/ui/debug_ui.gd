@@ -52,6 +52,12 @@ var is_tutorial_on: bool = false
 #endregion
 
 func _ready() -> void:
+	if not ProfileManager.is_tutorial_finished:
+		ProfileManager.is_tutorial_finished = true
+		SaveSystem.save_game()
+		
+		toggle_tutorial(true)
+		get_tree().paused = true
 	pass
 
 func _process(_delta: float) -> void:
@@ -68,6 +74,8 @@ func toggle_tutorial(is_toggled: bool) -> void:
 		tutorial_canvas.set_process_mode(Node.PROCESS_MODE_INHERIT)
 	else:
 		tutorial_canvas.set_process_mode(Node.PROCESS_MODE_DISABLED)
+		if not pause_ui.visible:
+			get_tree().paused = false
 	
 func set_up() -> void:
 	health_bar.min_value = 0
