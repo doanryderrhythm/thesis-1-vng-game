@@ -1,16 +1,14 @@
 [gd_scene format=3 uid="uid://dyx1viws6qqob"]
 
-[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="1_hkm3n"]
+[ext_resource type="Theme" uid="uid://diygj3e5jlw6y" path="res://themes/text_theme.tres" id="1_hkm3n"]
 [ext_resource type="Texture2D" uid="uid://br46pgblghmvf" path="res://sprites/ui/pause_button_unselected.png" id="2_iremg"]
 [ext_resource type="Texture2D" uid="uid://b2nua0rf6jexh" path="res://sprites/ui/pause_button_pressed.png" id="3_ebq1c"]
 [ext_resource type="Texture2D" uid="uid://r0ku0idq14xt" path="res://sprites/ui/pause_button_selected.png" id="4_x3vy0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wukam"]
-font = ExtResource("1_hkm3n")
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_x6xjm"]
-font = ExtResource("1_hkm3n")
 font_size = 20
 
 [sub_resource type="GDScript" id="GDScript_f6fxv"]
@@ -26,7 +24,6 @@ func _process(_delta: float) -> void:
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_gl8k6"]
-font = ExtResource("1_hkm3n")
 font_size = 40
 
 [node name="DifficultyItem" type="ColorRect" unique_id=684363975]
@@ -40,6 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 0.23300001
 offset_bottom = -0.19000244
 grow_horizontal = 2
+theme = ExtResource("1_hkm3n")
 text = "NORMAL"
 label_settings = SubResource("LabelSettings_wukam")
 horizontal_alignment = 1
@@ -56,6 +54,7 @@ offset_top = -0.070007324
 offset_bottom = -0.070007324
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_hkm3n")
 text = "• basic enemies
 • one phase each room
 • just fun!"
@@ -85,6 +84,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_hkm3n")
 text = "Start"
 label_settings = SubResource("LabelSettings_gl8k6")
 horizontal_alignment = 1

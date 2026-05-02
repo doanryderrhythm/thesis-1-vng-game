@@ -2,10 +2,12 @@ extends Node
 
 func get_save_profile() -> Dictionary:
 	var save_dict = {
+		"font_index": GameManager.font_index,
 		"is_tutorial_finished": ProfileManager.is_tutorial_finished,
 		"total_coins": ProfileManager.total_coins,
 		"unlocked_players": ProfileManager.unlocked_codes,
 		"unlocked_achs": ProfileManager.unlocked_achs,
+		"equipped_player": ProfileManager.player_code,
 		"normal_result": {
 			"best_score": ProfileManager.normal_result_data.best_score,
 			"best_phase": ProfileManager.normal_result_data.best_successful_phases,

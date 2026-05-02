@@ -3,16 +3,14 @@
 [ext_resource type="StyleBox" uid="uid://bn3ruoagmumjp" path="res://styles/style_achievement_locked.tres" id="1_8blqp"]
 [ext_resource type="Script" uid="uid://c0k0ly6mae0m1" path="res://scripts/ui/achievement_item.gd" id="2_gecmc"]
 [ext_resource type="Texture2D" uid="uid://cpubcm1cpvub" path="res://sprites/ui/achievement_cup.png" id="3_gf048"]
-[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="4_oyw70"]
+[ext_resource type="Theme" uid="uid://diygj3e5jlw6y" path="res://themes/text_theme.tres" id="4_8blqp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_juv1u"]
-font = ExtResource("4_oyw70")
 font_size = 32
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qtrd1"]
-font = ExtResource("4_oyw70")
 font_size = 28
 
 [node name="AchievementShownItem" type="Panel" unique_id=97140428]
@@ -44,6 +42,7 @@ offset_left = -0.120010376
 offset_right = -0.3600464
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_8blqp")
 text = "Title"
 label_settings = SubResource("LabelSettings_juv1u")
 vertical_alignment = 1
@@ -59,6 +58,7 @@ offset_left = 0.35992432
 offset_right = 0.19995117
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_8blqp")
 text = "Description"
 label_settings = SubResource("LabelSettings_qtrd1")
 vertical_alignment = 1

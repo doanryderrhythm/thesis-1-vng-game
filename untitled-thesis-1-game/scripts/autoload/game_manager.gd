@@ -16,6 +16,8 @@ enum CollectibleType
 	HEALTH,
 }
 
+var font_index: int = 0
+
 var level_type: LevelType
 
 var current_id_x: int = 0

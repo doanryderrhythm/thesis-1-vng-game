@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://c684lugvbafdo"]
 
-[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="1_mdvc0"]
 [ext_resource type="Script" uid="uid://wknoaevctit5" path="res://scripts/ui/profile_card.gd" id="1_u2pok"]
+[ext_resource type="Theme" uid="uid://diygj3e5jlw6y" path="res://themes/text_theme.tres" id="2_u2pok"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_85jtn"]
-font = ExtResource("1_mdvc0")
 font_size = 64
 font_color = Color(1, 1, 1, 0.14509805)
 shadow_size = 4
@@ -12,11 +11,9 @@ shadow_color = Color(0.13333334, 0.13333334, 0.13333334, 0.654902)
 shadow_offset = Vector2(3, 3)
 
 [sub_resource type="LabelSettings" id="LabelSettings_u2pok"]
-font = ExtResource("1_mdvc0")
 font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_hbbax"]
-font = ExtResource("1_mdvc0")
 font_size = 32
 
 [node name="ProfileCard" type="ColorRect" unique_id=980893977]
@@ -40,6 +37,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 100.0
 grow_horizontal = 2
+theme = ExtResource("2_u2pok")
 text = "TITLE"
 label_settings = SubResource("LabelSettings_85jtn")
 horizontal_alignment = 1
@@ -68,6 +66,7 @@ offset_left = 68.0
 offset_right = -307.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_u2pok")
 text = "highest enemies destroyed"
 label_settings = SubResource("LabelSettings_u2pok")
 horizontal_alignment = 1
@@ -82,6 +81,7 @@ offset_left = 501.0
 offset_right = -71.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_u2pok")
 text = "1234"
 label_settings = SubResource("LabelSettings_hbbax")
 horizontal_alignment = 1
@@ -100,6 +100,7 @@ offset_left = 68.0
 offset_right = -307.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_u2pok")
 text = "highest level reached"
 label_settings = SubResource("LabelSettings_u2pok")
 horizontal_alignment = 1
@@ -114,6 +115,7 @@ offset_left = 501.0
 offset_right = -71.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_u2pok")
 text = "1234"
 label_settings = SubResource("LabelSettings_hbbax")
 horizontal_alignment = 1
@@ -132,6 +134,7 @@ offset_left = 68.0
 offset_right = -307.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_u2pok")
 text = "highest successful phases"
 label_settings = SubResource("LabelSettings_u2pok")
 horizontal_alignment = 1
@@ -146,6 +149,7 @@ offset_left = 501.0
 offset_right = -71.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_u2pok")
 text = "1234"
 label_settings = SubResource("LabelSettings_hbbax")
 horizontal_alignment = 1
@@ -164,6 +168,7 @@ offset_left = 68.0
 offset_right = -307.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_u2pok")
 text = "highest score"
 label_settings = SubResource("LabelSettings_u2pok")
 horizontal_alignment = 1
@@ -178,6 +183,7 @@ offset_left = 501.0
 offset_right = -71.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_u2pok")
 text = "1234"
 label_settings = SubResource("LabelSettings_hbbax")
 horizontal_alignment = 1

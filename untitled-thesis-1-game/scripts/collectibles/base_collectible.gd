@@ -2,11 +2,9 @@ extends RigidBody2D
 class_name BaseCollectible
 
 @onready var interact_collision: CollisionShape2D = $InteractArea2D/CollisionShape2D
-@onready var anim_player: AnimationPlayer = $AnimationPlayer
 var current_time: float = 0
 
 func _ready() -> void:
-	anim_player.play("default")
 	interact_collision.disabled = true
 
 func _process(delta: float) -> void:

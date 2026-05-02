@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://br46pgblghmvf" path="res://sprites/ui/pause_button_unselected.png" id="2_gvlb1"]
 [ext_resource type="Texture2D" uid="uid://b2nua0rf6jexh" path="res://sprites/ui/pause_button_pressed.png" id="3_cqjee"]
 [ext_resource type="Texture2D" uid="uid://r0ku0idq14xt" path="res://sprites/ui/pause_button_selected.png" id="4_ccbv8"]
-[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="5_oxhaq"]
 [ext_resource type="Texture2D" uid="uid://eg5uhk50v6li" path="res://sprites/ui/tutorial/tutorial_0.png" id="6_ky8u4"]
 [ext_resource type="Texture2D" uid="uid://buhf866rod048" path="res://sprites/ui/tutorial/tutorial_1.png" id="7_ve4qq"]
 [ext_resource type="Texture2D" uid="uid://s28541im02nv" path="res://sprites/ui/tutorial/tutorial_2.png" id="8_ybx50"]
+[ext_resource type="Theme" uid="uid://diygj3e5jlw6y" path="res://themes/text_theme.tres" id="9_b4ly3"]
 [ext_resource type="Texture2D" uid="uid://d1ixdb54q28tp" path="res://sprites/ui/tutorial/tutorial_3.png" id="9_of8xf"]
 
 [sub_resource type="GDScript" id="GDScript_enjcu"]
@@ -19,16 +19,16 @@ script/source = "extends TextureButton
 func _process(_delta: float) -> void:
 	if is_hovered() and disabled == false:
 		text.label_settings.font_color = Color.BLACK
-	else:
+	elif !is_hovered() and disabled == false:
 		text.label_settings.font_color = Color.WHITE
+	else:
+		text.label_settings.font_color = Color.DARK_GRAY
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_b4ly3"]
-font = ExtResource("5_oxhaq")
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_6r42y"]
-font = ExtResource("5_oxhaq")
 font_size = 50
 
 [sub_resource type="GDScript" id="GDScript_kllu6"]
@@ -45,7 +45,6 @@ func _process(_delta: float) -> void:
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_enjcu"]
-font = ExtResource("5_oxhaq")
 font_size = 40
 
 [node name="TutorialCanvas" type="CanvasLayer" unique_id=1510277248]
@@ -70,6 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Tutorial0" type="TextureRect" parent="Tutorials" unique_id=1615074072]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -85,7 +85,46 @@ grow_vertical = 2
 pivot_offset = Vector2(20, 20)
 texture = ExtResource("6_ky8u4")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorials/Tutorial0" unique_id=1035955364]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -430.0
+offset_bottom = -330.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_b4ly3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Use WASD or arrow keys
+to [color=green]move[/color] the player around."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Tutorials/Tutorial0" unique_id=580566139]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -40.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_b4ly3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Place your mouse anywhere to aim,
+press and hold the left mouse button to [color=yellow]shoot[/color]."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tutorial1" type="TextureRect" parent="Tutorials" unique_id=1623003455]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,7 +140,89 @@ grow_vertical = 2
 pivot_offset = Vector2(20, 20)
 texture = ExtResource("7_ve4qq")
 
+[node name="RichTextLabel3" type="RichTextLabel" parent="Tutorials/Tutorial1" unique_id=190336050]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -310.0
+offset_bottom = -210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_b4ly3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "In order to [color=#00d0ff]dash[/color], use your mouse to aim
+at the desired direction, then press Space
+to begin dashing."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Tutorials/Tutorial1" unique_id=505276455]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_b4ly3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "The longer you hold Space,
+the further you dash."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel5" type="RichTextLabel" parent="Tutorials/Tutorial1" unique_id=1791585248]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -185.0
+offset_top = 89.0
+offset_right = -85.0
+offset_bottom = 189.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_b4ly3")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Short"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="Tutorials/Tutorial1" unique_id=971371830]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -61.0
+offset_top = 216.0
+offset_right = 39.0
+offset_bottom = 316.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_b4ly3")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Long"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tutorial2" type="TextureRect" parent="Tutorials" unique_id=648682762]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -117,7 +238,62 @@ grow_vertical = 2
 pivot_offset = Vector2(20, 20)
 texture = ExtResource("8_ybx50")
 
+[node name="RichTextLabel7" type="RichTextLabel" parent="Tutorials/Tutorial2" unique_id=262282479]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -360.0
+offset_bottom = -260.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_b4ly3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "To kill an enemy, you can either [color=yellow]shoot[/color] it..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel8" type="RichTextLabel" parent="Tutorials/Tutorial2" unique_id=1956004672]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 20.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_b4ly3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "or [color=#00d0ff]dash[/color] into it."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel9" type="RichTextLabel" parent="Tutorials/Tutorial2" unique_id=1155212816]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 250.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_b4ly3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "You will gain points for each destroyed enemy."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tutorial3" type="TextureRect" parent="Tutorials" unique_id=1335175400]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -132,6 +308,31 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(20, 20)
 texture = ExtResource("9_of8xf")
+
+[node name="RichTextLabel10" type="RichTextLabel" parent="Tutorials/Tutorial3" unique_id=1171795942]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -420.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_b4ly3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Finish a room by destroying all enemies
+that try to kill you.
+
+Once a room is finished, you can’t reenter
+that room any more, so try not to lock yourself!
+
+The mini map below will show you the [color=red]finished
+rooms[/color], [color=yellow]available rooms[/color] and your [color=green]current position[/color]."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PreviousButton" type="TextureButton" parent="." unique_id=1228630635]
 anchors_preset = 4
@@ -157,6 +358,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("9_b4ly3")
 text = "Previous"
 label_settings = SubResource("LabelSettings_b4ly3")
 horizontal_alignment = 1
@@ -189,6 +391,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("9_b4ly3")
 text = "Next"
 label_settings = SubResource("LabelSettings_6r42y")
 horizontal_alignment = 1
@@ -222,6 +425,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("9_b4ly3")
 text = "Quit"
 label_settings = SubResource("LabelSettings_enjcu")
 horizontal_alignment = 1

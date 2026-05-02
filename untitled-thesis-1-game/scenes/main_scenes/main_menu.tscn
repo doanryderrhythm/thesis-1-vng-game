@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dhek3kutftyn3" path="res://sprites/logos/game_logo.png" id="3_kllu6"]
 [ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="4_qd03l"]
 [ext_resource type="PackedScene" uid="uid://dyx1viws6qqob" path="res://scenes/ui/difficulty_item.tscn" id="5_bi8wh"]
+[ext_resource type="Theme" uid="uid://diygj3e5jlw6y" path="res://themes/text_theme.tres" id="7_gl8k6"]
 [ext_resource type="Script" uid="uid://ctvsltp2r1iuw" path="res://scripts/ui/profiles_checker.gd" id="9_f6fxv"]
 [ext_resource type="PackedScene" uid="uid://1joxgi7wl716" path="res://scenes/ui/tutorial_canvas.tscn" id="9_wukam"]
 [ext_resource type="PackedScene" uid="uid://c684lugvbafdo" path="res://scenes/ui/profile_card.tscn" id="9_x6xjm"]
@@ -30,6 +31,12 @@ script/source = "extends Control
 @onready var tutorial_button: TextureButton = $UI/TutorialButton
 @onready var tutorial_canvas: TutorialCanvas = $TutorialCanvas
 
+@onready var font_theme: Theme = preload(\"res://themes/text_theme.tres\")
+@onready var font_pixel: FontFile = preload(\"res://fonts/04B_03__.TTF\")
+@onready var font_normal: FontFile = preload(\"res://fonts/goorm-sans-medium.ttf\")
+
+@onready var characters: PlayerListener = load(\"res://resources/player/player_listener.tres\")
+
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color(0.029, 0.0, 0.184, 1.0))
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -43,7 +50,17 @@ func _ready() -> void:
 		tutorial_button.visible = false
 		tutorial_button.set_process_mode(Node.PROCESS_MODE_DISABLED)
 	
+	change_font(GameManager.font_index)
+	reload_player_character(ProfileManager.player_code)
 	insert_profiles_data()
+	
+func reload_player_character(player_code: String) -> void:
+	if player_code == \"\":
+		return
+	
+	for character in characters.players:
+		if character.code == player_code:
+			ProfileManager.update_profile(character)
 
 func _on_play_button_pressed() -> void:
 	if ProfileManager.player_code == \"\":
@@ -140,6 +157,21 @@ func _on_profile_button_pressed() -> void:
 func _on_profile_back_button_pressed() -> void:
 	show_overlay_info(profile, false)
 	pass # Replace with function body.
+
+func _on_change_font_button_pressed() -> void:
+	if font_theme.default_font == font_pixel:
+		change_font(1)
+	elif font_theme.default_font == font_normal:
+		change_font(0)
+	pass # Replace with function body.
+
+func change_font(index: int) -> void:
+	GameManager.font_index = index
+	if index == 0:
+		font_theme.default_font = font_pixel
+	elif index == 1:
+		font_theme.default_font = font_normal
+	SaveSystem.save_game()
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wukam"]
@@ -160,7 +192,6 @@ func _process(_delta: float) -> void:
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_bi8wh"]
-font = ExtResource("4_qd03l")
 font_size = 80
 
 [sub_resource type="GDScript" id="GDScript_bi8wh"]
@@ -177,7 +208,6 @@ func _process(_delta: float) -> void:
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_qd03l"]
-font = ExtResource("4_qd03l")
 font_size = 50
 
 [sub_resource type="GDScript" id="GDScript_6r42y"]
@@ -194,7 +224,6 @@ func _process(_delta: float) -> void:
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_kllu6"]
-font = ExtResource("4_qd03l")
 font_size = 50
 
 [sub_resource type="GDScript" id="GDScript_enjcu"]
@@ -211,15 +240,15 @@ func _process(_delta: float) -> void:
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_6r42y"]
-font = ExtResource("4_qd03l")
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_kpo0u"]
-font = ExtResource("4_qd03l")
 font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_y4rsf"]
-font = ExtResource("4_qd03l")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_4mf0r"]
 font_size = 40
 
 [sub_resource type="GDScript" id="GDScript_kllu6"]
@@ -236,15 +265,12 @@ func _process(_delta: float) -> void:
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_enjcu"]
-font = ExtResource("4_qd03l")
 font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_gl8k6"]
-font = ExtResource("4_qd03l")
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_q3f11"]
-font = ExtResource("4_qd03l")
 font_size = 30
 
 [sub_resource type="LabelSettings" id="LabelSettings_wukam"]
@@ -260,7 +286,6 @@ font = ExtResource("4_qd03l")
 font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_g3b7m"]
-font = ExtResource("4_qd03l")
 font_size = 32
 
 [sub_resource type="GDScript" id="GDScript_gl8k6"]
@@ -272,16 +297,16 @@ script/source = "extends TextureButton
 func _process(_delta: float) -> void:
 	if is_hovered() and disabled == false:
 		text.label_settings.font_color = Color.BLACK
-	else:
+	elif !is_hovered() and disabled == false:
 		text.label_settings.font_color = Color.WHITE
+	else:
+		text.label_settings.font_color = Color.DARK_GRAY
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_b4ly3"]
-font = ExtResource("4_qd03l")
 font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_85jtn"]
-font = ExtResource("4_qd03l")
 font_size = 50
 
 [sub_resource type="Animation" id="Animation_kllu6"]
@@ -577,6 +602,7 @@ _data = {
 [node name="MainMenu" type="Control" unique_id=1662960503]
 layout_mode = 3
 anchors_preset = 0
+theme = ExtResource("7_gl8k6")
 script = SubResource("GDScript_w3ui0")
 metadata/_edit_vertical_guides_ = [960.0]
 metadata/_edit_horizontal_guides_ = [540.0]
@@ -622,6 +648,7 @@ offset_bottom = 70.000015
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(300.47998, 70.339966)
+theme = ExtResource("7_gl8k6")
 texture_normal = ExtResource("1_kt583")
 texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
@@ -636,6 +663,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_gl8k6")
 text = "Play"
 label_settings = SubResource("LabelSettings_bi8wh")
 horizontal_alignment = 1
@@ -655,6 +683,7 @@ offset_bottom = 185.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(225, 53)
+theme = ExtResource("7_gl8k6")
 texture_normal = ExtResource("1_kt583")
 texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
@@ -688,6 +717,7 @@ offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(225, 53)
+theme = ExtResource("7_gl8k6")
 texture_normal = ExtResource("1_kt583")
 texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
@@ -721,6 +751,7 @@ offset_bottom = 415.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(225, 53)
+theme = ExtResource("7_gl8k6")
 texture_normal = ExtResource("1_kt583")
 texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
@@ -746,6 +777,7 @@ offset_left = 20.0
 offset_top = 20.0
 offset_right = 320.0
 offset_bottom = 90.0
+theme = ExtResource("7_gl8k6")
 texture_normal = ExtResource("1_kt583")
 texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
@@ -775,6 +807,7 @@ offset_top = 20.0
 offset_right = -20.0
 offset_bottom = 90.0
 grow_horizontal = 0
+theme = ExtResource("7_gl8k6")
 texture_normal = ExtResource("1_kt583")
 texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
@@ -794,6 +827,39 @@ label_settings = SubResource("LabelSettings_y4rsf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ChangeFontButton" type="TextureButton" parent="UI" unique_id=1401487110]
+modulate = Color(0.6431373, 0.89366263, 1, 1)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -90.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("7_gl8k6")
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_enjcu")
+
+[node name="Label" type="Label" parent="UI/ChangeFontButton" unique_id=346574742]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Change Font"
+label_settings = SubResource("LabelSettings_4mf0r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="QuitButton" type="TextureButton" parent="UI" unique_id=506030700]
 modulate = Color(1, 0.5920712, 0.5920712, 1)
 anchors_preset = 8
@@ -808,6 +874,7 @@ offset_bottom = 495.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(150, 35)
+theme = ExtResource("7_gl8k6")
 texture_normal = ExtResource("1_kt583")
 texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
@@ -847,6 +914,7 @@ offset_top = -320.0
 offset_bottom = -269.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_gl8k6")
 text = "SELECT DIFFICULTY"
 label_settings = SubResource("LabelSettings_gl8k6")
 horizontal_alignment = 1
@@ -881,6 +949,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_gl8k6")
 text = "Back"
 label_settings = SubResource("LabelSettings_q3f11")
 horizontal_alignment = 1
@@ -985,6 +1054,7 @@ offset_top = -160.0
 offset_bottom = -109.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_gl8k6")
 text = "WARNING"
 label_settings = SubResource("LabelSettings_gl8k6")
 horizontal_alignment = 1
@@ -1019,6 +1089,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_gl8k6")
 text = "Back"
 label_settings = SubResource("LabelSettings_q3f11")
 horizontal_alignment = 1
@@ -1044,6 +1115,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_gl8k6")
 text = "You have not selected a character to play.
 Please proceed to the shop to equip a character."
 label_settings = SubResource("LabelSettings_g3b7m")
@@ -1071,6 +1143,7 @@ offset_top = -275.0
 offset_bottom = -224.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_gl8k6")
 text = "PROFILE"
 label_settings = SubResource("LabelSettings_gl8k6")
 horizontal_alignment = 1
@@ -1105,6 +1178,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_gl8k6")
 text = "Back"
 label_settings = SubResource("LabelSettings_q3f11")
 horizontal_alignment = 1
@@ -1176,6 +1250,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_gl8k6")
 text = "Previous"
 label_settings = SubResource("LabelSettings_b4ly3")
 horizontal_alignment = 1
@@ -1209,6 +1284,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("7_gl8k6")
 text = "Next"
 label_settings = SubResource("LabelSettings_85jtn")
 horizontal_alignment = 1
@@ -1227,6 +1303,7 @@ libraries/ = SubResource("AnimationLibrary_gl8k6")
 [connection signal="pressed" from="UI/ShopButton" to="." method="_on_shop_button_pressed"]
 [connection signal="pressed" from="UI/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="UI/ProfileButton" to="." method="_on_profile_button_pressed"]
+[connection signal="pressed" from="UI/ChangeFontButton" to="." method="_on_change_font_button_pressed"]
 [connection signal="pressed" from="UI/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="UI/DifficultySelect/BackButton" to="." method="_on_difficulty_back_button_pressed"]
 [connection signal="pressed" from="UI/DifficultySelect/Banner/HBoxContainer/Normal/PlayButton" to="." method="_on_play_normal_button_pressed"]

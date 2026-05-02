@@ -69,8 +69,8 @@ _data = {
 script = ExtResource("1_i4vqm")
 
 [node name="SpikeReady" type="AnimatedSprite2D" parent="." unique_id=1211565796]
-position = Vector2(62, 0)
-scale = Vector2(1.55, 1.55)
+position = Vector2(109, 0)
+scale = Vector2(3.1, 1.55)
 sprite_frames = SubResource("SpriteFrames_i4vqm")
 frame_progress = 0.6600226
 

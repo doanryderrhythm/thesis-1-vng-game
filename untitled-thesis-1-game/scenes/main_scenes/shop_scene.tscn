@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://dak77hof5amf7" path="res://sprites/bars/coin_count.png" id="1_8r8tc"]
 [ext_resource type="Texture2D" uid="uid://dhekw8y7qg2fm" path="res://sprites/player/player_square_4-1.png" id="1_nj366"]
 [ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="2_0mw8q"]
-[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="2_23vwc"]
 [ext_resource type="Texture2D" uid="uid://btoh15dqs60rd" path="res://sprites/ui/scroll_background.png" id="2_cs7s0"]
 [ext_resource type="Texture2D" uid="uid://dr3qlf130cxs3" path="res://sprites/ui/player/player_highlighted.png" id="3_6cioo"]
+[ext_resource type="Theme" uid="uid://diygj3e5jlw6y" path="res://themes/text_theme.tres" id="3_cs7s0"]
 [ext_resource type="Texture2D" uid="uid://d3s2egp6m1js1" path="res://sprites/ui/player/player_highlighted_animated.png" id="3_uhyxf"]
 [ext_resource type="Texture2D" uid="uid://br46pgblghmvf" path="res://sprites/ui/pause_button_unselected.png" id="3_vic4h"]
 [ext_resource type="Texture2D" uid="uid://b2nua0rf6jexh" path="res://sprites/ui/pause_button_pressed.png" id="4_5rrvm"]
@@ -131,6 +131,7 @@ func change_coin_text() -> void:
 func equip_character() -> void:
 	ProfileManager.update_profile(skin_stats)
 	check_unlocked_state()
+	SaveSystem.save_game()
 	
 	if equipped_character_ui != null:
 		equipped_character_ui.unequip()
@@ -249,7 +250,6 @@ shader = ExtResource("1_5vnnh")
 shader_parameter/speed = 0.1
 
 [sub_resource type="LabelSettings" id="LabelSettings_0mw8q"]
-font = ExtResource("2_23vwc")
 font_size = 80
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 1)
@@ -259,15 +259,12 @@ shadow_offset = Vector2(5, 5)
 blend_mode = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_6cioo"]
-font = ExtResource("2_23vwc")
 font_size = 100
 
 [sub_resource type="LabelSettings" id="LabelSettings_uhyxf"]
-font = ExtResource("2_23vwc")
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_nj366"]
-font = ExtResource("2_23vwc")
 font_size = 60
 
 [sub_resource type="GDScript" id="GDScript_bk7nh"]
@@ -284,11 +281,9 @@ func _process(_delta: float) -> void:
 
 [sub_resource type="LabelSettings" id="LabelSettings_5vnnh"]
 line_spacing = 0.0
-font = ExtResource("2_23vwc")
 font_size = 36
 
 [sub_resource type="LabelSettings" id="LabelSettings_8r8tc"]
-font = ExtResource("2_23vwc")
 font_size = 40
 
 [sub_resource type="Animation" id="Animation_uhyxf"]
@@ -549,6 +544,7 @@ offset_top = 50.0
 offset_right = 280.0
 offset_bottom = 130.0
 grow_horizontal = 2
+theme = ExtResource("3_cs7s0")
 text = "Shop"
 label_settings = SubResource("LabelSettings_0mw8q")
 horizontal_alignment = 1
@@ -600,6 +596,7 @@ size_flags_vertical = 4
 
 [node name="Title" type="Label" parent="CanvasLayer/StatsContainer" unique_id=448971215]
 layout_mode = 2
+theme = ExtResource("3_cs7s0")
 text = "STATS"
 label_settings = SubResource("LabelSettings_6cioo")
 horizontal_alignment = 1
@@ -612,12 +609,14 @@ theme_override_constants/separation = 50
 [node name="Description" type="Label" parent="CanvasLayer/StatsContainer/MovementSpeed" unique_id=915966228]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme = ExtResource("3_cs7s0")
 text = "movement speed"
 label_settings = SubResource("LabelSettings_uhyxf")
 
 [node name="Value" type="Label" parent="CanvasLayer/StatsContainer/MovementSpeed" unique_id=1161055303]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme = ExtResource("3_cs7s0")
 text = "value"
 label_settings = SubResource("LabelSettings_nj366")
 
@@ -628,12 +627,14 @@ theme_override_constants/separation = 50
 [node name="Description" type="Label" parent="CanvasLayer/StatsContainer/DashSpeed" unique_id=1590121591]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme = ExtResource("3_cs7s0")
 text = "dash speed"
 label_settings = SubResource("LabelSettings_uhyxf")
 
 [node name="Value" type="Label" parent="CanvasLayer/StatsContainer/DashSpeed" unique_id=1194368534]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme = ExtResource("3_cs7s0")
 text = "value"
 label_settings = SubResource("LabelSettings_nj366")
 
@@ -644,12 +645,14 @@ theme_override_constants/separation = 50
 [node name="Description" type="Label" parent="CanvasLayer/StatsContainer/ShootSpeed" unique_id=1644979292]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme = ExtResource("3_cs7s0")
 text = "shoot speed"
 label_settings = SubResource("LabelSettings_uhyxf")
 
 [node name="Value" type="Label" parent="CanvasLayer/StatsContainer/ShootSpeed" unique_id=1127548162]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme = ExtResource("3_cs7s0")
 text = "value"
 label_settings = SubResource("LabelSettings_nj366")
 
@@ -660,12 +663,14 @@ theme_override_constants/separation = 50
 [node name="Description" type="Label" parent="CanvasLayer/StatsContainer/BulletDamage" unique_id=178823459]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme = ExtResource("3_cs7s0")
 text = "bullet damage"
 label_settings = SubResource("LabelSettings_uhyxf")
 
 [node name="Value" type="Label" parent="CanvasLayer/StatsContainer/BulletDamage" unique_id=326434313]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme = ExtResource("3_cs7s0")
 text = "value"
 label_settings = SubResource("LabelSettings_nj366")
 
@@ -676,12 +681,14 @@ theme_override_constants/separation = 50
 [node name="Description" type="Label" parent="CanvasLayer/StatsContainer/Health" unique_id=181213316]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme = ExtResource("3_cs7s0")
 text = "health"
 label_settings = SubResource("LabelSettings_uhyxf")
 
 [node name="Value" type="Label" parent="CanvasLayer/StatsContainer/Health" unique_id=974703357]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+theme = ExtResource("3_cs7s0")
 text = "value"
 label_settings = SubResource("LabelSettings_nj366")
 
@@ -692,10 +699,10 @@ anchor_left = 0.528
 anchor_top = 0.628
 anchor_right = 0.684
 anchor_bottom = 0.69600004
-offset_left = 51.23999
-offset_top = 2.7599487
-offset_right = 51.71997
-offset_bottom = 3.3199463
+offset_left = 222.23999
+offset_top = 31.759949
+offset_right = 222.71997
+offset_bottom = 32.319946
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("3_vic4h")
@@ -710,6 +717,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_cs7s0")
 text = "Unlock"
 label_settings = SubResource("LabelSettings_5vnnh")
 horizontal_alignment = 1
@@ -721,10 +729,10 @@ anchor_left = 0.528
 anchor_top = 0.628
 anchor_right = 0.684
 anchor_bottom = 0.69600004
-offset_left = 51.23999
-offset_top = 2.7599487
-offset_right = 51.71997
-offset_bottom = 3.3199463
+offset_left = 222.23999
+offset_top = 31.759949
+offset_right = 222.71997
+offset_bottom = 32.319946
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("3_vic4h")
@@ -740,6 +748,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_cs7s0")
 text = "Equip"
 label_settings = SubResource("LabelSettings_5vnnh")
 horizontal_alignment = 1
@@ -757,7 +766,7 @@ offset_right = 0.27990723
 offset_bottom = 0.15997314
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_23vwc")
+theme = ExtResource("3_cs7s0")
 theme_override_font_sizes/font_size = 32
 alignment = 2
 
@@ -846,6 +855,7 @@ offset_top = 10.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_cs7s0")
 text = "1234"
 label_settings = SubResource("LabelSettings_8r8tc")
 horizontal_alignment = 1
@@ -863,7 +873,7 @@ offset_right = 100.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("2_23vwc")
+theme = ExtResource("3_cs7s0")
 theme_override_font_sizes/font_size = 52
 text = "back"
 

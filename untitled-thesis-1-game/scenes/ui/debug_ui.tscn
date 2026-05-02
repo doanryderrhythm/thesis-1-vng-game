@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dadxxqbb0l40r" path="res://sprites/bars/player_stats.png" id="2_j0te7"]
 [ext_resource type="Texture2D" uid="uid://cmf4kh1kci1jp" path="res://sprites/bars/health_icon.png" id="2_pu33q"]
 [ext_resource type="Texture2D" uid="uid://b2of4763rak84" path="res://sprites/bars/health_progress.png" id="3_k7b8x"]
+[ext_resource type="Theme" uid="uid://diygj3e5jlw6y" path="res://themes/text_theme.tres" id="3_qctl6"]
 [ext_resource type="Texture2D" uid="uid://ptbjvi1ww8ce" path="res://sprites/bars/dash_icon.png" id="4_fadvp"]
 [ext_resource type="Texture2D" uid="uid://bx5nkaqlcb8v0" path="res://sprites/bars/dash_progress.png" id="5_ukyxi"]
 [ext_resource type="Texture2D" uid="uid://dak77hof5amf7" path="res://sprites/bars/coin_count.png" id="6_k7b8x"]
@@ -12,24 +13,20 @@
 [ext_resource type="PackedScene" uid="uid://dlu558v0xtgq" path="res://scenes/ui/room_icon.tscn" id="8_bcd6v"]
 [ext_resource type="Texture2D" uid="uid://br46pgblghmvf" path="res://sprites/ui/pause_button_unselected.png" id="8_f6xhk"]
 [ext_resource type="Texture2D" uid="uid://b2nua0rf6jexh" path="res://sprites/ui/pause_button_pressed.png" id="9_hqpec"]
-[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="9_j0te7"]
 [ext_resource type="Texture2D" uid="uid://r0ku0idq14xt" path="res://sprites/ui/pause_button_selected.png" id="10_hr2xk"]
 [ext_resource type="Texture2D" uid="uid://ccmhxs4mq68fr" path="res://sprites/ui/result_screen.png" id="12_hr2xk"]
 [ext_resource type="PackedScene" uid="uid://1joxgi7wl716" path="res://scenes/ui/tutorial_canvas.tscn" id="16_qctl6"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j3jup"]
-font = ExtResource("9_j0te7")
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_71sgh"]
 line_spacing = 0.0
-font = ExtResource("9_j0te7")
 font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_fadvp"]
 line_spacing = 0.0
-font = ExtResource("9_j0te7")
 font_size = 600
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f6xhk"]
@@ -41,30 +38,25 @@ atlas = ExtResource("1_14mai")
 region = Rect2(0, 42, 253, 42)
 
 [sub_resource type="LabelSettings" id="LabelSettings_k7b8x"]
-font = ExtResource("9_j0te7")
 font_size = 26
 
 [sub_resource type="LabelSettings" id="LabelSettings_pu33q"]
-font = ExtResource("9_j0te7")
 font_size = 26
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_14mai"]
-font = ExtResource("9_j0te7")
 font_size = 46
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_141q6"]
-font = ExtResource("9_j0te7")
 font_size = 32
 outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ukyxi"]
 line_spacing = 0.0
-font = ExtResource("9_j0te7")
 font_size = 124
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
@@ -84,17 +76,14 @@ func _process(_delta: float) -> void:
 
 [sub_resource type="LabelSettings" id="LabelSettings_f6xhk"]
 line_spacing = 0.0
-font = ExtResource("9_j0te7")
 font_size = 36
 
 [sub_resource type="LabelSettings" id="LabelSettings_hqpec"]
 line_spacing = 0.0
-font = ExtResource("9_j0te7")
 font_size = 36
 
 [sub_resource type="LabelSettings" id="LabelSettings_hr2xk"]
 line_spacing = 0.0
-font = ExtResource("9_j0te7")
 font_size = 36
 
 [sub_resource type="GDScript" id="GDScript_j0te7"]
@@ -111,25 +100,20 @@ func _process(_delta: float) -> void:
 "
 
 [sub_resource type="LabelSettings" id="LabelSettings_wf4xb"]
-font = ExtResource("9_j0te7")
 font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_bcd6v"]
 line_spacing = 0.0
-font = ExtResource("9_j0te7")
 font_size = 100
 font_color = Color(0.105409205, 0.105409205, 0.105409205, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qctl6"]
-font = ExtResource("9_j0te7")
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_bcx30"]
-font = ExtResource("9_j0te7")
 font_size = 66
 
 [sub_resource type="LabelSettings" id="LabelSettings_j0te7"]
-font = ExtResource("9_j0te7")
 font_size = 26
 
 [sub_resource type="Animation" id="Animation_k7b8x"]
@@ -469,6 +453,7 @@ anchor_right = 1.0
 anchor_bottom = 0.261
 offset_bottom = 11.466
 grow_horizontal = 2
+theme = ExtResource("3_qctl6")
 text = "move speed"
 label_settings = SubResource("LabelSettings_j3jup")
 horizontal_alignment = 1
@@ -483,6 +468,7 @@ anchor_bottom = 0.97800004
 offset_top = 12.466007
 offset_bottom = 5.068001
 grow_horizontal = 2
+theme = ExtResource("3_qctl6")
 text = "0"
 label_settings = SubResource("LabelSettings_71sgh")
 horizontal_alignment = 1
@@ -500,6 +486,7 @@ anchor_right = 1.0
 anchor_bottom = 0.261
 offset_bottom = 11.466
 grow_horizontal = 2
+theme = ExtResource("3_qctl6")
 text = "dash speed"
 label_settings = SubResource("LabelSettings_j3jup")
 horizontal_alignment = 1
@@ -514,6 +501,7 @@ anchor_bottom = 0.97800004
 offset_top = 12.466007
 offset_bottom = 5.068001
 grow_horizontal = 2
+theme = ExtResource("3_qctl6")
 text = "0"
 label_settings = SubResource("LabelSettings_71sgh")
 horizontal_alignment = 1
@@ -531,6 +519,7 @@ anchor_right = 1.0
 anchor_bottom = 0.261
 offset_bottom = 11.466
 grow_horizontal = 2
+theme = ExtResource("3_qctl6")
 text = "shoot speed"
 label_settings = SubResource("LabelSettings_j3jup")
 horizontal_alignment = 1
@@ -545,6 +534,7 @@ anchor_bottom = 0.97800004
 offset_top = 12.466007
 offset_bottom = 5.068001
 grow_horizontal = 2
+theme = ExtResource("3_qctl6")
 text = "0"
 label_settings = SubResource("LabelSettings_71sgh")
 horizontal_alignment = 1
@@ -574,6 +564,7 @@ offset_right = 171.5
 offset_bottom = 409.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_qctl6")
 text = "1"
 label_settings = SubResource("LabelSettings_fadvp")
 horizontal_alignment = 1
@@ -632,6 +623,7 @@ offset_top = 7.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_qctl6")
 text = "0"
 label_settings = SubResource("LabelSettings_k7b8x")
 horizontal_alignment = 1
@@ -646,6 +638,7 @@ offset_top = -108.0
 offset_right = 117.0
 offset_bottom = -53.0
 grow_vertical = 0
+theme = ExtResource("3_qctl6")
 text = "Score"
 label_settings = SubResource("LabelSettings_pu33q")
 vertical_alignment = 2
@@ -659,6 +652,7 @@ offset_top = -65.0
 offset_right = 117.0
 offset_bottom = -10.0
 grow_vertical = 0
+theme = ExtResource("3_qctl6")
 text = "Score"
 label_settings = SubResource("LabelSettings_14mai")
 vertical_alignment = 2
@@ -676,6 +670,7 @@ offset_right = 84.5
 offset_bottom = -125.000244
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("3_qctl6")
 text = "+ speed"
 label_settings = SubResource("LabelSettings_141q6")
 horizontal_alignment = 1
@@ -693,6 +688,7 @@ offset_right = 53.5
 offset_bottom = -53.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("3_qctl6")
 text = "Phase Count"
 label_settings = SubResource("LabelSettings_pu33q")
 horizontal_alignment = 1
@@ -710,6 +706,7 @@ offset_right = 53.5
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("3_qctl6")
 text = "Phase"
 label_settings = SubResource("LabelSettings_14mai")
 horizontal_alignment = 1
@@ -931,6 +928,7 @@ offset_top = -120.0
 offset_bottom = 17.000061
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_qctl6")
 text = "PAUSED"
 label_settings = SubResource("LabelSettings_ukyxi")
 horizontal_alignment = 1
@@ -961,6 +959,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_qctl6")
 text = "Resume"
 label_settings = SubResource("LabelSettings_f6xhk")
 horizontal_alignment = 1
@@ -980,6 +979,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_qctl6")
 text = "Retry"
 label_settings = SubResource("LabelSettings_hqpec")
 horizontal_alignment = 1
@@ -999,6 +999,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_qctl6")
 text = "Retire"
 label_settings = SubResource("LabelSettings_hr2xk")
 horizontal_alignment = 1
@@ -1025,6 +1026,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_qctl6")
 text = "Tutorial"
 label_settings = SubResource("LabelSettings_wf4xb")
 horizontal_alignment = 1
@@ -1065,6 +1067,7 @@ offset_left = -350.0
 offset_top = -72.00001
 offset_right = 350.0
 offset_bottom = 71.999855
+theme = ExtResource("3_qctl6")
 text = "RESULT"
 label_settings = SubResource("LabelSettings_bcd6v")
 horizontal_alignment = 1
@@ -1080,6 +1083,7 @@ offset_top = -0.00038146973
 offset_bottom = -0.0007324219
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_qctl6")
 text = "Reason to lose"
 label_settings = SubResource("LabelSettings_qctl6")
 horizontal_alignment = 1
@@ -1104,6 +1108,7 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer" unique_id=1025652906]
 layout_mode = 2
+theme = ExtResource("3_qctl6")
 text = "STATS"
 label_settings = SubResource("LabelSettings_bcx30")
 horizontal_alignment = 1
@@ -1116,13 +1121,14 @@ alignment = 1
 [node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer" unique_id=184615611]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
+theme = ExtResource("3_qctl6")
 text = "total destroyed enemies"
 label_settings = SubResource("LabelSettings_j0te7")
 
 [node name="StatsValueLabel" type="RichTextLabel" parent="ResultNode/Background/ContentContainer/StatsContainer/DestroyedEnemiesContainer" unique_id=2144481628]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("9_j0te7")
+theme = ExtResource("3_qctl6")
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "abc"
@@ -1136,13 +1142,14 @@ alignment = 1
 [node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer" unique_id=1411810909]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
+theme = ExtResource("3_qctl6")
 text = "level reached"
 label_settings = SubResource("LabelSettings_j0te7")
 
 [node name="StatsValueLabel" type="RichTextLabel" parent="ResultNode/Background/ContentContainer/StatsContainer/LevelReachedContainer" unique_id=1256294199]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("9_j0te7")
+theme = ExtResource("3_qctl6")
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "abc"
@@ -1156,13 +1163,14 @@ alignment = 1
 [node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer" unique_id=1688280108]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
+theme = ExtResource("3_qctl6")
 text = "total successful phases"
 label_settings = SubResource("LabelSettings_j0te7")
 
 [node name="StatsValueLabel" type="RichTextLabel" parent="ResultNode/Background/ContentContainer/StatsContainer/PhasesContainer" unique_id=203679116]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("9_j0te7")
+theme = ExtResource("3_qctl6")
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "abc"
@@ -1176,13 +1184,14 @@ alignment = 1
 [node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer" unique_id=933965342]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
+theme = ExtResource("3_qctl6")
 text = "overall score"
 label_settings = SubResource("LabelSettings_j0te7")
 
 [node name="StatsValueLabel" type="RichTextLabel" parent="ResultNode/Background/ContentContainer/StatsContainer/ScoreContainer" unique_id=1543115216]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("9_j0te7")
+theme = ExtResource("3_qctl6")
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "abc"
@@ -1194,6 +1203,7 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer" unique_id=1346600435]
 layout_mode = 2
+theme = ExtResource("3_qctl6")
 text = "REWARDS"
 label_settings = SubResource("LabelSettings_bcx30")
 horizontal_alignment = 1
@@ -1206,13 +1216,14 @@ alignment = 1
 [node name="Description" type="Label" parent="ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer" unique_id=506726360]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
+theme = ExtResource("3_qctl6")
 text = "coins"
 label_settings = SubResource("LabelSettings_j0te7")
 
 [node name="RewardsValueLabel" type="RichTextLabel" parent="ResultNode/Background/ContentContainer/RewardsContainer/CoinsContainer" unique_id=898613177]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_fonts/normal_font = ExtResource("9_j0te7")
+theme = ExtResource("3_qctl6")
 theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "abc"
@@ -1248,6 +1259,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_qctl6")
 text = "Retry"
 label_settings = SubResource("LabelSettings_hqpec")
 horizontal_alignment = 1
@@ -1267,6 +1279,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_qctl6")
 text = "Retire"
 label_settings = SubResource("LabelSettings_hr2xk")
 horizontal_alignment = 1

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bphaxnd524ixp" path="res://scripts/achievements/achievement_item.gd" id="1_plkl0"]
 [ext_resource type="Texture2D" uid="uid://cpubcm1cpvub" path="res://sprites/ui/achievement_cup.png" id="2_ywwbx"]
-[ext_resource type="FontFile" uid="uid://pwniptj2n3oj" path="res://fonts/04B_03__.TTF" id="3_f4yeg"]
+[ext_resource type="Theme" uid="uid://diygj3e5jlw6y" path="res://themes/text_theme.tres" id="3_plkl0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxkpg"]
 bg_color = Color(0, 0.14382452, 0.269822, 1)
@@ -15,11 +15,9 @@ border_blend = true
 corner_detail = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_j5ap0"]
-font = ExtResource("3_f4yeg")
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_mc5it"]
-font = ExtResource("3_f4yeg")
 font_size = 24
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_plkl0"]
@@ -107,12 +105,14 @@ alignment = 1
 
 [node name="Title" type="Label" parent="Detail" unique_id=1023756559]
 layout_mode = 2
+theme = ExtResource("3_plkl0")
 text = "Title"
 label_settings = SubResource("LabelSettings_j5ap0")
 autowrap_mode = 2
 
 [node name="Description" type="Label" parent="Detail" unique_id=1007400934]
 layout_mode = 2
+theme = ExtResource("3_plkl0")
 text = "Description"
 label_settings = SubResource("LabelSettings_mc5it")
 autowrap_mode = 2

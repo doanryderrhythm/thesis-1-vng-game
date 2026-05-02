@@ -2,10 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bjreuumda0cck" path="res://scripts/area_2d/interact_area_2d.gd" id="1_d3ltt"]
 [ext_resource type="Script" uid="uid://b25vymqgwcsro" path="res://scripts/collectibles/base_collectible.gd" id="1_d5deo"]
-[ext_resource type="Texture2D" uid="uid://blmvcbloyiin4" path="res://sprites/effects/glow.png" id="2_7i1g5"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7i1g5"]
-blend_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u7xa0"]
 radius = 47.0
@@ -13,55 +9,12 @@ radius = 47.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_d5deo"]
 radius = 52.086468
 
-[sub_resource type="Animation" id="Animation_7i1g5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Glow:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_d27tq"]
-resource_name = "default"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Glow:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.5882353), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l8nvq"]
-_data = {
-&"RESET": SubResource("Animation_7i1g5"),
-&"default": SubResource("Animation_d27tq")
-}
-
 [node name="BaseCollectible" type="RigidBody2D" unique_id=1780334649]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_d5deo")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1319834975]
-
-[node name="Glow" type="Sprite2D" parent="." unique_id=709504758]
-material = SubResource("CanvasItemMaterial_7i1g5")
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("2_7i1g5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=435083227]
 shape = SubResource("CircleShape2D_u7xa0")
@@ -74,8 +27,5 @@ metadata/_custom_type_script = "uid://bjreuumda0cck"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea2D" unique_id=1821629557]
 shape = SubResource("CircleShape2D_d5deo")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1422386095]
-libraries/ = SubResource("AnimationLibrary_l8nvq")
 
 [connection signal="interact" from="InteractArea2D" to="." method="_on_interact_area_2d_interact"]

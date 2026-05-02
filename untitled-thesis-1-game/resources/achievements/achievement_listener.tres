@@ -11,7 +11,6 @@
 [ext_resource type="Resource" uid="uid://c56h5sio8h1xj" path="res://resources/achievements/destroy_enemies_dash_30.tres" id="8_aufcu"]
 [ext_resource type="Resource" uid="uid://fry7e1ib7thd" path="res://resources/achievements/destroy_enemies_shoot_30.tres" id="9_0rqhj"]
 [ext_resource type="Resource" uid="uid://c5xjhnssipysj" path="res://resources/achievements/double_kill.tres" id="10_ontek"]
-[ext_resource type="Resource" uid="uid://vdk8wfx25io3" path="res://resources/achievements/explorer.tres" id="11_8t3t8"]
 [ext_resource type="Resource" uid="uid://cbe8btbyophoo" path="res://resources/achievements/fully_healed.tres" id="12_gscbd"]
 [ext_resource type="Resource" uid="uid://dpgm5m0gmchsp" path="res://resources/achievements/lock_yourself.tres" id="13_6gifm"]
 [ext_resource type="Resource" uid="uid://bd078poxo70rq" path="res://resources/achievements/no_bullet_10.tres" id="14_og6vd"]
@@ -27,5 +26,5 @@
 
 [resource]
 script = ExtResource("2_823bj")
-achievements = Array[ExtResource("1_rd81i")]([ExtResource("22_a8u3s"), ExtResource("21_menfn"), ExtResource("7_elw6i"), ExtResource("8_aufcu"), ExtResource("9_0rqhj"), ExtResource("15_q00aj"), ExtResource("14_og6vd"), ExtResource("17_pq1ed"), ExtResource("18_ri4u3"), ExtResource("3_ru705"), ExtResource("10_ontek"), ExtResource("23_re84c"), ExtResource("19_7hbgm"), ExtResource("16_g8x7w"), ExtResource("12_gscbd"), ExtResource("13_6gifm"), ExtResource("4_qj7n0"), ExtResource("5_71sy2"), ExtResource("6_u66w1"), ExtResource("20_8ytum"), ExtResource("11_8t3t8"), ExtResource("2_m867e")])
+achievements = Array[ExtResource("1_rd81i")]([ExtResource("22_a8u3s"), ExtResource("21_menfn"), ExtResource("7_elw6i"), ExtResource("8_aufcu"), ExtResource("9_0rqhj"), ExtResource("15_q00aj"), ExtResource("14_og6vd"), ExtResource("17_pq1ed"), ExtResource("18_ri4u3"), ExtResource("3_ru705"), ExtResource("10_ontek"), ExtResource("23_re84c"), ExtResource("19_7hbgm"), ExtResource("16_g8x7w"), ExtResource("12_gscbd"), ExtResource("13_6gifm"), ExtResource("4_qj7n0"), ExtResource("5_71sy2"), ExtResource("6_u66w1"), ExtResource("20_8ytum"), ExtResource("2_m867e")])
 metadata/_custom_type_script = "uid://dodvnbi81r0jg"

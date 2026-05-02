@@ -16,11 +16,14 @@ func load_game():
 
 		var node_data = json.data
 
+		GameManager.font_index = node_data["font_index"]
 		ProfileManager.is_tutorial_finished = node_data["is_tutorial_finished"]
 
 		ProfileManager.total_coins = node_data["total_coins"]
 		ProfileManager.unlocked_codes.assign(node_data.get("unlocked_players", []))
 		ProfileManager.unlocked_achs.assign(node_data.get("unlocked_achs", []))
+		
+		ProfileManager.player_code = node_data["equipped_player"]
 		
 		ProfileManager.normal_result_data.best_score = node_data["normal_result"]["best_score"]
 		ProfileManager.normal_result_data.best_successful_phases = node_data["normal_result"]["best_phase"]
