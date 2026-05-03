@@ -24,6 +24,13 @@ func _gui_input(event: InputEvent) -> void:
 
 func _on_clicked() -> void:
 	ProfileManager.custom_index_selected.emit(get_parent().get_children().find(self))
+	
+	var shop_scene = get_tree().current_scene
+	if shop_scene.sfx_player != null:
+		shop_scene.change_player_anim.stop()
+		shop_scene.change_player_anim.play("RESET")
+		shop_scene.sfx_player.stream = AudioStorer.navigate_character
+		shop_scene.sfx_player.play()
 	pass
 
 func select_texture() -> void:

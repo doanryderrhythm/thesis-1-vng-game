@@ -46,6 +46,10 @@ func _ready() -> void:
 	MusicManager.change_music(MusicManager.main_menu_music)
 	LoadSystem.load_game()
 	
+	if ProfileManager.player_code == \"\" and ProfileManager.unlocked_codes.is_empty():
+		ProfileManager.player_code = \"player_circle_1-1\"
+		ProfileManager.unlocked_codes.push_back(\"player_circle_1-1\")
+	
 	if not ProfileManager.is_tutorial_finished:
 		tutorial_button.visible = false
 		tutorial_button.set_process_mode(Node.PROCESS_MODE_DISABLED)
@@ -172,6 +176,11 @@ func change_font(index: int) -> void:
 	elif index == 1:
 		font_theme.default_font = font_normal
 	SaveSystem.save_game()
+
+
+func _on_credits_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/main_scenes/credit_scene.tscn\")
+	pass # Replace with function body.
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wukam"]
@@ -1301,6 +1310,7 @@ libraries/ = SubResource("AnimationLibrary_gl8k6")
 [connection signal="pressed" from="UI/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="UI/AchievementsButton" to="." method="_on_achievement_button_pressed"]
 [connection signal="pressed" from="UI/ShopButton" to="." method="_on_shop_button_pressed"]
+[connection signal="pressed" from="UI/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="UI/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="pressed" from="UI/ProfileButton" to="." method="_on_profile_button_pressed"]
 [connection signal="pressed" from="UI/ChangeFontButton" to="." method="_on_change_font_button_pressed"]

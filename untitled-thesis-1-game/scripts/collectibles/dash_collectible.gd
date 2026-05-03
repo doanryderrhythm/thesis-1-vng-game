@@ -7,3 +7,8 @@ func take_effect() -> void:
 		GameManager.stats_change.emit(GameManager.CollectibleType.DASH_LENGTH)
 	queue_free()
 	pass
+
+func _on_interact_area_2d_interact(_area: Area2D) -> void:
+	take_effect()
+	play_audio(AudioStorer.collectible_collect, _area)
+	pass # Replace with function body.

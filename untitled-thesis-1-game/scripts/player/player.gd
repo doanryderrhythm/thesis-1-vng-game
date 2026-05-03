@@ -55,6 +55,7 @@ var _is_invulnerable: bool = false
 @onready var _shoot_audio: AudioStreamPlayer = $ShootAudio
 @onready var _dash_audio: AudioStreamPlayer = $DashAudio
 @onready var _hurt_audio: AudioStreamPlayer = $HurtAudio
+@onready var _collectible_audio: AudioStreamPlayer = $CollectibleAudio
 
 @onready var _player_sprite: Sprite2D = $Sprite2D
 

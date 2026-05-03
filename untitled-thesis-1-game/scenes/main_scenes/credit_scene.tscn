@@ -1,0 +1,233 @@
+[gd_scene format=3 uid="uid://cyl6c6itl4bhr"]
+
+[ext_resource type="Shader" uid="uid://dpqb3l5tdyisr" path="res://shaders/scroll.gdshader" id="2_l824s"]
+[ext_resource type="Texture2D" uid="uid://btoh15dqs60rd" path="res://sprites/ui/scroll_background.png" id="3_og23p"]
+[ext_resource type="Texture2D" uid="uid://dfqs6uw5cinbh" path="res://sprites/logos/Logo-DH-Cong-Nghe-Thong-Tin-UIT.png" id="4_l824s"]
+[ext_resource type="Theme" uid="uid://diygj3e5jlw6y" path="res://themes/text_theme.tres" id="4_vig83"]
+[ext_resource type="Texture2D" uid="uid://dbsvjtpqed3h8" path="res://sprites/logos/VNG_Corp._logo.svg.png" id="5_og23p"]
+
+[sub_resource type="GDScript" id="GDScript_00rrg"]
+script/source = "extends Node2D
+
+func _ready() -> void:
+	RenderingServer.set_default_clear_color(Color(0.184, 0.156, 0.0, 1.0))
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func _on_back_button_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/main_scenes/main_menu.tscn\")
+	pass # Replace with function body.
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dr8q4"]
+shader = ExtResource("2_l824s")
+shader_parameter/speed = 0.1
+
+[sub_resource type="LabelSettings" id="LabelSettings_qtrd1"]
+font_size = 80
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
+
+[node name="Credits" type="Node2D" unique_id=1705559252]
+script = SubResource("GDScript_00rrg")
+
+[node name="AchievementUI" type="CanvasLayer" parent="." unique_id=1773686825]
+
+[node name="Scroll" type="TextureRect" parent="AchievementUI" unique_id=54684333]
+modulate = Color(1, 1, 1, 0.23529412)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_dr8q4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_og23p")
+stretch_mode = 1
+
+[node name="Title" type="Label" parent="AchievementUI" unique_id=2142745708]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -280.0
+offset_top = 50.0
+offset_right = 280.0
+offset_bottom = 130.0
+grow_horizontal = 2
+theme = ExtResource("4_vig83")
+text = "Credits"
+label_settings = SubResource("LabelSettings_qtrd1")
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="AchievementUI" unique_id=603253424]
+anchors_preset = -1
+anchor_left = 0.21900001
+anchor_top = 0.157
+anchor_right = 0.781
+anchor_bottom = 0.89800006
+offset_left = -0.480011
+offset_top = 0.43998718
+offset_right = 0.47998047
+offset_bottom = 0.15991211
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(540, 400)
+size_flags_horizontal = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AchievementUI/Panel" unique_id=1111295252]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AchievementUI/Panel/ScrollContainer" unique_id=1395858575]
+custom_minimum_size = Vector2(1080, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Logos" type="Control" parent="AchievementUI/Panel/ScrollContainer/VBoxContainer" unique_id=1004612266]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AchievementUI/Panel/ScrollContainer/VBoxContainer/Logos" unique_id=207053183]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -303.5
+offset_right = 303.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="AchievementUI/Panel/ScrollContainer/VBoxContainer/Logos/HBoxContainer" unique_id=803477730]
+custom_minimum_size = Vector2(13.105, 0)
+layout_mode = 2
+texture = ExtResource("4_l824s")
+expand_mode = 3
+
+[node name="TextureRect2" type="TextureRect" parent="AchievementUI/Panel/ScrollContainer/VBoxContainer/Logos/HBoxContainer" unique_id=1583772555]
+layout_mode = 2
+texture = ExtResource("5_og23p")
+expand_mode = 3
+
+[node name="Description0" type="RichTextLabel" parent="AchievementUI/Panel/ScrollContainer/VBoxContainer" unique_id=1272874577]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("4_vig83")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "This project is created for [color=#2f6aff]UIT[/color] thesis project
+with the help from staff of [color=#F05A22]VNG[/color]."
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
+horizontal_alignment = 1
+
+[node name="Description1" type="RichTextLabel" parent="AchievementUI/Panel/ScrollContainer/VBoxContainer" unique_id=219821500]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("4_vig83")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "STUDENT"
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description2" type="RichTextLabel" parent="AchievementUI/Panel/ScrollContainer/VBoxContainer" unique_id=751699512]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Lê Bá Đoàn - 23520292"
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
+horizontal_alignment = 1
+
+[node name="Description3" type="RichTextLabel" parent="AchievementUI/Panel/ScrollContainer/VBoxContainer" unique_id=672861204]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("4_vig83")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "MENTOR"
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description4" type="RichTextLabel" parent="AchievementUI/Panel/ScrollContainer/VBoxContainer" unique_id=525464935]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Nguyễn Xuân Cầu"
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
+horizontal_alignment = 1
+
+[node name="Description5" type="RichTextLabel" parent="AchievementUI/Panel/ScrollContainer/VBoxContainer" unique_id=1404164804]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("4_vig83")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "MUSIC USED"
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description6" type="RichTextLabel" parent="AchievementUI/Panel/ScrollContainer/VBoxContainer" unique_id=1955873109]
+custom_minimum_size = Vector2(0, 170)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("4_vig83")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[font_size=40]Will You Snail? OST[/font_size]
+\"Quitetly Searching\"
+\"Disco of Doom\"
+\"Shelly Fire\"
+\"Winter Mode\""
+fit_content = true
+scroll_active = false
+autowrap_mode = 1
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="AchievementUI" unique_id=1011565654]
+anchors_preset = -1
+anchor_left = 0.467
+anchor_top = 0.94500005
+anchor_right = 0.53300005
+anchor_bottom = 1.0
+offset_left = -0.14001465
+offset_top = -30.600037
+offset_right = 0.13989258
+offset_bottom = -30.999878
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_vig83")
+theme_override_font_sizes/font_size = 50
+text = "Back"
+
+[connection signal="pressed" from="AchievementUI/BackButton" to="." method="_on_back_button_pressed"]

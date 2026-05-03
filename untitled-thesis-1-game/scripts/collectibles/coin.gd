@@ -14,3 +14,8 @@ func take_effect() -> void:
 	if is_instance_valid(self):
 		queue_free()
 	pass
+
+func _on_interact_area_2d_interact(_area: Area2D) -> void:
+	take_effect()
+	play_audio(AudioStorer.coin_collect, _area)
+	pass # Replace with function body.

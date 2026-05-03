@@ -190,6 +190,8 @@ bus = &"SFX"
 stream = ExtResource("9_h17s1")
 bus = &"SFX"
 
+[node name="CollectibleAudio" type="AudioStreamPlayer" parent="." unique_id=35117587]
+
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=2042102076]
 current = true
 

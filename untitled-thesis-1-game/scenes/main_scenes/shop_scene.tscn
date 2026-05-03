@@ -53,6 +53,8 @@ var equipped_character_ui: CharacterUIItem
 @onready var glow_anim: AnimationPlayer = $GlowAnim
 @onready var insufficient_anim: AnimationPlayer = $InsufficientAnim
 
+@onready var sfx_player: AudioStreamPlayer = $SFXPlayer
+
 func _ready() -> void:
 	ProfileManager.custom_index_selected.connect(select_character_custom_index)
 	
@@ -82,12 +84,16 @@ func _process(_delta: float) -> void:
 			change_player_anim.stop()
 			change_player_anim.play(\"left_select\")
 			select_character()
+			sfx_player.stream = AudioStorer.navigate_character
+			sfx_player.play()
 	elif Input.is_action_just_pressed(ValueStorer.key_right):
 		if character_index < character_list_ui.get_child_count() - 1:
 			character_index += 1
 			change_player_anim.stop()
 			change_player_anim.play(\"right_select\")
 			select_character()
+			sfx_player.stream = AudioStorer.navigate_character
+			sfx_player.play()
 
 func select_character_custom_index(index: int) -> void:
 	if index < 0 or index >= character_list_ui.get_child_count():
@@ -146,6 +152,9 @@ func attempt_to_unlock() -> void:
 	
 	glow_anim.stop()
 	glow_anim.play(\"default\")
+	sfx_player.stream = AudioStorer.unlock_character
+	sfx_player.play()
+	
 	var unlocked_character_ui = character_list_ui.get_child(character_index)
 	unlocked_character_ui.unequip()
 	ProfileManager.total_coins -= skin_stats.requirement
@@ -587,7 +596,7 @@ anchor_right = 0.634
 anchor_bottom = 0.694
 offset_left = 189.77997
 offset_top = -80.48001
-offset_right = 325.22058
+offset_right = 325.22095
 offset_bottom = -79.52002
 grow_horizontal = 2
 grow_vertical = 2
@@ -891,6 +900,9 @@ libraries/ = SubResource("AnimationLibrary_85bsg")
 
 [node name="InsufficientAnim" type="AnimationPlayer" parent="." unique_id=589147171]
 libraries/ = SubResource("AnimationLibrary_2jb01")
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=1665770087]
+bus = &"SFX"
 
 [connection signal="pressed" from="CanvasLayer/UnlockButton" to="." method="_on_unlock_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/EquipButton" to="." method="_on_equip_button_pressed"]

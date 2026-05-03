@@ -18,3 +18,14 @@ func take_effect() -> void:
 func _on_interact_area_2d_interact(_area: Area2D) -> void:
 	take_effect()
 	pass # Replace with function body.
+
+func play_audio(_audio: AudioStreamWAV, _area: Area2D) -> void:
+	var temp = _area
+	while temp.get_parent() != null:
+		temp = temp.get_parent()
+		if temp is Player:
+			break
+	if temp is Player:
+		temp._collectible_audio.stream = _audio
+		temp._collectible_audio.play()
+	pass
