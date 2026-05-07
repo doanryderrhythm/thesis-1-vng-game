@@ -11,12 +11,7 @@ var angle: float
 var damage: float
 
 func _ready() -> void:
-	angular_velocity = randf_range(ValueStorer.bullet_min_angular_velocity, ValueStorer.bullet_max_angular_velocity)
-	
-	sprite.texture = texture
-	sprite.global_rotation = angle
-	
-	linear_velocity = speed * Vector2(cos(angle), sin(angle))
+	pass
 
 func _on_body_entered(_body: Node) -> void:
 	var parent = get_tree().current_scene.find_child(ValueStorer.bullet_particles_node)
@@ -26,5 +21,22 @@ func _on_body_entered(_body: Node) -> void:
 	particles.one_shot = true
 	particles.explosiveness = 1
 	particles.reparent(parent)
-	queue_free()
+	reset_bullet()
 	pass
+
+func reset_bullet() -> void:
+	visible = false
+	call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
+	set_physics_process(false)
+
+func reenable_bullet() -> void:
+	visible = true
+	set_process_mode(Node.PROCESS_MODE_INHERIT)
+	set_physics_process(true)
+	
+	angular_velocity = randf_range(ValueStorer.bullet_min_angular_velocity, ValueStorer.bullet_max_angular_velocity)
+	
+	sprite.texture = texture
+	sprite.global_rotation = angle
+	
+	linear_velocity = speed * Vector2(cos(angle), sin(angle))

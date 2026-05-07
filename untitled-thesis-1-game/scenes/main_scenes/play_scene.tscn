@@ -19,6 +19,8 @@ script/source = "extends Node2D
 @onready var background_snow = $Player/Particles/Snow
 
 func _ready() -> void:
+	get_tree().root.move_child(ObjectPoolManager, get_tree().root.get_child_count() - 1)
+	
 	if GameManager.level_type == GameManager.LevelType.LEVEL_ICY:
 		background_snow.visible = true
 		background_snow.set_process_mode(Node.PROCESS_MODE_INHERIT)

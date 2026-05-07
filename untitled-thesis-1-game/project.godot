@@ -30,6 +30,7 @@ LoadSystem="*uid://cytaw6mh4a3bj"
 AchievementManager="*uid://cmpw7w2aq7lm0"
 AchievementLayer="*uid://d1aie06ecrdup"
 MusicManager="*uid://c6pagjlk4a3ow"
+ObjectPoolManager="*uid://qjvwy6rh6jub"
 
 [display]
 

@@ -9,7 +9,6 @@ var damage: float
 var shoot_markers: Array[Marker2D]
 
 @export var enemy_stats: EnemyStats
-@export var bullet_scene: PackedScene
 
 @onready var shoot_delay_timer: Timer = $ShootingDelayTimer
 @onready var navigation_timer: Timer = $NavigationTimer
@@ -103,7 +102,7 @@ func _physics_process(_delta: float) -> void:
 func shoot_bullets() -> void:
 	shoot_audio.play()
 	for i in range(shoot_markers.size()):
-		var bullet = bullet_scene.instantiate()
+		var bullet: BaseBullet = ObjectPoolManager.get_bullet_from_enemy_pool()
 		bullet.global_position = shoot_markers[i].global_position
 		bullet.texture = enemy_stats.bullet_stats.texture
 		bullet.speed = randf_range(
@@ -115,13 +114,14 @@ func shoot_bullets() -> void:
 			(shoot_markers[i].global_position.x - global_position.x)
 			)
 		bullet.damage = enemy_stats.bullet_stats.damage
+		bullet.reenable_bullet()
 		if is_moving:
 			bullet.modulate = enemy_stats.bullet_stats.bullet_color_moving
 		else:
 			bullet.modulate = enemy_stats.bullet_stats.bullet_color
 		
 		var parent = get_tree().current_scene.find_child(ValueStorer.bullets_node)
-		parent.add_child(bullet)
+		bullet.reparent(parent)
 
 func _on_shooting_delay_timer_timeout() -> void:
 	shoot_bullets()

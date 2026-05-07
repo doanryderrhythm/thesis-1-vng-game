@@ -28,7 +28,6 @@ enum PhysicsType
 @export var _character_type: CharacterType
 @export var _physics_type: PhysicsType
 @export var _bullet_stats: BulletStats
-@export var _bullet_scene: PackedScene
 
 @onready var _shoot_markers_storer = $ShootingMarkers
 var _markers_pos: Array[Vector2]
@@ -180,7 +179,7 @@ func shoot_bullet() -> void:
 	AchievementManager.is_shoot = true
 	_shoot_audio.play()
 	for i in range(_shoot_markers.size()):
-		var bullet = _bullet_scene.instantiate()
+		var bullet: PlayerBullet = ObjectPoolManager.get_bullet_from_player_pool()
 		bullet.global_position = _shoot_markers[i].global_position
 		bullet.texture = _bullet_stats.texture
 		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed) * \
@@ -191,9 +190,10 @@ func shoot_bullet() -> void:
 			))
 		bullet.angle = deg_to_rad(randf_range(cal_angle - 2, cal_angle + 2))
 		bullet.damage = _bullet_stats.damage
+		bullet.reenable_bullet()
 		
 		var parent = get_tree().current_scene.find_child(ValueStorer.bullets_node)
-		parent.add_child(bullet)
+		bullet.reparent(parent)
 
 func increase_dash(_amount: float) -> void:
 	_total_dash += _amount;

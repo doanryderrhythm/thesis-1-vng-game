@@ -402,7 +402,7 @@ func destroy_everything() -> void:
 	for obj in rewards_node.get_children():
 		if is_instance_valid(obj): obj.queue_free()
 	for obj in bullet_node.get_children():
-		if is_instance_valid(obj): obj.queue_free()
+		if is_instance_valid(obj): obj.reset_bullet()
 	
 	var room: Room = find_room(current_id_x, current_id_y)
 	if room != null and is_instance_valid(room):
