@@ -19,3 +19,6 @@ self_modulate = Color(0, 0.101960786, 0.18431373, 1)
 
 [node name="Floor" parent="." index="2" unique_id=36058597]
 texture = ExtResource("2_m1ed3")
+
+[node name="NavigationRegion2D" parent="." index="21" unique_id=1834800968]
+visible = true

@@ -33,6 +33,7 @@ var snow_count: int
 @onready var corridors: Node2D = $Corridors
 
 @onready var start_area_collision: CollisionShape2D = $StartArea2D/CollisionShape2D
+@onready var nav_region: NavigationRegion2D = $NavigationRegion2D
 
 @onready var room_particles: Node2D = $RoomParticles
 
@@ -79,6 +80,7 @@ func start_stage(is_toggled: bool, is_game_start: bool = false) -> void:
 	corridors.visible = !is_toggled
 	if is_toggled:
 		door_close_audio.play()
+		nav_region.bake_navigation_polygon()
 		GameManager.room_start.emit()
 		if GameManager.is_lazer: lazer_timer.start()
 		if GameManager.is_spike: spike_timer.start()

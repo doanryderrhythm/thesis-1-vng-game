@@ -20,8 +20,8 @@ size = Vector2(200, 200)
 size = Vector2(2250, 2250)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_oxyh5"]
-vertices = PackedVector2Array(1147.9922, -1147, 1147, 1146, -1147, 1146, -1147, -1147.9922)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+vertices = PackedVector2Array(778, 502, 502, 502, 266, 266, 266, -266, 502, -502, 1147.9922, -1147, 1147, 1146, 778, -502, 778, -778, 778, 778, -1147, 1146, 502, 778, -502, 778, -778, 778, -1147, -1147.9922, 502, -778, -778, 502, -502, -502, -502, -778, -266, -266, -778, -778, -266, 266, -502, 502, -778, -502)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 6, 10, 11), PackedInt32Array(11, 10, 12, 1), PackedInt32Array(13, 12, 10), PackedInt32Array(14, 5, 8, 15), PackedInt32Array(13, 10, 14, 16), PackedInt32Array(17, 18, 15, 4, 3, 19), PackedInt32Array(14, 15, 18), PackedInt32Array(14, 18, 20), PackedInt32Array(21, 2, 1, 12, 22), PackedInt32Array(22, 16, 14, 23), PackedInt32Array(4, 7, 6, 0), PackedInt32Array(6, 9, 0), PackedInt32Array(23, 17, 19, 21, 22), PackedInt32Array(14, 20, 23)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1157, -1158, 1158, -1157, 1157, 1156, -1157, 1156)])
 
 [sub_resource type="Animation" id="Animation_u6ncq"]
@@ -380,10 +380,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartArea2D" unique_id=11408061]
 shape = SubResource("RectangleShape2D_4x8xk")
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1834800968]
-visible = false
-navigation_polygon = SubResource("NavigationPolygon_oxyh5")
-
 [node name="LazerTimer" type="Timer" parent="." unique_id=1144469924]
 wait_time = 2.0
 
@@ -405,6 +401,9 @@ wait_time = 2.0
 stream = ExtResource("4_ativ4")
 pitch_scale = 0.5
 bus = &"SFX"
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1834800968]
+navigation_polygon = SubResource("NavigationPolygon_oxyh5")
 
 [node name="RoomAnimationPlayer" type="AnimationPlayer" parent="." unique_id=651746508]
 libraries/ = SubResource("AnimationLibrary_xp0a8")

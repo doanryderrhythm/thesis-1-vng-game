@@ -10,8 +10,15 @@ var speed: float
 var angle: float
 var damage: float
 
+var time: float = 0.0
+
 func _ready() -> void:
 	pass
+
+func _process(_delta: float) -> void:
+	time += _delta
+	if time > 30.0:
+		reset_bullet()
 
 func _on_body_entered(_body: Node) -> void:
 	var parent = get_tree().current_scene.find_child(ValueStorer.bullet_particles_node)
@@ -25,6 +32,7 @@ func _on_body_entered(_body: Node) -> void:
 	pass
 
 func reset_bullet() -> void:
+	time = 0.0
 	visible = false
 	call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
 	set_physics_process(false)
