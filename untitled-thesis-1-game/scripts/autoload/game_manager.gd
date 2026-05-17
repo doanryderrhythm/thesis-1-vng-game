@@ -127,8 +127,7 @@ func reset() -> void:
 func _process(delta: float) -> void:
 	if is_going:
 		survival_time += delta
-		AchievementManager.total_survival_time += delta
-		AchievementManager.check_achievement("survival_0")
+		EventBus.survival_time_added.emit(delta)
 
 func set_up_rooms() -> void:
 	var listener: RoomsListener
@@ -279,9 +278,7 @@ func deduct_enemies() -> void:
 	if current_enemies_num <= 0:
 		current_phase -= 1
 		total_successful_phases += 1
-		AchievementManager.total_phases_finished += 1
-		AchievementManager.check_achievement("phase_15")
-		AchievementManager.check_achievement("phase_30")
+		EventBus.phase_finished_added.emit(1)
 		if current_phase > 0:
 			phase_change.emit(true)
 			var current_room = find_room(current_id_x, current_id_y)
@@ -301,20 +298,16 @@ func deduct_enemies() -> void:
 		if current_level < stage_stats.size() - 1:
 			current_level += 1
 		current_actual_level += 1
-		if !AchievementManager.is_dash:
-			AchievementManager.total_rooms_no_dash += 1
-			AchievementManager.check_achievement("no_dash_10")
-		if !AchievementManager.is_shoot:
-			AchievementManager.total_rooms_no_shoot += 1
-			AchievementManager.check_achievement("no_bullet_10")
+		EventBus.room_no_dash_added.emit(1)
+		EventBus.room_no_shoot_added.emit(1)
 		
 		if player.health >= 0 and player.health <= 10:
-			AchievementManager.check_achievement("clutch")
+			EventBus.clutch.emit()
 		phase_change.emit(false)
 		delete_bullets.emit()
 		if is_all_surroundings_locked(current_id_x, current_id_y):
 			if is_instance_valid(GameManager.player):
-				AchievementManager.check_achievement("lock_yourself")
+				EventBus.lock_yourself.emit()
 				GameManager.player.call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
 				GameManager.player.call_deferred("set_physics_process", false)
 				is_locked = true
@@ -423,9 +416,4 @@ func destroy_everything() -> void:
 
 func update_profile() -> void:
 	var total_coins: int = ProfileManager.total_coins
-	if total_coins >= 100:
-		AchievementManager.check_achievement("coins_100")
-	if total_coins >= 500:
-		AchievementManager.check_achievement("coins_500")
-	if total_coins >= 2000:
-		AchievementManager.check_achievement("coins_2000")
+	EventBus.coin_check.emit(total_coins)

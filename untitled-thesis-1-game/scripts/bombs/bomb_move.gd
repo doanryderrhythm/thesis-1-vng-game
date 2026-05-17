@@ -49,7 +49,9 @@ func execute_collision() -> void:
 
 func shoot_bullets() -> void:
 	for marker in shoot_markers.get_children():
-		var bullet = bullet_scene.instantiate()
+		var bullet: BaseBullet = ObjectPoolManager.get_bullet_from_enemy_pool()
+		if bullet == null or !is_instance_valid(bullet):
+			return
 		bullet.global_position = marker.global_position
 		bullet.texture = bullet_stats.texture
 		bullet.speed = randf_range(
@@ -61,6 +63,7 @@ func shoot_bullets() -> void:
 			(marker.global_position.x - global_position.x)
 			)
 		bullet.damage = bullet_stats.damage
+		bullet.reenable_bullet()
 		
 		var parent = get_tree().current_scene.find_child(ValueStorer.bullets_node)
 		parent.call_deferred("add_child", bullet)

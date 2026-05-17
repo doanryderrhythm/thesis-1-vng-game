@@ -73,11 +73,8 @@ func take_damage(_damage: float) -> void:
 		is_dead = true
 		GameManager.add_score(20)
 		
-		AchievementManager.enemies_destroyed += 1
-		AchievementManager.check_achievement("destroy_enemies_50")
-		
-		AchievementManager.enemies_destroyed_shoot += 1
-		AchievementManager.check_achievement("destroy_enemies_shoot_30")
+		EventBus.enemy_destroyed.emit(1)
+		EventBus.enemy_destroyed_shoot.emit(1)
 		
 		dead_audio.play()
 		spawn_killed_particles()
@@ -103,6 +100,8 @@ func shoot_bullets() -> void:
 	shoot_audio.play()
 	for i in range(shoot_markers.size()):
 		var bullet: BaseBullet = ObjectPoolManager.get_bullet_from_enemy_pool()
+		if bullet == null or !is_instance_valid(bullet):
+			return
 		bullet.global_position = shoot_markers[i].global_position
 		bullet.texture = enemy_stats.bullet_stats.texture
 		bullet.speed = randf_range(
@@ -159,11 +158,9 @@ func hurt(area: Area2D) -> void:
 	if temp is Player:
 		is_dead = true
 		GameManager.add_score(100)
-		AchievementManager.enemies_destroyed += 1
-		AchievementManager.check_achievement("destroy_enemies_50")
 		
-		AchievementManager.enemies_destroyed_dash += 1
-		AchievementManager.check_achievement("destroy_enemies_dash_30")
+		EventBus.enemy_destroyed.emit(1)
+		EventBus.enemy_destroyed_dash.emit(1)
 		
 		AchievementManager.enemies_destroyed_dash_same += 1
 		dead_audio.play()

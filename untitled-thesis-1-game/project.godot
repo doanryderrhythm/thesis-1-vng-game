@@ -31,6 +31,7 @@ AchievementManager="*uid://cmpw7w2aq7lm0"
 AchievementLayer="*uid://d1aie06ecrdup"
 MusicManager="*uid://c6pagjlk4a3ow"
 ObjectPoolManager="*uid://qjvwy6rh6jub"
+EventBus="*uid://b5hjf2l6he5gq"
 
 [display]
 

@@ -18,5 +18,5 @@ func on_hurt(area: Area2D) -> void:
 			break
 	temp.hurt(area)
 	if area.get_parent() is BaseBullet:
-		area.get_parent().queue_free()
+		area.get_parent().reset_bullet()
 	pass

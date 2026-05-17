@@ -94,8 +94,7 @@ func increase_move_speed(_amount: float) -> void:
 
 func manage_move() -> void:
 	if velocity == Vector2.ZERO and !GameManager.is_going:
-		AchievementManager.total_stay_still += get_physics_process_delta_time()
-		AchievementManager.check_achievement("stay_still_0")
+		EventBus.stay_still_time_added.emit(get_physics_process_delta_time())
 	else:
 		AchievementManager.total_stay_still = 0.0
 	
@@ -200,7 +199,7 @@ func increase_dash(_amount: float) -> void:
 
 func heal(_amount: float) -> void:
 	if health + _amount >= ProfileManager.health and health < ProfileManager.health:
-		AchievementManager.check_achievement("fully_healed")
+		EventBus.fully_heal.emit()
 	health += _amount
 	if health > ProfileManager.health:
 		health = ProfileManager.health
@@ -308,22 +307,12 @@ func toggle_dash(is_toggled: bool) -> void:
 		hurt_collision.disabled = true
 		
 		AchievementManager.is_dash = true
-		
-		AchievementManager.check_achievement("double_kill")
-		AchievementManager.check_achievement("triple_kill")
-		AchievementManager.check_achievement("quadruple_kill")
-		AchievementManager.check_achievement("penta_kill")
-		AchievementManager.enemies_destroyed_dash_same = 0
+		EventBus.enemy_destroyed_dash_same.emit()
 	else:
 		hurt_collision.disabled = is_toggled
 		if !is_toggled:
 			AchievementManager.is_dash = true
-			
-			AchievementManager.check_achievement("double_kill")
-			AchievementManager.check_achievement("triple_kill")
-			AchievementManager.check_achievement("quadruple_kill")
-			AchievementManager.check_achievement("penta_kill")
-			AchievementManager.enemies_destroyed_dash_same = 0
+			EventBus.enemy_destroyed_dash_same.emit()
 	hit_collision.disabled = !is_toggled
 
 func _on_shooting_delay_timer_timeout() -> void:

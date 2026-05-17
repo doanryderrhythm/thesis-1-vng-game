@@ -5,10 +5,7 @@
 
 [node name="BaseRoom" unique_id=1792470563 instance=ExtResource("1_50ha8")]
 
-[node name="HindranceTilemap" type="TileMapLayer" parent="." index="6" unique_id=319143323]
+[node name="HindranceTilemap" type="TileMapLayer" parent="NavigationRegion2D" parent_id_path=PackedInt32Array(1834800968) index="0" unique_id=319143323]
 self_modulate = Color(0.76131123, 0.7360839, 0.6217099, 1)
 tile_map_data = PackedByteArray("AAD///n/AAAAAAAAAAD///r/AAAAAAAAAAD///v/AAAAAAAAAAAAAPn/AAAAAAAAAAAAAPr/AAAAAAAAAAAAAPv/AAAAAAAAAAD5////AAAAAAAAAAD5/wAAAAAAAAAAAAD6////AAAAAAAAAAD6/wAAAAAAAAAAAAD7////AAAAAAAAAAD7/wAAAAAAAAAAAAAEAP//AAAAAAAAAAAEAAAAAAAAAAAAAAAFAP//AAAAAAAAAAAFAAAAAAAAAAAAAAAGAP//AAAAAAAAAAAGAAAAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD//wYAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAA=")
 tile_set = ExtResource("2_ixptg")
-
-[node name="NavigationRegion2D" parent="." index="7" unique_id=1834800968]
-visible = false

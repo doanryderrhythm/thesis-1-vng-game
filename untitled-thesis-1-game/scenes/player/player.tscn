@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://4ntrfrdt4iyl" path="res://scripts/player/player.gd" id="1_dovo2"]
 [ext_resource type="Resource" uid="uid://bsdrkhprypdg4" path="res://resources/bullets/bullet_diamond_1-1.tres" id="2_75vfm"]
-[ext_resource type="PackedScene" uid="uid://vtxwdqpa14io" path="res://scenes/bullets/player_bullet.tscn" id="3_0owmy"]
 [ext_resource type="Script" uid="uid://crv1isw4q5df" path="res://scripts/area_2d/hurt_area_2d.gd" id="3_gmlin"]
 [ext_resource type="Script" uid="uid://2jniw3exf4mu" path="res://scripts/area_2d/hit_area_2d.gd" id="3_lvxji"]
 [ext_resource type="Texture2D" uid="uid://eek56nfjnj62" path="res://sprites/player/player_circle_3-1.png" id="4_5gtgg"]
@@ -85,7 +84,6 @@ motion_mode = 1
 platform_floor_layers = 4294967040
 script = ExtResource("1_dovo2")
 _bullet_stats = ExtResource("2_75vfm")
-_bullet_scene = ExtResource("3_0owmy")
 health = 100.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=768663192]

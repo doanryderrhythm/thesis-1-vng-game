@@ -21,13 +21,6 @@ func _process(_delta: float) -> void:
 		reset_bullet()
 
 func _on_body_entered(_body: Node) -> void:
-	var parent = get_tree().current_scene.find_child(ValueStorer.bullet_particles_node)
-	if parent == null:
-		return
-	particles.color = modulate
-	particles.one_shot = true
-	particles.explosiveness = 1
-	particles.reparent(parent)
 	reset_bullet()
 	pass
 

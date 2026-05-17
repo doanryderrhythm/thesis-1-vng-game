@@ -55,7 +55,11 @@ func room_start() -> void:
 
 func delete_bullets() -> void:
 	for obj in all_bullets.get_children():
-		if is_instance_valid(obj) and obj is not PlayerBullet: obj.queue_free()
+		if is_instance_valid(obj):
+			if obj is not BaseBullet:
+				obj.queue_free()
+			else:
+				obj.reset_bullet()
 "
 
 [sub_resource type="Gradient" id="Gradient_y0n7b"]
