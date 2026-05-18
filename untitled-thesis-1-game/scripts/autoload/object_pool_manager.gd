@@ -1,6 +1,6 @@
 extends Node
 
-var max_bullet_count: int = 50
+var max_bullet_count: int = 500
 
 var enemy_bullets_pool: Array[BaseBullet] = []
 var player_bullets_pool: Array[PlayerBullet] = []

@@ -2,7 +2,6 @@ extends RigidBody2D
 class_name BaseBullet
 
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var particles: CPUParticles2D = $CPUParticles2D
 
 var texture: Texture2D
 
@@ -29,11 +28,13 @@ func reset_bullet() -> void:
 	visible = false
 	call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
 	set_physics_process(false)
+	self.call_deferred("reparent", ObjectPoolManager)
 
 func reenable_bullet() -> void:
 	visible = true
 	set_process_mode(Node.PROCESS_MODE_INHERIT)
 	set_physics_process(true)
+	print(damage)
 	
 	angular_velocity = randf_range(ValueStorer.bullet_min_angular_velocity, ValueStorer.bullet_max_angular_velocity)
 	

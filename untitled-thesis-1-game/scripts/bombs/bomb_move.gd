@@ -66,7 +66,7 @@ func shoot_bullets() -> void:
 		bullet.reenable_bullet()
 		
 		var parent = get_tree().current_scene.find_child(ValueStorer.bullets_node)
-		parent.call_deferred("add_child", bullet)
+		bullet.reparent(parent)
 		bullet.modulate = Color("c4ffe6ff")
 
 func show_glow() -> void:

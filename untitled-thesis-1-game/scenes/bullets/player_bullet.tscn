@@ -6,8 +6,8 @@
 [node name="PlayerBullet" unique_id=1344972379 instance=ExtResource("1_om8qi")]
 script = ExtResource("2_48eg6")
 
-[node name="Sprite2D" parent="." index="0" unique_id=2096521337]
+[node name="Sprite2D" parent="." index="1" unique_id=2096521337]
 modulate = Color(0.38601565, 0.8163898, 0.9999998, 1)
 
-[node name="HitArea2D" parent="." index="2" unique_id=489705954]
+[node name="HitArea2D" parent="." index="3" unique_id=489705954]
 collision_layer = 16

@@ -278,10 +278,12 @@ func toggle_pause(is_toggled: bool) -> void:
 	get_tree().paused = is_toggled
 
 func retry() -> void:
+	GameManager.destroy_everything()
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func retire() -> void:
+	GameManager.destroy_everything()
 	get_tree().paused = false
 	get_tree().change_scene_to_file(retire_string)
 

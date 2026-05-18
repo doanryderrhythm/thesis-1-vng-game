@@ -64,7 +64,7 @@ func shoot_bullets() -> void:
 		bullet.reenable_bullet()
 		
 		var parent = get_tree().current_scene.find_child(ValueStorer.bullets_node)
-		parent.add_child(bullet)
+		bullet.reparent(parent)
 		bullet.modulate = Color("ffc4ffff")
 		
 	shoot_attempts -= 1

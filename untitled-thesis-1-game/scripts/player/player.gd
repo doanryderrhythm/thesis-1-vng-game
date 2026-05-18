@@ -179,6 +179,8 @@ func shoot_bullet() -> void:
 	_shoot_audio.play()
 	for i in range(_shoot_markers.size()):
 		var bullet: PlayerBullet = ObjectPoolManager.get_bullet_from_player_pool()
+		if bullet == null or !is_instance_valid(bullet):
+			return
 		bullet.global_position = _shoot_markers[i].global_position
 		bullet.texture = _bullet_stats.texture
 		bullet.speed = randf_range(_bullet_stats.min_speed, _bullet_stats.max_speed) * \
