@@ -32,6 +32,7 @@ AchievementLayer="*uid://d1aie06ecrdup"
 MusicManager="*uid://c6pagjlk4a3ow"
 ObjectPoolManager="*uid://qjvwy6rh6jub"
 EventBus="*uid://b5hjf2l6he5gq"
+Server="*uid://dhf04hxmy6fo8"
 
 [display]
 
