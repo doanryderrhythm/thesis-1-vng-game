@@ -75,6 +75,9 @@ signal delete_bullets
 signal coin_change
 signal stats_change
 
+var algo_mode: int = 0
+signal on_algo_mode_fired(_index: int)
+
 func _ready() -> void:
 	pass
 

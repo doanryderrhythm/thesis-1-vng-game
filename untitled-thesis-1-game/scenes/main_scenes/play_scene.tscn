@@ -41,6 +41,13 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if GameManager.player != null and is_instance_valid(GameManager.player):
 		background.position = GameManager.player.position
+		
+		if Input.is_action_just_pressed(\"algo_nothing\"):
+			GameManager.on_algo_mode_fired.emit(0)
+		elif Input.is_action_just_pressed(\"algo_a_star\"):
+			GameManager.on_algo_mode_fired.emit(1)
+		elif Input.is_action_just_pressed(\"algo_rvo\"):
+			GameManager.on_algo_mode_fired.emit(2)
 	
 	if Input.is_action_just_pressed(\"pause\"):
 		if GameManager.player != null \\

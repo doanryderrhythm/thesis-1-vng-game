@@ -43,6 +43,9 @@ func _ready() -> void:
 			queue_free()
 		return
 
+	GameManager.on_algo_mode_fired.connect(toggle_algorithm)
+	
+	toggle_algorithm(GameManager.algo_mode)
 	navigation_agent.target_position = goal.global_transform.origin
 	
 	for marker in shoot_markers_storer.get_children():
@@ -89,6 +92,27 @@ func _process(_delta: float) -> void:
 		look_at(GameManager.player.position)
 	
 	health_bar_sprite.rotation = -rotation
+
+func toggle_algorithm(_index: int) -> void:
+	if _index == 0:
+		navigation_agent.call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
+		navigation_agent.avoidance_enabled = false
+	elif _index == 1:
+		navigation_agent.call_deferred("set_process_mode", Node.PROCESS_MODE_INHERIT)
+		navigation_agent.avoidance_enabled = true
+		disable_avoidance_layer(1)
+	elif _index == 2:
+		navigation_agent.call_deferred("set_process_mode", Node.PROCESS_MODE_INHERIT)
+		navigation_agent.avoidance_enabled = true
+		enable_avoidance_layer(1)
+	
+	GameManager.algo_mode = _index
+
+func enable_avoidance_layer(layer: int) -> void:
+	navigation_agent.avoidance_mask |= 1 << (layer - 1)
+
+func disable_avoidance_layer(layer: int) -> void:
+	navigation_agent.avoidance_mask &= ~(1 << (layer - 1))
 
 func _physics_process(_delta: float) -> void:
 	var current_position: Vector2 = self.global_transform.origin
