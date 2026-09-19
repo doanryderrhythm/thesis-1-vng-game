@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://ctvsltp2r1iuw" path="res://scripts/ui/profiles_checker.gd" id="9_f6fxv"]
 [ext_resource type="PackedScene" uid="uid://1joxgi7wl716" path="res://scenes/ui/tutorial_canvas.tscn" id="9_wukam"]
 [ext_resource type="PackedScene" uid="uid://c684lugvbafdo" path="res://scenes/ui/profile_card.tscn" id="9_x6xjm"]
+[ext_resource type="PackedScene" uid="uid://d1dtiy4s1mhg7" path="res://scenes/ui/input_box.tscn" id="13_q3f11"]
 
 [sub_resource type="GDScript" id="GDScript_w3ui0"]
 resource_name = "main_menu"
@@ -317,6 +318,27 @@ font_size = 50
 
 [sub_resource type="LabelSettings" id="LabelSettings_85jtn"]
 font_size = 50
+
+[sub_resource type="GDScript" id="GDScript_f6xhk"]
+resource_name = "pause_nav_button"
+script/source = "extends TextureButton
+
+@onready var text: Label = $Label
+
+func _process(_delta: float) -> void:
+	if is_hovered():
+		text.label_settings.font_color = Color.BLACK
+	else:
+		text.label_settings.font_color = Color.WHITE
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_hqpec"]
+line_spacing = 0.0
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_hr2xk"]
+line_spacing = 0.0
+font_size = 36
 
 [sub_resource type="Animation" id="Animation_kllu6"]
 length = 0.001
@@ -1301,6 +1323,133 @@ vertical_alignment = 1
 
 [node name="TutorialCanvas" parent="." unique_id=1510277248 instance=ExtResource("9_wukam")]
 
+[node name="LoginCanvas" type="CanvasLayer" parent="." unique_id=98131106]
+
+[node name="Background" type="ColorRect" parent="LoginCanvas" unique_id=937882697]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8627451)
+
+[node name="LoginPanel" type="ColorRect" parent="LoginCanvas" unique_id=38365315]
+custom_minimum_size = Vector2(700, 850)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11198568, 0.11198568, 0.11198568, 1)
+
+[node name="LoginTitle" type="Label" parent="LoginCanvas/LoginPanel" unique_id=2009859137]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("7_gl8k6")
+theme_override_font_sizes/font_size = 64
+text = "LOGIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoginContainer" type="VBoxContainer" parent="LoginCanvas/LoginPanel" unique_id=1948644624]
+custom_minimum_size = Vector2(0, 570)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.165
+anchor_right = 1.0
+anchor_bottom = 0.83500004
+offset_left = 40.0
+offset_top = 284.75
+offset_right = -40.0
+offset_bottom = -284.75006
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="UsernameInputBox" parent="LoginCanvas/LoginPanel/LoginContainer" unique_id=432676371 instance=ExtResource("13_q3f11")]
+layout_mode = 2
+
+[node name="Title" parent="LoginCanvas/LoginPanel/LoginContainer/UsernameInputBox" index="0" unique_id=1981325245]
+text = "username"
+
+[node name="LineEdit" parent="LoginCanvas/LoginPanel/LoginContainer/UsernameInputBox" index="1" unique_id=1603760894]
+placeholder_text = "type here"
+
+[node name="PasswordInput" parent="LoginCanvas/LoginPanel/LoginContainer" unique_id=780246873 instance=ExtResource("13_q3f11")]
+layout_mode = 2
+
+[node name="Title" parent="LoginCanvas/LoginPanel/LoginContainer/PasswordInput" index="0" unique_id=1981325245]
+text = "password"
+
+[node name="LineEdit" parent="LoginCanvas/LoginPanel/LoginContainer/PasswordInput" index="1" unique_id=1603760894]
+placeholder_text = "password"
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="LoginCanvas/LoginPanel" unique_id=399341029]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -302.0
+offset_top = -74.0
+offset_right = 302.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="LoginButton" type="TextureButton" parent="LoginCanvas/LoginPanel/ButtonsContainer" unique_id=686010574]
+modulate = Color(0.33558714, 1, 0.5354467, 1)
+layout_mode = 2
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+script = SubResource("GDScript_f6xhk")
+
+[node name="Label" type="Label" parent="LoginCanvas/LoginPanel/ButtonsContainer/LoginButton" unique_id=327617352]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_gl8k6")
+text = "Login"
+label_settings = SubResource("LabelSettings_hqpec")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="LoginCanvas/LoginPanel/ButtonsContainer" unique_id=1373939326]
+layout_mode = 2
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+script = SubResource("GDScript_f6xhk")
+
+[node name="Label" type="Label" parent="LoginCanvas/LoginPanel/ButtonsContainer/ExitButton" unique_id=69174095]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_gl8k6")
+text = "Exit"
+label_settings = SubResource("LabelSettings_hr2xk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DifficultySelectAnim" type="AnimationPlayer" parent="." unique_id=1553370032]
 libraries/ = SubResource("AnimationLibrary_x6xjm")
 
@@ -1332,3 +1481,5 @@ libraries/ = SubResource("AnimationLibrary_gl8k6")
 [editable path="UI/Profile/Banner/Cards/TerrainCard"]
 [editable path="UI/Profile/Banner/Cards/IcyCard"]
 [editable path="TutorialCanvas"]
+[editable path="LoginCanvas/LoginPanel/LoginContainer/UsernameInputBox"]
+[editable path="LoginCanvas/LoginPanel/LoginContainer/PasswordInput"]

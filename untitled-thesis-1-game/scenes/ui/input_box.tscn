@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://d1dtiy4s1mhg7"]
+
+[ext_resource type="Theme" uid="uid://diygj3e5jlw6y" path="res://themes/text_theme.tres" id="1_ifwep"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d5xl4"]
+content_margin_left = 16.0
+bg_color = Color(0.77621365, 0.77621365, 0.77621365, 1)
+
+[node name="InputBox" type="ColorRect" unique_id=432676371]
+custom_minimum_size = Vector2(620, 110)
+custom_maximum_size = Vector2(-1, 110)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -60.0
+offset_right = 310.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Title" type="Label" parent="." unique_id=1981325245]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+theme = ExtResource("1_ifwep")
+theme_override_font_sizes/font_size = 30
+text = "Title"
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=1603760894]
+custom_minimum_size = Vector2(620, 70)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -70.0
+offset_right = 310.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_ifwep")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0.25666898, 0.25666898, 0.25666898, 0.6)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_constants/caret_width = 3
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_d5xl4")
+placeholder_text = "placeholder"
