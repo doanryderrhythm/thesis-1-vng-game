@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://hgatrfib6v5q"]
+
+[ext_resource type="Script" uid="uid://r8rpgdmiela" path="res://scripts/authenticate.gd" id="1_ri8qs"]
+
+[node name="Authenticate" type="Node" unique_id=299407286]
+script = ExtResource("1_ri8qs")

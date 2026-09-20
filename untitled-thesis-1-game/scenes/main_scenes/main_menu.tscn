@@ -1369,9 +1369,9 @@ anchor_top = 0.165
 anchor_right = 1.0
 anchor_bottom = 0.83500004
 offset_left = 40.0
-offset_top = 284.75
+offset_top = -50.25
 offset_right = -40.0
-offset_bottom = -284.75006
+offset_bottom = -49.75006
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -1395,6 +1395,38 @@ text = "password"
 [node name="LineEdit" parent="LoginCanvas/LoginPanel/LoginContainer/PasswordInput" index="1" unique_id=1603760894]
 placeholder_text = "password"
 
+[node name="LoginButton" type="TextureButton" parent="LoginCanvas/LoginPanel" unique_id=2067659343]
+modulate = Color(0.5019608, 1, 0.74771607, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 85.0
+offset_right = 150.0
+offset_bottom = 159.00006
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+script = SubResource("GDScript_f6xhk")
+
+[node name="Label" type="Label" parent="LoginCanvas/LoginPanel/LoginButton" unique_id=138853878]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_gl8k6")
+text = "Login"
+label_settings = SubResource("LabelSettings_hqpec")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ButtonsContainer" type="HBoxContainer" parent="LoginCanvas/LoginPanel" unique_id=399341029]
 layout_mode = 1
 anchors_preset = -1
@@ -1409,15 +1441,15 @@ offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="LoginButton" type="TextureButton" parent="LoginCanvas/LoginPanel/ButtonsContainer" unique_id=686010574]
-modulate = Color(0.33558714, 1, 0.5354467, 1)
+[node name="RegisterButton" type="TextureButton" parent="LoginCanvas/LoginPanel/ButtonsContainer" unique_id=686010574]
+modulate = Color(0.5, 0.89948916, 1, 1)
 layout_mode = 2
 texture_normal = ExtResource("1_kt583")
 texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
 script = SubResource("GDScript_f6xhk")
 
-[node name="Label" type="Label" parent="LoginCanvas/LoginPanel/ButtonsContainer/LoginButton" unique_id=327617352]
+[node name="Label" type="Label" parent="LoginCanvas/LoginPanel/ButtonsContainer/RegisterButton" unique_id=327617352]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1425,7 +1457,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_gl8k6")
-text = "Login"
+text = "Register"
 label_settings = SubResource("LabelSettings_hqpec")
 horizontal_alignment = 1
 vertical_alignment = 1

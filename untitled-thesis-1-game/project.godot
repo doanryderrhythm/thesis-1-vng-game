@@ -21,6 +21,8 @@ buses/default_bus_layout="uid://btj3o7pysosip"
 
 [autoload]
 
+Server="*uid://dhf04hxmy6fo8"
+Gateway="*uid://ch64s745xp2xh"
 GameManager="*uid://cvck5mj1un6eb"
 ValueStorer="*uid://fls5guvqpn01"
 AudioStorer="*uid://i4hpi7gpx185"
@@ -32,7 +34,6 @@ AchievementLayer="*uid://d1aie06ecrdup"
 MusicManager="*uid://c6pagjlk4a3ow"
 ObjectPoolManager="*uid://qjvwy6rh6jub"
 EventBus="*uid://b5hjf2l6he5gq"
-Server="*uid://dhf04hxmy6fo8"
 
 [display]
 
