@@ -5,7 +5,7 @@ var ip = "127.0.0.1"
 var port = 1909
 
 func _ready():
-	connect_to_server()
+	pass
 	
 func connect_to_server() -> void:
 	var response := network.create_client(ip, port)

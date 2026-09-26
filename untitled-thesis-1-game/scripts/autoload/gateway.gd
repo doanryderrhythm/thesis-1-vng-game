@@ -40,6 +40,25 @@ func connect_to_server(_username, _password) -> void:
 
 func _on_connection_succeeded() -> void:
 	print("Successfully connected to login server")
+	request_login()
 	
 func _on_connection_failed() -> void:
 	print("Failed to connect to login server")
+	# GET THE BUTTON TO ENABLE
+	
+func request_login() -> void:
+	print("Connecting to gateway to request login")
+	rpc_id(1, "login_request", username, password)
+	username = ""
+	password = ""
+	
+@rpc("any_peer") func return_login_request(results) -> void:
+	print("Results received")
+	if results == true:
+		Server.connect_to_server()
+		# DISABLE LOGIN SCREEN
+	else:
+		print("Please provide correct username and password")
+		# REENABLE LOGIN BUTTON
+	multiplayer.connected_to_server.disconnect(_on_connection_succeeded)
+	multiplayer.connection_failed.disconnect(_on_connection_failed)

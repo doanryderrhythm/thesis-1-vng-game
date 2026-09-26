@@ -23,3 +23,11 @@ func _on_connection_succeeded() -> void:
 
 func _on_connection_failed() -> void:
 	print("Failed to connect to authentication server")
+
+func authenticate_player(username, password, player_id) -> void:
+	print("Sending out authentication request")
+	rpc_id(1, "authenticate_player", username, password, player_id)
+
+@rpc("any_peer") func authentication_results(result, player_id) -> void:
+	print("Results received and replying to player login request")
+	Gateway.return_login_request(result, player_id)
