@@ -12,7 +12,9 @@ func start_server() -> void:
 	if response != OK:
 		print("Connection failed: ", response)
 		return
-		
+	
+	print("Authentication server started")
+	
 	multiplayer.multiplayer_peer = network
 	
 	multiplayer.peer_connected.connect(_peer_connected)
@@ -42,3 +44,6 @@ func _peer_disconnected(gateway_id) -> void:
 	
 	print("Authentication result send to gateway server")
 	rpc_id(gateway_id, "authentication_results", result, player_id)
+
+@rpc("any_peer") func authentication_results(_result, _player_id) -> void:
+	pass

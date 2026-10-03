@@ -19,9 +19,8 @@ func start_server() -> void:
 	if response != OK:
 		print("Connection failed: ", response)
 		return
-		
-	get_tree().set_multiplayer(gateway_api)
-	
+
+	get_tree().set_multiplayer(gateway_api, self.get_path())
 	multiplayer.multiplayer_peer = network
 	
 	multiplayer.peer_connected.connect(_peer_connected)
@@ -38,6 +37,8 @@ func _peer_disconnected(player_id) -> void:
 	var player_id = multiplayer.get_remote_sender_id()
 	Authenticate.authenticate_player(username, password, player_id)
 
-func return_login_request(result, player_id) -> void:
+@rpc("any_peer") func return_login_request(_result) -> void:
+	pass
+
+func send_login_result(result, player_id) -> void:
 	rpc_id(player_id, "return_login_request", result)
-	network.disconnect_peer(player_id)

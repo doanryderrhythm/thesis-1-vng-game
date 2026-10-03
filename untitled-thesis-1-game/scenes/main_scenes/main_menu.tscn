@@ -32,6 +32,10 @@ script/source = "extends Control
 @onready var tutorial_button: TextureButton = $UI/TutorialButton
 @onready var tutorial_canvas: TutorialCanvas = $TutorialCanvas
 
+@onready var login_username_input: LineEdit = $LoginCanvas/LoginPanel/LoginContainer/UsernameInputBox/LineEdit
+@onready var login_password_input: LineEdit = $LoginCanvas/LoginPanel/LoginContainer/PasswordInput/LineEdit
+@onready var login_button: TextureButton = $LoginCanvas/LoginPanel/LoginButton
+
 @onready var font_theme: Theme = preload(\"res://themes/text_theme.tres\")
 @onready var font_pixel: FontFile = preload(\"res://fonts/04B_03__.TTF\")
 @onready var font_normal: FontFile = preload(\"res://fonts/goorm-sans-medium.ttf\")
@@ -39,6 +43,8 @@ script/source = "extends Control
 @onready var characters: PlayerListener = load(\"res://resources/player/player_listener.tres\")
 
 func _ready() -> void:
+	Gateway.on_connection_finished.connect(finish_login_process)
+	
 	RenderingServer.set_default_clear_color(Color(0.029, 0.0, 0.184, 1.0))
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
@@ -66,6 +72,28 @@ func reload_player_character(player_code: String) -> void:
 	for character in characters.players:
 		if character.code == player_code:
 			ProfileManager.update_profile(character)
+
+func _on_login_button_pressed() -> void:
+	if login_username_input.text == \"\" or login_password_input.text == \"\":
+		print(\"Please provide valid username and password\")
+	else:
+		disable_login()
+		var username = login_username_input.get_text()
+		var password = login_password_input.get_text()
+		print(\"Attempting to login\")
+		Gateway.connect_to_server(username, password)
+
+func finish_login_process(is_successful: bool) -> void:
+	if is_successful:
+		pass
+	else:
+		reenable_login()
+
+func reenable_login() -> void:
+	login_button.disabled = false
+
+func disable_login() -> void:
+	login_button.disabled = true
 
 func _on_play_button_pressed() -> void:
 	if ProfileManager.player_code == \"\":
@@ -331,6 +359,10 @@ func _process(_delta: float) -> void:
 	else:
 		text.label_settings.font_color = Color.WHITE
 "
+
+[sub_resource type="LabelSettings" id="LabelSettings_pnfts"]
+line_spacing = 0.0
+font_size = 36
 
 [sub_resource type="LabelSettings" id="LabelSettings_hqpec"]
 line_spacing = 0.0
@@ -1394,6 +1426,7 @@ text = "password"
 
 [node name="LineEdit" parent="LoginCanvas/LoginPanel/LoginContainer/PasswordInput" index="1" unique_id=1603760894]
 placeholder_text = "password"
+secret = true
 
 [node name="LoginButton" type="TextureButton" parent="LoginCanvas/LoginPanel" unique_id=2067659343]
 modulate = Color(0.5019608, 1, 0.74771607, 1)
@@ -1423,7 +1456,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_gl8k6")
 text = "Login"
-label_settings = SubResource("LabelSettings_hqpec")
+label_settings = SubResource("LabelSettings_pnfts")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1505,6 +1538,7 @@ libraries/ = SubResource("AnimationLibrary_gl8k6")
 [connection signal="pressed" from="UI/Profile/PreviousButton" to="UI/Profile" method="_on_previous_button_pressed"]
 [connection signal="pressed" from="UI/Profile/NextButton" to="UI/Profile" method="_on_next_button_pressed"]
 [connection signal="pressed" from="TutorialCanvas/ExitButton" to="." method="_on_tutorial_exit_button_pressed"]
+[connection signal="pressed" from="LoginCanvas/LoginPanel/LoginButton" to="." method="_on_login_button_pressed"]
 
 [editable path="UI/DifficultySelect/Banner/HBoxContainer/Normal"]
 [editable path="UI/DifficultySelect/Banner/HBoxContainer/Terrain"]

@@ -15,8 +15,8 @@ func connect_to_server() -> void:
 		
 	multiplayer.multiplayer_peer = network
 	
-	multiplayer.peer_connected.connect(_on_connection_succeeded)
-	multiplayer.peer_disconnected.connect(_on_connection_failed)
+	multiplayer.connected_to_server.connect(_on_connection_succeeded)
+	multiplayer.connection_failed.connect(_on_connection_failed)
 	
 func _on_connection_succeeded() -> void:
 	print("Connection succeeded")

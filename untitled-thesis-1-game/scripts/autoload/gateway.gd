@@ -7,6 +7,11 @@ var port = 1910
 
 var username
 var password
+var login_attempt_active: bool = false
+
+const LOGIN_TIMEOUT_SECONDS: float = 10.0
+
+signal on_connection_finished(is_successful: bool)
 
 func _ready():
 	pass
@@ -21,6 +26,10 @@ func _process(_delta: float) -> void:
 	multiplayer.poll()
 	
 func connect_to_server(_username, _password) -> void:
+	if login_attempt_active:
+		return
+	login_attempt_active = true
+
 	network = ENetMultiplayerPeer.new()
 	gateway_api = SceneMultiplayer.new()
 	username = _username
@@ -29,14 +38,23 @@ func connect_to_server(_username, _password) -> void:
 	var response := network.create_client(ip, port)
 	if response != OK:
 		print("Connection failed: ", response)
+		_finish_login_attempt(false)
 		return
 	
-	get_tree().set_multiplayer(gateway_api)
+	get_tree().set_multiplayer(gateway_api, self.get_path())
 	
 	multiplayer.multiplayer_peer = network
 	
 	multiplayer.connected_to_server.connect(_on_connection_succeeded)
 	multiplayer.connection_failed.connect(_on_connection_failed)
+	multiplayer.server_disconnected.connect(_on_connection_failed)
+	_watch_login_timeout()
+
+func _watch_login_timeout() -> void:
+	await get_tree().create_timer(LOGIN_TIMEOUT_SECONDS).timeout
+	if login_attempt_active:
+		print("Login request timed out")
+		_finish_login_attempt(false)
 
 func _on_connection_succeeded() -> void:
 	print("Successfully connected to login server")
@@ -44,21 +62,38 @@ func _on_connection_succeeded() -> void:
 	
 func _on_connection_failed() -> void:
 	print("Failed to connect to login server")
-	# GET THE BUTTON TO ENABLE
+	_finish_login_attempt(false)
 	
 func request_login() -> void:
 	print("Connecting to gateway to request login")
 	rpc_id(1, "login_request", username, password)
 	username = ""
 	password = ""
+
+@rpc("any_peer") func login_request(_username, _password) -> void:
+	pass
 	
 @rpc("any_peer") func return_login_request(results) -> void:
+	if not login_attempt_active:
+		return
+
 	print("Results received")
 	if results == true:
 		Server.connect_to_server()
-		# DISABLE LOGIN SCREEN
 	else:
 		print("Please provide correct username and password")
-		# REENABLE LOGIN BUTTON
-	multiplayer.connected_to_server.disconnect(_on_connection_succeeded)
-	multiplayer.connection_failed.disconnect(_on_connection_failed)
+	_finish_login_attempt(results == true)
+
+func _finish_login_attempt(is_successful: bool) -> void:
+	if not login_attempt_active:
+		return
+
+	login_attempt_active = false
+	if multiplayer.connected_to_server.is_connected(_on_connection_succeeded):
+		multiplayer.connected_to_server.disconnect(_on_connection_succeeded)
+	if multiplayer.connection_failed.is_connected(_on_connection_failed):
+		multiplayer.connection_failed.disconnect(_on_connection_failed)
+	if multiplayer.server_disconnected.is_connected(_on_connection_failed):
+		multiplayer.server_disconnected.disconnect(_on_connection_failed)
+	multiplayer.multiplayer_peer = null
+	on_connection_finished.emit(is_successful)
