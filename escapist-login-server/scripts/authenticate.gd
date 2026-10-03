@@ -27,22 +27,22 @@ func _peer_disconnected(gateway_id) -> void:
 	print("Gateway " + str(gateway_id) + " disconnected")
 
 @rpc("any_peer") func authenticate_player(username, password, player_id) -> void:
-	print("Authentication request received")
+	var token
 	var gateway_id = multiplayer.get_remote_sender_id()
 	var result
 	
-	print("Starting authentication")
 	if not PlayerData.player_ids.has(username):
-		print("User not recognized")
 		result = false
 	elif not PlayerData.player_ids[username].password == password:
-		print("Incorrect password")
 		result = false
 	else:
-		print("Successful authentication")
 		result = true
+		
+		randomize()
+		token = str(randi()).sha256_text() + str(Time.get_unix_time_from_system())
+		var game_server = "GameServer1"
+		GameServers.distribute_login_token(token, game_server)
 	
-	print("Authentication result send to gateway server")
 	rpc_id(gateway_id, "authentication_results", result, player_id)
 
 @rpc("any_peer") func authentication_results(_result, _player_id) -> void:

@@ -1,13 +1,20 @@
 extends Node
 
 var network = ENetMultiplayerPeer.new()
+var gateway_api = SceneMultiplayer.new()
 var ip = "127.0.0.1"
-var port = 1909
+var port = 1912
 
-var token
+@onready var game_server = get_node("/root/Server")
 
 func _ready():
-	pass
+	connect_to_server()
+
+func _process(_delta: float) -> void:
+	if not multiplayer.has_multiplayer_peer():
+		return
+	
+	multiplayer.poll()
 	
 func connect_to_server() -> void:
 	var response := network.create_client(ip, port)
@@ -15,22 +22,17 @@ func connect_to_server() -> void:
 		print("Player connection failed: ", response)
 		return
 		
+	get_tree().set_multiplayer(gateway_api, self.get_path())
 	multiplayer.multiplayer_peer = network
 	
 	multiplayer.connected_to_server.connect(_on_connection_succeeded)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	
 func _on_connection_succeeded() -> void:
-	print("Connection succeeded")
+	print("Successfully connected to game server hub")
 
 func _on_connection_failed() -> void:
-	print("Connection failed")
+	print("Failed to connect to game server hub")
 
-@rpc("any_peer") func fetch_token() -> void:
-	rpc_id(1, "return_token", token)
-
-@rpc("any_peer") func return_token_verification_results(result) -> void:
-	if result == true:
-		print("Successful token verification")
-	else:
-		print("Login failed, please try again")
+@rpc("any_peer") func receive_login_token(token) -> void:
+	game_server.expected_tokens.append(token)

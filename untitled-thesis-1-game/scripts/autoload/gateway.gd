@@ -73,12 +73,13 @@ func request_login() -> void:
 @rpc("any_peer") func login_request(_username, _password) -> void:
 	pass
 	
-@rpc("any_peer") func return_login_request(results) -> void:
+@rpc("any_peer") func return_login_request(results, token) -> void:
 	if not login_attempt_active:
 		return
 
 	print("Results received")
 	if results == true:
+		Server.token = token
 		Server.connect_to_server()
 	else:
 		print("Please provide correct username and password")
