@@ -37,8 +37,8 @@ func _peer_disconnected(player_id) -> void:
 	var player_id = multiplayer.get_remote_sender_id()
 	Authenticate.authenticate_player(username, password, player_id)
 
-@rpc("any_peer") func return_login_request(_result) -> void:
+@rpc("any_peer") func return_login_request(_result, _token) -> void:
 	pass
 
-func send_login_result(result, player_id) -> void:
-	rpc_id(player_id, "return_login_request", result)
+func send_login_result(result, player_id, token) -> void:
+	rpc_id(player_id, "return_login_request", result, token)

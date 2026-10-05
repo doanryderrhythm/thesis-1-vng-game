@@ -40,3 +40,6 @@ func _peer_disconnected(game_server_id) -> void:
 func distribute_login_token(token, game_server) -> void:
 	var game_server_peer_id = game_server_list[game_server]
 	rpc_id(game_server_peer_id, "receive_login_token", token)
+
+@rpc("any_peer") func receive_login_token(_token) -> void:
+	pass

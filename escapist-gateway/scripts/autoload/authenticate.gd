@@ -28,6 +28,6 @@ func _on_connection_failed() -> void:
 	print("Sending out authentication request")
 	rpc_id(1, "authenticate_player", username, password, player_id)
 
-@rpc("any_peer") func authentication_results(result, player_id) -> void:
+@rpc("any_peer") func authentication_results(result, player_id, token) -> void:
 	print("Results received and replying to player login request")
-	Gateway.send_login_result(result, player_id)
+	Gateway.send_login_result(result, player_id, token)

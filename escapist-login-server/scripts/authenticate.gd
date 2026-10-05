@@ -27,7 +27,7 @@ func _peer_disconnected(gateway_id) -> void:
 	print("Gateway " + str(gateway_id) + " disconnected")
 
 @rpc("any_peer") func authenticate_player(username, password, player_id) -> void:
-	var token
+	var token = ""
 	var gateway_id = multiplayer.get_remote_sender_id()
 	var result
 	
@@ -43,7 +43,7 @@ func _peer_disconnected(gateway_id) -> void:
 		var game_server = "GameServer1"
 		GameServers.distribute_login_token(token, game_server)
 	
-	rpc_id(gateway_id, "authentication_results", result, player_id)
+	rpc_id(gateway_id, "authentication_results", result, player_id, token)
 
-@rpc("any_peer") func authentication_results(_result, _player_id) -> void:
+@rpc("any_peer") func authentication_results(_result, _player_id, _token) -> void:
 	pass

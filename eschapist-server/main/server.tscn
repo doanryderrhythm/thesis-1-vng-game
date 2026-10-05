@@ -10,6 +10,8 @@ script = ExtResource("1_hsyl4")
 script = ExtResource("2_2r54a")
 
 [node name="VerificationExpiration" type="Timer" parent="PlayerVerification" unique_id=129104483]
+wait_time = 10.0
+autostart = true
 
 [node name="TokenExpiration" type="Timer" parent="." unique_id=887142623]
 wait_time = 10.0
