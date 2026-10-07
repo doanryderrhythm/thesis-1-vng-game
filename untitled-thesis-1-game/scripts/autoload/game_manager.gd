@@ -131,6 +131,9 @@ func _process(delta: float) -> void:
 	if is_going:
 		survival_time += delta
 		EventBus.survival_time_added.emit(delta)
+	else:
+		if Input.is_action_just_pressed("skip_level"):
+			current_level = 16
 
 func set_up_rooms() -> void:
 	var listener: RoomsListener
