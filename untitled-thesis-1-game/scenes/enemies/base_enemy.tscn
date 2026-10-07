@@ -118,6 +118,7 @@ autostart = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=381579731]
 path_postprocessing = 1
+simplify_epsilon = 5.0
 avoidance_enabled = true
 radius = 260.56
 neighbor_distance = 3000.0
