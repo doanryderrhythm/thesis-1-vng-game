@@ -372,6 +372,18 @@ font_size = 36
 line_spacing = 0.0
 font_size = 36
 
+[sub_resource type="LabelSettings" id="LabelSettings_t3buh"]
+line_spacing = 0.0
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_hhlsr"]
+line_spacing = 0.0
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_7lxof"]
+line_spacing = 0.0
+font_size = 36
+
 [sub_resource type="Animation" id="Animation_kllu6"]
 length = 0.001
 tracks/0/type = "value"
@@ -1515,6 +1527,166 @@ label_settings = SubResource("LabelSettings_hr2xk")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="RegisterPanel" type="ColorRect" parent="LoginCanvas" unique_id=1509117497]
+custom_minimum_size = Vector2(700, 850)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11198568, 0.11198568, 0.11198568, 1)
+
+[node name="RegisterTitle" type="Label" parent="LoginCanvas/RegisterPanel" unique_id=2090928888]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("7_gl8k6")
+theme_override_font_sizes/font_size = 64
+text = "LOGIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RegisterContainer" type="VBoxContainer" parent="LoginCanvas/RegisterPanel" unique_id=63412629]
+custom_minimum_size = Vector2(0, 570)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.165
+anchor_right = 1.0
+anchor_bottom = 0.83500004
+offset_left = 40.0
+offset_top = -50.25
+offset_right = -40.0
+offset_bottom = -49.75006
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="UsernameInputBox" parent="LoginCanvas/RegisterPanel/RegisterContainer" unique_id=1797667178 instance=ExtResource("13_q3f11")]
+layout_mode = 2
+
+[node name="Title" parent="LoginCanvas/RegisterPanel/RegisterContainer/UsernameInputBox" index="0" unique_id=1981325245]
+text = "username"
+
+[node name="LineEdit" parent="LoginCanvas/RegisterPanel/RegisterContainer/UsernameInputBox" index="1" unique_id=1603760894]
+placeholder_text = "type here"
+
+[node name="PasswordInput" parent="LoginCanvas/RegisterPanel/RegisterContainer" unique_id=1308620418 instance=ExtResource("13_q3f11")]
+layout_mode = 2
+
+[node name="Title" parent="LoginCanvas/RegisterPanel/RegisterContainer/PasswordInput" index="0" unique_id=1981325245]
+text = "password"
+
+[node name="LineEdit" parent="LoginCanvas/RegisterPanel/RegisterContainer/PasswordInput" index="1" unique_id=1603760894]
+placeholder_text = "password"
+secret = true
+
+[node name="RetypePasswordInput" parent="LoginCanvas/RegisterPanel/RegisterContainer" unique_id=923382185 instance=ExtResource("13_q3f11")]
+layout_mode = 2
+
+[node name="Title" parent="LoginCanvas/RegisterPanel/RegisterContainer/RetypePasswordInput" index="0" unique_id=1981325245]
+text = "retype password"
+
+[node name="LineEdit" parent="LoginCanvas/RegisterPanel/RegisterContainer/RetypePasswordInput" index="1" unique_id=1603760894]
+placeholder_text = "password"
+secret = true
+
+[node name="RegisterButton" type="TextureButton" parent="LoginCanvas/RegisterPanel" unique_id=981781152]
+modulate = Color(0.5019608, 0.8980392, 1, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 155.0
+offset_right = 150.0
+offset_bottom = 229.00024
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+script = SubResource("GDScript_f6xhk")
+
+[node name="Label" type="Label" parent="LoginCanvas/RegisterPanel/RegisterButton" unique_id=140770314]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_gl8k6")
+text = "Register"
+label_settings = SubResource("LabelSettings_t3buh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="LoginCanvas/RegisterPanel" unique_id=1762253024]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -302.0
+offset_top = -74.0
+offset_right = 302.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="LoginButton" type="TextureButton" parent="LoginCanvas/RegisterPanel/ButtonsContainer" unique_id=1769891232]
+modulate = Color(0.5019608, 1, 0.7490196, 1)
+layout_mode = 2
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+script = SubResource("GDScript_f6xhk")
+
+[node name="Label" type="Label" parent="LoginCanvas/RegisterPanel/ButtonsContainer/LoginButton" unique_id=409837211]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_gl8k6")
+text = "Back to login"
+label_settings = SubResource("LabelSettings_hhlsr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="LoginCanvas/RegisterPanel/ButtonsContainer" unique_id=135048069]
+layout_mode = 2
+texture_normal = ExtResource("1_kt583")
+texture_pressed = ExtResource("2_qd03l")
+texture_hover = ExtResource("3_bi8wh")
+script = SubResource("GDScript_f6xhk")
+
+[node name="Label" type="Label" parent="LoginCanvas/RegisterPanel/ButtonsContainer/ExitButton" unique_id=1835057158]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_gl8k6")
+text = "Exit"
+label_settings = SubResource("LabelSettings_7lxof")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DifficultySelectAnim" type="AnimationPlayer" parent="." unique_id=1553370032]
 libraries/ = SubResource("AnimationLibrary_x6xjm")
 
@@ -1549,3 +1721,6 @@ libraries/ = SubResource("AnimationLibrary_gl8k6")
 [editable path="TutorialCanvas"]
 [editable path="LoginCanvas/LoginPanel/LoginContainer/UsernameInputBox"]
 [editable path="LoginCanvas/LoginPanel/LoginContainer/PasswordInput"]
+[editable path="LoginCanvas/RegisterPanel/RegisterContainer/UsernameInputBox"]
+[editable path="LoginCanvas/RegisterPanel/RegisterContainer/PasswordInput"]
+[editable path="LoginCanvas/RegisterPanel/RegisterContainer/RetypePasswordInput"]
