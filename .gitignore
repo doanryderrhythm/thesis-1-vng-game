@@ -15,3 +15,6 @@ export_credentials.cfg
 data_*/
 mono_crash.*.json
 escapist-login-server/scripts/autoload/player_data.gd
+escapist-gateway/certificate/X509_certificate.crt
+escapist-gateway/certificate/X509_key.key
+untitled-thesis-1-game/resources/certificate/X509_certificate.crt

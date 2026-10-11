@@ -5,6 +5,8 @@ var gateway_api = SceneMultiplayer.new()
 var ip = "127.0.0.1"
 var port = 1910
 
+@onready var cert = load("res://resources/certificate/X509_certificate.crt")
+
 var username
 var password
 var login_attempt_active: bool = false
@@ -32,6 +34,7 @@ func connect_to_server(_username, _password) -> void:
 
 	network = ENetMultiplayerPeer.new()
 	gateway_api = SceneMultiplayer.new()
+	
 	username = _username
 	password = _password
 	
@@ -41,8 +44,9 @@ func connect_to_server(_username, _password) -> void:
 		_finish_login_attempt(false)
 		return
 	
-	get_tree().set_multiplayer(gateway_api, self.get_path())
+	network.host.dtls_client_setup("EschapistMultiplayer", TLSOptions.client(cert))
 	
+	get_tree().set_multiplayer(gateway_api, self.get_path())
 	multiplayer.multiplayer_peer = network
 	
 	multiplayer.connected_to_server.connect(_on_connection_succeeded)

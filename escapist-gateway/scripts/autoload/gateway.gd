@@ -5,6 +5,9 @@ var gateway_api = SceneMultiplayer.new()
 var port = 1910
 var max_players = 100
 
+var cert = load("res://certificate/X509_certificate.crt")
+var key = load("res://certificate/X509_key.key")
+
 func _ready() -> void:
 	start_server()
 	
@@ -19,6 +22,8 @@ func start_server() -> void:
 	if response != OK:
 		print("Connection failed: ", response)
 		return
+	
+	network.host.dtls_server_setup(TLSOptions.server(key, cert))
 
 	get_tree().set_multiplayer(gateway_api, self.get_path())
 	multiplayer.multiplayer_peer = network
