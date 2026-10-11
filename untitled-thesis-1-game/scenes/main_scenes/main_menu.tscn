@@ -32,9 +32,14 @@ script/source = "extends Control
 @onready var tutorial_button: TextureButton = $UI/TutorialButton
 @onready var tutorial_canvas: TutorialCanvas = $TutorialCanvas
 
-@onready var login_username_input: LineEdit = $LoginCanvas/LoginPanel/LoginContainer/UsernameInputBox/LineEdit
-@onready var login_password_input: LineEdit = $LoginCanvas/LoginPanel/LoginContainer/PasswordInput/LineEdit
-@onready var login_button: TextureButton = $LoginCanvas/LoginPanel/LoginButton
+@onready var login_username_input: LineEdit = $AuthCanvas/LoginPanel/LoginContainer/UsernameInputBox/LineEdit
+@onready var login_password_input: LineEdit = $AuthCanvas/LoginPanel/LoginContainer/PasswordInput/LineEdit
+@onready var login_button: TextureButton = $AuthCanvas/LoginPanel/LoginButton
+
+@onready var reg_username_input: LineEdit = $AuthCanvas/RegisterPanel/RegisterContainer/UsernameInputBox/LineEdit
+@onready var reg_password_input: LineEdit = $AuthCanvas/RegisterPanel/RegisterContainer/PasswordInput/LineEdit
+@onready var reg_retype_password_input: LineEdit = $AuthCanvas/RegisterPanel/RegisterContainer/RetypePasswordInput/LineEdit
+@onready var register_button: TextureButton = $AuthCanvas/RegisterPanel/RegisterButton
 
 @onready var font_theme: Theme = preload(\"res://themes/text_theme.tres\")
 @onready var font_pixel: FontFile = preload(\"res://fonts/04B_03__.TTF\")
@@ -73,11 +78,28 @@ func reload_player_character(player_code: String) -> void:
 		if character.code == player_code:
 			ProfileManager.update_profile(character)
 
+func _on_register_button_pressed() -> void:
+	if reg_username_input.text == \"\":
+		print(\"Please provide a username\")
+	elif reg_password_input.text == \"\":
+		print(\"Please provide a password\")
+	elif reg_retype_password_input.text == \"\":
+		print(\"Please retype your password\")
+	elif reg_password_input.text != reg_retype_password_input.text:
+		print(\"Passwords don't match\")
+	elif reg_password_input.text.length() < 8:
+		print(\"Password must contain at least 8 characters\")
+	else:
+		register_button.disabled = true
+		var username = reg_username_input.text
+		var password = reg_password_input.text
+		Gateway.connect_to_server(username, password)
+
 func _on_login_button_pressed() -> void:
 	if login_username_input.text == \"\" or login_password_input.text == \"\":
 		print(\"Please provide valid username and password\")
 	else:
-		disable_login()
+		login_button.disabled = true
 		var username = login_username_input.get_text()
 		var password = login_password_input.get_text()
 		print(\"Attempting to login\")
@@ -86,14 +108,8 @@ func _on_login_button_pressed() -> void:
 func finish_login_process(is_successful: bool) -> void:
 	if is_successful:
 		pass
-	else:
-		reenable_login()
-
-func reenable_login() -> void:
+	
 	login_button.disabled = false
-
-func disable_login() -> void:
-	login_button.disabled = true
 
 func _on_play_button_pressed() -> void:
 	if ProfileManager.player_code == \"\":
@@ -1367,9 +1383,9 @@ vertical_alignment = 1
 
 [node name="TutorialCanvas" parent="." unique_id=1510277248 instance=ExtResource("9_wukam")]
 
-[node name="LoginCanvas" type="CanvasLayer" parent="." unique_id=98131106]
+[node name="AuthCanvas" type="CanvasLayer" parent="." unique_id=98131106]
 
-[node name="Background" type="ColorRect" parent="LoginCanvas" unique_id=937882697]
+[node name="Background" type="ColorRect" parent="AuthCanvas" unique_id=937882697]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1377,7 +1393,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.8627451)
 
-[node name="LoginPanel" type="ColorRect" parent="LoginCanvas" unique_id=38365315]
+[node name="LoginPanel" type="ColorRect" parent="AuthCanvas" unique_id=38365315]
 custom_minimum_size = Vector2(700, 850)
 anchors_preset = 8
 anchor_left = 0.5
@@ -1392,7 +1408,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.11198568, 0.11198568, 0.11198568, 1)
 
-[node name="LoginTitle" type="Label" parent="LoginCanvas/LoginPanel" unique_id=2009859137]
+[node name="LoginTitle" type="Label" parent="AuthCanvas/LoginPanel" unique_id=2009859137]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 1
 anchors_preset = 10
@@ -1405,7 +1421,7 @@ text = "LOGIN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LoginContainer" type="VBoxContainer" parent="LoginCanvas/LoginPanel" unique_id=1948644624]
+[node name="LoginContainer" type="VBoxContainer" parent="AuthCanvas/LoginPanel" unique_id=1948644624]
 custom_minimum_size = Vector2(0, 570)
 layout_mode = 1
 anchors_preset = -1
@@ -1421,26 +1437,26 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="UsernameInputBox" parent="LoginCanvas/LoginPanel/LoginContainer" unique_id=432676371 instance=ExtResource("13_q3f11")]
+[node name="UsernameInputBox" parent="AuthCanvas/LoginPanel/LoginContainer" unique_id=432676371 instance=ExtResource("13_q3f11")]
 layout_mode = 2
 
-[node name="Title" parent="LoginCanvas/LoginPanel/LoginContainer/UsernameInputBox" index="0" unique_id=1981325245]
+[node name="Title" parent="AuthCanvas/LoginPanel/LoginContainer/UsernameInputBox" index="0" unique_id=1981325245]
 text = "username"
 
-[node name="LineEdit" parent="LoginCanvas/LoginPanel/LoginContainer/UsernameInputBox" index="1" unique_id=1603760894]
+[node name="LineEdit" parent="AuthCanvas/LoginPanel/LoginContainer/UsernameInputBox" index="1" unique_id=1603760894]
 placeholder_text = "type here"
 
-[node name="PasswordInput" parent="LoginCanvas/LoginPanel/LoginContainer" unique_id=780246873 instance=ExtResource("13_q3f11")]
+[node name="PasswordInput" parent="AuthCanvas/LoginPanel/LoginContainer" unique_id=780246873 instance=ExtResource("13_q3f11")]
 layout_mode = 2
 
-[node name="Title" parent="LoginCanvas/LoginPanel/LoginContainer/PasswordInput" index="0" unique_id=1981325245]
+[node name="Title" parent="AuthCanvas/LoginPanel/LoginContainer/PasswordInput" index="0" unique_id=1981325245]
 text = "password"
 
-[node name="LineEdit" parent="LoginCanvas/LoginPanel/LoginContainer/PasswordInput" index="1" unique_id=1603760894]
+[node name="LineEdit" parent="AuthCanvas/LoginPanel/LoginContainer/PasswordInput" index="1" unique_id=1603760894]
 placeholder_text = "password"
 secret = true
 
-[node name="LoginButton" type="TextureButton" parent="LoginCanvas/LoginPanel" unique_id=2067659343]
+[node name="LoginButton" type="TextureButton" parent="AuthCanvas/LoginPanel" unique_id=2067659343]
 modulate = Color(0.5019608, 1, 0.74771607, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -1459,7 +1475,7 @@ texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
 script = SubResource("GDScript_f6xhk")
 
-[node name="Label" type="Label" parent="LoginCanvas/LoginPanel/LoginButton" unique_id=138853878]
+[node name="Label" type="Label" parent="AuthCanvas/LoginPanel/LoginButton" unique_id=138853878]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1472,7 +1488,7 @@ label_settings = SubResource("LabelSettings_pnfts")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="LoginCanvas/LoginPanel" unique_id=399341029]
+[node name="ButtonsContainer" type="HBoxContainer" parent="AuthCanvas/LoginPanel" unique_id=399341029]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -1486,7 +1502,7 @@ offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="RegisterButton" type="TextureButton" parent="LoginCanvas/LoginPanel/ButtonsContainer" unique_id=686010574]
+[node name="RegisterButton" type="TextureButton" parent="AuthCanvas/LoginPanel/ButtonsContainer" unique_id=686010574]
 modulate = Color(0.5, 0.89948916, 1, 1)
 layout_mode = 2
 texture_normal = ExtResource("1_kt583")
@@ -1494,7 +1510,7 @@ texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
 script = SubResource("GDScript_f6xhk")
 
-[node name="Label" type="Label" parent="LoginCanvas/LoginPanel/ButtonsContainer/RegisterButton" unique_id=327617352]
+[node name="Label" type="Label" parent="AuthCanvas/LoginPanel/ButtonsContainer/RegisterButton" unique_id=327617352]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1507,14 +1523,14 @@ label_settings = SubResource("LabelSettings_hqpec")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExitButton" type="TextureButton" parent="LoginCanvas/LoginPanel/ButtonsContainer" unique_id=1373939326]
+[node name="ExitButton" type="TextureButton" parent="AuthCanvas/LoginPanel/ButtonsContainer" unique_id=1373939326]
 layout_mode = 2
 texture_normal = ExtResource("1_kt583")
 texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
 script = SubResource("GDScript_f6xhk")
 
-[node name="Label" type="Label" parent="LoginCanvas/LoginPanel/ButtonsContainer/ExitButton" unique_id=69174095]
+[node name="Label" type="Label" parent="AuthCanvas/LoginPanel/ButtonsContainer/ExitButton" unique_id=69174095]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1527,7 +1543,7 @@ label_settings = SubResource("LabelSettings_hr2xk")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RegisterPanel" type="ColorRect" parent="LoginCanvas" unique_id=1509117497]
+[node name="RegisterPanel" type="ColorRect" parent="AuthCanvas" unique_id=1509117497]
 custom_minimum_size = Vector2(700, 850)
 anchors_preset = 8
 anchor_left = 0.5
@@ -1542,7 +1558,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.11198568, 0.11198568, 0.11198568, 1)
 
-[node name="RegisterTitle" type="Label" parent="LoginCanvas/RegisterPanel" unique_id=2090928888]
+[node name="RegisterTitle" type="Label" parent="AuthCanvas/RegisterPanel" unique_id=2090928888]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 1
 anchors_preset = 10
@@ -1555,7 +1571,7 @@ text = "LOGIN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RegisterContainer" type="VBoxContainer" parent="LoginCanvas/RegisterPanel" unique_id=63412629]
+[node name="RegisterContainer" type="VBoxContainer" parent="AuthCanvas/RegisterPanel" unique_id=63412629]
 custom_minimum_size = Vector2(0, 570)
 layout_mode = 1
 anchors_preset = -1
@@ -1571,36 +1587,36 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="UsernameInputBox" parent="LoginCanvas/RegisterPanel/RegisterContainer" unique_id=1797667178 instance=ExtResource("13_q3f11")]
+[node name="UsernameInputBox" parent="AuthCanvas/RegisterPanel/RegisterContainer" unique_id=1797667178 instance=ExtResource("13_q3f11")]
 layout_mode = 2
 
-[node name="Title" parent="LoginCanvas/RegisterPanel/RegisterContainer/UsernameInputBox" index="0" unique_id=1981325245]
+[node name="Title" parent="AuthCanvas/RegisterPanel/RegisterContainer/UsernameInputBox" index="0" unique_id=1981325245]
 text = "username"
 
-[node name="LineEdit" parent="LoginCanvas/RegisterPanel/RegisterContainer/UsernameInputBox" index="1" unique_id=1603760894]
+[node name="LineEdit" parent="AuthCanvas/RegisterPanel/RegisterContainer/UsernameInputBox" index="1" unique_id=1603760894]
 placeholder_text = "type here"
 
-[node name="PasswordInput" parent="LoginCanvas/RegisterPanel/RegisterContainer" unique_id=1308620418 instance=ExtResource("13_q3f11")]
+[node name="PasswordInput" parent="AuthCanvas/RegisterPanel/RegisterContainer" unique_id=1308620418 instance=ExtResource("13_q3f11")]
 layout_mode = 2
 
-[node name="Title" parent="LoginCanvas/RegisterPanel/RegisterContainer/PasswordInput" index="0" unique_id=1981325245]
+[node name="Title" parent="AuthCanvas/RegisterPanel/RegisterContainer/PasswordInput" index="0" unique_id=1981325245]
 text = "password"
 
-[node name="LineEdit" parent="LoginCanvas/RegisterPanel/RegisterContainer/PasswordInput" index="1" unique_id=1603760894]
+[node name="LineEdit" parent="AuthCanvas/RegisterPanel/RegisterContainer/PasswordInput" index="1" unique_id=1603760894]
 placeholder_text = "password"
 secret = true
 
-[node name="RetypePasswordInput" parent="LoginCanvas/RegisterPanel/RegisterContainer" unique_id=923382185 instance=ExtResource("13_q3f11")]
+[node name="RetypePasswordInput" parent="AuthCanvas/RegisterPanel/RegisterContainer" unique_id=923382185 instance=ExtResource("13_q3f11")]
 layout_mode = 2
 
-[node name="Title" parent="LoginCanvas/RegisterPanel/RegisterContainer/RetypePasswordInput" index="0" unique_id=1981325245]
+[node name="Title" parent="AuthCanvas/RegisterPanel/RegisterContainer/RetypePasswordInput" index="0" unique_id=1981325245]
 text = "retype password"
 
-[node name="LineEdit" parent="LoginCanvas/RegisterPanel/RegisterContainer/RetypePasswordInput" index="1" unique_id=1603760894]
+[node name="LineEdit" parent="AuthCanvas/RegisterPanel/RegisterContainer/RetypePasswordInput" index="1" unique_id=1603760894]
 placeholder_text = "password"
 secret = true
 
-[node name="RegisterButton" type="TextureButton" parent="LoginCanvas/RegisterPanel" unique_id=981781152]
+[node name="RegisterButton" type="TextureButton" parent="AuthCanvas/RegisterPanel" unique_id=981781152]
 modulate = Color(0.5019608, 0.8980392, 1, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -1619,7 +1635,7 @@ texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
 script = SubResource("GDScript_f6xhk")
 
-[node name="Label" type="Label" parent="LoginCanvas/RegisterPanel/RegisterButton" unique_id=140770314]
+[node name="Label" type="Label" parent="AuthCanvas/RegisterPanel/RegisterButton" unique_id=140770314]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1632,7 +1648,7 @@ label_settings = SubResource("LabelSettings_t3buh")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="LoginCanvas/RegisterPanel" unique_id=1762253024]
+[node name="ButtonsContainer" type="HBoxContainer" parent="AuthCanvas/RegisterPanel" unique_id=1762253024]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -1646,7 +1662,7 @@ offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="LoginButton" type="TextureButton" parent="LoginCanvas/RegisterPanel/ButtonsContainer" unique_id=1769891232]
+[node name="LoginButton" type="TextureButton" parent="AuthCanvas/RegisterPanel/ButtonsContainer" unique_id=1769891232]
 modulate = Color(0.5019608, 1, 0.7490196, 1)
 layout_mode = 2
 texture_normal = ExtResource("1_kt583")
@@ -1654,7 +1670,7 @@ texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
 script = SubResource("GDScript_f6xhk")
 
-[node name="Label" type="Label" parent="LoginCanvas/RegisterPanel/ButtonsContainer/LoginButton" unique_id=409837211]
+[node name="Label" type="Label" parent="AuthCanvas/RegisterPanel/ButtonsContainer/LoginButton" unique_id=409837211]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1667,14 +1683,14 @@ label_settings = SubResource("LabelSettings_hhlsr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExitButton" type="TextureButton" parent="LoginCanvas/RegisterPanel/ButtonsContainer" unique_id=135048069]
+[node name="ExitButton" type="TextureButton" parent="AuthCanvas/RegisterPanel/ButtonsContainer" unique_id=135048069]
 layout_mode = 2
 texture_normal = ExtResource("1_kt583")
 texture_pressed = ExtResource("2_qd03l")
 texture_hover = ExtResource("3_bi8wh")
 script = SubResource("GDScript_f6xhk")
 
-[node name="Label" type="Label" parent="LoginCanvas/RegisterPanel/ButtonsContainer/ExitButton" unique_id=1835057158]
+[node name="Label" type="Label" parent="AuthCanvas/RegisterPanel/ButtonsContainer/ExitButton" unique_id=1835057158]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1710,7 +1726,8 @@ libraries/ = SubResource("AnimationLibrary_gl8k6")
 [connection signal="pressed" from="UI/Profile/PreviousButton" to="UI/Profile" method="_on_previous_button_pressed"]
 [connection signal="pressed" from="UI/Profile/NextButton" to="UI/Profile" method="_on_next_button_pressed"]
 [connection signal="pressed" from="TutorialCanvas/ExitButton" to="." method="_on_tutorial_exit_button_pressed"]
-[connection signal="pressed" from="LoginCanvas/LoginPanel/LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="AuthCanvas/LoginPanel/LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="AuthCanvas/RegisterPanel/RegisterButton" to="." method="_on_register_button_pressed"]
 
 [editable path="UI/DifficultySelect/Banner/HBoxContainer/Normal"]
 [editable path="UI/DifficultySelect/Banner/HBoxContainer/Terrain"]
@@ -1719,8 +1736,8 @@ libraries/ = SubResource("AnimationLibrary_gl8k6")
 [editable path="UI/Profile/Banner/Cards/TerrainCard"]
 [editable path="UI/Profile/Banner/Cards/IcyCard"]
 [editable path="TutorialCanvas"]
-[editable path="LoginCanvas/LoginPanel/LoginContainer/UsernameInputBox"]
-[editable path="LoginCanvas/LoginPanel/LoginContainer/PasswordInput"]
-[editable path="LoginCanvas/RegisterPanel/RegisterContainer/UsernameInputBox"]
-[editable path="LoginCanvas/RegisterPanel/RegisterContainer/PasswordInput"]
-[editable path="LoginCanvas/RegisterPanel/RegisterContainer/RetypePasswordInput"]
+[editable path="AuthCanvas/LoginPanel/LoginContainer/UsernameInputBox"]
+[editable path="AuthCanvas/LoginPanel/LoginContainer/PasswordInput"]
+[editable path="AuthCanvas/RegisterPanel/RegisterContainer/UsernameInputBox"]
+[editable path="AuthCanvas/RegisterPanel/RegisterContainer/PasswordInput"]
+[editable path="AuthCanvas/RegisterPanel/RegisterContainer/RetypePasswordInput"]
