@@ -45,5 +45,21 @@ func _peer_disconnected(gateway_id) -> void:
 	
 	rpc_id(gateway_id, "authentication_results", result, player_id, token)
 
+@rpc("any_peer") func create_account(username, password, player_id) -> void:
+	var gateway_id = multiplayer.get_remote_sender_id()
+	var result
+	var message
+	if PlayerData.player_ids.has(username):
+		result = false
+		message = 2
+	else:
+		result = true
+		message = 3
+		PlayerData.player_ids[username] = {
+			"Password": password
+		}
+	
+	rpc_id(gateway_id, "create_account_results", result, player_id, message)
+
 @rpc("any_peer") func authentication_results(_result, _player_id, _token) -> void:
 	pass

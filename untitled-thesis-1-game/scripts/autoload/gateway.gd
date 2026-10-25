@@ -9,6 +9,7 @@ var port = 1910
 
 var username
 var password
+var new_account
 var login_attempt_active: bool = false
 
 const LOGIN_TIMEOUT_SECONDS: float = 10.0
@@ -27,7 +28,7 @@ func _process(_delta: float) -> void:
 	
 	multiplayer.poll()
 	
-func connect_to_server(_username, _password) -> void:
+func connect_to_server(_username, _password, _new_account) -> void:
 	if login_attempt_active:
 		return
 	login_attempt_active = true
@@ -37,6 +38,7 @@ func connect_to_server(_username, _password) -> void:
 	
 	username = _username
 	password = _password
+	new_account = _new_account
 	
 	var response := network.create_client(ip, port)
 	if response != OK:
@@ -62,7 +64,10 @@ func _watch_login_timeout() -> void:
 
 func _on_connection_succeeded() -> void:
 	print("Successfully connected to login server")
-	request_login()
+	if new_account:
+		request_create_account()
+	else:
+		request_login()
 	
 func _on_connection_failed() -> void:
 	print("Failed to connect to login server")
@@ -74,7 +79,16 @@ func request_login() -> void:
 	username = ""
 	password = ""
 
+func request_create_account() -> void:
+	print("Connecting to gateway to request login")
+	rpc_id(1, "create_account_request", username, password)
+	username = ""
+	password = ""
+
 @rpc("any_peer") func login_request(_username, _password) -> void:
+	pass
+	
+@rpc("any_peer") func create_account_request(_username, _password) -> void:
 	pass
 	
 @rpc("any_peer") func return_login_request(results, token) -> void:
@@ -88,6 +102,23 @@ func request_login() -> void:
 	else:
 		print("Please provide correct username and password")
 	_finish_login_attempt(results == true)
+
+@rpc("any_peer") func return_create_account_request(results, message) -> void:
+	print("Results received")
+	if results == true:
+		print("Account created, please proceed with logging in")
+	else:
+		if message == 1:
+			print("Couldn't create account, please try again")
+		elif message == 2:
+			print("The username already exist, please use a different username")
+	if multiplayer.connected_to_server.is_connected(_on_connection_succeeded):
+		multiplayer.connected_to_server.disconnect(_on_connection_succeeded)
+	if multiplayer.connection_failed.is_connected(_on_connection_failed):
+		multiplayer.connection_failed.disconnect(_on_connection_failed)
+	if multiplayer.server_disconnected.is_connected(_on_connection_failed):
+		multiplayer.server_disconnected.disconnect(_on_connection_failed)
+	multiplayer.multiplayer_peer = null
 
 func _finish_login_attempt(is_successful: bool) -> void:
 	if not login_attempt_active:

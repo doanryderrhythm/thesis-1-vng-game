@@ -32,10 +32,14 @@ script/source = "extends Control
 @onready var tutorial_button: TextureButton = $UI/TutorialButton
 @onready var tutorial_canvas: TutorialCanvas = $TutorialCanvas
 
+@onready var auth_canvas: CanvasLayer = $AuthCanvas
+
+@onready var login_panel: ColorRect = $AuthCanvas/LoginPanel
 @onready var login_username_input: LineEdit = $AuthCanvas/LoginPanel/LoginContainer/UsernameInputBox/LineEdit
 @onready var login_password_input: LineEdit = $AuthCanvas/LoginPanel/LoginContainer/PasswordInput/LineEdit
 @onready var login_button: TextureButton = $AuthCanvas/LoginPanel/LoginButton
 
+@onready var reg_panel: ColorRect = $AuthCanvas/RegisterPanel
 @onready var reg_username_input: LineEdit = $AuthCanvas/RegisterPanel/RegisterContainer/UsernameInputBox/LineEdit
 @onready var reg_password_input: LineEdit = $AuthCanvas/RegisterPanel/RegisterContainer/PasswordInput/LineEdit
 @onready var reg_retype_password_input: LineEdit = $AuthCanvas/RegisterPanel/RegisterContainer/RetypePasswordInput/LineEdit
@@ -48,7 +52,7 @@ script/source = "extends Control
 @onready var characters: PlayerListener = load(\"res://resources/player/player_listener.tres\")
 
 func _ready() -> void:
-	Gateway.on_connection_finished.connect(finish_login_process)
+	Gateway.on_connection_finished.connect(finish_authentication_process)
 	
 	RenderingServer.set_default_clear_color(Color(0.029, 0.0, 0.184, 1.0))
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -70,6 +74,10 @@ func _ready() -> void:
 	reload_player_character(ProfileManager.player_code)
 	insert_profiles_data()
 	
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed(\"login\"):
+		auth_canvas.visible = true
+	
 func reload_player_character(player_code: String) -> void:
 	if player_code == \"\":
 		return
@@ -77,6 +85,20 @@ func reload_player_character(player_code: String) -> void:
 	for character in characters.players:
 		if character.code == player_code:
 			ProfileManager.update_profile(character)
+
+func toggle_register_panel(is_open: bool) -> void:
+	login_panel.visible = !is_open
+	reg_panel.visible = is_open
+
+func _on_auth_exit_button_pressed() -> void:
+	toggle_register_panel(false)
+	auth_canvas.visible = false
+
+func _on_register_from_login_button_pressed() -> void:
+	toggle_register_panel(true)
+
+func _on_login_from_register_button_pressed() -> void:
+	toggle_register_panel(false)
 
 func _on_register_button_pressed() -> void:
 	if reg_username_input.text == \"\":
@@ -93,7 +115,7 @@ func _on_register_button_pressed() -> void:
 		register_button.disabled = true
 		var username = reg_username_input.text
 		var password = reg_password_input.text
-		Gateway.connect_to_server(username, password)
+		Gateway.connect_to_server(username, password, true)
 
 func _on_login_button_pressed() -> void:
 	if login_username_input.text == \"\" or login_password_input.text == \"\":
@@ -103,13 +125,14 @@ func _on_login_button_pressed() -> void:
 		var username = login_username_input.get_text()
 		var password = login_password_input.get_text()
 		print(\"Attempting to login\")
-		Gateway.connect_to_server(username, password)
+		Gateway.connect_to_server(username, password, false)
 
-func finish_login_process(is_successful: bool) -> void:
+func finish_authentication_process(is_successful: bool) -> void:
 	if is_successful:
 		pass
 	
 	login_button.disabled = false
+	register_button.disabled = false
 
 func _on_play_button_pressed() -> void:
 	if ProfileManager.player_code == \"\":
@@ -1384,6 +1407,7 @@ vertical_alignment = 1
 [node name="TutorialCanvas" parent="." unique_id=1510277248 instance=ExtResource("9_wukam")]
 
 [node name="AuthCanvas" type="CanvasLayer" parent="." unique_id=98131106]
+visible = false
 
 [node name="Background" type="ColorRect" parent="AuthCanvas" unique_id=937882697]
 anchors_preset = 15
@@ -1568,7 +1592,7 @@ offset_bottom = 23.0
 grow_horizontal = 2
 theme = ExtResource("7_gl8k6")
 theme_override_font_sizes/font_size = 64
-text = "LOGIN"
+text = "REGISTER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1728,7 +1752,11 @@ libraries/ = SubResource("AnimationLibrary_gl8k6")
 [connection signal="pressed" from="UI/Profile/NextButton" to="UI/Profile" method="_on_next_button_pressed"]
 [connection signal="pressed" from="TutorialCanvas/ExitButton" to="." method="_on_tutorial_exit_button_pressed"]
 [connection signal="pressed" from="AuthCanvas/LoginPanel/LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="AuthCanvas/LoginPanel/ButtonsContainer/RegisterButton" to="." method="_on_register_from_login_button_pressed"]
+[connection signal="pressed" from="AuthCanvas/LoginPanel/ButtonsContainer/ExitButton" to="." method="_on_auth_exit_button_pressed"]
 [connection signal="pressed" from="AuthCanvas/RegisterPanel/RegisterButton" to="." method="_on_register_button_pressed"]
+[connection signal="pressed" from="AuthCanvas/RegisterPanel/ButtonsContainer/LoginButton" to="." method="_on_login_from_register_button_pressed"]
+[connection signal="pressed" from="AuthCanvas/RegisterPanel/ButtonsContainer/ExitButton" to="." method="_on_auth_exit_button_pressed"]
 
 [editable path="UI/DifficultySelect/Banner/HBoxContainer/Normal"]
 [editable path="UI/DifficultySelect/Banner/HBoxContainer/Terrain"]

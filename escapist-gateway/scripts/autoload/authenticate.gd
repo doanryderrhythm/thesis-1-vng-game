@@ -31,3 +31,11 @@ func _on_connection_failed() -> void:
 @rpc("any_peer") func authentication_results(result, player_id, token) -> void:
 	print("Results received and replying to player login request")
 	Gateway.send_login_result(result, player_id, token)
+
+@rpc("any_peer") func create_account(username, password, player_id) -> void:
+	print("Sending out create account request")
+	rpc_id(1, "create_account", username, password, player_id)
+
+@rpc("any_peer") func create_account_results(result, player_id, message) -> void:
+	print("Results received and replying to player create account request")
+	Gateway.send_create_account_result(result, player_id, message)
