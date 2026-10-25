@@ -49,18 +49,18 @@ func _peer_disconnected(player_id) -> void:
 		valid_request = false
 	if password == "":
 		valid_request = false
-	if password.length() <= 8:
+	if password.length() < 8:
 		valid_request = false
 	
 	if valid_request == false:
-		return_create_account_request(valid_request, player_id, 1)
+		send_create_account_result(false, player_id, 1)
 	else:
 		Authenticate.create_account(username, password, player_id)
 
 @rpc("any_peer") func return_login_request(_result, _token) -> void:
 	pass
 
-@rpc("any_peer") func return_create_account_request(_result, _player_id, _message) -> void:
+@rpc("any_peer") func return_create_account_request(_result, _message) -> void:
 	pass
 
 func send_login_result(result, player_id, token) -> void:

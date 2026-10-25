@@ -59,7 +59,10 @@ func connect_to_server(_username, _password, _new_account) -> void:
 func _watch_login_timeout() -> void:
 	await get_tree().create_timer(LOGIN_TIMEOUT_SECONDS).timeout
 	if login_attempt_active:
-		print("Login request timed out")
+		if new_account:
+			print("Account creation request timed out")
+		else:
+			print("Login request timed out")
 		_finish_login_attempt(false)
 
 func _on_connection_succeeded() -> void:
@@ -80,7 +83,7 @@ func request_login() -> void:
 	password = ""
 
 func request_create_account() -> void:
-	print("Connecting to gateway to request login")
+	print("Connecting to gateway to request account creation")
 	rpc_id(1, "create_account_request", username, password)
 	username = ""
 	password = ""
@@ -104,6 +107,9 @@ func request_create_account() -> void:
 	_finish_login_attempt(results == true)
 
 @rpc("any_peer") func return_create_account_request(results, message) -> void:
+	if not login_attempt_active:
+		return
+
 	print("Results received")
 	if results == true:
 		print("Account created, please proceed with logging in")
@@ -112,13 +118,7 @@ func request_create_account() -> void:
 			print("Couldn't create account, please try again")
 		elif message == 2:
 			print("The username already exist, please use a different username")
-	if multiplayer.connected_to_server.is_connected(_on_connection_succeeded):
-		multiplayer.connected_to_server.disconnect(_on_connection_succeeded)
-	if multiplayer.connection_failed.is_connected(_on_connection_failed):
-		multiplayer.connection_failed.disconnect(_on_connection_failed)
-	if multiplayer.server_disconnected.is_connected(_on_connection_failed):
-		multiplayer.server_disconnected.disconnect(_on_connection_failed)
-	multiplayer.multiplayer_peer = null
+	_finish_login_attempt(false)
 
 func _finish_login_attempt(is_successful: bool) -> void:
 	if not login_attempt_active:

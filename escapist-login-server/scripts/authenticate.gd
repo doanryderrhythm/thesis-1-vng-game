@@ -33,7 +33,7 @@ func _peer_disconnected(gateway_id) -> void:
 	
 	if not PlayerData.player_ids.has(username):
 		result = false
-	elif not PlayerData.player_ids[username].password == password:
+	elif PlayerData.player_ids[username].get("password", "") != password:
 		result = false
 	else:
 		result = true
@@ -56,10 +56,13 @@ func _peer_disconnected(gateway_id) -> void:
 		result = true
 		message = 3
 		PlayerData.player_ids[username] = {
-			"Password": password
+			"password": password
 		}
 	
 	rpc_id(gateway_id, "create_account_results", result, player_id, message)
 
 @rpc("any_peer") func authentication_results(_result, _player_id, _token) -> void:
+	pass
+
+@rpc("any_peer") func create_account_results(_result, _player_id, _message) -> void:
 	pass
