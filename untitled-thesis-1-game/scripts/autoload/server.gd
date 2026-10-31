@@ -26,10 +26,13 @@ func _on_connection_succeeded() -> void:
 func _on_connection_failed() -> void:
 	print("Connection failed")
 
-@rpc("any_peer") func fetch_token() -> void:
+@rpc("authority") func fetch_token() -> void:
 	rpc_id(1, "return_token", token)
 
-@rpc("any_peer") func return_token_verification_results(result) -> void:
+@rpc("any_peer") func return_token(_token) -> void:
+	pass
+
+@rpc("authority") func return_token_verification_results(result) -> void:
 	if result == true:
 		print("Successful token verification")
 	else:

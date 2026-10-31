@@ -39,12 +39,14 @@ func _peer_disconnected(gateway_id) -> void:
 		if not PlayerData.player_ids[username].get("password", "") == hashed_password:
 			result = false
 		else:
-			result = true
-			
 			randomize()
-			token = str(randi()).sha256_text() + str(Time.get_unix_time_from_system())
+			var generated_token = str(randi()).sha256_text() + str(int(Time.get_unix_time_from_system()))
 			var game_server = "GameServer1"
-			GameServers.distribute_login_token(token, game_server)
+			if GameServers.distribute_login_token(generated_token, game_server):
+				result = true
+				token = generated_token
+			else:
+				result = false
 	
 	rpc_id(gateway_id, "authentication_results", result, player_id, token)
 

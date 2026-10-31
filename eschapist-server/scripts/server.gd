@@ -26,10 +26,12 @@ func start_server() -> void:
 	print("Server started on port " + str(port))
 	
 func _peer_connected(player_id) -> void:
-	print("User " + str(player_id) + " connected")	
+	print("User " + str(player_id) + " connected")
+	player_verification_process.start(player_id)
 	
 func _peer_disconnected(player_id) -> void:
 	print("User " + str(player_id) + " disconnected")
+	player_verification_process.cancel(player_id)
 
 func _on_token_expiration_timeout() -> void:
 	var current_time = Time.get_unix_time_from_system()
@@ -48,12 +50,18 @@ func _on_token_expiration_timeout() -> void:
 	print("Expected Tokens: ")
 	print(expected_tokens)
 
-func fetch_token(player_id) -> void:
+func request_token(player_id) -> void:
 	rpc_id(player_id, "fetch_token")
+
+@rpc("authority") func fetch_token() -> void:
+	pass
 
 @rpc("any_peer") func return_token(token) -> void:
 	var player_id = multiplayer.get_remote_sender_id()
 	player_verification_process.verify(player_id, token)
 
-func return_token_verification_results(player_id, result) -> void:
+func send_token_verification_result(player_id, result) -> void:
 	rpc_id(player_id, "return_token_verification_results", result)
+
+@rpc("authority") func return_token_verification_results(_result) -> void:
+	pass

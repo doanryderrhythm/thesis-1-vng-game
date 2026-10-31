@@ -36,10 +36,18 @@ func _peer_connected(game_server_id) -> void:
 	
 func _peer_disconnected(game_server_id) -> void:
 	print("Game server " + str(game_server_id) + " disconnected")
+	for game_server in game_server_list.keys():
+		if game_server_list[game_server] == game_server_id:
+			game_server_list.erase(game_server)
 
-func distribute_login_token(token, game_server) -> void:
+func distribute_login_token(token, game_server) -> bool:
+	if not game_server_list.has(game_server):
+		push_error("Cannot distribute login token: game server is not connected: " + str(game_server))
+		return false
+
 	var game_server_peer_id = game_server_list[game_server]
 	rpc_id(game_server_peer_id, "receive_login_token", token)
+	return true
 
 @rpc("any_peer") func receive_login_token(_token) -> void:
 	pass
