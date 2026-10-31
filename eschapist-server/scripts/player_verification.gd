@@ -29,13 +29,13 @@ func verify(player_id, token) -> void:
 
 	var timestamp = token_timestamp.to_int()
 	var current_time = Time.get_unix_time_from_system()
-	if timestamp > current_time or current_time - timestamp > 30:
+	if timestamp > current_time or main_interface.is_token_expired(timestamp, current_time):
 		_fail_verification(player_id)
 		return
 
 	while awaiting_verification.has(player_id):
 		current_time = Time.get_unix_time_from_system()
-		if timestamp > current_time or current_time - timestamp > 30:
+		if timestamp > current_time or main_interface.is_token_expired(timestamp, current_time):
 			_fail_verification(player_id)
 			return
 

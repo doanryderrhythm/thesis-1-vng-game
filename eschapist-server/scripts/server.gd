@@ -4,6 +4,8 @@ var network = ENetMultiplayerPeer.new()
 var port = 1909
 var max_players = 100
 
+const TOKEN_LIFETIME_SECONDS: int = 24 * 60 * 60
+
 var expected_tokens = []
 @onready var player_verification_process = $PlayerVerification
 
@@ -45,10 +47,13 @@ func _on_token_expiration_timeout() -> void:
 				expected_tokens.remove_at(i)
 				continue
 			token_time = token_timestamp.to_int()
-			if current_time - token_time >= 30:
+			if token_time > current_time or is_token_expired(token_time, current_time):
 				expected_tokens.remove_at(i)
 	print("Expected Tokens: ")
 	print(expected_tokens)
+
+func is_token_expired(token_timestamp: int, current_time: int) -> bool:
+	return current_time - token_timestamp >= TOKEN_LIFETIME_SECONDS
 
 func request_token(player_id) -> void:
 	rpc_id(player_id, "fetch_token")
