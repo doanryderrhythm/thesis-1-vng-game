@@ -13,7 +13,8 @@ func start(player_id) -> void:
 
 func verify(player_id, token) -> void:
 	var token_verification = false
-	while Time.get_unix_time_from_system() - int(token.right(64)) <= 30:
+	var token_timestamp = token.substr(64)
+	while token_timestamp.is_valid_int() and Time.get_unix_time_from_system() - token_timestamp.to_int() <= 30:
 		if main_interface.expected_tokens.has(token):
 			token_verification = true
 			

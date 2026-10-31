@@ -38,9 +38,13 @@ func _on_token_expiration_timeout() -> void:
 		pass
 	else:
 		for i in range(expected_tokens.size() - 1, -1, -1):
-			token_time = int(expected_tokens[i].right(64))
+			var token_timestamp = expected_tokens[i].substr(64)
+			if not token_timestamp.is_valid_int():
+				expected_tokens.remove_at(i)
+				continue
+			token_time = token_timestamp.to_int()
 			if current_time - token_time >= 30:
-				expected_tokens.remove(i)
+				expected_tokens.remove_at(i)
 	print("Expected Tokens: ")
 	print(expected_tokens)
 
