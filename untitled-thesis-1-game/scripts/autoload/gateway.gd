@@ -78,13 +78,13 @@ func _on_connection_failed() -> void:
 	
 func request_login() -> void:
 	print("Connecting to gateway to request login")
-	rpc_id(1, "login_request", username, password)
+	rpc_id(1, "login_request", username, password.sha256_text())
 	username = ""
 	password = ""
 
 func request_create_account() -> void:
 	print("Connecting to gateway to request account creation")
-	rpc_id(1, "create_account_request", username, password)
+	rpc_id(1, "create_account_request", username, password.sha256_text())
 	username = ""
 	password = ""
 

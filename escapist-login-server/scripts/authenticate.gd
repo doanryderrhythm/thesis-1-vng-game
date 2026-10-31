@@ -33,15 +33,18 @@ func _peer_disconnected(gateway_id) -> void:
 	
 	if not PlayerData.player_ids.has(username):
 		result = false
-	elif PlayerData.player_ids[username].get("password", "") != password:
-		result = false
 	else:
-		result = true
-		
-		randomize()
-		token = str(randi()).sha256_text() + str(Time.get_unix_time_from_system())
-		var game_server = "GameServer1"
-		GameServers.distribute_login_token(token, game_server)
+		var retrieved_salt = PlayerData.player_ids[username].get("salt", "")
+		var hashed_password = generate_hashed_password(password, retrieved_salt)
+		if not PlayerData.player_ids[username].get("password", "") == hashed_password:
+			result = false
+		else:
+			result = true
+			
+			randomize()
+			token = str(randi()).sha256_text() + str(Time.get_unix_time_from_system())
+			var game_server = "GameServer1"
+			GameServers.distribute_login_token(token, game_server)
 	
 	rpc_id(gateway_id, "authentication_results", result, player_id, token)
 
@@ -55,11 +58,28 @@ func _peer_disconnected(gateway_id) -> void:
 	else:
 		result = true
 		message = 3
+		var salt = generate_salt()
+		var hashed_password = generate_hashed_password(password, salt)
 		PlayerData.player_ids[username] = {
-			"password": password
+			"password": hashed_password,
+			"salt": salt
 		}
 	
 	rpc_id(gateway_id, "create_account_results", result, player_id, message)
+
+func generate_salt():
+	randomize()
+	var salt = str(randi()).sha256_text()
+	print("Salt: " + salt)
+	return salt
+
+func generate_hashed_password(password, salt):
+	var hashed_password = password
+	var rounds = pow(2, 3)
+	while rounds > 0:
+		hashed_password = str(hashed_password + salt).sha256_text()
+		rounds -= 1
+	return hashed_password
 
 @rpc("any_peer") func authentication_results(_result, _player_id, _token) -> void:
 	pass
